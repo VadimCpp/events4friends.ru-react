@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
+import LogoTitle from '../components/LogoTitle.js'
 import './MainView.css';
 
 class MainView extends Component {
   render() {
     return (
       <div class="main-view">
-        <div>
-          Events4Friends
-        </div>
+        <LogoTitle />
         <div>
           Events List
         </div>
