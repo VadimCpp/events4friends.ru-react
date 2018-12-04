@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import MainView from './MainView.js'
+import MainView from './views/MainView.js'
 import './App.css';
 
 class App extends Component {
