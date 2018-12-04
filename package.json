@@ -2,7 +2,7 @@
   "name": "events4friends.ru-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vadimcpp.github.io/events4frients.ru-react/",
+  "homepage": "https://vadimcpp.github.io/events4friends.ru-react/",
   "dependencies": {
     "bootstrap": "^4.1.3",
     "gh-pages": "^2.0.1",
