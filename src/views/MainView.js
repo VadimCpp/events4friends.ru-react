@@ -16,28 +16,30 @@ class MainView extends Component {
 
   render() {
     return (
-      <div class="main-view">
+      <div className="main-view">
         <LogoTitle />
-        <div class="mt-5">
-          Events List (TODO)
-        </div>
-        <div class="mt-5">
-          Перейти к обсуждениям в <br />          
-          <Button
-            color="link" 
-            onClick={this.openChat}
-          >
-            telegram-чат
-          </Button>
-        </div>
-        <div class="mt-5">
-          Перейти на страницу <br /> 
-          <Button 
-            color="link"
-            onClick={this.openDonate}
-          >
-            пожертвований
-          </Button>
+        <div className="container container-center main-view-container">
+          <div className="pt-5">
+            Events List (TODO)
+          </div>
+          <div className="pt-5">
+            Перейти к обсуждениям в <br />          
+            <Button
+              color="link" 
+              onClick={this.openChat}
+            >
+              telegram-чат
+            </Button>
+          </div>
+          <div className="pt-5">
+            Перейти на страницу <br /> 
+            <Button 
+              color="link"
+              onClick={this.openDonate}
+            >
+              пожертвований
+            </Button>
+          </div>
         </div>
       </div>
     )
