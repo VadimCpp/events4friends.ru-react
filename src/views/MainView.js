@@ -6,6 +6,11 @@ import Calendar from 'react-google-calendar-events-list';
 import './MainView.css';
 
 class MainView extends Component {
+  createEvent() {
+    // TODO: put yandex goals here
+    alert('Not implemented');
+  }
+
   openChat() {    
     // TODO: put yandex goals here
     window.location.href = 'https://t.me/events4friends';
@@ -53,22 +58,45 @@ class MainView extends Component {
             </Calendar>
           </div>
           <div className="pt-5">
-            Перейти к обсуждениям в <br />          
-            <Button
-              color="link" 
-              onClick={this.openChat}
-            >
-              telegram-чат
-            </Button>
-          </div>
+            <p>
+              Планируете собрать друзей? Заполните простую анкету и вскоре ваше событие отобразится
+              на этом сайте.
+            </p>
+            <p>
+              <Button
+                color="warning" 
+                onClick={this.createEvent}
+              >
+                Создать событие
+              </Button>
+            </p>
+          </div>          
           <div className="pt-5">
-            Перейти на страницу <br /> 
-            <Button 
-              color="link"
-              onClick={this.openDonate}
-            >
-              пожертвований
-            </Button>
+            <p>
+              Приглашаем Вас в чат, где можно получить ответы на все вопросы и спланировать мероприятие.
+            </p>
+            <p>
+              <Button
+                color="warning" 
+                onClick={this.openChat}
+              >
+                Telegram-чат
+              </Button>
+            </p>
+          </div>
+          <div className="py-5">
+            <p>
+              Принимаем пожервования. Аредна помещений, билеты, трансфер, вкусный чай с плюшками - все стоит денег.
+              Схема простая: больше денег - лучше мероприятия.
+            </p>
+            <p>
+              <Button 
+                color="warning"
+                onClick={this.openDonate}
+              >
+                Перевести деньги
+              </Button>
+            </p>
           </div>
         </div>
       </div>
