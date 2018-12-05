@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LogoTitle from '../components/LogoTitle.js'
 import { Button } from 'reactstrap';
+import Calendar from 'react-google-calendar-events-list';
 import './MainView.css';
 
 class MainView extends Component {
@@ -19,8 +20,15 @@ class MainView extends Component {
       <div className="main-view">
         <LogoTitle />
         <div className="container container-center main-view-container">
-          <div className="pt-5">
-            Events List (TODO)
+          <div className="pt-5">            
+            <Calendar
+              calendarID="dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com"
+              apiKey="AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs"
+            >
+              {({ loading, events }) =>
+                loading ? <div>loading</div> : <div>{JSON.stringify(events)}</div>
+              }
+            </Calendar>
           </div>
           <div className="pt-5">
             Перейти к обсуждениям в <br />          
