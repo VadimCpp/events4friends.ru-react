@@ -28,7 +28,8 @@ class MainView extends Component {
         );
     } else {
 
-      const listItems = events.map((event) =>
+      // reverse: https://stackoverflow.com/questions/36415904/is-there-a-way-to-use-map-on-an-array-in-reverse-order-with-javascript
+      const listItems = events.slice(0).reverse().map((event) =>
         <li key={event.id}>
           <EventItem 
             googleEvent={event}
