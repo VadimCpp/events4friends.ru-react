@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LogoTitle from '../components/LogoTitle.js'
+import EventItem from '../components/EventItem.js'
 import { Button } from 'reactstrap';
 import Calendar from 'react-google-calendar-events-list';
 import './MainView.css';
@@ -23,7 +24,9 @@ class MainView extends Component {
     } else {
 
       const listItems = events.map((event) =>
-        <li>{JSON.stringify(event)}</li>
+        <EventItem 
+          googleEvent={event}
+        />
       );
 
       return (
