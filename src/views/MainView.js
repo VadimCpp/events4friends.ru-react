@@ -24,9 +24,11 @@ class MainView extends Component {
     } else {
 
       const listItems = events.map((event) =>
-        <EventItem 
-          googleEvent={event}
-        />
+        <li key={event.id}>
+          <EventItem 
+            googleEvent={event}
+          />
+        </li>
       );
 
       return (
