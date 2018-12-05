@@ -8,11 +8,11 @@ class App extends Component {
     return (
       <div className="App App-fixed-image">
         <MainView />
-      </div>
-      <div>
-        // SNIP
-          <YMInitializer accounts={[51441281]} />
-        // SNIP
+		<div>
+		  /* SNIP */
+		  <YMInitializer accounts={[51441281]} />
+		  /* SNIP */
+		</div>
       </div>
     );
   }

@@ -3,21 +3,22 @@ import LogoTitle from '../components/LogoTitle.js'
 import EventItem from '../components/EventItem.js'
 import { Button } from 'reactstrap';
 import Calendar from 'react-google-calendar-events-list';
+import ym from 'react-yandex-metrika';
 import './MainView.css';
 
 class MainView extends Component {
   createEvent() {
-    // TODO: put yandex goals here
+    ym('51441281', 'create-event-click');    
     window.location.href = 'https://goo.gl/forms/7ZomljxN7PAor8aI2';
   }
 
   openChat() {    
-    // TODO: put yandex goals here
+    ym('51441281', 'open-chat-click');    
     window.location.href = 'https://t.me/events4friends';
   }
 
   openDonate() {
-    // TODO: put yandex goals here
+    ym('51441281', 'donate-click');
     window.location.href = 'https://money.yandex.ru/to/41001866582787';
   }
 
