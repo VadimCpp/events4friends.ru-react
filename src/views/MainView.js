@@ -15,6 +15,18 @@ class MainView extends Component {
     alert('Not implemented');
   }
 
+  displayEvents(loading, events) {
+    if (loading) {
+      return (
+          <div>loading</div>
+        );
+    } else {
+      return (
+        <div>{JSON.stringify(events)}</div>
+      );      
+    }
+  }
+
   render() {
     return (
       <div className="main-view">
@@ -25,8 +37,8 @@ class MainView extends Component {
               calendarID="dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com"
               apiKey="AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs"
             >
-              {({ loading, events }) =>
-                loading ? <div>loading</div> : <div>{JSON.stringify(events)}</div>
+              {({loading, events}) =>
+                this.displayEvents(loading, events)
               }
             </Calendar>
           </div>
