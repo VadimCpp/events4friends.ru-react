@@ -8,7 +8,7 @@ import './MainView.css';
 class MainView extends Component {
   createEvent() {
     // TODO: put yandex goals here
-    alert('Not implemented');
+    window.location.href = 'https://goo.gl/forms/7ZomljxN7PAor8aI2';
   }
 
   openChat() {    
