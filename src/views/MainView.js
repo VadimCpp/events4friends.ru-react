@@ -21,8 +21,13 @@ class MainView extends Component {
           <div>loading</div>
         );
     } else {
+
+      const listItems = events.map((event) =>
+        <li>{JSON.stringify(event)}</li>
+      );
+
       return (
-        <div>{JSON.stringify(events)}</div>
+        <ul>{listItems}</ul>
       );      
     }
   }
