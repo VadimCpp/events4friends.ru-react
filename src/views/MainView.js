@@ -37,7 +37,7 @@ class MainView extends Component {
       );
 
       return (
-        <ul>{listItems}</ul>
+        <ul className="event-list">{listItems}</ul>
       );      
     }
   }
