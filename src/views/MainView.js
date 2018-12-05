@@ -18,7 +18,7 @@ class MainView extends Component {
 
   openDonate() {
     // TODO: put yandex goals here
-    alert('Not implemented');
+    window.location.href = 'https://money.yandex.ru/to/41001866582787';
   }
 
   displayEvents(loading, events) {
