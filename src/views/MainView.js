@@ -29,7 +29,7 @@ class MainView extends Component {
         );
     } else {
 
-      let sortedEvents = events.sort((a, b) => {
+      const sortedEvents = events.sort((a, b) => {
         if (a.start && a.start.dateTime &&
           b.start && b.start.dateTime) {
           return a.start.dateTime < b.start.dateTime ? -1 : 1;
