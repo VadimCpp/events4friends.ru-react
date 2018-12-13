@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import LogoTitle from '../components/LogoTitle.js'
 import EventItem from '../components/EventItem.js'
 import { Button } from 'reactstrap';
+import { Link } from "react-router-dom";
 import Calendar from 'react-google-calendar-events-list';
 import ym from 'react-yandex-metrika';
 import './MainView.css';
@@ -53,8 +53,7 @@ class MainView extends Component {
 
   render() {
     return (
-      <div className="main-view">
-        <LogoTitle />
+      <div className="main-view">        
         <div className="container container-center main-view-container">
           <div className="pt-5">            
             <Calendar
@@ -66,47 +65,16 @@ class MainView extends Component {
               }
             </Calendar>
           </div>
-          <div className="pt-5">
+          <div className="pt-5 pb-5">
             <p>
-              Планируете собрать друзей? Заполните простую анкету и вскоре ваше событие отобразится
-              на этом сайте.
+              На главной только список событий. Остальные возможности пока находятся в разеде "О сообществе".
             </p>
-            <p>
-              <Button
-                color="warning" 
-                onClick={this.createEvent}
-              >
-                Создать событие
+            <p>              
+              <Button color="warning">
+                <Link className="reset-link-style" to="/about">О сообществе</Link>                
               </Button>
             </p>
-          </div>          
-          <div className="pt-5">
-            <p>
-              Приглашаем Вас в чат, где можно получить ответы на все вопросы и спланировать мероприятие.
-            </p>
-            <p>
-              <Button
-                color="warning" 
-                onClick={this.openChat}
-              >
-                Telegram-чат
-              </Button>
-            </p>
-          </div>
-          <div className="py-5">
-            <p>
-              Принимаем пожервования. Аредна помещений, билеты, трансфер, вкусный чай с плюшками - все стоит денег.
-              Схема простая: больше денег - лучше мероприятия.
-            </p>
-            <p>
-              <Button 
-                color="warning"
-                onClick={this.openDonate}
-              >
-                Перевести деньги
-              </Button>
-            </p>
-          </div>
+          </div>        
         </div>
       </div>
     )
