@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
 
