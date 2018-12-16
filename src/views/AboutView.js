@@ -5,6 +5,21 @@ import ym from 'react-yandex-metrika';
 import './AboutView.css';
 
 class AboutView extends Component {
+  createEvent() {
+    // ym('51441281', 'create-event-click');    
+    window.location.href = 'https://goo.gl/forms/7ZomljxN7PAor8aI2';
+  }
+
+  openChat() {    
+    // ym('51441281', 'open-chat-click');    
+    window.location.href = 'https://t.me/events4friends';
+  }
+
+  openDonate() {
+    // ym('51441281', 'donate-click');
+    window.location.href = 'https://money.yandex.ru/to/41001866582787';
+  }
+  
   render() {
     return (
       <div className="about-view">        
