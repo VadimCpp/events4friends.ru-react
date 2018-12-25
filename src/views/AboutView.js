@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
-import ym from 'react-yandex-metrika';
 import './AboutView.css';
 
 class AboutView extends Component {
   createEvent() {
+    // TODO:
     // ym('51441281', 'create-event-click');    
     window.location.href = 'https://goo.gl/forms/7ZomljxN7PAor8aI2';
   }
 
   openChat() {    
+    // TODO:
     // ym('51441281', 'open-chat-click');    
     window.location.href = 'https://t.me/events4friends';
   }
 
   openDonate() {
+    // TODO:
     // ym('51441281', 'donate-click');
     window.location.href = 'https://money.yandex.ru/to/41001866582787';
   }

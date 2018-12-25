@@ -3,7 +3,6 @@ import EventItem from '../components/EventItem.js'
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
 import Calendar from 'react-google-calendar-events-list';
-import ym from 'react-yandex-metrika';
 import './MainView.css';
 
 class MainView extends Component {
