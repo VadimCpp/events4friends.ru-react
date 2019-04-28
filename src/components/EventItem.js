@@ -156,18 +156,17 @@ class EventItem extends Component {
     if (!this.state.moreInfo) {
       return (
         <div className='event-more btn-container'>
-          <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> Подробнее...</button>
+          <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть' : 'Подробнее..'}.</button>
         </div>)
     } else {
       return (
         <div className='event-more'>
+          <div className='event-more btn-container'>
+            <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть' : 'Подробнее..'}.</button>
+          </div>
           {this.formatDescription()}
           {this.formatName()}
           {this.formatEmail()}
-          <div className='btn-container'>
-
-            <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}>Свернуть</button>
-          </div>
         </div>
       )
     }

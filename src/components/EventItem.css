@@ -19,6 +19,10 @@
   .event-more {
     margin: 15px 0 0 0;
   }
+
+  .btn-container {
+    margin: 15px 0 15px 0;
+  }
   
   .event-description {
     text-align: justify;
