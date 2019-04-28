@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment'
+import { Link } from "react-router-dom";
 import 'moment/locale/ru';
 import './EventItem.css';
 
@@ -157,6 +158,7 @@ class EventItem extends Component {
       return (
         <div className='event-more btn-container'>
           <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть' : 'Подробнее..'}.</button>
+          <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}><Link className="reset-link-style" to="/event">К событию</Link></button>
         </div>)
     } else {
       return (
