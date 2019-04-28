@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import EventItem from '../components/EventItem.js'
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
-import Calendar from 'react-google-calendar-events-list';
 import './MainView.css';
 
 class MainView extends Component {
@@ -40,14 +39,7 @@ class MainView extends Component {
       <div className="main-view">        
         <div className="container container-center main-view-container">
           <div className="pt-5">            
-            <Calendar
-              calendarID="dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com"
-              apiKey="AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs"
-            >
-              {({loading, events}) =>
-                this.displayEvents(loading, events)
-              }
-            </Calendar>
+            
           </div>
           <div className="pt-5 pb-5">
             <p>
