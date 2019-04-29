@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import EventItem from '../components/EventItem.js'
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
+import EventItem from '../components/EventItem.js'
 import './EventView.css';
 
 class EventView extends Component {
