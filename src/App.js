@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App App-fixed-image">
+      <div className="App">
         <LogoTitle />
         <AppRouter />
       </div>
