@@ -37,8 +37,8 @@ class EventView extends Component {
             return
         }
         return (
-            <div className="main-view">
-                <div className="container container-center main-view-container">
+            <div className="event-view">
+                <div className="container container-center event-view-container">
                     <div className="pt-5">
                         {this.displayEvents(this.props.googleEvents)}
                     </div>
