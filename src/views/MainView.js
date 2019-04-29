@@ -2,27 +2,12 @@ import React, { Component } from 'react';
 import EventItem from '../components/EventItem.js'
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
-import axios from 'axios';
 import './MainView.css';
 
 class MainView extends Component {
-  state = {
-    loading: true,
-    events: []
-  }
-  componentDidMount() {
-    this.getEvents();
-  }
 
-  getEvents = () => {
-    const CALENDAR_ID = 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'
-    const API_KEY = 'AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs'
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`
-    axios.get(url)
-      .then(res => this.setState({ loading: false, events: res.data.items }))
-  }
   displayEvents(events) {
-    if (this.state.loading) {
+    if (this.props.loading) {
       return (
         <div>loading</div>
       );
@@ -45,6 +30,7 @@ class MainView extends Component {
       const listItems = sortedEvents.map((event) =>
         <li key={event.id}>
           <EventItem
+            getEvent={this.props.getEvent}
             googleEvent={event}
           />
         </li>
@@ -61,7 +47,7 @@ class MainView extends Component {
       <div className="main-view">
         <div className="container container-center main-view-container">
           <div className="pt-5">
-            {this.displayEvents(this.state.events)}
+            {this.displayEvents(this.props.events)}
           </div>
           <div className="pt-5 pb-5">
             <p>

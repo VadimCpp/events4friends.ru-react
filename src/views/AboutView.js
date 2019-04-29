@@ -10,7 +10,7 @@ class AboutView extends Component {
     window.location.href = 'https://goo.gl/forms/7ZomljxN7PAor8aI2';
   }
 
-  openChat() {    
+  openChat() {
     // TODO:
     // ym('51441281', 'open-chat-click');    
     window.location.href = 'https://t.me/events4friends';
@@ -21,10 +21,10 @@ class AboutView extends Component {
     // ym('51441281', 'donate-click');
     window.location.href = 'https://money.yandex.ru/to/41001866582787';
   }
-  
+
   render() {
     return (
-      <div className="about-view">        
+      <div className="about-view">
         <div className="container container-center about-view-container">
           <div className="pt-5">
             <p>
@@ -33,20 +33,20 @@ class AboutView extends Component {
             </p>
             <p>
               <Button
-                color="warning" 
+                color="warning"
                 onClick={this.createEvent}
               >
                 Создать событие
               </Button>
             </p>
-          </div>          
+          </div>
           <div className="pt-5">
             <p>
               Приглашаем Вас в чат, где можно получить ответы на все вопросы и спланировать мероприятие.
             </p>
             <p>
               <Button
-                color="warning" 
+                color="warning"
                 onClick={this.openChat}
               >
                 Telegram-чат
@@ -59,7 +59,7 @@ class AboutView extends Component {
               Схема простая: больше денег - лучше мероприятия.
             </p>
             <p>
-              <Button 
+              <Button
                 color="warning"
                 onClick={this.openDonate}
               >
@@ -69,12 +69,12 @@ class AboutView extends Component {
           </div>
           <div className="py-5">
             <hr className="separator" />
-            <p>              
+            <p>
               <Button color="warning">
-                <Link className="reset-link-style" to="/">На главную</Link>                
+                <Link className="reset-link-style" to="/">На главную</Link>
               </Button>
             </p>
-          </div>           
+          </div>
         </div>
       </div>
     )
