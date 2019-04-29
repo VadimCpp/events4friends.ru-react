@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment'
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import 'moment/locale/ru';
 import './EventItem.css';
 
@@ -145,7 +145,7 @@ class EventItem extends Component {
     if (this.props.googleEvent.description) {
       return (
         <div className='event-description'>
-          <p dangerouslySetInnerHTML={{ __html: this.props.googleEvent.description }}>{}</p>
+          <p dangerouslySetInnerHTML={{ __html: this.props.googleEvent.description }} />
         </div>
       );
     } else {
@@ -157,21 +157,29 @@ class EventItem extends Component {
     if (!this.state.moreInfo) {
       return (
         <div className='event-more btn-container'>
-          <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть' : 'Подробнее..'}.</button>
-          <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}><Link className="reset-link-style" to="/event">К событию</Link></button>
-        </div>)
+          <button type="button" className="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть' : 'Подробнее..'}.</button>
+          <button type="button" className="btn btn-light btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>
+        </div >)
     } else {
       return (
         <div className='event-more'>
           <div className='event-more btn-container'>
-            <button type="button" class="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть' : 'Подробнее..'}.</button>
+            <button type="button" className="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть' : 'Подробнее..'}.</button>
           </div>
-          {this.formatDescription()}
-          {this.formatName()}
-          {this.formatEmail()}
+          {this.renderInfoBlock()}
         </div>
       )
     }
+  }
+
+  renderInfoBlock = () => {
+    return (
+      <>
+        {this.formatDescription()}
+        {this.formatName()}
+        {this.formatEmail()}
+      </>
+    )
   }
 
   render() {
@@ -194,7 +202,7 @@ class EventItem extends Component {
         {this.formatLocation()}
 
 
-        {this.moreInfo()}
+        {this.props.match.path === '/' ? this.moreInfo() : this.renderInfoBlock()}
 
       </div>
     )
@@ -202,4 +210,4 @@ class EventItem extends Component {
 }
 
 
-export default EventItem;
+export default withRouter(EventItem);
