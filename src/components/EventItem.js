@@ -11,14 +11,24 @@ class EventItem extends Component {
   state = {
     moreInfo: false,
     event: {
-      title: 'Sample Event',
-      description: 'This is the sample event provided as an example only',
-      location: 'Portland, OR',
-      startTime: '2016-09-16T20:15:00-04:00',
-      endTime: '2016-09-16T21:45:00-04:00'
+      title: '',
+      description: '',
+      location: '',
+      startTime: '2019-01-01T00:00:00',
+      endTime: '2019-01-01T00:00:00'
     }
-
   }
+
+  componentDidMount() {
+    this.setState({event: {
+      title: this.props.googleEvent.summary,
+      description: this.props.googleEvent.description,
+      location: this.props.googleEvent.location,
+      startTime: this.props.googleEvent.start.dateTime,
+      endTime: this.props.googleEvent.start.dateTime,
+    }});
+  }
+
   formatStartDate() {
     if (this.props.googleEvent.start && this.props.googleEvent.start.dateTime) {
       return (
@@ -171,7 +181,13 @@ class EventItem extends Component {
         <div className='event-more btn-container'>
           <button type="button" className="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
           <button type="button" className="btn btn-light btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>
-          <button type="button" className="btn btn-light btn-more" ><AddToCalendar event={this.state.event} /> </button>
+          <button type="button" className="btn btn-light btn-more" >
+            <AddToCalendar
+              event={this.state.event}
+              buttonTemplate={icon}
+              buttonLabel="Добавить в календарь"
+            />
+          </button>
         </div >)
     } else {
       return (
