@@ -34,6 +34,7 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "react-add-to-calendar": "^0.1.5"
   }
 }

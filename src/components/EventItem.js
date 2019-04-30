@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment'
+import AddToCalendar from 'react-add-to-calendar';
+import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link, withRouter } from "react-router-dom";
 import 'moment/locale/ru';
 import './EventItem.css';
@@ -7,7 +9,15 @@ import './EventItem.css';
 class EventItem extends Component {
 
   state = {
-    moreInfo: false
+    moreInfo: false,
+    event: {
+      title: 'Sample Event',
+      description: 'This is the sample event provided as an example only',
+      location: 'Portland, OR',
+      startTime: '2016-09-16T20:15:00-04:00',
+      endTime: '2016-09-16T21:45:00-04:00'
+    }
+
   }
   formatStartDate() {
     if (this.props.googleEvent.start && this.props.googleEvent.start.dateTime) {
@@ -154,11 +164,14 @@ class EventItem extends Component {
   }
 
   moreInfo() {
+    let icon = { 'calendar-plus-o': 'left' };
+
     if (!this.state.moreInfo) {
       return (
         <div className='event-more btn-container'>
           <button type="button" className="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
           <button type="button" className="btn btn-light btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>
+          <button type="button" className="btn btn-light btn-more" ><AddToCalendar event={this.state.event} /> </button>
         </div >)
     } else {
       return (
@@ -166,6 +179,7 @@ class EventItem extends Component {
           <div className='event-more btn-container '>
             <button type="button" className="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
             <button type="button" className="btn btn-light btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>
+            <button type="button" className="btn btn-light btn-more" ><AddToCalendar event={this.state.event} /> </button>
           </div>
           {this.renderInfoBlock()}
         </div>

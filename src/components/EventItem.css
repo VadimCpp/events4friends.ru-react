@@ -38,3 +38,16 @@
   padding: 0;
   color: black !important;
 }
+
+
+/* Customize from 'react-add-to-calendar/dist/react-add-to-calendar.css'; */
+.react-add-to-calendar__button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  color: #000;
+}
+
+.react-add-to-calendar__dropdown ul {
+  padding-left: 0;
+}
