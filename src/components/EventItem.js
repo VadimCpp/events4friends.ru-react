@@ -175,6 +175,11 @@ class EventItem extends Component {
 
   moreInfo() {
     let icon = { 'calendar-plus-o': 'left' };
+    let items = [
+      { google: 'Google' },
+      { apple: 'Apple Calendar' },
+      { outlook: 'Outlook' },
+   ];
 
     if (!this.state.moreInfo) {
       return (
@@ -186,6 +191,7 @@ class EventItem extends Component {
               event={this.state.event}
               buttonTemplate={icon}
               buttonLabel="Добавить в календарь"
+              listItems={items}
             />
           </button>
         </div >)
@@ -194,8 +200,15 @@ class EventItem extends Component {
         <div className='event-more'>
           <div className='event-more btn-container '>
             <button type="button" className="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
-            <button type="button" className="btn btn-light btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>
-            <button type="button" className="btn btn-light btn-more" ><AddToCalendar event={this.state.event} /> </button>
+            <button type="button" className="btn btn-light btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>            
+            <button type="button" className="btn btn-light btn-more" >
+              <AddToCalendar
+                event={this.state.event}
+                buttonTemplate={icon}
+                buttonLabel="Добавить в календарь"
+                listItems={items}
+              />
+            </button>
           </div>
           {this.renderInfoBlock()}
         </div>
