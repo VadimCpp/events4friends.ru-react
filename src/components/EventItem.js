@@ -25,7 +25,7 @@ class EventItem extends Component {
       description: this.props.googleEvent.description,
       location: this.props.googleEvent.location,
       startTime: this.props.googleEvent.start.dateTime,
-      endTime: this.props.googleEvent.start.dateTime,
+      endTime: this.props.googleEvent.end.dateTime,
     }});
   }
 
