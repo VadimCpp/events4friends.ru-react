@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment'
+import Moment from 'react-moment';
 import AddToCalendar from 'react-add-to-calendar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
