@@ -20,7 +20,6 @@ class EventItem extends Component {
       endTime: '2019-01-01T00:00:00'
     },
     copied: false,
-    timer: 0,
   }
 
   componentDidMount() {
@@ -32,6 +31,10 @@ class EventItem extends Component {
       endTime: this.props.googleEvent.end.dateTime,
     }});
     moment.locale('ru');
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   getStartDate = () => {
@@ -248,7 +251,10 @@ class EventItem extends Component {
 
     const shareText = `Приглашаю на мероприятие:\n\n${details}\n\nПодробнее на сайте:\n${url}`;
 
-    this.setState({ copied: true, timer: 3 });
+    this.setState({ copied: true });
+    this.timer = setTimeout(() => {
+      this.setState({ copied: false });
+    }, 1000);
   }
 
   moreInfo() {
