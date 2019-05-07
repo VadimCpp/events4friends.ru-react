@@ -38,6 +38,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
+    "clipboard": "^2.0.4",
     "react-add-to-calendar": "^0.1.5"
   }
 }

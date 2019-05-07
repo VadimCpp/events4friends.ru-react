@@ -238,6 +238,13 @@ class EventItem extends Component {
   }
 
   shareEvent = () => {
+    this.setState({ copied: true });
+    this.timer = setTimeout(() => {
+      this.setState({ copied: false });
+    }, 1000);
+  }
+
+  getClipboardText = () => {
     const { googleEvent } = this.props;
 
     const startDate = this.getStartDate();
@@ -249,12 +256,9 @@ class EventItem extends Component {
 
     const url = `http://events4friends.ru/event/${this.props.googleEvent.id}/`;
 
-    const shareText = `Приглашаю на мероприятие:\n\n${details}\n\nПодробнее на сайте:\n${url}`;
+    const clipboardText = `Приглашаю на мероприятие:\n\n${details}\n\nПодробнее на сайте:\n${url}`;
 
-    this.setState({ copied: true });
-    this.timer = setTimeout(() => {
-      this.setState({ copied: false });
-    }, 1000);
+    return clipboardText;
   }
 
   moreInfo() {
@@ -278,7 +282,13 @@ class EventItem extends Component {
               listItems={items}
             />
           </button>
-          <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent} disabled={this.state.copied}>
+          <button
+            type="button"
+            className="btn btn-light btn-more btn-clipboard"
+            disabled={this.state.copied}
+            data-clipboard-text={this.getClipboardText()}
+            onClick={this.shareEvent}
+          >
             { this.state.copied && (
               <span>                
                 {'Скопировано'}
@@ -306,7 +316,13 @@ class EventItem extends Component {
                 listItems={items}
               />
             </button>
-            <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent} disabled={this.state.copied}>
+            <button
+              type="button"
+              className="btn btn-light btn-more btn-clipboard"
+              disabled={this.state.copied}
+              data-clipboard-text={this.getClipboardText()}
+              onClick={this.shareEvent}
+            >
             { this.state.copied && (
               <span>                
                 {'Скопировано'}
