@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment'
 import AddToCalendar from 'react-add-to-calendar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link, withRouter } from "react-router-dom";
 import 'moment/locale/ru';
@@ -198,8 +199,9 @@ class EventItem extends Component {
               listItems={items}
             />
           </button>
-          <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent}>
-            {'Поделиться...'}
+          <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent}>            
+            <FontAwesomeIcon icon="share" className="share-icon"/>
+            {'Поделиться'}
           </button>
         </div >)
     } else {
@@ -217,7 +219,8 @@ class EventItem extends Component {
               />
             </button>
             <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent}>
-              {'Поделиться...'}
+              <FontAwesomeIcon icon="share" className="share-icon"/>
+              {'Поделиться'}
             </button>
           </div>
           {this.renderInfoBlock()}
