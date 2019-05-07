@@ -173,6 +173,10 @@ class EventItem extends Component {
     }
   }
 
+  shareEvent = () => {
+    alert('TODO:');
+  }
+
   moreInfo() {
     let icon = { 'calendar-plus-o': 'left' };
     let items = [
@@ -194,6 +198,9 @@ class EventItem extends Component {
               listItems={items}
             />
           </button>
+          <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent}>
+            {'Поделиться...'}
+          </button>
         </div >)
     } else {
       return (
@@ -208,6 +215,9 @@ class EventItem extends Component {
                 buttonLabel="Добавить в календарь"
                 listItems={items}
               />
+            </button>
+            <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent}>
+              {'Поделиться...'}
             </button>
           </div>
           {this.renderInfoBlock()}
