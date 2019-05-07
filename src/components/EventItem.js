@@ -313,10 +313,10 @@ class EventItem extends Component {
   render() {
     return (
       <div className="event-item">
-        📅
+        <span role="img" aria-label="Date">📅</span>
         {this.formatStartDate()}
 
-        🕗
+        <span role="img" aria-label="Time">🕗</span>
         {this.formatStartTime()}
 
         -
@@ -326,7 +326,7 @@ class EventItem extends Component {
         {this.formatSummary()}
         »
 
-        📍
+        <span role="img" aria-label="Location">📍</span>
         {this.formatLocation()}
 
 
