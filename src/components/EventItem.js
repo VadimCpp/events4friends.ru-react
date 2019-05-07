@@ -175,6 +175,8 @@ class EventItem extends Component {
 
       if (secondCommaPosition > 0) {
         simpleLocation = location.substr(0, secondCommaPosition);
+      } else {
+        simpleLocation = location;
       }
 
       return (
