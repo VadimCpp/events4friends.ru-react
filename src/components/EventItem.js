@@ -254,7 +254,7 @@ class EventItem extends Component {
     const location = this.getLocation();
     const details = `📅 ${startDate} 🕗 ${startTime} - ${endTime} － «${summary}» 📍${location}`;
 
-    const url = `http://events4friends.ru/event/${this.props.googleEvent.id}/`;
+    const url = `http://events4friends.ru/#/event/${this.props.googleEvent.id}/`;
 
     const clipboardText = `Приглашаю на мероприятие:\n\n${details}\n\nПодробнее на сайте:\n${url}`;
 
