@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
+import moment from 'moment';
 import AddToCalendar from 'react-add-to-calendar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
@@ -28,6 +29,19 @@ class EventItem extends Component {
       startTime: this.props.googleEvent.start.dateTime,
       endTime: this.props.googleEvent.end.dateTime,
     }});
+    moment.locale('ru');
+  }
+
+  getStartDate = () => {
+    const event = this.props.googleEvent;
+
+    let startDate = 'Не указано';
+
+    if (event.start && event.start.dateTime) {
+      startDate = moment(event.start.dateTime).format('LL');
+    }
+
+    return startDate;
   }
 
   formatStartDate() {
@@ -177,7 +191,7 @@ class EventItem extends Component {
   shareEvent = () => {
     const { googleEvent } = this.props;
 
-    const startDate = 'Не указано';
+    const startDate = this.getStartDate();
     const startTime = 'Не указано';
     const endTime = 'Не указано';
     const summary = googleEvent.summary || 'Не указано';
