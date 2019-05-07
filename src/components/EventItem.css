@@ -51,3 +51,7 @@
 .react-add-to-calendar__dropdown ul {
   padding-left: 0;
 }
+
+.share-icon {
+  padding-right: 5px;
+}

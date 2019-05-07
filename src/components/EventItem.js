@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment'
+import Moment from 'react-moment';
+import moment from 'moment';
 import AddToCalendar from 'react-add-to-calendar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link, withRouter } from "react-router-dom";
 import 'moment/locale/ru';
@@ -16,7 +18,8 @@ class EventItem extends Component {
       location: '',
       startTime: '2019-01-01T00:00:00',
       endTime: '2019-01-01T00:00:00'
-    }
+    },
+    copied: false,
   }
 
   componentDidMount() {
@@ -27,7 +30,66 @@ class EventItem extends Component {
       startTime: this.props.googleEvent.start.dateTime,
       endTime: this.props.googleEvent.end.dateTime,
     }});
+    moment.locale('ru');
   }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
+  }
+
+  getStartDate = () => {
+    const event = this.props.googleEvent;
+
+    let startDate = 'Не указано';
+
+    if (event.start && event.start.dateTime) {
+      startDate = moment(event.start.dateTime).format('LL');
+    }
+
+    return startDate;
+  }
+
+  getStartTime = () => {
+    const event = this.props.googleEvent;
+
+    let startDate = 'Не указано';
+
+    if (event.start && event.start.dateTime) {
+      startDate = moment(event.start.dateTime).format('HH:mm');
+    }
+
+    return startDate;
+  }
+
+  getEndTime = () => {
+    const event = this.props.googleEvent;
+
+    let endDate = 'Не указано';
+
+    if (event.end && event.end.dateTime) {
+      endDate = moment(event.end.dateTime).format('HH:mm');
+    }
+
+    return endDate;
+  }
+
+  getLocation = () => {
+    const event = this.props.googleEvent;
+
+    let location = 'Не указано';
+
+    if (event.location) {
+      const secondCommaPosition = event.location.indexOf(',', event.location.indexOf(',', 0) + 1);
+      
+      if (secondCommaPosition > 0) {
+        location = event.location.substr(0, secondCommaPosition);
+      } else {
+        location = event.location;
+      }
+    }
+
+    return location;
+  }  
 
   formatStartDate() {
     if (this.props.googleEvent.start && this.props.googleEvent.start.dateTime) {
@@ -118,6 +180,8 @@ class EventItem extends Component {
 
       if (secondCommaPosition > 0) {
         simpleLocation = location.substr(0, secondCommaPosition);
+      } else {
+        simpleLocation = location;
       }
 
       return (
@@ -173,13 +237,37 @@ class EventItem extends Component {
     }
   }
 
+  shareEvent = () => {
+    this.setState({ copied: true });
+    this.timer = setTimeout(() => {
+      this.setState({ copied: false });
+    }, 1000);
+  }
+
+  getClipboardText = () => {
+    const { googleEvent } = this.props;
+
+    const startDate = this.getStartDate();
+    const startTime = this.getStartTime();
+    const endTime = this.getEndTime();
+    const summary = googleEvent.summary || 'Не указано';
+    const location = this.getLocation();
+    const details = `📅 ${startDate} 🕗 ${startTime} - ${endTime} － «${summary}» 📍${location}`;
+
+    const url = `http://events4friends.ru/#/event/${this.props.googleEvent.id}/`;
+
+    const clipboardText = `Приглашаю на мероприятие:\n\n${details}\n\nПодробнее на сайте:\n${url}`;
+
+    return clipboardText;
+  }
+
   moreInfo() {
     let icon = { 'calendar-plus-o': 'left' };
     let items = [
       { google: 'Google' },
       { apple: 'Apple Calendar' },
       { outlook: 'Outlook' },
-   ];
+    ];
 
     if (!this.state.moreInfo) {
       return (
@@ -194,6 +282,25 @@ class EventItem extends Component {
               listItems={items}
             />
           </button>
+          <button
+            type="button"
+            className="btn btn-light btn-more btn-clipboard"
+            disabled={this.state.copied}
+            data-clipboard-text={this.getClipboardText()}
+            onClick={this.shareEvent}
+          >
+            { this.state.copied && (
+              <span>                
+                {'Скопировано'}
+              </span>
+            )}
+            { !this.state.copied && (
+              <span>
+                <FontAwesomeIcon icon="share" className="share-icon"/>
+                {'Поделиться'}
+              </span>
+            )}
+            </button>
         </div >)
     } else {
       return (
@@ -208,6 +315,25 @@ class EventItem extends Component {
                 buttonLabel="Добавить в календарь"
                 listItems={items}
               />
+            </button>
+            <button
+              type="button"
+              className="btn btn-light btn-more btn-clipboard"
+              disabled={this.state.copied}
+              data-clipboard-text={this.getClipboardText()}
+              onClick={this.shareEvent}
+            >
+            { this.state.copied && (
+              <span>                
+                {'Скопировано'}
+              </span>
+            )}
+            { !this.state.copied && (
+              <span>
+                <FontAwesomeIcon icon="share" className="share-icon"/>
+                {'Поделиться'}
+              </span>
+            )}
             </button>
           </div>
           {this.renderInfoBlock()}
@@ -229,10 +355,10 @@ class EventItem extends Component {
   render() {
     return (
       <div className="event-item">
-        📅
+        <span role="img" aria-label="Date">📅</span>
         {this.formatStartDate()}
 
-        🕗
+        <span role="img" aria-label="Time">🕗</span>
         {this.formatStartTime()}
 
         -
@@ -242,7 +368,7 @@ class EventItem extends Component {
         {this.formatSummary()}
         »
 
-        📍
+        <span role="img" aria-label="Location">📍</span>
         {this.formatLocation()}
 
 
