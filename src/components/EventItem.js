@@ -175,7 +175,20 @@ class EventItem extends Component {
   }
 
   shareEvent = () => {
-    alert('TODO:');
+    const { googleEvent } = this.props;
+
+    const startDate = 'Не указано';
+    const startTime = 'Не указано';
+    const endTime = 'Не указано';
+    const summary = googleEvent.summary || 'Не указано';
+    const location = 'Не указано';
+    const url = `http://events4friends.ru/event/${this.props.googleEvent.id}/`;
+
+    const details = `📅 ${startDate} 🕗 ${startTime} - ${endTime} － «${summary}» 📍${location}`;
+
+    const shareText = `Приглашаю на мероприятие:\n\n${details}\n\nПодробнее на сайте:\n${url}`;
+
+    alert(shareText);
   }
 
   moreInfo() {
