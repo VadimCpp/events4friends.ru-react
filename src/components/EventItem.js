@@ -44,6 +44,30 @@ class EventItem extends Component {
     return startDate;
   }
 
+  getStartTime = () => {
+    const event = this.props.googleEvent;
+
+    let startDate = 'Не указано';
+
+    if (event.start && event.start.dateTime) {
+      startDate = moment(event.start.dateTime).format('HH:mm');
+    }
+
+    return startDate;
+  }
+
+  getEndTime = () => {
+    const event = this.props.googleEvent;
+
+    let endDate = 'Не указано';
+
+    if (event.end && event.end.dateTime) {
+      endDate = moment(event.end.dateTime).format('HH:mm');
+    }
+
+    return endDate;
+  }
+
   formatStartDate() {
     if (this.props.googleEvent.start && this.props.googleEvent.start.dateTime) {
       return (
@@ -192,8 +216,8 @@ class EventItem extends Component {
     const { googleEvent } = this.props;
 
     const startDate = this.getStartDate();
-    const startTime = 'Не указано';
-    const endTime = 'Не указано';
+    const startTime = this.getStartTime();
+    const endTime = this.getEndTime();
     const summary = googleEvent.summary || 'Не указано';
     const location = 'Не указано';
     const url = `http://events4friends.ru/event/${this.props.googleEvent.id}/`;
