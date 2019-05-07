@@ -68,6 +68,24 @@ class EventItem extends Component {
     return endDate;
   }
 
+  getLocation = () => {
+    const event = this.props.googleEvent;
+
+    let location = 'Не указано';
+
+    if (event.location) {
+      const secondCommaPosition = event.location.indexOf(',', event.location.indexOf(',', 0) + 1);
+      
+      if (secondCommaPosition > 0) {
+        location = event.location.substr(0, secondCommaPosition);
+      } else {
+        location = event.location;
+      }
+    }
+
+    return location;
+  }  
+
   formatStartDate() {
     if (this.props.googleEvent.start && this.props.googleEvent.start.dateTime) {
       return (
@@ -219,10 +237,10 @@ class EventItem extends Component {
     const startTime = this.getStartTime();
     const endTime = this.getEndTime();
     const summary = googleEvent.summary || 'Не указано';
-    const location = 'Не указано';
-    const url = `http://events4friends.ru/event/${this.props.googleEvent.id}/`;
-
+    const location = this.getLocation();
     const details = `📅 ${startDate} 🕗 ${startTime} - ${endTime} － «${summary}» 📍${location}`;
+
+    const url = `http://events4friends.ru/event/${this.props.googleEvent.id}/`;
 
     const shareText = `Приглашаю на мероприятие:\n\n${details}\n\nПодробнее на сайте:\n${url}`;
 
