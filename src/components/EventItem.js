@@ -18,7 +18,9 @@ class EventItem extends Component {
       location: '',
       startTime: '2019-01-01T00:00:00',
       endTime: '2019-01-01T00:00:00'
-    }
+    },
+    copied: false,
+    timer: 0,
   }
 
   componentDidMount() {
@@ -246,7 +248,7 @@ class EventItem extends Component {
 
     const shareText = `Приглашаю на мероприятие:\n\n${details}\n\nПодробнее на сайте:\n${url}`;
 
-    alert(shareText);
+    this.setState({ copied: true, timer: 3 });
   }
 
   moreInfo() {
@@ -270,10 +272,19 @@ class EventItem extends Component {
               listItems={items}
             />
           </button>
-          <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent}>            
-            <FontAwesomeIcon icon="share" className="share-icon"/>
-            {'Поделиться'}
-          </button>
+          <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent} disabled={this.state.copied}>
+            { this.state.copied && (
+              <span>                
+                {'Скопировано'}
+              </span>
+            )}
+            { !this.state.copied && (
+              <span>
+                <FontAwesomeIcon icon="share" className="share-icon"/>
+                {'Поделиться'}
+              </span>
+            )}
+            </button>
         </div >)
     } else {
       return (
@@ -289,9 +300,18 @@ class EventItem extends Component {
                 listItems={items}
               />
             </button>
-            <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent}>
-              <FontAwesomeIcon icon="share" className="share-icon"/>
-              {'Поделиться'}
+            <button type="button" className="btn btn-light btn-more" onClick={this.shareEvent} disabled={this.state.copied}>
+            { this.state.copied && (
+              <span>                
+                {'Скопировано'}
+              </span>
+            )}
+            { !this.state.copied && (
+              <span>
+                <FontAwesomeIcon icon="share" className="share-icon"/>
+                {'Поделиться'}
+              </span>
+            )}
             </button>
           </div>
           {this.renderInfoBlock()}
