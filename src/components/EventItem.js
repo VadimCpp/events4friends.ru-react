@@ -183,7 +183,7 @@ class EventItem extends Component {
       { google: 'Google' },
       { apple: 'Apple Calendar' },
       { outlook: 'Outlook' },
-   ];
+    ];
 
     if (!this.state.moreInfo) {
       return (
