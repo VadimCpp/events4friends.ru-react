@@ -29,12 +29,40 @@ class EventItem extends Component {
       location: this.props.googleEvent.location,
       startTime: this.props.googleEvent.start.dateTime,
       endTime: this.props.googleEvent.end.dateTime,
+      coordinates: this.parseLonLat(),
     }});
     moment.locale('ru');
   }
 
   componentWillUnmount() {
     clearTimeout(this.timer);
+  }
+
+  parseLonLat = () => {
+    const { googleEvent } = this.props;
+
+    let coordinates = {
+      latitude: '',
+      longitude: '',
+    };
+
+    if (googleEvent && googleEvent.location) {
+      //
+      // Link: https://stackoverflow.com/a/18690202/1775459
+      //
+      // This will get output:
+      // ["54.649617, 19.901687"]
+      //
+      const lonLat = googleEvent.location.match(/[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)/g);
+
+      if (lonLat && lonLat[0]) {
+        const lonLatArray = lonLat[0].match(/[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)/g);
+        coordinates.latitude = lonLatArray[0];
+        coordinates.longitude = lonLatArray[1];
+      }
+    }
+
+    return coordinates;
   }
 
   getStartDate = () => {
