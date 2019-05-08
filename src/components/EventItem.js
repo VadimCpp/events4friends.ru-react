@@ -211,8 +211,22 @@ class EventItem extends Component {
       } else {
         simpleLocation = location;
       }
+      
+      const { coordinates } = this.state.event;
+      const hasCoordinates = Boolean(coordinates && coordinates.latitude && coordinates.longitude);
 
-      return (
+      let url = "";
+      if (hasCoordinates) {
+        url = "https://maps.google.com/?q=" + coordinates.latitude + "," + coordinates.longitude;
+      }
+   
+      return hasCoordinates
+      ? (
+        <a href={url} className="event-location">
+          {simpleLocation}
+        </a>
+      )
+      : (
         <span className="event-location">
           {simpleLocation}
         </span>
