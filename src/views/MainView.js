@@ -51,11 +51,11 @@ class MainView extends Component {
           </div>
           <div className="pt-5 pb-5">
             <p>
-              На главной только список событий. Остальные возможности пока находятся в разделе "О сообществе".
+              На главной пока только список событий. Все остальное в разделе "О нас".
             </p>
             <p>
               <Button color="warning">
-                <Link className="reset-link-style" to="/about">О сообществе</Link>
+                <Link className="reset-link-style" to="/about">О нас</Link>
               </Button>
             </p>
           </div>
