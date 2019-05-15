@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import './AboutView.css';
 
 class AboutView extends Component {
-  openChat() {
-    window.location.href = 'https://t.me/events4friends';
-  }
-
   render() {
     return (
       <div className="about-view">
@@ -32,14 +28,6 @@ class AboutView extends Component {
               Сайт предназначается для некоммерческих огранизаций и сообществ. Сайт не хранит
               никаких данных на сервере, а только отображает в удобном формате
               данные календарей, которые предоставляют сообщества и организации.
-            </p>
-            <p>
-              <Button
-                color="warning"
-                onClick={this.openChat}
-              >
-                Telegram-чат
-              </Button>
             </p>
           </div>
           <div className="py-5">
