@@ -244,6 +244,7 @@ class EventItem extends Component {
     if (this.props.googleEvent.creator.email) {
       return (
         <div className='event-email'>
+          <span>Написать организаторам: </span>
           <span>{this.props.googleEvent.creator.email}</span>
           <button className='btn btn-link btn-email' onClick={() => window.open(`mailto:${this.props.googleEvent.creator.email}`)}><svg id="i-mail" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentcolor"  >
             <path d="M2 26 L30 26 30 6 2 6 Z M2 6 L16 16 30 6" />

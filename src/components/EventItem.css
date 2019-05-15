@@ -34,6 +34,7 @@
   margin: 10px 10px 0 0;
 }
 .btn-email {
+  margin-top: 0;
   margin-left: 15px;
   padding: 0;
   color: black !important;
