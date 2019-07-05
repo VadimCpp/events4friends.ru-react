@@ -10,6 +10,21 @@ import axios from 'axios';
 class AppRouter extends Component {
   state = {
     loading: true,
+    //
+    // TODO: после загрузки данных из нескольких календарей необходимо
+    // изменить структуру хранения данных. Пример:
+    //
+    // events: [
+    //   {
+    //      calendarName: "events4friends",
+    //      events: [ ... ]
+    //   },
+    //   {
+    //      calendarName: "Право на город",
+    //      events: [ ... ]
+    //   },
+    // ]
+    //
     events: [],
     event: []
   }
