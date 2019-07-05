@@ -17,7 +17,25 @@ class AppRouter extends Component {
     this.getEvents();
   }
 
+  //
+  // Данные календаря "Право на город"
+  // Посмотреть в браузере: https://calendar.google.com/calendar/embed?src=pravonagorod%40gmail.com&ctz=Europe%2FKaliningrad
+  // CALENDAR_ID = 'pravonagorod%40gmail.com'
+  //
+  // TODO: реализовать загрузку событий этого календаря
+  //
+
+  //
+  // Данные календаря "events4friends"
+  // Посмотреть в браузере: https://calendar.google.com/calendar/embed?src=dveenjcu4k5ktd3k8pv4iul2bk%40group.calendar.google.com&ctz=Europe%2FKaliningrad
+  // CALENDAR_ID = 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'
+  //
+
   getEvents = () => {
+    // 
+    // NOTE!
+    // Тут можно подставить любой CALENDAR_ID
+    //
     const CALENDAR_ID = 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'
     const API_KEY = 'AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs'
     let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`
