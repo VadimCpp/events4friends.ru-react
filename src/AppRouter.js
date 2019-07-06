@@ -10,52 +10,33 @@ import axios from 'axios';
 class AppRouter extends Component {
   state = {
     loading: true,
-    //
-    // TODO: после загрузки данных из нескольких календарей необходимо
-    // изменить структуру хранения данных. Пример:
-    //
-    // events: [
-    //   {
-    //      calendarName: "events4friends",
-    //      events: [ ... ]
-    //   },
-    //   {
-    //      calendarName: "Право на город",
-    //      events: [ ... ]
-    //   },
-    // ]
-    //
     events: [],
     event: []
   }
+
   componentDidMount() {
     this.getEvents();
   }
 
-  //
-  // Данные календаря "Право на город"
-  // Посмотреть в браузере: https://calendar.google.com/calendar/embed?src=pravonagorod%40gmail.com&ctz=Europe%2FKaliningrad
-  // CALENDAR_ID = 'pravonagorod%40gmail.com'
-  //
-  // TODO: реализовать загрузку событий этого календаря
-  //
+  getEvents = async () => {
+    const URL = 'https://www.googleapis.com/calendar/v3/calendars/';
+    const API_KEY = 'AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs';
+    const CALENDAR_IDS = {
+      PRAVO: 'pravonagorod%40gmail.com',
+      BASIC: 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'
+    }
+    
+    try {
+      const pravo = await axios.get(`${URL}${CALENDAR_IDS.PRAVO}/events?key=${API_KEY}`);
+      const basic = await axios.get(`${URL}${CALENDAR_IDS.BASIC}/events?key=${API_KEY}`);
 
-  //
-  // Данные календаря "events4friends"
-  // Посмотреть в браузере: https://calendar.google.com/calendar/embed?src=dveenjcu4k5ktd3k8pv4iul2bk%40group.calendar.google.com&ctz=Europe%2FKaliningrad
-  // CALENDAR_ID = 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'
-  //
-
-  getEvents = () => {
-    // 
-    // NOTE!
-    // Тут можно подставить любой CALENDAR_ID
-    //
-    const CALENDAR_ID = 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'
-    const API_KEY = 'AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs'
-    let url = `https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}`
-    axios.get(url)
-      .then(res => this.setState({ loading: false, events: res.data.items }))
+      this.setState({ loading: false, events: [
+        { calendarName: "events4friends", events: basic.data.items },
+        { calendarName: "Право на город", events: pravo.data.items }
+      ]})
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   getEvent = eventId => {
@@ -65,12 +46,15 @@ class AppRouter extends Component {
   }
 
   render() {
-    return (<Router>
+    const { loading, events } = this.state;
+
+    return (
+    <Router>
       <ScrollToTop>
         <div>
-          <Route path="/" exact render={props => (
-            <MainView {...props} events={this.state.events} loading={this.state.loading} getEvent={this.getEvent} />
-          )} />
+          {loading ? <div>Loading please wait...</div> : <Route path="/" exact render={props => ( 
+            <MainView {...props} events={events} getEvent={this.getEvent} />
+          )} />}
           <Route path="/about/" component={AboutView} />
           <Route path="/event/:id" render={props => (
             <EventView {...props} googleEvents={this.state.events} getEvent={this.getEvent} />
