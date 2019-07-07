@@ -4,8 +4,8 @@ import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";
+import { EsriProvider } from 'leaflet-geosearch';
 import axios from 'axios';
-
 
 class AppRouter extends Component {
   state = {
@@ -18,6 +18,20 @@ class AppRouter extends Component {
     this.getEvents();
   }
 
+  filterEvents(events) {
+    return  events.filter(event => {
+      let _ref2, _ref3;
+
+      return (((_ref2 = event) != null ? (_ref2 = _ref2.start) != null ? _ref2.dateTime : _ref2 : _ref2) || ((_ref3 = event) != null ? (_ref3 = _ref3.start) != null ? _ref3.date : _ref3 : _ref3)) > new Date().toISOString();
+    }).sort((a, b) => {
+      if (a.start && a.start.dateTime &&
+        b.start && b.start.dateTime) {
+        return a.start.dateTime < b.start.dateTime ? -1 : 1;
+      }
+      return 0;
+    });
+  }
+
   getEvents = async () => {
     const URL = 'https://www.googleapis.com/calendar/v3/calendars/';
     const API_KEY = 'AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs';
@@ -27,18 +41,34 @@ class AppRouter extends Component {
     }
     
     try {
-      const pravo = await axios.get(`${URL}${CALENDAR_IDS.PRAVO}/events?key=${API_KEY}`);
-      const basic = await axios.get(`${URL}${CALENDAR_IDS.BASIC}/events?key=${API_KEY}`);
+      const resPravo = await axios.get(`${URL}${CALENDAR_IDS.PRAVO}/events?key=${API_KEY}`);
+      const resFriends = await axios.get(`${URL}${CALENDAR_IDS.BASIC}/events?key=${API_KEY}`);
+
+      const pravo = this.filterEvents(resPravo.data.items);
+      const friends = this.filterEvents(resFriends.data.items);
+
+      await this.addCoords(pravo);
+      await this.addCoords(friends);
 
       this.setState({ loading: false, events: [
-        { calendarName: "events4friends", events: basic.data.items },
-        { calendarName: "Право на город", events: pravo.data.items }
+        { calendarName: "events4friends", events: friends },
+        { calendarName: "Право на город", events: pravo }
       ]})
     } catch (err) {
       console.log(err);
     }
   }
 
+  addCoords = async (events) => {
+    const provider = new EsriProvider();
+
+    for (const event of events) {
+      const result = await provider.search({ query: event.location });
+      if (!result[0].x || !result[0].y) event.geolocation = null;
+      else event.geolocation = { lon: result[0].x, lat: result[0].y };
+    }
+  }
+  
   getEvent = eventId => {
     const listEvents = [...this.state.events];
     const targetEvents = listEvents.filter(event => event.id === eventId);

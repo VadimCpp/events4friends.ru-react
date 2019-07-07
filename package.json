@@ -39,6 +39,9 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
     "clipboard": "^2.0.4",
-    "react-add-to-calendar": "^0.1.5"
+    "leaflet": "^1.5.1",
+    "leaflet-geosearch": "^2.7.0",
+    "react-add-to-calendar": "^0.1.5",
+    "react-leaflet": "^2.4.0"
   }
 }
