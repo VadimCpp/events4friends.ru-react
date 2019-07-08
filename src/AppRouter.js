@@ -3,9 +3,7 @@ import { HashRouter as Router, Route } from "react-router-dom";
 import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
 import EventView from './views/EventView'
-import ScrollToTop from "./components/ScrollToTop.js";
-import { EsriProvider } from 'leaflet-geosearch';
-import axios from 'axios';
+import ScrollToTop from "./components/ScrollToTop.js";import axios from 'axios';
 
 class AppRouter extends Component {
   state = {
@@ -47,25 +45,16 @@ class AppRouter extends Component {
       const pravo = this.filterEvents(resPravo.data.items);
       const friends = this.filterEvents(resFriends.data.items);
 
-      await this.addCoords(pravo);
-      await this.addCoords(friends);
-
-      this.setState({ loading: false, events: [
-        { calendarName: "events4friends", events: friends },
-        { calendarName: "Право на город", events: pravo }
-      ]})
+      this.setState((state) => ({ 
+        ...state,
+        loading: false, 
+        events: [
+          { calendarName: "events4friends", events: friends },
+          { calendarName: "pravonagorod", events: pravo }
+        ]
+      }))
     } catch (err) {
       console.log(err);
-    }
-  }
-
-  addCoords = async (events) => {
-    const provider = new EsriProvider();
-
-    for (const event of events) {
-      const result = await provider.search({ query: event.location });
-      if (!result[0].x || !result[0].y) event.geolocation = null;
-      else event.geolocation = { lon: result[0].x, lat: result[0].y };
     }
   }
   
@@ -83,7 +72,7 @@ class AppRouter extends Component {
       <ScrollToTop>
         <div>
           {loading ? <div>Loading please wait...</div> : <Route path="/" exact render={props => ( 
-            <MainView {...props} events={events} getEvent={this.getEvent} />
+            <MainView {...props} events={events} allEvents={[...events[0].events, ...events[1].events]} getEvent={this.getEvent} />
           )} />}
           <Route path="/about/" component={AboutView} />
           <Route path="/event/:id" render={props => (
