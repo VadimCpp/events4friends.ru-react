@@ -4,6 +4,7 @@ import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";import axios from 'axios';
+import { NAMES_CALENDARS } from './config';
 
 class AppRouter extends Component {
   state = {
@@ -42,6 +43,7 @@ class AppRouter extends Component {
       const resPravo = await axios.get(`${URL}${CALENDAR_IDS.PRAVO}/events?key=${API_KEY}`);
       const resFriends = await axios.get(`${URL}${CALENDAR_IDS.BASIC}/events?key=${API_KEY}`);
 
+      console.log(resPravo.headers);
       const pravo = this.filterEvents(resPravo.data.items);
       const friends = this.filterEvents(resFriends.data.items);
 
@@ -49,8 +51,8 @@ class AppRouter extends Component {
         ...state,
         loading: false, 
         events: [
-          { calendarName: "events4friends", events: friends },
-          { calendarName: "pravonagorod", events: pravo }
+          { calendarName: NAMES_CALENDARS[friends[0].creator.email].name, events: friends },
+          { calendarName: NAMES_CALENDARS[pravo[0].creator.email].name, events: pravo }
         ]
       }))
     } catch (err) {
@@ -72,7 +74,7 @@ class AppRouter extends Component {
       <ScrollToTop>
         <div>
           {loading ? <div>Loading please wait...</div> : <Route path="/" exact render={props => ( 
-            <MainView {...props} events={events} allEvents={[...events[0].events, ...events[1].events]} getEvent={this.getEvent} />
+            <MainView {...props} events={events} getEvent={this.getEvent} />
           )} />}
           <Route path="/about/" component={AboutView} />
           <Route path="/event/:id" render={props => (

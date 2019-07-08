@@ -1,13 +1,9 @@
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
-import { EsriProvider } from 'leaflet-geosearch';
 import Moment from 'react-moment';
+import { EsriProvider } from 'leaflet-geosearch';
+import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import { NAMES_CALENDARS } from '../config'
 import './map.css';
-
-const NAMES_CLALENDARS = {
-  'vadim.cpp@gmail.com': 'Events For Friends',
-  'pravonagorod@gmail.com': 'Право на город'
-}
 
 class Map extends React.Component {
   state = {
@@ -65,10 +61,11 @@ class Map extends React.Component {
 
         {!pins ? null : pins.map(event => {
           const { lat, lng } = event.geolocation;
+
           return (
             <Marker key={event.id} position={[lat, lng]}>
               <Popup>
-                <h5>#{NAMES_CLALENDARS[event.email]}</h5>
+                <h5>#{NAMES_CALENDARS[event.email].name}</h5>
                 <p>{event.description.slice(0, 150)}...</p>
                 <p>Место события: {event.location}</p>
                 <p>Начало: <Moment format={'DD MMM HH:mm'}>{event.dateTime}</Moment></p>
