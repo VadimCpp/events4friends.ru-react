@@ -43,7 +43,6 @@ class AppRouter extends Component {
       const resPravo = await axios.get(`${URL}${CALENDAR_IDS.PRAVO}/events?key=${API_KEY}`);
       const resFriends = await axios.get(`${URL}${CALENDAR_IDS.BASIC}/events?key=${API_KEY}`);
 
-      console.log(resPravo.headers);
       const pravo = this.filterEvents(resPravo.data.items);
       const friends = this.filterEvents(resFriends.data.items);
 
