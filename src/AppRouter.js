@@ -4,6 +4,7 @@ import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";import axios from 'axios';
+import { NAMES_CALENDARS } from './config';
 
 class AppRouter extends Component {
   state = {
@@ -49,8 +50,8 @@ class AppRouter extends Component {
         ...state,
         loading: false, 
         events: [
-          { calendarName: "events4friends", events: friends },
-          { calendarName: "pravonagorod", events: pravo }
+          { calendarName: NAMES_CALENDARS[friends[0].creator.email].name, events: friends },
+          { calendarName: NAMES_CALENDARS[pravo[0].creator.email].name, events: pravo }
         ]
       }))
     } catch (err) {
@@ -72,7 +73,7 @@ class AppRouter extends Component {
       <ScrollToTop>
         <div>
           {loading ? <div>Loading please wait...</div> : <Route path="/" exact render={props => ( 
-            <MainView {...props} events={events} allEvents={[...events[0].events, ...events[1].events]} getEvent={this.getEvent} />
+            <MainView {...props} events={events} getEvent={this.getEvent} />
           )} />}
           <Route path="/about/" component={AboutView} />
           <Route path="/event/:id" render={props => (

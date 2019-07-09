@@ -18,6 +18,7 @@ class MainView extends Component {
               <EventItem
                 getEvent={this.props.getEvent}
                 googleEvent={event}
+                name={nameCalendar}
               />
             </li>
           )}
@@ -27,13 +28,13 @@ class MainView extends Component {
   }
 
   render() {
-    const { events, allEvents } = this.props;
+    const { events } = this.props;
 
     return (
       <div className="main-view">
         <div className="container container-center main-view-container">
           <div className="pt-5">
-            <Map allEvents={allEvents} />
+            <Map allEvents={[...events[0].events, ...events[1].events]}/>
             {events.map(events => this.displayEvents(events.events, events.calendarName))}
           </div>
           <div className="pt-5 pb-5">
