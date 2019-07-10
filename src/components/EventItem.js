@@ -398,7 +398,7 @@ class EventItem extends Component {
   render() {
     return (
       <div className="event-item">
-        <h5>#{this.props.name}</h5>
+        <p className="calendar-name"><small>#{this.props.name}</small></p>
         <span role="img" aria-label="Date">📅</span>
         {this.formatStartDate()}
 
