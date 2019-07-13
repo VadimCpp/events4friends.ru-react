@@ -9,7 +9,7 @@ class MainView extends Component {
 
   displayEvents(events, nameCalendar) {
     if (!events.length) return null;
-
+  
     return (
         <ul key={nameCalendar} className="event-list">
           
