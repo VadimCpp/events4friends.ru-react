@@ -346,6 +346,7 @@ class EventItem extends Component {
             </button>
         </div >)
     } else {
+      console.log(this.props.googleEvent);
       return (
         <div className='event-more'>
           <div className='event-more btn-container '>
