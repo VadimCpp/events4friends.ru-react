@@ -43,16 +43,29 @@ class AppRouter extends Component {
       const resPravo = await axios.get(`${URL}${CALENDAR_IDS.PRAVO}/events?key=${API_KEY}`);
       const resFriends = await axios.get(`${URL}${CALENDAR_IDS.BASIC}/events?key=${API_KEY}`);
 
+      //
+      // NOTE!
+      // В календаре может не быть предстоящих событий, 
+      // следовательно его не надо включать в список отображаемых календарей
+      //
+
       const pravo = this.filterEvents(resPravo.data.items);
       const friends = this.filterEvents(resFriends.data.items);
+
+      let events = [];
+
+      if (pravo[0]) {
+        events.push({ calendarName: NAMES_CALENDARS[pravo[0].creator.email].name, events: pravo });
+      }      
+
+      if (friends[0]) {
+        events.push({ calendarName: NAMES_CALENDARS[friends[0].creator.email].name, events: friends });
+      }
 
       this.setState((state) => ({ 
         ...state,
         loading: false, 
-        events: [
-          { calendarName: NAMES_CALENDARS[friends[0].creator.email].name, events: friends },
-          { calendarName: NAMES_CALENDARS[pravo[0].creator.email].name, events: pravo }
-        ]
+        events
       }))
     } catch (err) {
       console.log(err);

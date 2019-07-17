@@ -30,11 +30,25 @@ class MainView extends Component {
   render() {
     const { events } = this.props;
 
+    //
+    // NOTE!
+    // events - массив, каждый элемент которого является массивом событий
+    // Тут собираем все события всех календарей в единый массив
+    //
+
+    let allEvents = [];
+    
+    for (let i = 0; i < events.length; i++) {
+      if (events[i]) {
+        allEvents = [...allEvents, events[i].events];
+      }  
+    }
+
     return (
       <div className="main-view">
         <div className="container container-center main-view-container">
           <div className="pt-5">
-            <Map allEvents={[...events[0].events, ...events[1].events]}/>
+            <Map allEvents={allEvents}/>
             {events.map(events => this.displayEvents(events.events, events.calendarName))}
           </div>
           <div className="pt-5 pb-5">
