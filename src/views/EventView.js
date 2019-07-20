@@ -23,8 +23,22 @@ class EventView extends Component {
 
     render() {
         const { googleEvents } = this.props;
-       
-        if (!googleEvents.length) {
+
+        //
+        // NOTE!
+        // googleEvents - массив, каждый элемент которого является массивом событий
+        // Тут собираем все события всех календарей в единый массив
+        //
+
+        let allEvents = [];
+        
+        for (let i = 0; i < googleEvents.length; i++) {
+            if (googleEvents[i]) {
+                allEvents = [...allEvents, ...googleEvents[i].events];
+            }  
+        }
+
+        if (!allEvents.length) {
             return <Redirect to="/" />
         }
 
@@ -32,7 +46,8 @@ class EventView extends Component {
             <div className="event-view">
                 <div className="container container-center event-view-container">
                     <div className="pt-5">
-                        {this.displayEvents([...googleEvents[0].events, ...googleEvents[1].events])}
+                        <p>asdasd</p>
+                        {this.displayEvents(allEvents)}
                     </div>
                     <div className="pt-5 pb-5">
                         <p>

@@ -40,7 +40,7 @@ class MainView extends Component {
     
     for (let i = 0; i < events.length; i++) {
       if (events[i]) {
-        allEvents = [...allEvents, events[i].events];
+        allEvents = [...allEvents, ...events[i].events];
       }  
     }
 
