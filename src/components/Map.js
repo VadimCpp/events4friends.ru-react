@@ -78,7 +78,7 @@ class Map extends React.Component {
               return (
                 <Marker key={event.id} position={[lat, lng]}>
                   <Popup>
-                    <h5>#{NAMES_CALENDARS[event.email].name}</h5>
+                    <h5>#{NAMES_CALENDARS[event.email] ? NAMES_CALENDARS[event.email].name : event.email}</h5>
                     <p>{event.description.slice(0, 150)}...</p>
                     <p>Место события: {event.location}</p>
                     <p>
