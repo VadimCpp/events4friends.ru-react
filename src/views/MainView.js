@@ -48,7 +48,7 @@ class MainView extends Component {
       <div className="main-view">
         <div className="container container-center main-view-container">
           <div className="pt-5">
-            <Map allEvents={allEvents}/>
+            {/*<Map allEvents={allEvents}/>*/}
             {events.map(events => this.displayEvents(events.events, events.calendarName))}
           </div>
           <div className="pt-5 pb-5">
