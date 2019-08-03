@@ -1,0 +1,22 @@
+.header{
+    align-items: center;
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    background: #ffffff;
+}
+
+.header_effect{
+    overflow: hidden;
+    position: relative;
+}
+
+.header_text{
+    font-family: Roboto, serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    text-align: center;
+    color: #000000;
+}
