@@ -6,9 +6,7 @@ class Header extends Component {
     render() {
         return(
             <header className="header">
-                <div className="header_effect">
-                    <h2 className="header_text" data-text="События для друзей">События для друзей</h2>
-                </div>
+                <h2 className="header_title" data-text="События для друзей">События для друзей</h2>
             </header>
         )
     }

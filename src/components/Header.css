@@ -6,17 +6,11 @@
     background: #ffffff;
 }
 
-.header_effect{
-    overflow: hidden;
-    position: relative;
-}
-
-.header_text{
-    font-family: Roboto, serif;
+.header_title{
+    margin-bottom: 0;
     font-style: normal;
     font-weight: normal;
-    font-size: 36px;
-    line-height: 42px;
+    font-size: 30px;
     text-align: center;
     color: #000000;
 }
