@@ -4,7 +4,7 @@ import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";import axios from 'axios';
-import { NAMES_CALENDARS } from './config';
+import { NAMES_CALENDARS } from './config'; // TODO: удалить
 
 class AppRouter extends Component {
   state = {
@@ -55,10 +55,16 @@ class AppRouter extends Component {
       let events = [];
 
       if (pravo[0]) {
+        //
+        // TODO: передать в calendarName значение 'Право на город'
+        //
         events.push({ calendarName: NAMES_CALENDARS[pravo[0].creator.email].name, events: pravo });
       }      
 
       if (friends[0]) {
+        //
+        // TODO: передать в calendarName значение 'Events For Friends'
+        //
         events.push({ calendarName: NAMES_CALENDARS[friends[0].creator.email].name, events: friends });
       }
 

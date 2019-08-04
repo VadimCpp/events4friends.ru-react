@@ -2,7 +2,7 @@ import React from "react";
 import Moment from "react-moment";
 import { EsriProvider } from "leaflet-geosearch";
 import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
-import { NAMES_CALENDARS } from "../config";
+import { NAMES_CALENDARS } from "../config"; // TODO: удалить
 import "./map.css";
 
 class Map extends React.Component {
@@ -78,6 +78,7 @@ class Map extends React.Component {
               return (
                 <Marker key={event.id} position={[lat, lng]}>
                   <Popup>
+                    {/* TODO: тег <h5> закоментить, но не удалять */}
                     <h5>#{NAMES_CALENDARS[event.email] ? NAMES_CALENDARS[event.email].name : event.email}</h5>
                     <p>{event.description.slice(0, 150)}...</p>
                     <p>Место события: {event.location}</p>
