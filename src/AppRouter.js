@@ -54,11 +54,11 @@ class AppRouter extends Component {
       let events = [];
 
       if (pravo[0]) {
-        events.push({ calendarName: 'Право на город' });
+        events.push({ calendarName: 'Право на город', events: pravo });
       }      
 
       if (friends[0]) {
-        events.push({ calendarName: 'Events For Friends' });
+        events.push({ calendarName: 'Events For Friends', events: friends });
       }
 
       this.setState((state) => ({ 
