@@ -33,33 +33,32 @@ class AppRouter extends Component {
   getEvents = async () => {
     const URL = 'https://www.googleapis.com/calendar/v3/calendars/';
     const API_KEY = 'AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs';
-    const CALENDAR_IDS = {
-      PRAVO: 'pravonagorod%40gmail.com',
-      BASIC: 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'
-    }
+    
+	
+    const CALENDARS = [
+		{id: 'pravonagorod%40gmail.com', name: 'Право на город'},
+		{id: 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com', name: 'Events For Friends'},
+		{id: '97oe212v23kfm97rnp7b1fv94c@group.calendar.google.com', name: 'Утро с Тедди'},
+    ]
     
     try {
-      const resPravo = await axios.get(`${URL}${CALENDAR_IDS.PRAVO}/events?key=${API_KEY}`);
-      const resFriends = await axios.get(`${URL}${CALENDAR_IDS.BASIC}/events?key=${API_KEY}`);
-
       //
       // NOTE!
       // В календаре может не быть предстоящих событий, 
       // следовательно его не надо включать в список отображаемых календарей
       //
 
-      const pravo = this.filterEvents(resPravo.data.items);
-      const friends = this.filterEvents(resFriends.data.items);
-
       let events = [];
-
-      if (pravo[0]) {
-        events.push({ calendarName: 'Право на город', events: pravo });
-      }      
-
-      if (friends[0]) {
-        events.push({ calendarName: 'Events For Friends', events: friends });
-      }
+	  
+		for (var cal of CALENDARS) {
+			console.log('Loading events from ', cal.name, cal.id);
+			var data = await axios.get(`${URL}${cal.id}/events?key=${API_KEY}`);
+			var items = this.filterEvents(data.data.items);
+			
+			if (items[0]) {
+				events.push({ calendarName: cal.name, events: items });
+			}    
+		}
 
       this.setState((state) => ({ 
         ...state,
