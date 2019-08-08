@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
+import LoadingView from "./views/LoadingView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";import axios from 'axios';
 
@@ -85,7 +86,7 @@ class AppRouter extends Component {
     <Router>
       <ScrollToTop>
         <div>
-          {loading ? <div>Loading please wait...</div> : <Route path="/" exact render={props => ( 
+          {loading ? <LoadingView /> : <Route path="/" exact render={props => ( 
             <MainView {...props} events={events} getEvent={this.getEvent} />
           )} />}
           <Route path="/about/" component={AboutView} />
