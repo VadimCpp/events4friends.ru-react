@@ -112,7 +112,7 @@ class AppRouter extends Component {
               <ScrollToTop>
                 <div>
                   <Route path="/" exact render={props => ( 
-                    <MainView {...props} events={events} getEvent={this.getEvent} />
+                    <MainView {...props} googleEvents={events} getEvent={this.getEvent} />
                   )} />
                   <Route path="/about/" component={AboutView} />
                   <Route path="/event/:id" render={props => (

@@ -28,19 +28,19 @@ class MainView extends Component {
   }
 
   render() {
-    const { events } = this.props;
+    const { googleEvents } = this.props;
 
     //
     // NOTE!
-    // events - массив, каждый элемент которого является массивом событий
+    // googleEvents - массив, каждый элемент которого является массивом событий
     // Тут собираем все события всех календарей в единый массив
     //
 
     let allEvents = [];
     
-    for (let i = 0; i < events.length; i++) {
-      if (events[i]) {
-        allEvents = [...allEvents, ...events[i].events];
+    for (let i = 0; i < googleEvents.length; i++) {
+      if (googleEvents[i]) {
+        allEvents = [...allEvents, ...googleEvents[i].events];
       }  
     }
 
@@ -49,7 +49,7 @@ class MainView extends Component {
         <div className="container container-center main-view-container">
           <div className="pt-5">
             {/*<Map allEvents={allEvents}/>*/}
-            {events.map(events => this.displayEvents(events.events, events.calendarName))}
+            {googleEvents.map(events => this.displayEvents(events.events, events.calendarName))}
           </div>
           <div className="pt-5 pb-5">
             <p>
