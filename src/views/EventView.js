@@ -46,7 +46,6 @@ class EventView extends Component {
             <div className="event-view">
                 <div className="container container-center event-view-container">
                     <div className="pt-5">
-                        <p>asdasd</p>
                         {this.displayEvents(allEvents)}
                     </div>
                     <div className="pt-5 pb-5">
