@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
+import LoadingView from "./views/LoadingView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";import axios from 'axios';
 
@@ -9,7 +10,11 @@ class AppRouter extends Component {
   state = {
     loading: true,
     events: [],
-    event: []
+    event: [],
+
+    loadingName: '', // имя загружаемого календаря
+    loadingNumber: 0, // порядковый номер загружаемого календаря
+    loadingTotal: 3, // общее количество календарей
   }
 
   componentDidMount() {
@@ -49,16 +54,28 @@ class AppRouter extends Component {
       //
 
       let events = [];
-	  
-		for (var cal of CALENDARS) {
-			console.log('Loading events from ', cal.name, cal.id);
-			var data = await axios.get(`${URL}${cal.id}/events?key=${API_KEY}`);
-			var items = this.filterEvents(data.data.items);
-			
-			if (items[0]) {
-				events.push({ calendarName: cal.name, events: items });
-			}    
-		}
+
+      for (var cal of CALENDARS) {
+        // 
+        // NOTE!
+        // увеличиваем порядковый номер календаря, 
+        // который загружаем в данный момент
+        //
+        this.setState((state) => ({ 
+          loadingNumber: state.loadingNumber + 1,
+          loadingName: cal.name,
+        }))
+        
+        console.log('Loading events from ', cal.name, cal.id);
+        var data = await axios.get(`${URL}${cal.id}/events?key=${API_KEY}`);
+        var items = this.filterEvents(data.data.items);
+        
+        if (items[0]) {
+          events.push({ calendarName: cal.name, events: items });
+        }    
+      }
+
+      console.log('Done loading all calendars');
 
       this.setState((state) => ({ 
         ...state,
@@ -80,19 +97,31 @@ class AppRouter extends Component {
     const { loading, events } = this.state;
 
     return (
-    <Router>
-      <ScrollToTop>
-        <div>
-          {loading ? <div>Loading please wait...</div> : <Route path="/" exact render={props => ( 
-            <MainView {...props} events={events} getEvent={this.getEvent} />
-          )} />}
-          <Route path="/about/" component={AboutView} />
-          <Route path="/event/:id" render={props => (
-            <EventView {...props} googleEvents={this.state.events} getEvent={this.getEvent} />
-          )} />
-        </div>
-      </ScrollToTop>
-    </Router>);
+      <div>
+        { loading ?  
+          <LoadingView 
+            loadingNumber={this.state.loadingNumber}
+            loadingTotal={this.state.loadingTotal}
+            loadingName={this.state.loadingName}
+          /> :
+          (
+            <Router>
+              <ScrollToTop>
+                <div>
+                  <Route path="/" exact render={props => ( 
+                    <MainView {...props} events={events} getEvent={this.getEvent} />
+                  )} />
+                  <Route path="/about/" component={AboutView} />
+                  <Route path="/event/:id" render={props => (
+                    <EventView {...props} googleEvents={this.state.events} getEvent={this.getEvent} />
+                  )} />
+                </div>
+              </ScrollToTop>
+            </Router>
+          )
+        };
+      </div>
+    );
   }
 };
 
