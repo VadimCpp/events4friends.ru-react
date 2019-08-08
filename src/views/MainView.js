@@ -9,7 +9,7 @@ class MainView extends Component {
 
   displayEvent(event, nameCalendar) {  
     return (
-      <li key={event.id}>
+      <li className="list-item" key={event.id}>
         <EventItem
           getEvent={this.props.getEvent}
           googleEvent={event}
