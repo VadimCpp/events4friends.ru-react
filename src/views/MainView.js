@@ -36,11 +36,11 @@ class MainView extends Component {
     // Тут собираем все события всех календарей в единый массив
     //
 
-    let allEvents = [];
+    let allMapEvents = [];
     
     for (let i = 0; i < googleEvents.length; i++) {
       if (googleEvents[i]) {
-        allEvents = [...allEvents, ...googleEvents[i].events];
+        allMapEvents = [...allMapEvents, ...googleEvents[i].events];
       }  
     }
 
@@ -48,7 +48,7 @@ class MainView extends Component {
       <div className="main-view">
         <div className="container container-center main-view-container">
           <div className="pt-5">
-            {/*<Map allEvents={allEvents}/>*/}
+            {/*<Map allEvents={allMapEvents}/>*/}
             {googleEvents.map(events => this.displayEvents(events.events, events.calendarName))}
           </div>
           <div className="pt-5 pb-5">
