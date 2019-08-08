@@ -58,7 +58,7 @@ class MainView extends Component {
         for (let j = i + 1; j < allListEvents.length; j++) {          
           let a = allListEvents[i];
           let b = allListEvents[j];
-          if (a.event.start.dateTime.localeCompare(b.event.start.dateTime) == 1) {
+          if (a.event.start.dateTime.localeCompare(b.event.start.dateTime) === 1) {
             let tmp = allListEvents[i];
             allListEvents[i] = allListEvents[j];
             allListEvents[j] = tmp;
@@ -82,6 +82,13 @@ class MainView extends Component {
               <Button color="warning">
                 <Link className="reset-link-style" to="/about">О нас</Link>
               </Button>
+              <button 
+                type="button" 
+                className="btn btn-warning" 
+                onClick={() => { alert('TODO'); }}
+              >
+                Скопировать все
+              </button>
             </p>
           </div>
         </div>
