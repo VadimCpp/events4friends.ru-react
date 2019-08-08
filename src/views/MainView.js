@@ -46,6 +46,27 @@ class MainView extends Component {
       }  
     }
 
+    //
+    // NOTE! 
+    // Почему-то функция sort() не работает
+    // Ручками "метод пузырька"
+    //
+    // TODO: разобраться с этим
+    //
+    if (allListEvents.length > 1) {
+      for (let i = 0; i < allListEvents.length - 1; i++) {
+        for (let j = i + 1; j < allListEvents.length; j++) {          
+          let a = allListEvents[i];
+          let b = allListEvents[j];
+          if (a.event.start.dateTime.localeCompare(b.event.start.dateTime) == 1) {
+            let tmp = allListEvents[i];
+            allListEvents[i] = allListEvents[j];
+            allListEvents[j] = tmp;
+          }
+        }
+      }
+    }
+
     return (
       <div className="main-view">
         <div className="container container-center main-view-container">
