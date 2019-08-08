@@ -7,25 +7,17 @@ import './MainView.css';
 
 class MainView extends Component {
 
-  displayEvents(events, nameCalendar) {
-    if (!events.length) return null;
-  
+  displayEvent(event, nameCalendar) {  
     return (
-        <ul key={nameCalendar} className="event-list">
-          
-          {events.map((event) =>
-            <li key={event.id}>
-              <EventItem
-                getEvent={this.props.getEvent}
-                googleEvent={event}
-                name={nameCalendar}
-              />
-            </li>
-          )}
-
-        </ul>
+      <li key={event.id}>
+        <EventItem
+          getEvent={this.props.getEvent}
+          googleEvent={event}
+          name={nameCalendar}
+        />
+      </li>
     );
-  }
+  }  
 
   render() {
     const { googleEvents } = this.props;
@@ -37,10 +29,20 @@ class MainView extends Component {
     //
 
     let allMapEvents = [];
+    let allListEvents = [];
     
     for (let i = 0; i < googleEvents.length; i++) {
       if (googleEvents[i]) {
         allMapEvents = [...allMapEvents, ...googleEvents[i].events];
+
+        // allListEvents - единый массив событий из элементов { событие, имя календаря }
+        const eventsArray = googleEvents[i].events;
+        for (let j = 0; j < eventsArray.length; j++) {
+          allListEvents.push({
+            event: eventsArray[j],
+            calendarName: googleEvents[i].calendarName
+          });
+        }
       }  
     }
 
@@ -49,7 +51,7 @@ class MainView extends Component {
         <div className="container container-center main-view-container">
           <div className="pt-5">
             {/*<Map allEvents={allMapEvents}/>*/}
-            {googleEvents.map(events => this.displayEvents(events.events, events.calendarName))}
+            {allListEvents.map(event => this.displayEvent(event.event, event.calendarName))}
           </div>
           <div className="pt-5 pb-5">
             <p>
