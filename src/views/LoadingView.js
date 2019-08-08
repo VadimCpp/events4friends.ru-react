@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Spinner from '../components/spinner';
+import Loader from '../components/loader';
 import './LoadingView.css';
 
 class LoadingView extends Component {
@@ -14,7 +14,10 @@ class LoadingView extends Component {
           {this.props.loadingNumber} из {this.props.loadingTotal} : {this.props.loadingName}
         </p>
         <p>
-          <Spinner />
+          <Loader
+            number={this.props.loadingNumber}
+            total={this.props.loadingTotal}
+          />
         </p>
       </div>
     )
