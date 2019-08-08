@@ -12,6 +12,7 @@ class AppRouter extends Component {
     events: [],
     event: [],
 
+    loadingName: '', // имя загружаемого календаря
     loadingNumber: 0, // порядковый номер загружаемого календаря
     loadingTotal: 3, // общее количество календарей
   }
@@ -62,6 +63,7 @@ class AppRouter extends Component {
         //
         this.setState((state) => ({ 
           loadingNumber: state.loadingNumber + 1,
+          loadingName: cal.name,
         }))
         
         console.log('Loading events from ', cal.name, cal.id);
@@ -102,6 +104,7 @@ class AppRouter extends Component {
             <LoadingView 
               loadingNumber={this.state.loadingNumber}
               loadingTotal={this.state.loadingTotal}
+              loadingName={this.state.loadingName}
             /> 
             : 
             <Route path="/" exact render={props => ( 

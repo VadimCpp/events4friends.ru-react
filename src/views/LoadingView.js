@@ -9,7 +9,7 @@ class LoadingView extends Component {
           Загружаем события...
         </p>
         <p>
-          {this.props.loadingNumber} из {this.props.loadingTotal}
+          {this.props.loadingNumber} из {this.props.loadingTotal} : {this.props.loadingName}
         </p>
         <p>
           TODO: добавить индикатор загрузки
