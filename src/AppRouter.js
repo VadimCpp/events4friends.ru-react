@@ -10,7 +10,10 @@ class AppRouter extends Component {
   state = {
     loading: true,
     events: [],
-    event: []
+    event: [],
+
+    loadingNumber: 0, // порядковый номер загружаемого календаря
+    loadingTotal: 3, // общее количество календарей
   }
 
   componentDidMount() {
@@ -50,8 +53,17 @@ class AppRouter extends Component {
       //
 
       let events = [];
-	  
+
       for (var cal of CALENDARS) {
+        // 
+        // NOTE!
+        // увеличиваем порядковый номер календаря, 
+        // который загружаем в данный момент
+        //
+        this.setState((state) => ({ 
+          loadingNumber: state.loadingNumber + 1,
+        }))
+        
         console.log('Loading events from ', cal.name, cal.id);
         var data = await axios.get(`${URL}${cal.id}/events?key=${API_KEY}`);
         var items = this.filterEvents(data.data.items);
@@ -86,7 +98,13 @@ class AppRouter extends Component {
     <Router>
       <ScrollToTop>
         <div>
-          {loading ? <LoadingView /> : <Route path="/" exact render={props => ( 
+          {loading ? 
+            <LoadingView 
+              loadingNumber={this.state.loadingNumber}
+              loadingTotal={this.state.loadingTotal}
+            /> 
+            : 
+            <Route path="/" exact render={props => ( 
             <MainView {...props} events={events} getEvent={this.getEvent} />
           )} />}
           <Route path="/about/" component={AboutView} />

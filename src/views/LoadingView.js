@@ -9,7 +9,7 @@ class LoadingView extends Component {
           Загружаем события...
         </p>
         <p>
-          TODO: добавить счетчик календарей
+          {this.props.loadingNumber} из {this.props.loadingTotal}
         </p>
         <p>
           TODO: добавить индикатор загрузки
