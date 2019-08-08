@@ -97,26 +97,31 @@ class AppRouter extends Component {
     const { loading, events } = this.state;
 
     return (
-    <Router>
-      <ScrollToTop>
-        <div>
-          {loading ? 
-            <LoadingView 
-              loadingNumber={this.state.loadingNumber}
-              loadingTotal={this.state.loadingTotal}
-              loadingName={this.state.loadingName}
-            /> 
-            : 
-            <Route path="/" exact render={props => ( 
-            <MainView {...props} events={events} getEvent={this.getEvent} />
-          )} />}
-          <Route path="/about/" component={AboutView} />
-          <Route path="/event/:id" render={props => (
-            <EventView {...props} googleEvents={this.state.events} getEvent={this.getEvent} />
-          )} />
-        </div>
-      </ScrollToTop>
-    </Router>);
+      <div>
+        { loading ?  
+          <LoadingView 
+            loadingNumber={this.state.loadingNumber}
+            loadingTotal={this.state.loadingTotal}
+            loadingName={this.state.loadingName}
+          /> :
+          (
+            <Router>
+              <ScrollToTop>
+                <div>
+                  <Route path="/" exact render={props => ( 
+                    <MainView {...props} events={events} getEvent={this.getEvent} />
+                  )} />
+                  <Route path="/about/" component={AboutView} />
+                  <Route path="/event/:id" render={props => (
+                    <EventView {...props} googleEvents={this.state.events} getEvent={this.getEvent} />
+                  )} />
+                </div>
+              </ScrollToTop>
+            </Router>
+          )
+        };
+      </div>
+    );
   }
 };
 
