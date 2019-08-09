@@ -7,18 +7,20 @@ class LoadingView extends Component {
   render() {
     return (
       <div className="loading-view">
-        <p>
-          Загружаем события...
-        </p>
-        <p>
-          {this.props.loadingNumber} из {this.props.loadingTotal} : {this.props.loadingName}
-        </p>
-        <p>
-          <Progress
-            value={this.props.loadingNumber}
-            max={this.props.loadingTotal}
-          />
-        </p>
+        <div className="container">
+          <p>
+            Загружаем события...
+          </p>
+          <p>
+            {this.props.loadingNumber} из {this.props.loadingTotal} : {this.props.loadingName}
+          </p>
+          <p>
+            <Progress
+              value={this.props.loadingNumber}
+              max={this.props.loadingTotal}
+            />
+          </p>
+        </div>
       </div>
     )
   }
