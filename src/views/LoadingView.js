@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Progress } from 'reactstrap';
 
-import Loader from '../components/loader';
 import './LoadingView.css';
 
 class LoadingView extends Component {
@@ -14,9 +14,9 @@ class LoadingView extends Component {
           {this.props.loadingNumber} из {this.props.loadingTotal} : {this.props.loadingName}
         </p>
         <p>
-          <Loader
-            number={this.props.loadingNumber}
-            total={this.props.loadingTotal}
+          <Progress
+            value={this.props.loadingNumber}
+            max={this.props.loadingTotal}
           />
         </p>
       </div>
