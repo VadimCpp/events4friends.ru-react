@@ -95,10 +95,6 @@ class MainView extends Component {
     return (
       <div className="main-view">
         <div className="container container-center main-view-container">
-          <div className="pt-5">
-            {/*<Map allEvents={allMapEvents}/>*/}
-            {allListEvents.map(event => this.displayEvent(event.event, event.calendarName))}
-          </div>
           <div className="pt-5 pb-5">
             <p>
               На главной пока только список событий. Все остальное в разделе "О нас".
@@ -125,6 +121,10 @@ class MainView extends Component {
                 )}
                 </button>              
             </p>
+          </div>
+          <div className="pt-3">
+            {/*<Map allEvents={allMapEvents}/>*/}
+            {allListEvents.map(event => this.displayEvent(event.event, event.calendarName))}
           </div>
         </div>
       </div>
