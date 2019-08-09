@@ -12,6 +12,7 @@ class MainView extends Component {
     this.state = {
       allMapEvents: [],
       allListEvents: [],
+      copied: false
     };
   }
   
@@ -81,8 +82,15 @@ class MainView extends Component {
     );
   }  
 
+  copyAllEvents() {
+    this.setState({ copied: true });
+    this.timer = setTimeout(() => {
+      this.setState({ copied: false });
+    }, 1000);
+  }
+
   render() {
-    const { allListEvents } = this.state;
+    const { allListEvents, copied } = this.state;
 
     return (
       <div className="main-view">
@@ -99,13 +107,23 @@ class MainView extends Component {
               <Button color="warning">
                 <Link className="reset-link-style" to="/about">О нас</Link>
               </Button>
-              <button 
-                type="button" 
-                className="btn btn-warning" 
-                onClick={() => { alert('TODO'); }}
+              <button
+                type="button"
+                className="btn btn-warning"
+                disabled={copied}                
+                onClick={() => { this.copyAllEvents(); }}
               >
-                Скопировать все
-              </button>
+                { copied && (
+                  <span>                
+                    Скопировано
+                  </span>
+                )}
+                { !copied && (
+                  <span>
+                    Скопировать все
+                  </span>
+                )}
+                </button>              
             </p>
           </div>
         </div>
