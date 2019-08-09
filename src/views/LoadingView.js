@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Progress } from 'reactstrap';
+
 import './LoadingView.css';
 
 class LoadingView extends Component {
@@ -12,7 +14,10 @@ class LoadingView extends Component {
           {this.props.loadingNumber} из {this.props.loadingTotal} : {this.props.loadingName}
         </p>
         <p>
-          TODO: добавить индикатор загрузки
+          <Progress
+            value={this.props.loadingNumber}
+            max={this.props.loadingTotal}
+          />
         </p>
       </div>
     )
