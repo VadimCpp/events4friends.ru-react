@@ -6,20 +6,16 @@ import Map from '../components/Map';
 import './MainView.css';
 
 class MainView extends Component {
+  constructor(props) {
+    super(props);
 
-  displayEvent(event, nameCalendar) {  
-    return (
-      <li className="list-item" key={event.id}>
-        <EventItem
-          getEvent={this.props.getEvent}
-          googleEvent={event}
-          name={nameCalendar}
-        />
-      </li>
-    );
-  }  
-
-  render() {
+    this.state = {
+      allMapEvents: [],
+      allListEvents: [],
+    };
+  }
+  
+  componentDidMount() {
     const { googleEvents } = this.props;
 
     //
@@ -66,6 +62,27 @@ class MainView extends Component {
         }
       }
     }
+
+    this.setState({
+      allMapEvents,
+      allListEvents,
+    })
+  }
+
+  displayEvent(event, nameCalendar) {  
+    return (
+      <li className="list-item" key={event.id}>
+        <EventItem
+          getEvent={this.props.getEvent}
+          googleEvent={event}
+          name={nameCalendar}
+        />
+      </li>
+    );
+  }  
+
+  render() {
+    const { allListEvents } = this.state;
 
     return (
       <div className="main-view">
