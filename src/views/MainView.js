@@ -82,7 +82,19 @@ class MainView extends Component {
     );
   }  
 
-  copyAllEvents() {
+  getClipboardText = () => {
+    let clipboardText = "TODO: implement";    
+    return clipboardText;
+  }
+
+  // 
+  // NOTE!
+  // The event's data is copied with the help of the ClipboardJS.
+  // See "data-clipboard-text" attribute and https://clipboardjs.com/ for more details.
+  // 
+  // This method contains only animation.
+  // 
+  animateCopyingAllEvents() {
     this.setState({ copied: true });
     this.timer = setTimeout(() => {
       this.setState({ copied: false });
@@ -105,9 +117,10 @@ class MainView extends Component {
               </Button>
               <button
                 type="button"
-                className="btn btn-warning"
-                disabled={copied}                
-                onClick={() => { this.copyAllEvents(); }}
+                className="btn btn-warning btn-clipboard"
+                disabled={copied}   
+                data-clipboard-text={this.getClipboardText()}
+                onClick={() => this.animateCopyingAllEvents()}
               >
                 { copied && (
                   <span>                
