@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import EventItem from '../components/EventItem.js'
+import moment from 'moment';
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
+import EventItem from '../components/EventItem.js'
 import Map from '../components/Map';
+import 'moment/locale/ru';
 import './MainView.css';
 
 class MainView extends Component {
@@ -82,8 +84,109 @@ class MainView extends Component {
     );
   }  
 
+  // 
+  // NOTE! 
+  // This method is a copy of the exact one in EventItem.js
+  //
+  // TODO: refactor code and remove code duplication
+  //
+  getLocation = (event) => {
+    let location = 'Не указано';
+
+    if (event.location) {
+      const secondCommaPosition = event.location.indexOf(',', event.location.indexOf(',', 0) + 1);
+      
+      if (secondCommaPosition > 0) {
+        location = event.location.substr(0, secondCommaPosition);
+      } else {
+        location = event.location;
+      }
+    }
+
+    return location;
+  }  
+
+  // 
+  // NOTE! 
+  // This method is a copy of the exact one in EventItem.js
+  //
+  // TODO: refactor code and remove code duplication
+  //
+  getEndTime = (event) => {
+    let endDate = 'Не указано';
+
+    if (event.end && event.end.dateTime) {
+      endDate = moment(event.end.dateTime).format('HH:mm');
+    }
+
+    return endDate;
+  }
+
+  // 
+  // NOTE! 
+  // This method is a copy of the exact one in EventItem.js
+  //
+  // TODO: refactor code and remove code duplication
+  //
+  getStartTime = (event) => {
+    let startDate = 'Не указано';
+
+    if (event.start && event.start.dateTime) {
+      startDate = moment(event.start.dateTime).format('HH:mm');
+    }
+
+    return startDate;
+  }
+
+  // 
+  // NOTE! 
+  // This method is a copy of the exact one in EventItem.js
+  //
+  // TODO: refactor code and remove code duplication
+  //
+  getStartDate = (event) => {
+    let startDate = 'Не указано';
+
+    if (event.start && event.start.dateTime) {
+      startDate = moment(event.start.dateTime).format('LL');
+    }
+
+    return startDate;
+  }
+
+  // 
+  // NOTE! 
+  // This method is a copy of the exact one in EventItem.js
+  //
+  // TODO: refactor code and remove code duplication
+  //
+  getClipboardTextForEvent = (event) => {
+    const startDate = this.getStartDate(event);
+    const startTime = this.getStartTime(event);
+    const endTime = this.getEndTime(event);
+    const summary = event.summary || 'Не указано';
+    const location = this.getLocation(event);
+    const details = `📅 ${startDate} 🕗 ${startTime} - ${endTime} － «${summary}» 📍${location}`;
+
+    const url = `http://events4friends.ru/#/event/${event.id}/`;
+
+    const clipboardText = `${details} [Подробнее на сайте...](${url})`;
+
+    return clipboardText;
+  }
+
   getClipboardText = () => {
-    let clipboardText = "TODO: implement";    
+    const { allListEvents } = this.state;
+    
+    let clipboardText = "Список предстоящих мероприятий: \n\n";
+
+    allListEvents.forEach((event) => {
+      clipboardText += this.getClipboardTextForEvent(event.event);
+      clipboardText += '\n\n';
+    });
+
+    clipboardText += "Еще больше информации на сайте events4friends.ru";
+
     return clipboardText;
   }
 
