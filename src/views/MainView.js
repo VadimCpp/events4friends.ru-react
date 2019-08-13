@@ -170,7 +170,7 @@ class MainView extends Component {
 
     const url = `http://events4friends.ru/#/event/${event.id}/`;
 
-    const clipboardText = `${details} [Подробнее на сайте...](${url})`;
+    const clipboardText = `${details} ( [Подробнее...](${url}) )`;
 
     return clipboardText;
   }
