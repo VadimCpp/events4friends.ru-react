@@ -123,7 +123,7 @@ class EventItem extends Component {
     if (this.props.googleEvent.start && this.props.googleEvent.start.dateTime) {
       return (
         <span className="event-date">
-          <Moment format="LL" locale="ru">
+          <Moment format="D MMMM, dddd" locale="ru">
             {this.props.googleEvent.start.dateTime}
           </Moment>
         </span>
