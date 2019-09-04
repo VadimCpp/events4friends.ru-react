@@ -55,14 +55,6 @@ class AppRouter extends Component {
 
       let events = [];
 
-<<<<<<< HEAD
-      if (pravo[0]) {
-        events.push({ calendarName: 'Право на город', events: pravo });
-      }      
-
-      if (friends[0]) {
-        events.push({ calendarName: 'Events For Friends', events: friends });
-=======
       for (var cal of CALENDARS) {
         // 
         // NOTE!
@@ -81,7 +73,6 @@ class AppRouter extends Component {
         if (items[0]) {
           events.push({ calendarName: cal.name, events: items });
         }    
->>>>>>> upstream/master
       }
 
       console.log('Done loading all calendars');
