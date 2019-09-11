@@ -17,7 +17,7 @@ class MainView extends Component {
       copied: false
     };
   }
-  
+
   componentDidMount() {
     const { googleEvents } = this.props;
 
@@ -29,7 +29,7 @@ class MainView extends Component {
 
     let allMapEvents = [];
     let allListEvents = [];
-    
+
     for (let i = 0; i < googleEvents.length; i++) {
       if (googleEvents[i]) {
         allMapEvents = [...allMapEvents, ...googleEvents[i].events];
@@ -42,22 +42,20 @@ class MainView extends Component {
             calendarName: googleEvents[i].calendarName
           });
         }
-      }  
+      }
     }
 
     //
     // NOTE! 
     // Почему-то функция sort() не работает
     // Ручками "метод пузырька"
-    //
-    // TODO: разобраться с этим
-    //
+    // TODO: разобраться с этим --> Пофиксил! "=" заменил на ">"
     if (allListEvents.length > 1) {
       for (let i = 0; i < allListEvents.length - 1; i++) {
-        for (let j = i + 1; j < allListEvents.length; j++) {          
+        for (let j = i + 1; j < allListEvents.length; j++) {
           let a = allListEvents[i];
           let b = allListEvents[j];
-          if (a.event.start.dateTime.localeCompare(b.event.start.dateTime) === 1) {
+          if (a.event.start.dateTime > b.event.start.dateTime) {
             let tmp = allListEvents[i];
             allListEvents[i] = allListEvents[j];
             allListEvents[j] = tmp;
@@ -72,7 +70,7 @@ class MainView extends Component {
     })
   }
 
-  displayEvent(event, nameCalendar) {  
+  displayEvent(event, nameCalendar) {
     return (
       <li className="list-item" key={event.id}>
         <EventItem
@@ -81,8 +79,8 @@ class MainView extends Component {
           name={nameCalendar}
         />
       </li>
-    );
-  }  
+    )
+  }
 
   // 
   // NOTE! 
@@ -95,7 +93,7 @@ class MainView extends Component {
 
     if (event.location) {
       const secondCommaPosition = event.location.indexOf(',', event.location.indexOf(',', 0) + 1);
-      
+
       if (secondCommaPosition > 0) {
         location = event.location.substr(0, secondCommaPosition);
       } else {
@@ -104,7 +102,7 @@ class MainView extends Component {
     }
 
     return location;
-  }  
+  }
 
   // 
   // NOTE! 
@@ -177,7 +175,7 @@ class MainView extends Component {
 
   getClipboardText = () => {
     const { allListEvents } = this.state;
-    
+
     let clipboardText = "Список предстоящих мероприятий: \n\n";
 
     allListEvents.forEach((event) => {
@@ -211,31 +209,32 @@ class MainView extends Component {
       <div className="main-view">
         <div className="container container-center main-view-container">
           <div className="pt-5 pb-5">
+            <p> На главной пока только список событий. Все остальное в разделе "О нас". </p>
             <p>
-              На главной пока только список событий. Все остальное в разделе "О нас".
-            </p>
-            <p>
+              <Button color="warning">
+                <Link className="reset-link-style" to="/archive">Архив</Link>
+              </Button>
               <Button color="warning">
                 <Link className="reset-link-style" to="/about">О нас</Link>
               </Button>
               <button
                 type="button"
                 className="btn btn-warning btn-clipboard"
-                disabled={copied}   
+                disabled={copied}
                 data-clipboard-text={this.getClipboardText()}
                 onClick={() => this.animateCopyingAllEvents()}
               >
-                { copied && (
-                  <span>                
+                {copied && (
+                  <span>
                     Скопировано
                   </span>
                 )}
-                { !copied && (
+                {!copied && (
                   <span>
                     Скопировать все
                   </span>
                 )}
-                </button>              
+              </button>
             </p>
           </div>
           <div className="pt-3">
