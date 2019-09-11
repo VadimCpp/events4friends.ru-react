@@ -31,11 +31,11 @@ class EventView extends Component {
         //
 
         let allEvents = [];
-        
+
         for (let i = 0; i < googleEvents.length; i++) {
             if (googleEvents[i]) {
                 allEvents = [...allEvents, ...googleEvents[i].events];
-            }  
+            }
         }
 
         if (!allEvents.length) {
@@ -49,6 +49,11 @@ class EventView extends Component {
                         {this.displayEvents(allEvents)}
                     </div>
                     <div className="pt-5 pb-5">
+                        <p>
+                            <Button color="warning">
+                                <Link className="reset-link-style" to="/archive">Архив</Link>
+                            </Button>
+                        </p>
                         <p>
                             <Button color="warning">
                                 <Link className="reset-link-style" to="/about">О сообществе</Link>
