@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-// Вернуть решётку в адресе поможет 
-// замена BrowserRouter на HashRouter
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
 import ArchiveView from "./views/ArchiveView.js";
