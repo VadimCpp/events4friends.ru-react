@@ -12,3 +12,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.pt-3, .py-3 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
