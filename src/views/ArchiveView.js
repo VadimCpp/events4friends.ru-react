@@ -3,11 +3,10 @@ import moment from 'moment';
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
 import EventItem from '../components/EventItem.js'
-import Map from '../components/Map';
 import 'moment/locale/ru';
 import './MainView.css';
 
-class MainView extends Component {
+class ArchiveView extends Component {
   constructor(props) {
     super(props);
 
@@ -55,7 +54,7 @@ class MainView extends Component {
         for (let j = i + 1; j < allListEvents.length; j++) {
           let a = allListEvents[i];
           let b = allListEvents[j];
-          if (a.event.start.dateTime > b.event.start.dateTime) {
+          if (a.event.start.dateTime < b.event.start.dateTime) {
             let tmp = allListEvents[i];
             allListEvents[i] = allListEvents[j];
             allListEvents[j] = tmp;
@@ -212,7 +211,7 @@ class MainView extends Component {
             <p> На главной пока только список событий. Все остальное в разделе "О нас". </p>
             <p>
               <Button color="warning">
-                <Link className="reset-link-style" to="/archive">Архив</Link>
+                <Link className="reset-link-style" to="/">На главную</Link>
               </Button>
               <Button color="warning">
                 <Link className="reset-link-style" to="/about">О нас</Link>
@@ -238,7 +237,6 @@ class MainView extends Component {
             </p>
           </div>
           <div className="pt-3">
-            {/*<Map allEvents={allMapEvents}/>*/}
             {allListEvents.map(event => this.displayEvent(event.event, event.calendarName))}
           </div>
         </div>
@@ -247,4 +245,4 @@ class MainView extends Component {
   }
 }
 
-export default MainView;
+export default ArchiveView;
