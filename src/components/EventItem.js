@@ -315,9 +315,9 @@ class EventItem extends Component {
     if (!this.state.moreInfo) {
       return (
         <div className='event-more btn-container'>
-          <button type="button" className="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
-          <button type="button" className="btn btn-light btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>
-          <button type="button" className="btn btn-light btn-more" >
+          <button type="button" className="btn btn-warning btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
+          <button type="button" className="btn btn-warning btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>
+          <button type="button" className="btn btn-warning btn-more" >
             <AddToCalendar
               event={this.state.event}
               buttonTemplate={icon}
@@ -327,7 +327,7 @@ class EventItem extends Component {
           </button>
           <button
             type="button"
-            className="btn btn-light btn-more btn-clipboard"
+            className="btn btn-warning btn-more btn-clipboard"
             disabled={this.state.copied}
             data-clipboard-text={this.getClipboardText()}
             onClick={this.shareEvent}
@@ -350,9 +350,9 @@ class EventItem extends Component {
       return (
         <div className='event-more'>
           <div className='event-more btn-container '>
-            <button type="button" className="btn btn-light btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
-            <button type="button" className="btn btn-light btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>            
-            <button type="button" className="btn btn-light btn-more" >
+            <button type="button" className="btn btn-warning btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
+            <button type="button" className="btn btn-warning btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>            
+            <button type="button" className="btn btn-warning btn-more" >
               <AddToCalendar
                 event={this.state.event}
                 buttonTemplate={icon}
@@ -362,7 +362,7 @@ class EventItem extends Component {
             </button>
             <button
               type="button"
-              className="btn btn-light btn-more btn-clipboard"
+              className="btn btn-warning btn-more btn-clipboard"
               disabled={this.state.copied}
               data-clipboard-text={this.getClipboardText()}
               onClick={this.shareEvent}
@@ -398,27 +398,31 @@ class EventItem extends Component {
 
   render() {
     return (
-      <div className="event-item">
-        <small className="calendar-name">#{this.props.name}</small>
-        <span role="img" aria-label="Date">📅</span>
-        {this.formatStartDate()}
+      <div className="borderbottom">
+        <div className="container">
+          <div className="event-item container-center main-view-container">
+            <small className="calendar-name">#{this.props.name}</small>
+            <span role="img" aria-label="Date">📅</span>
+            {this.formatStartDate()}
 
-        <span role="img" aria-label="Time">🕗</span>
-        {this.formatStartTime()}
+            <span role="img" aria-label="Time">🕗</span>
+            {this.formatStartTime()}
 
-        -
+            -
         {this.formatEndTime()}
 
-        － «
+            － «
         {this.formatSummary()}
-        »
-
+            »
+    
         <span role="img" aria-label="Location">📍</span>
-        {this.formatLocation()}
+            {this.formatLocation()}
 
 
-        { ((this.props.match.path === '/') || (this.props.match.path === '/archive/')) ? this.moreInfo() : this.renderInfoBlock()}
+            {((this.props.match.path === '/') || (this.props.match.path === '/archive/')) ? this.moreInfo() : this.renderInfoBlock()}
 
+          </div>
+        </div>
       </div>
     )
   }

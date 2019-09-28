@@ -207,13 +207,13 @@ class MainView extends Component {
 
     return (
       <div className="main-view">
-        <div className="container container-center main-view-container">
-          <div className="pt-5 pb-5">
-            <p> На главной пока только список событий. Все остальное в разделе "О нас". </p>
+        <div className="borderbottom">
+          <div className="pt-3 pb-3 container container-center main-view-container">
+            <p className="pt-3"> На главной пока только список событий. Все остальное в разделе "О нас". </p>
             <p>
-              <Button color="warning">
+              {/* <Button color="warning">
                 <Link className="reset-link-style" to="/archive">Архив</Link>
-              </Button>
+              </Button> */}
               <Button color="warning">
                 <Link className="reset-link-style" to="/about">О нас</Link>
               </Button>
@@ -237,10 +237,10 @@ class MainView extends Component {
               </button>
             </p>
           </div>
-          <div className="pt-3">
-            {/*<Map allEvents={allMapEvents}/>*/}
-            {allListEvents.map(event => this.displayEvent(event.event, event.calendarName))}
-          </div>
+        </div>
+        <div className="pt-3">
+          {/*<Map allEvents={allMapEvents}/>*/}
+          {allListEvents.map(event => this.displayEvent(event.event, event.calendarName))}
         </div>
       </div>
     )

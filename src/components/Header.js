@@ -5,9 +5,11 @@ import './Header.css';
 class Header extends Component {
     render() {
         return(
-            <header className="header">
-                <h2 className="header_title" data-text="События для друзей">События для друзей</h2>
-            </header>
+            <div className="borderbottom">
+                <header className="header">
+                    <h2 className="header_title" data-text="События для друзей">События для друзей</h2>
+                </header>
+            </div>
         )
     }
 }
