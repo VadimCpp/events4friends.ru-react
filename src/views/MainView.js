@@ -211,9 +211,9 @@ class MainView extends Component {
           <div className="pt-3 pb-3 container container-center main-view-container">
             <p className="pt-3"> На главной пока только список событий. Все остальное в разделе "О нас". </p>
             <p>
-              {/* <Button color="warning">
+              <Button color="warning">
                 <Link className="reset-link-style" to="/archive">Архив</Link>
-              </Button> */}
+              </Button>
               <Button color="warning">
                 <Link className="reset-link-style" to="/about">О нас</Link>
               </Button>
