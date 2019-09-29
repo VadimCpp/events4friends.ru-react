@@ -1,3 +1,17 @@
-{
-    "name": "События для друзей",
-}
+"name": "События для друзей"
+"short_name": "events4friends.ru",
+"icons": [
+    {
+        "src": "/android-chrome-192x192.png",
+         "sizes": "192x192",
+        "type": "image/png"
+    },
+    {
+         "src": "/android-chrome-512x512.png",
+         "sizes": "512x512",
+        "type": "image/png"
+    }
+],
+"theme_color": "#f66013",
+"background_color": "#f66013",
+"display": "standalone"
