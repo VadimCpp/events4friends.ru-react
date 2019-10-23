@@ -71,7 +71,7 @@ class EventItem extends Component {
     let startDate = 'Не указано';
 
     if (event.start && event.start.dateTime) {
-      startDate = moment(event.start.dateTime).format('LL');
+      startDate = moment(event.start.dateTime).format(''D MMMM, dddd'');
     }
 
     return startDate;
@@ -108,7 +108,7 @@ class EventItem extends Component {
 
     if (event.location) {
       const secondCommaPosition = event.location.indexOf(',', event.location.indexOf(',', 0) + 1);
-      
+
       if (secondCommaPosition > 0) {
         location = event.location.substr(0, secondCommaPosition);
       } else {
@@ -117,7 +117,7 @@ class EventItem extends Component {
     }
 
     return location;
-  }  
+  }
 
   formatStartDate() {
     if (this.props.googleEvent.start && this.props.googleEvent.start.dateTime) {
@@ -211,7 +211,7 @@ class EventItem extends Component {
       } else {
         simpleLocation = location;
       }
-      
+
       const { coordinates } = this.state.event;
       const hasCoordinates = Boolean(coordinates && coordinates.latitude && coordinates.longitude);
 
@@ -219,7 +219,7 @@ class EventItem extends Component {
       if (hasCoordinates) {
         url = "https://maps.google.com/?q=" + coordinates.latitude + "," + coordinates.longitude;
       }
-   
+
       return hasCoordinates
       ? (
         <a href={url} className="event-location">
@@ -333,7 +333,7 @@ class EventItem extends Component {
             onClick={this.shareEvent}
           >
             { this.state.copied && (
-              <span>                
+              <span>
                 {'Скопировано'}
               </span>
             )}
@@ -351,7 +351,7 @@ class EventItem extends Component {
         <div className='event-more'>
           <div className='event-more btn-container '>
             <button type="button" className="btn btn-warning btn-more" onClick={() => this.setState({ moreInfo: !this.state.moreInfo })}> {this.state.moreInfo ? 'Свернуть ↑' : 'Подробнее ↓'}</button>
-            <button type="button" className="btn btn-warning btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>            
+            <button type="button" className="btn btn-warning btn-more" ><Link className="reset-link-style" to={`/event/${this.props.googleEvent.id}`} onClick={() => this.props.getEvent(this.props.googleEvent.id)}>К событию</Link></button>
             <button type="button" className="btn btn-warning btn-more" >
               <AddToCalendar
                 event={this.state.event}
@@ -368,7 +368,7 @@ class EventItem extends Component {
               onClick={this.shareEvent}
             >
             { this.state.copied && (
-              <span>                
+              <span>
                 {'Скопировано'}
               </span>
             )}
@@ -414,7 +414,7 @@ class EventItem extends Component {
             － «
         {this.formatSummary()}
             »
-    
+
         <span role="img" aria-label="Location">📍</span>
             {this.formatLocation()}
 
