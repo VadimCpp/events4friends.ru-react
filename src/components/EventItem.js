@@ -71,7 +71,7 @@ class EventItem extends Component {
     let startDate = 'Не указано';
 
     if (event.start && event.start.dateTime) {
-      startDate = moment(event.start.dateTime).format(''D MMMM, dddd'');
+      startDate = moment(event.start.dateTime).format('D MMMM, dddd');
     }
 
     return startDate;
