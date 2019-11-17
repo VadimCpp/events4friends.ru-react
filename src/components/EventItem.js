@@ -401,7 +401,7 @@ class EventItem extends Component {
       <div className="borderbottom">
         <div className="container">
           <div className="event-item container-center main-view-container">
-            <small className="calendar-name">#{this.props.name}</small>
+            <small className="calendar-name">#{this.formatSummary()}</small>
             <span role="img" aria-label="Date">📅</span>
             {this.formatStartDate()}
 
