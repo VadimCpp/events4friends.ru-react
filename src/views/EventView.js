@@ -7,12 +7,13 @@ import './EventView.css';
 class EventView extends Component {
 
     displayEvents(events) {
-        const currentEvent = events.filter(event => event.id === this.props.match.params.id)
+        const currentEvent = events.filter(event => event.event.id === this.props.match.params.id)
         const listItems = currentEvent.map((event) =>
-            <li key={event.id}>
+            <li key={event.event.id}>
                 <EventItem
                     getEvent={this.props.getEvent}
-                    googleEvent={event}
+                    googleEvent={event.event}
+                    name={event.calendarName}
                 />
             </li>
         );
@@ -41,12 +42,28 @@ class EventView extends Component {
         if (!allEvents.length) {
             return <Redirect to="/" />
         }
+        
+        let allListEvents = [];
+        
+        for (let i = 0; i < googleEvents.length; i++) {
+            if (googleEvents[i]) {      
+                // allListEvents - единый массив событий из элементов { событие, имя календаря }
+                const eventsArray = googleEvents[i].events;
+                const calendarName = googleEvents[i].calendarName;
+                for (let j = 0; j < eventsArray.length; j++) {
+                    allListEvents.push({
+                        event: eventsArray[j],
+                        calendarName
+                    });
+                }
+            }
+        }
 
         return (
             <div className="event-view">
                 <div className="container container-center event-view-container">
                     <div className="pt-5">
-                        {this.displayEvents(allEvents)}
+                        {this.displayEvents(allListEvents)}
                     </div>
                     <div className="pt-5 pb-5">
                         <p>
