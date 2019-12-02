@@ -7,6 +7,7 @@ import LoadingView from "./views/LoadingView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";
 import axios from 'axios';
+import WelcomeView from "./views/WelcomeView.js";
 
 class AppRouter extends Component {
   state = {
@@ -144,6 +145,7 @@ class AppRouter extends Component {
                   <Route path="/archive/" render={props => (<ArchiveView {...props}
                     googleEvents={pastEvents}
                     getEvent={this.getEvent} />)} />
+                  <Route path="/welcome" component={WelcomeView} />
                 </div>
 
               </ScrollToTop>
