@@ -9,7 +9,7 @@ class WelcomeView extends Component {
       <div className="welcomeview">
         <div className="welcomeview__block">
           <div className="container container-center">
-            <p>Добро пожаловать в виртуальное общественно публичное пространство!</p>
+            <span>Добро пожаловать в виртуальное общественно публичное пространство!</span>
           </div>
         </div>
         
