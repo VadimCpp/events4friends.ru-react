@@ -16,7 +16,7 @@ class WelcomeView extends Component {
         <div className="welcomeview__block">
           <div className="container container-center">
             <p>Предстоящие мероприятия тут:</p>
-            <Link to="/" >
+            <Link to="/list" >
               <Button tag="div" icon="/icons/iconfinder_social.png" >
                 Открыть календарь
               </Button>

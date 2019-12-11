@@ -419,7 +419,9 @@ class EventItem extends Component {
             {this.formatLocation()}
 
 
-            {((this.props.match.path === '/') || (this.props.match.path === '/archive/')) ? this.moreInfo() : this.renderInfoBlock()}
+            {((this.props.match.path === '/') 
+              || (this.props.match.path === '/list/')
+              || (this.props.match.path === '/archive/')) ? this.moreInfo() : this.renderInfoBlock()}
 
           </div>
         </div>
