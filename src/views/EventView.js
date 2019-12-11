@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import EventItem from '../components/EventItem.js'
 import './EventView.css';
 
@@ -31,18 +31,6 @@ class EventView extends Component {
         // Тут собираем все события всех календарей в единый массив
         //
 
-        let allEvents = [];
-
-        for (let i = 0; i < googleEvents.length; i++) {
-            if (googleEvents[i]) {
-                allEvents = [...allEvents, ...googleEvents[i].events];
-            }
-        }
-
-        if (!allEvents.length) {
-            return <Redirect to="/" />
-        }
-        
         let allListEvents = [];
         
         for (let i = 0; i < googleEvents.length; i++) {
