@@ -56,3 +56,7 @@
     width: 93px;
     height: 88px;
 }
+
+.header__logo-link {
+    cursor: pointer;
+}
