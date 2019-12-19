@@ -1,20 +1,33 @@
 .header{
     align-items: center;
-    display: flex;
     height: 100px;
-    justify-content: center;
     background: #ffffff;
 }
 
-.borderbottom{
+.borderbottom {
     border-bottom: 1px solid rgba(200, 200, 200, 1);
 }
 
-.header_title{
-    margin-bottom: 0;
+.header__title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+}
+
+.header__subtitle {
+    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 30px;
-    text-align: center;
-    color: #000000;
+    font-size: 12px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+
+    color: #AAAAAA;
 }

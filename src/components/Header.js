@@ -7,7 +7,8 @@ class Header extends Component {
         return(
             <div className="borderbottom">
                 <header className="header">
-                    <h2 className="header_title" data-text="События для друзей">События для друзей</h2>
+                    <h1 className="header__title">events4friends</h1>
+                    <h2 className="header__subtitle">События для друзей</h2>
                 </header>
             </div>
         )
