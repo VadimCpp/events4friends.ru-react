@@ -7,10 +7,6 @@
     margin-left: auto;
 }
 
-.borderbottom {
-    border-bottom: 1px solid rgba(200, 200, 200, 1);
-}
-
 .header__first-col {
     float: left;
     width: 100px;
