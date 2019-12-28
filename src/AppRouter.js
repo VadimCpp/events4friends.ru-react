@@ -85,10 +85,10 @@ class AppRouter extends Component {
         }))
 
         console.log('Loading events from ', cal.name, cal.id);
-        var data = await axios.get(`${URL}${cal.id}/events?key=${API_KEY}`);
-        var allEvents = [...data.data.items];;
-        var items = this.filterEvents(allEvents);
-        var goneEvents = this.filterGoneEvents(allEvents);
+        let data = await axios.get(`${URL}${cal.id}/events?key=${API_KEY}`);
+        let allEvents = [...data.data.items];
+        let items = this.filterEvents(allEvents);
+        let goneEvents = this.filterGoneEvents(allEvents);
         if (items[0]) {
           events.push({ calendarName: cal.name, events: items });
           pastEvents.push({ calendarName: cal.name, events: goneEvents });
