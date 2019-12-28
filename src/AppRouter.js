@@ -15,7 +15,7 @@ class AppRouter extends Component {
     events: [],
     event: [],
     pastEvents: [],
-    everyEvents: [],
+    allEvents: [],
     loadingName: '', // имя загружаемого календаря
     loadingNumber: 0, // порядковый номер загружаемого календаря
     loadingTotal: 3, // общее количество календарей
@@ -64,15 +64,10 @@ class AppRouter extends Component {
     ]
 
     try {
-      //
-      // NOTE!
-      // В календаре может не быть предстоящих событий, 
-      // следовательно его не надо включать в список отображаемых календарей
-      //
+      let allEvents = [];
+      let futureEvents = [];
+      let pastEvents = [];
 
-      let events = [];
-      let everyEvents = [];
-      let { pastEvents } = this.state;
       for (var cal of CALENDARS) {
         // 
         // NOTE!
@@ -90,20 +85,18 @@ class AppRouter extends Component {
         let futureEventsForCalendar = this.filterEvents(allEventsForCalendar);
         let pastEventsForCalendar = this.filterGoneEvents(allEventsForCalendar);
 
-        if (futureEventsForCalendar[0]) {
-          events.push({ calendarName: cal.name, events: futureEventsForCalendar });
-          pastEvents.push({ calendarName: cal.name, events: pastEventsForCalendar });
-          everyEvents.push({ calendarName: cal.name, events: allEventsForCalendar });
-        }
+        futureEvents.push({ calendarName: cal.name, events: futureEventsForCalendar });
+        pastEvents.push({ calendarName: cal.name, events: pastEventsForCalendar });
+        allEvents.push({ calendarName: cal.name, events: allEventsForCalendar });
       }
       console.log('Done loading all calendars');
 
       this.setState((state) => ({
         ...state,
         loading: false,
-        events,
+        events: futureEvents,
         pastEvents,
-        everyEvents
+        everyEvents: allEvents
       }))
     } catch (err) {
       console.log(err);
