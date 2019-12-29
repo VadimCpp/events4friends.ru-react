@@ -242,7 +242,10 @@ class MainView extends Component {
           {/*<Map allEvents={allMapEvents}/>*/}
           { allListEvents.length ? allListEvents.map(event => this.displayEvent(event.event, event.calendarName)) : null }
           { !allListEvents.length && (
-            <p> Список событий пуст. </p>
+            <p>
+              <span>Список событий пуст. Загляните в </span>
+              <Link to="/archive">архив</Link>
+            </p>
           )}
         </div>
       </div>
