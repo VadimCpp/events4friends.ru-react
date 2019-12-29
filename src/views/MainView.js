@@ -240,7 +240,10 @@ class MainView extends Component {
         </div>
         <div className="pt-3">
           {/*<Map allEvents={allMapEvents}/>*/}
-          {allListEvents.map(event => this.displayEvent(event.event, event.calendarName))}
+          { allListEvents.length ? allListEvents.map(event => this.displayEvent(event.event, event.calendarName)) : null }
+          { !allListEvents.length && (
+            <p> Список событий пуст. </p>
+          )}
         </div>
       </div>
     )
