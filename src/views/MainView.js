@@ -212,6 +212,9 @@ class MainView extends Component {
             <p className="pt-3"> На главной пока только список событий. Все остальное в разделе &quot;О нас&quot;. </p>
             <p>
               <Button color="warning">
+                <Link className="reset-link-style" to="/map">Карта</Link>
+              </Button>
+              <Button color="warning">
                 <Link className="reset-link-style" to="/archive">Архив</Link>
               </Button>
               <Button color="warning">
