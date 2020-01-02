@@ -11,8 +11,13 @@ class Map extends React.Component {
   };
 
   componentDidUpdate(prevPops, prevState) {
-    if (prevPops.pins !== this.props.pins) this.addPins(this.props.allEvents);
+    if (prevPops.pins !== this.props.pins) {
+      this.addPins(this.props.allEvents);
+    } else if (!this.state.pins.length) {
+      this.addPins(this.props.allEvents);
+    }
   }
+
   componentDidMount() {
     this.addPins(this.props.allEvents);
   }
