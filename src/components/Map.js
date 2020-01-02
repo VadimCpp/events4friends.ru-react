@@ -1,6 +1,6 @@
 import React from "react";
 import Moment from "react-moment";
-import { EsriProvider } from "leaflet-geosearch";
+// import { EsriProvider } from "leaflet-geosearch";
 import { Map as LeafletMap, TileLayer, Marker, Popup } from "react-leaflet";
 import "./map.css";
 
@@ -17,35 +17,32 @@ class Map extends React.Component {
     this.addPins(this.props.allEvents);
   }
 
-  addPins = async events => {
-    const provider = new EsriProvider();
-
+  addPins = events => {
     for (const event of events) {
-      if (!event.location) continue;
-
-      const result = await provider.search({ query: event.location });
-
-      if (!result[0].x || !result[0].y) continue;
-
-      this.setState(state => {
-        const {
-          id,
-          description,
-          location,
-          creator: { email },
-          start: { dateTime }
-        } = event;
-        const pins = state.pins.slice();
-        pins.push({
-          id,
-          description,
-          location,
-          email,
-          dateTime,
-          geolocation: { lng: result[0].x, lat: result[0].y }
+      const { coordinates } = event;
+      const hasCoordinates = Boolean(coordinates && coordinates.latitude && coordinates.longitude);
+      
+      if (hasCoordinates) {
+        this.setState(state => {
+          const {
+            id,
+            description,
+            location,
+            creator: { email },
+            start: { dateTime }
+          } = event;
+          const pins = state.pins.slice();
+          pins.push({
+            id,
+            description,
+            location,
+            email,
+            dateTime,
+            geolocation: { lng: coordinates.longitude, lat: coordinates.latitude }
+          });
+          return { ...state, isLoading: false, pins };
         });
-        return { ...state, isLoading: false, pins };
-      });
+      }
     }
   };
 
