@@ -5,7 +5,7 @@ function Button({ tag: Tag = "a", icon, children, borderColor = "#4d4d4d", ...pr
   return (
     <Tag className="welcomeview__button" {...props} style={{ borderColor }}>
       <div className="welcomeview__image">
-        <img src={icon} alt={children} />
+        <img src={icon} alt={children} width="40" height="40" />
       </div>
       {children &&
         <div className="welcomeview__text">

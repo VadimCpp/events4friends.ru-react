@@ -16,11 +16,20 @@ class WelcomeView extends Component {
         <div className="welcomeview__block">
           <div className="container container-center">
             <p>Предстоящие мероприятия тут:</p>
-            <Link to="/list" >
-              <Button tag="div" icon="/icons/iconfinder_social.png" >
-                Открыть календарь
-              </Button>
-            </Link>
+            <div>
+              <Link to="/list">
+                <Button tag="div" icon="/icons/icon_list.png" >
+                  Открыть список
+                </Button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/map">
+                <Button tag="div" icon="/icons/icon_map.png" >
+                  Открыть карту
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
 
