@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './WelcomeView.css'
 import Button from '../components/Button'
+import ButtonLink from '../components/ButtonLink'
 import { Link } from 'react-router-dom'
 
 class WelcomeView extends Component {
@@ -16,13 +17,20 @@ class WelcomeView extends Component {
         <div className="welcomeview__block">
           <div className="container container-center">
             <p>Предстоящие мероприятия тут:</p>
-            <div>
-              <Link to="/list">
-                <Button tag="div" icon="/icons/icon_list.png" >
-                  Открыть список
-                </Button>
-              </Link>
-            </div>
+
+            <ButtonLink 
+              to="/list" 
+              icon="/icons/icon_list.png"
+              title="Открыть список"
+              style={{ 
+                width: 250,
+                display: 'block',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                marginBottom: 10
+              }}
+            />
+
             <div>
               <Link to="/map">
                 <Button tag="div" icon="/icons/icon_map.png" >
