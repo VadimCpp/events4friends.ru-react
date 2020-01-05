@@ -1,0 +1,26 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem 1rem;
+  background-color: #fff;
+  border: 1px solid #4D4D4D;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.link__image {
+  width: 40px;
+  height: 40px;
+}
+
+.link__text {
+  padding-left: 8px;
+  line-height: 19px;
+  font-size: 16px;
+  color: #4d4d4d;
+}

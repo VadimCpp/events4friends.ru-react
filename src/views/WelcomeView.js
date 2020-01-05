@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import './WelcomeView.css'
-import Button from '../components/Button'
 import ButtonLink from '../components/ButtonLink'
+import ButtonExternalLink from '../components/ButtonExternalLink'
+import './WelcomeView.css'
 
 class WelcomeView extends Component {
   render() {
@@ -48,16 +48,49 @@ class WelcomeView extends Component {
         <div className="welcomeview__block">
           <div className="container container-center">
             <p>Выберите мессенджер для общения:</p>
-            <Button href="https://t.me/events4friends" icon="/icons/telegram.png" borderColor="#139BD0"></Button>
-            <Button href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8" icon="/icons/wa.png" borderColor="#57BB63"></Button>
-            <Button href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B" icon="/icons/viber.png" borderColor="#7C519B"></Button>
+            <ButtonExternalLink 
+              href="https://t.me/events4friends" 
+              icon="/icons/telegram.png" 
+              style={{
+                borderColor: "#139BD0",
+                margin: 8
+              }} 
+            />
+            <ButtonExternalLink 
+              href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8" 
+              icon="/icons/wa.png"
+              style={{
+                borderColor: "#57BB63",
+                margin: 8
+              }} 
+            />
+            <ButtonExternalLink 
+              href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
+              icon="/icons/viber.png" 
+              style={{
+                borderColor: "#7C519B",
+                margin: 8
+              }} 
+            />
           </div>
         </div>
 
         <div className="welcomeview__block">
           <div className="container container-center">
-            <p>Действует группа ВКонтакте:</p>
-            <Button href="https://vk.com/kldevents4friends" icon="/icons/vk.png" borderColor="#4D76A1">Открыть ВКонтакте</Button>
+            <p>Действует группа ВКонтакте:</p>            
+            <ButtonExternalLink 
+              href="https://vk.com/kldevents4friends"
+              icon="/icons/vk.png" 
+              style={{
+                borderColor: "#4D76A1",
+                margin: 8,
+                width: 250,
+                display: 'block',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+              }}
+              title="Открыть ВКонтакте"
+            />
           </div>
         </div>
 
