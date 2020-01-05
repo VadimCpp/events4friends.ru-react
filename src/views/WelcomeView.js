@@ -95,7 +95,10 @@ class WelcomeView extends Component {
         </div>
 
         <div className="container container-center">
-          <p className="welcomeview__footer">Здесь действуют правила поведения в общественных местах и нормы законов РФ</p>
+          <p className="welcomeview__footer">
+            Здесь действуют правила поведения в общественных местах и нормы законов РФ.
+            Разработано в <a href="https://roscomputing.com/">Роскомпьютинг</a>.
+          </p>
         </div>
       </div>
     )
