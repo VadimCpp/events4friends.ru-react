@@ -3,7 +3,6 @@ import moment from 'moment';
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
 import EventItem from '../components/EventItem.js'
-import Map from '../components/Map';
 import 'moment/locale/ru';
 import './MainView.css';
 
