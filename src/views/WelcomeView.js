@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import './WelcomeView.css'
 import Button from '../components/Button'
 import ButtonLink from '../components/ButtonLink'
-import { Link } from 'react-router-dom'
 
 class WelcomeView extends Component {
   render() {
