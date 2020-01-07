@@ -37,6 +37,21 @@
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+
+    <!-- VK Init -->
+    <script src="https://vk.com/js/api/openapi.js?162" type="text/javascript"></script>
+    <script type="text/javascript">
+      VK.init({
+        apiId: 7272040
+      });
+      VK.Api.call('wall.get', {owner_id: -93114971, count: 1, v: "5.103"}, function(r) {
+        if (r.response && r.response.items && r.response.items.length) {
+          console.log("Success getting wall post");
+          console.log(r.response.items[0].text);
+        }
+      });
+    </script>
+
     <div id="root"></div>
     <!--
       This HTML file is a template.
