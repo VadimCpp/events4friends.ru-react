@@ -24,6 +24,22 @@ class AppRouter extends Component {
 
   componentDidMount() {
     this.getEvents();
+
+    if (window.VK) {
+      console.log('VK module found');
+      const vk = window.VK;
+      vk.init({
+        apiId: 7272040
+      });
+      vk.Api.call('wall.get', {owner_id: -93114971, count: 1, v: "5.103"}, function(r) {
+        if (r.response && r.response.items && r.response.items.length) {
+          console.log("Success getting wall post");
+          console.log(r.response.items[0].text);
+        }
+      });      
+    } else {
+      console.error('No VK module found');
+    }
   }
 
   filterEvents(events) {
