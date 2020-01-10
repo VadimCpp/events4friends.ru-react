@@ -28,11 +28,8 @@ class AppRouter extends Component {
 
     const source = new EventsSource('Янтарная афиша - Калининград', 'https://vk.com/afisha_39');
     source.loadEvents(
-      (r) => {
-        if (r.response && r.response.items && r.response.items.length) {
-          console.log("Success getting wall post");
-          console.log(r.response.items[0].text);
-        }
+      (events) => {
+        console.log(events);
       },
       (error) => {
         console.error(error);
