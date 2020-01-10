@@ -40,8 +40,7 @@ class AppRouter extends Component {
       });
             
       const source = new EventsSource('Янтарная афиша - Калининград', 'https://vk.com/afisha_39');
-      // TODO:
-      // source.loalEvents();
+      source.loadEvents();
       console.log(source);
 
     } else {
