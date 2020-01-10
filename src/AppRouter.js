@@ -9,6 +9,7 @@ import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";
 import axios from 'axios';
 import WelcomeView from "./views/WelcomeView.js";
+import EventsSource from "./model/EventsSource";
 
 class AppRouter extends Component {
   state = {
@@ -36,7 +37,13 @@ class AppRouter extends Component {
           console.log("Success getting wall post");
           console.log(r.response.items[0].text);
         }
-      });      
+      });
+            
+      const source = new EventsSource('Янтарная афиша - Калининград', 'https://vk.com/afisha_39');
+      // TODO:
+      // source.loalEvents();
+      console.log(source);
+
     } else {
       console.error('No VK module found');
     }
