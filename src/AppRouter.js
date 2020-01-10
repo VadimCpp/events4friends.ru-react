@@ -26,26 +26,18 @@ class AppRouter extends Component {
   componentDidMount() {
     this.getEvents();
 
-    if (window.VK) {
-      console.log('VK module found');
-      const vk = window.VK;
-      vk.init({
-        apiId: 7272040
-      });
-      vk.Api.call('wall.get', {owner_id: -93114971, count: 1, v: "5.103"}, function(r) {
+    const source = new EventsSource('Янтарная афиша - Калининград', 'https://vk.com/afisha_39');
+    source.loadEvents(
+      (r) => {
         if (r.response && r.response.items && r.response.items.length) {
           console.log("Success getting wall post");
           console.log(r.response.items[0].text);
         }
-      });
-            
-      const source = new EventsSource('Янтарная афиша - Калининград', 'https://vk.com/afisha_39');
-      source.loadEvents();
-      console.log(source);
-
-    } else {
-      console.error('No VK module found');
-    }
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   filterEvents(events) {
