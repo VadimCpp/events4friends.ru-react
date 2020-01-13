@@ -121,18 +121,18 @@ class EventsSource {
               r.response.items.forEach(item => {
                 console.log(item);
 
-                const { text } = item;
+                const { text, owner_id, id } = item;
 
-                const id = "1";
+                const eventId = `${owner_id}_${id}`;
                 const start = that._parseStart(text);
                 const end = that._parseEnd(text);
                 const summary = that._parseSummary(text);
                 const description = text;
                 const location = that._parseLocation(text);
                 const contact = "https://vk.com/afisha_39";
-                const reference = "Не указано";
+                const reference = `https://vk.com/wall${owner_id}_${id}`;
 
-                const event = new Event(id, start, end, summary, description, location, contact, reference);
+                const event = new Event(eventId, start, end, summary, description, location, contact, reference);
 
                 events.unshift(event);
               });
