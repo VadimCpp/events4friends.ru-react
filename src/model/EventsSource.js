@@ -41,6 +41,30 @@ class EventsSource {
   /**
    * @param {string} text 
    * @private
+   * @return {string|null}
+   */
+  _parseEnd(text) {
+
+    /**
+     * @type {string|null}
+     */
+    let resultDate = null;
+
+    if (text) {
+      const dateFormat = /#\d\d_[а-я]+\d\d\d\d@afisha_39/g;
+      const matches = text.match(dateFormat);
+
+      if (matches && matches.length > 1) {
+        resultDate = matches[1];
+      }
+    }
+
+    return resultDate;
+  }
+
+  /**
+   * @param {string} text 
+   * @private
    * @return {string}
    */
   _parseSummary(text) {
@@ -79,7 +103,7 @@ class EventsSource {
 
                 const id = "1";
                 const start = that._parseStart(text);
-                const end = "2019-09-14T11:00:00+02:00";
+                const end = that._parseEnd(text);
                 const summary = that._parseSummary(text);
                 const description = text;
                 const location = "Не указано";
