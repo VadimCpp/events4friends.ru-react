@@ -73,6 +73,28 @@ class EventsSource {
   }
 
   /**
+   * @param {string} text 
+   * @private
+   * @return {string}
+   */
+  _parseLocation(text) {
+    let result = "Не указано";
+
+    if (text) {
+      const thirdString = text.split('\n')[4];
+      const fourthString = text.split('\n')[5];
+
+      console.log(thirdString, fourthString);
+
+      if (thirdString && fourthString) {
+        result = `${thirdString.trim()}, ${fourthString.trim()}`;
+      }
+    }
+
+    return result;
+  }
+
+  /**
    * @param {function} cbSuccess функция вызывается при успешном получении данных
    * @param {function} cbError функция вызывается в случае ошибки
    */
@@ -106,7 +128,7 @@ class EventsSource {
                 const end = that._parseEnd(text);
                 const summary = that._parseSummary(text);
                 const description = text;
-                const location = "Не указано";
+                const location = that._parseLocation(text);
                 const contact = "https://vk.com/afisha_39";
                 const reference = "Не указано";
 
