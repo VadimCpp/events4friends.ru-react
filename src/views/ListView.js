@@ -81,6 +81,29 @@ class ListView extends Component {
     )
   }
 
+  /**
+   * @param {EventsSource} source 
+   */
+  displaySource(source) {
+    if (!source) {      
+      return null;
+    }
+
+    const { events } = source;
+
+    if (!events || !events.length) {
+      return null;
+    }
+    
+    return events.map(event => {
+      return (
+        <div className="margin-bottom" key={event.id}>
+          <span> {JSON.stringify(event)} </span>
+        </div>
+      );
+    });
+  }
+
   // 
   // NOTE! 
   // This method is a copy of the exact one in EventItem.js
@@ -203,6 +226,7 @@ class ListView extends Component {
 
   render() {
     const { allListEvents, copied } = this.state;
+    const { eventsSources } = this.props;
 
     return (
       <div className="main-view">
@@ -242,6 +266,9 @@ class ListView extends Component {
         </div>
         <div className="pt-3">
           {/*<Map allEvents={allMapEvents}/>*/}
+          <p className="pt-3"> Новый список событий </p>
+          { eventsSources.length ? eventsSources.map(source => this.displaySource(source)) : null }
+          <p className="pt-3"> Старый список событий </p>
           { allListEvents.length ? allListEvents.map(event => this.displayEvent(event.event, event.calendarName)) : null }
           { !allListEvents.length && (
             <p>

@@ -183,7 +183,7 @@ class EventsSource {
               });
 
               if (events.length) {
-                this.events = events;
+                that.events = events;
                 cbSuccess(events);
               } else {
                 throw "No events has been parsed from VK wall posts.";

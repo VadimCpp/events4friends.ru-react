@@ -143,7 +143,8 @@ class AppRouter extends Component {
       loading,
       events,
       everyEvents,
-      pastEvents
+      pastEvents,
+      eventsSources
     } = this.state;
     return (
       <div>
@@ -159,7 +160,7 @@ class AppRouter extends Component {
                 <div>
                   <Route path="/" exact component={WelcomeView} />
                   <Route path="/list/" render={props => (
-                    <ListView {...props} googleEvents={events} getEvent={this.getEvent} />
+                    <ListView {...props} googleEvents={events} getEvent={this.getEvent} eventsSources={eventsSources} />
                   )} />
                   <Route path="/map/" render={props => (
                     <MapView {...props} googleEvents={events} getEvent={this.getEvent} />
