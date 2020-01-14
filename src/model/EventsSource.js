@@ -129,13 +129,11 @@ class EventsSource {
     let result = "Не указано";
 
     if (text) {
-      const thirdString = text.split('\n')[4];
-      const fourthString = text.split('\n')[5];
+      const address1st = text.split('\n')[4];
+      const address2nd = text.split('\n')[5];
 
-      console.log(thirdString, fourthString);
-
-      if (thirdString && fourthString) {
-        result = `${thirdString.trim()}, ${fourthString.trim()}`;
+      if (address1st && address2nd) {
+        result = `${address1st.trim()}, ${address2nd.trim()}`;
       }
     }
 
