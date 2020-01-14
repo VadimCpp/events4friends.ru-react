@@ -10,6 +10,7 @@ class EventsSource {
   constructor(name, source,) {    
     this.name = name;
     this.source = source;
+    this.events = null;
   }
 
   /**
@@ -165,8 +166,6 @@ class EventsSource {
               let events = [];
               
               r.response.items.forEach(item => {
-                console.log(item);
-
                 const { text, owner_id, id } = item;
 
                 const eventId = `${owner_id}_${id}`;
@@ -183,7 +182,12 @@ class EventsSource {
                 events.unshift(event);
               });
 
-              cbSuccess(events);
+              if (events.length) {
+                this.events = events;
+                cbSuccess(events);
+              } else {
+                throw "No events has been parsed from VK wall posts.";
+              }              
             } else {
               throw "No VK wall post found.";
             }
