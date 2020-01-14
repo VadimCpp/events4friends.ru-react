@@ -22,6 +22,19 @@ class AppRouter extends Component {
     loadingName: '', // имя загружаемого календаря
     loadingNumber: 0, // порядковый номер загружаемого календаря
     loadingTotal: 3, // общее количество календарей
+
+    //
+    // NOTE!
+    // Все, что выше, будет отрефакторено
+    //
+
+    //
+    // Источники событий.
+    //
+    // Пока что только один источник: https://vk.com/afisha_39
+    // Но скоро добавлю еще
+    //
+    eventsSources: [], // все события
   }
 
   componentDidMount() {
@@ -31,6 +44,9 @@ class AppRouter extends Component {
     source.loadEvents(
       (events) => {
         console.log(events);
+        this.setState({
+          eventsSources: [ source ]
+        });
       },
       (error) => {
         console.error(error);
