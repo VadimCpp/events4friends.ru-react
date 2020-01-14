@@ -1,4 +1,6 @@
+import moment from 'moment';
 import Event from "./Event";
+import 'moment/locale/ru';
 
 class EventsSource {
   /**
@@ -30,7 +32,30 @@ class EventsSource {
         const data = regex.exec(text);
 
         if (data && data[0]) {
-          resultDate = data[0];
+          // "#11_Января2020@afisha_39" -> "#11_января2020@afisha_39"
+          resultDate = data[0].toLowerCase();
+
+          // "#11_января2020@afisha_39" -> "#11_01_2020@afisha_39"
+          [
+            "января",
+            "февраля",
+            "марта",
+            "апреля",
+            "мая",
+            "июня",
+            "июля",
+            "августа",
+            "сентября",
+            "октября",
+            "ноября",
+            "декабря",
+          ].forEach((month, index) => {    
+            const monthNo = index + 1;        
+            resultDate = resultDate.replace(month, monthNo < 10 ? `0${monthNo}_` : `${monthNo}_`);
+          });
+          
+          // "#11_01_2020@afisha_39" -> "11 января 2020 г"
+          resultDate = moment(resultDate, 'DD_MM_YYYY@afisha_39').format('LL');
         }
       } 
     }
