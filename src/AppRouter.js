@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import AboutView from "./views/AboutView.js";
 import MainView from "./views/MainView.js";
+import ListView from "./views/ListView.js";
 import MapView from "./views/MapView.js";
 import ArchiveView from "./views/ArchiveView.js";
 import LoadingView from "./views/LoadingView.js";
@@ -142,7 +143,7 @@ class AppRouter extends Component {
                 <div>
                   <Route path="/" exact component={WelcomeView} />
                   <Route path="/list/" render={props => (
-                    <MainView {...props} googleEvents={events} getEvent={this.getEvent} />
+                    <ListView {...props} googleEvents={events} getEvent={this.getEvent} />
                   )} />
                   <Route path="/map/" render={props => (
                     <MapView {...props} googleEvents={events} getEvent={this.getEvent} />
