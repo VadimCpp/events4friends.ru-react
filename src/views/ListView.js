@@ -96,6 +96,18 @@ class ListView extends Component {
     }
     
     return events.map(event => {
+      // 
+      // TODO: implement
+      //
+
+      // return (
+      //   <div key={event.id}>
+      //     <EventCard
+      //       event={event}
+      //     />
+      //   </div>
+      // );
+
       return (
         <div className="margin-bottom" key={event.id}>
           <span className="word-wrap"> {JSON.stringify(event)} </span>
