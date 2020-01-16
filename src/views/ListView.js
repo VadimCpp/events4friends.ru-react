@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Button } from 'reactstrap';
 import { Link } from "react-router-dom";
-import EventItem from '../components/EventItem.js'
+import EventItem from '../components/EventItem.js';
+import EventCard from '../components/EventCard.js';
 import 'moment/locale/ru';
 import './ListView.css';
 
@@ -96,21 +97,13 @@ class ListView extends Component {
     }
     
     return events.map(event => {
-      // 
-      // TODO: implement
-      //
-
-      // return (
-      //   <div key={event.id}>
-      //     <EventCard
-      //       event={event}
-      //     />
-      //   </div>
-      // );
-
       return (
-        <div className="margin-bottom" key={event.id}>
-          <span className="word-wrap"> {JSON.stringify(event)} </span>
+        <div key={event.id}>
+          <EventCard
+            getEvent={this.props.getEvent}
+            event={event}
+            name={source.name}
+          />
         </div>
       );
     });
