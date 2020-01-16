@@ -3,7 +3,6 @@ import ClipboardJS from 'clipboard';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import AppRouter from './AppRouter.js'
-import Header from './components/Header.js'
 import './App.css';
 
 class App extends Component {
@@ -40,7 +39,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
         <AppRouter />
       </div>
     );

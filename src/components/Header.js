@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import HeaderLogo from './Header/header_logo.png';
 import './Header.css';
 
@@ -7,9 +8,9 @@ class Header extends Component {
     return(
       <header className="header">
         <div className="header__first-col">
-          <a className="header__logo-link" href="/">
-            <img className="header__logo" src={HeaderLogo} alt="Header Logo"/>
-          </a>
+         <Link className="reset-link-style" to="/">
+          <img className="header__logo" src={HeaderLogo} alt="Header Logo"/>
+         </Link>
         </div>
         <div className="header__second-col">
           <h1 className="header__title">events4friends</h1>
@@ -20,4 +21,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

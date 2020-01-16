@@ -11,6 +11,7 @@ import ScrollToTop from "./components/ScrollToTop.js";
 import axios from 'axios';
 import WelcomeView from "./views/WelcomeView.js";
 import EventsSource from "./model/EventsSource";
+import Header from './components/Header.js'
 
 class AppRouter extends Component {
   state = {
@@ -157,6 +158,7 @@ class AppRouter extends Component {
           (
             <Router>
               <ScrollToTop>
+                <Header />
                 <div>
                   <Route path="/" exact component={WelcomeView} />
                   {/* <Route path="/list/" render={props => (
