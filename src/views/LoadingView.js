@@ -14,12 +14,12 @@ class LoadingView extends Component {
           <p>
             {this.props.loadingNumber} из {this.props.loadingTotal} : {this.props.loadingName}
           </p>
-          <p>
+          <div>
             <Progress
               value={this.props.loadingNumber}
               max={this.props.loadingTotal}
             />
-          </p>
+          </div>
         </div>
       </div>
     )
