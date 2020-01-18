@@ -22,7 +22,7 @@ class AppRouter extends Component {
     allEvents: [],
     loadingName: '', // имя загружаемого календаря
     loadingNumber: 0, // порядковый номер загружаемого календаря
-    loadingTotal: 3, // общее количество календарей
+    loadingTotal: 4, // общее количество календарей (3) + янтарная афиша
 
     //
     // NOTE!
@@ -40,19 +40,6 @@ class AppRouter extends Component {
 
   componentDidMount() {
     this.getEvents();
-
-    const source = new EventsSource('Янтарная афиша - Калининград', 'https://vk.com/afisha_39');
-    source.loadEvents(
-      (events) => {
-        console.log(events);
-        this.setState({
-          eventsSources: [ source ]
-        });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
   }
 
   filterEvents(events) {
@@ -83,6 +70,7 @@ class AppRouter extends Component {
   }
 
   getEvents = async () => {
+    const that = this;
     const URL = 'https://www.googleapis.com/calendar/v3/calendars/';
     const API_KEY = 'AIzaSyBOXnnT1F-h9s1FP3063BQ_o0KtD7Y0DPs';
 
@@ -121,13 +109,29 @@ class AppRouter extends Component {
       }
       console.log('Done loading all calendars');
 
+      const source = new EventsSource('Янтарная афиша - Калининград', 'https://vk.com/afisha_39');
       this.setState((state) => ({
-        ...state,
-        loading: false,
-        events: futureEvents,
-        pastEvents,
-        everyEvents: allEvents
+        loadingNumber: state.loadingNumber + 1,
+        loadingName: source.name,
       }))
+      source.loadEvents(
+        (events) => {
+          console.log('Done loading VK events:');
+          console.log(events);
+          that.setState((state) => ({
+            ...state,
+            loading: false,
+            events: futureEvents,
+            pastEvents,
+            everyEvents: allEvents,
+            eventsSources: [ source ]
+          }));
+        },
+        (error) => {
+          console.log('Failed loading VK posts');
+          console.error(error);
+        }
+      );
     } catch (err) {
       console.log(err);
     }
