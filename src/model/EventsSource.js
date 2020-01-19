@@ -1,5 +1,6 @@
 
 import AfishaKaliningrad from './sources/AfishaKalinigrad';
+import GoogleCalendar from './sources/GoogleCalendar';
 
 class EventsSource {
   /**
@@ -12,6 +13,12 @@ class EventsSource {
 
     if (this.url === 'https://vk.com/afisha_39') {
       this.source = new AfishaKaliningrad();
+    } else if (this.url === 'pravonagorod%40gmail.com') {
+      this.source = new GoogleCalendar('pravonagorod%40gmail.com');
+    } else if (this.url === 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com') {
+      this.source = new GoogleCalendar('dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com');
+    } else if (this.url === '97oe212v23kfm97rnp7b1fv94c@group.calendar.google.com') {
+      this.source = new GoogleCalendar('97oe212v23kfm97rnp7b1fv94c@group.calendar.google.com');
     } else {
       this.source = null;
     }
