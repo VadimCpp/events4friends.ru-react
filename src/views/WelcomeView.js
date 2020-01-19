@@ -15,7 +15,7 @@ class WelcomeView extends Component {
         
         <div className="welcomeview__block">
           <div className="container container-center">
-            <p>Предстоящие мероприятия тут:</p>
+            <p>Мероприятия тут:</p>
 
             <ButtonLink 
               to="/list" 
@@ -29,7 +29,7 @@ class WelcomeView extends Component {
                 marginBottom: 10
               }}
             />
-
+{/* 
             <ButtonLink 
               to="/map" 
               icon="/icons/icon_map.png"
@@ -41,7 +41,7 @@ class WelcomeView extends Component {
                 marginLeft: 'auto',
                 marginBottom: 10
               }}
-            />
+            /> */}
           </div>
         </div>
 
