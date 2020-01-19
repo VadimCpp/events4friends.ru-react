@@ -35,30 +35,50 @@ class AppRouter extends Component {
       new EventsSource('Янтарная афиша - ВКонтакте', 'https://vk.com/afisha_39'),
     ];
 
+    const eventsSourcesLehgth = eventsSources.length;
+
     this.setState((state) => ({
       ...state,
       loading: true,
       loadingName: '',
       loadingNumber: 0,
-      loadingTotal: eventsSources.lehgth,
+      loadingTotal: eventsSourcesLehgth,
       eventsSources: eventsSources
     }), () => {
       this.loadEvents();
     });
   }
 
+  increnemtLoading = (loadingNumber) => {   
+    const loading = loadingNumber < this.state.loadingTotal;
+    this.setState({
+      loadingNumber,
+      loading
+    });
+  }
+
   loadEvents = () => {
     console.log('Loading events');
-    this.state.eventsSources.forEach((eventSource, index) => {
+
+    const { eventsSources } = this.state;
+    let loadingNumber = 0;
+
+    eventsSources.forEach((eventSource, index) => {
       console.log(`Loading events from #${index} source: ${eventSource.name}...`);
       eventSource.loadEvents(
         (events) => {
           console.log(`Done loading events from #${index} source: ${eventSource.name}`);
           console.log(events);
+          
+          loadingNumber += 1;
+          this.increnemtLoading(loadingNumber);          
         },
         (error) => {
           console.log(`Failed loading events from #${index} source: ${eventSource.name}`);
           console.error(error);
+
+          loadingNumber += 1;
+          this.increnemtLoading(loadingNumber); 
         }
       );
     })
