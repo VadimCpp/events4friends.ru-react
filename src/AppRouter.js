@@ -51,6 +51,16 @@ class AppRouter extends Component {
     console.log('Loading events');
     this.state.eventsSources.forEach((eventSource, index) => {
       console.log(`Loading events from #${index} source: ${eventSource.name}...`);
+      eventSource.loadEvents(
+        (events) => {
+          console.log(`Done loading events from #${index} source: ${eventSource.name}`);
+          console.log(events);
+        },
+        (error) => {
+          console.log(`Failed loading events from #${index} source: ${eventSource.name}`);
+          console.error(error);
+        }
+      );
     })
   }
 
