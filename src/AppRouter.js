@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
-import AboutView from "./views/AboutView.js";
+// import AboutView from "./views/AboutView.js";
 import ListView from "./views/ListView.js";
-import MapView from "./views/MapView.js";
-import ArchiveView from "./views/ArchiveView.js";
+// import MapView from "./views/MapView.js";
+// import ArchiveView from "./views/ArchiveView.js";
 import LoadingView from "./views/LoadingView.js";
-import EventView from './views/EventView'
+// import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";
 import WelcomeView from "./views/WelcomeView.js";
 import EventsSource from "./model/EventsSource";
@@ -96,9 +96,9 @@ class AppRouter extends Component {
                 <div>
                   <Route path="/" exact component={WelcomeView} />
                   <Route path="/list/" render={props => (
-                    <ListView {...props} googleEvents={events} getEvent={this.getEvent} eventsSources={eventsSources} />
+                    <ListView {...props} getEvent={this.getEvent} eventsSources={eventsSources} />
                   )} />
-                  <Route path="/map/" render={props => (
+                  {/* <Route path="/map/" render={props => (
                     <MapView {...props} googleEvents={events} getEvent={this.getEvent} />
                   )} />
                   <Route path="/about/" component={AboutView} />
@@ -108,7 +108,7 @@ class AppRouter extends Component {
                       getEvent={this.getEvent} />)} />
                   <Route path="/archive/" render={props => (<ArchiveView {...props}
                     googleEvents={pastEvents}
-                    getEvent={this.getEvent} />)} />
+                    getEvent={this.getEvent} />)} /> */}
                 </div>
 
               </ScrollToTop>
