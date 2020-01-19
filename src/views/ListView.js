@@ -90,7 +90,7 @@ class ListView extends Component {
       return null;
     }
 
-    const { events } = source;
+    const events = source.getEvents();
 
     if (!events || !events.length) {
       return null;
