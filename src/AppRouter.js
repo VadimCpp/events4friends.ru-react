@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 import AboutView from "./views/AboutView.js";
-import MainView from "./views/MainView.js";
+// import MainView from "./views/MainView.js";
 import ListView from "./views/ListView.js";
 import MapView from "./views/MapView.js";
 import ArchiveView from "./views/ArchiveView.js";
@@ -14,32 +14,44 @@ import EventsSource from "./model/EventsSource";
 import Header from './components/Header.js'
 
 class AppRouter extends Component {
-  state = {
-    loading: true,
+  state = {    
     events: [],
     event: [],
     pastEvents: [],
     allEvents: [],
+
+    loading: true,
     loadingName: '', // имя загружаемого календаря
-    loadingNumber: 0, // порядковый номер загружаемого календаря
-    loadingTotal: 4, // общее количество календарей (3) + янтарная афиша
-
-    //
-    // NOTE!
-    // Все, что выше, будет отрефакторено
-    //
-
-    //
-    // Источники событий.
-    //
-    // Пока что только один источник: https://vk.com/afisha_39
-    // Но скоро добавлю еще
-    //
+    loadingNumber: 0, // порядковый номер источника
+    loadingTotal: 0, // общее количество источников
     eventsSources: [], // все события
   }
 
   componentDidMount() {
-    this.getEvents();
+    const eventsSources = [
+      new EventsSource('Право на город - Календарь', 'pravonagorod%40gmail.com'),
+      new EventsSource('Events For Friends - Календарь', 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'),
+      new EventsSource('Утро с Тедди - Календарь', '97oe212v23kfm97rnp7b1fv94c@group.calendar.google.com'),
+      new EventsSource('Янтарная афиша - ВКонтакте', 'https://vk.com/afisha_39'),
+    ];
+
+    this.setState((state) => ({
+      ...state,
+      loading: true,
+      loadingName: '',
+      loadingNumber: 0,
+      loadingTotal: eventsSources.lehgth,
+      eventsSources: eventsSources
+    }), () => {
+      this.loadEvents();
+    });
+  }
+
+  loadEvents = () => {
+    console.log('Loading events');
+    this.state.eventsSources.forEach((eventSource, index) => {
+      console.log(`Loading events from #${index} source: ${eventSource.name}...`);
+    })
   }
 
   filterEvents(events) {
