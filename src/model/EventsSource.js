@@ -10,7 +10,7 @@ class EventsSource {
     this.name = name;
     this.url = url;
 
-    if (this.url == 'https://vk.com/afisha_39') {
+    if (this.url === 'https://vk.com/afisha_39') {
       this.source = new AfishaKaliningrad();
     } else {
       this.source = null;
