@@ -139,57 +139,62 @@ class AfishaKalinigrad {
   loadEvents(cbSuccess, cbError) {
     const that = this;
 
-    try {
-      if (window.VK) {
-        const vk = window.VK;
-        vk.init({
-          apiId: 7272040
-        });
-        vk.Api.call(
-          'wall.get',
-          {
-            owner_id: -93114971,
-            count: 5,
-            v: "5.103"
-          },
-          function(r) {
-            if (r.response && r.response.items && r.response.items.length) {
-              let events = [];
-              
-              r.response.items.forEach(item => {
-                const { text, owner_id, id } = item;
-
-                const eventId = `${owner_id}_${id}`;
-                const start = that._parseStart(text);
-                const end = that._parseEnd(text);
-                const summary = that._parseSummary(text);
-                const description = text;
-                const location = that._parseLocation(text);
-                const contact = "https://vk.com/afisha_39";
-                const reference = `https://vk.com/wall${owner_id}_${id}`;
-
-                const event = new Event(eventId, start, end, summary, description, location, contact, reference);
-
-                events.unshift(event);
-              });
-
-              if (events.length) {
-                that.events = events;
-                cbSuccess(events);
+    if (window.VK) {
+      const vk = window.VK;
+      vk.init({
+        apiId: 7272040
+      });
+      //
+      // Проверка авторизации пользователя:
+      // https://vk.com/dev/openapi?f=3.4.%20VK.Auth.getLoginStatus
+      //
+      vk.Auth.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          vk.Api.call(
+            'wall.get',
+            {
+              owner_id: -93114971,
+              count: 5,
+              v: "5.103"
+            },
+            function(r) {
+              if (r.response && r.response.items && r.response.items.length) {
+                let events = [];
+                
+                r.response.items.forEach(item => {
+                  const { text, owner_id, id } = item;
+  
+                  const eventId = `${owner_id}_${id}`;
+                  const start = that._parseStart(text);
+                  const end = that._parseEnd(text);
+                  const summary = that._parseSummary(text);
+                  const description = text;
+                  const location = that._parseLocation(text);
+                  const contact = "https://vk.com/afisha_39";
+                  const reference = `https://vk.com/wall${owner_id}_${id}`;
+  
+                  const event = new Event(eventId, start, end, summary, description, location, contact, reference);
+  
+                  events.unshift(event);
+                });
+  
+                if (events.length) {
+                  that.events = events;
+                  cbSuccess(events);
+                } else {
+                  cbError("No events has been parsed from VK wall posts.");
+                }              
               } else {
-                throw "No events has been parsed from VK wall posts.";
-              }              
-            } else {
-              throw "No VK wall post found.";
+                cbError("No VK wall post found.");
+              }
             }
-          }
-        );
-      } else {
-        throw "No VK module found. Make sure https://vk.com/js/api/openapi.js script has been added to web page.";
-      }
-    }
-    catch(error) {
-      cbError(error);
+          );
+        } else {
+          cbError("User VK is not authorized");
+        }
+      });
+    } else {
+      cbError("No VK module found. Make sure https://vk.com/js/api/openapi.js script has been added to web page.");
     }
   }
 };
