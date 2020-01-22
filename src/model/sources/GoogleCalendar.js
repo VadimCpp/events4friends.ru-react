@@ -26,8 +26,8 @@ class GoogleCalendar {
 
       items.forEach((item) => {
         const eventId = item.id;
-        const start = item.start.dateTime;
-        const end = item.end.dateTime;
+        const start = item.start.dateTime || item.start.date;
+        const end = item.end.dateTime || item.end.date;
         const summary = item.summary;
         const description = item.description;
         const location = item.location;
