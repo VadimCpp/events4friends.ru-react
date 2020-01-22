@@ -39,6 +39,10 @@ class ListView extends Component {
       });
     });
 
+    commonList.sort((firstEl, secondEl) => {
+      return firstEl.event.start > secondEl.event.start ? -1 : 1;
+    });
+
     commonList.length = 10;
 
     return (
