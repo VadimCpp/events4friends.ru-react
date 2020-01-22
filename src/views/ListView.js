@@ -4,39 +4,47 @@ import './ListView.css';
 
 class ListView extends Component {
   /**
+   * @param {Event} event 
    * @param {EventsSource} source 
    */
-  displaySource(source) {
-    if (!source) {      
-      return null;
-    }
-
-    const events = source.getEvents();
-
-    if (!events || !events.length) {
+  displayEvent(event, source) {
+    if (!event || !source) {
       return null;
     }
     
-    return events.map(event => {
-      return (
-        <div key={event.id}>
-          <EventCard
-            getEvent={this.props.getEvent}
-            event={event}
-            name={source.name}
-          />
-        </div>
-      );
-    });
+    return (
+      <div key={event.id}>
+        <EventCard
+          event={event}
+          name={source.name}
+        />
+      </div>
+    );
   }
 
   render() {
     const { eventsSources } = this.props;
 
+    let commonList = [];
+
+    eventsSources.forEach(source => {
+      const events = source.getEvents();
+
+      if (!events || !events.length) {
+        return;
+      }
+      
+      events.forEach(event => {
+        commonList.push({source, event});
+      });
+    });
+
+    commonList.length = 10;
+
     return (
       <div className="main-view">
         <div className="pt-3">
-          { eventsSources.length ? eventsSources.map(source => this.displaySource(source)) : null }
+          { commonList.length ? commonList.map(eventItem => this.displayEvent(eventItem.event, eventItem.source)) : null }
         </div>
       </div>
     )
