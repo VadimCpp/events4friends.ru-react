@@ -16,7 +16,7 @@ class EventCard extends Component {
     const startTime = moment(event.start).format('HH:MM');
 
     return (
-      <div className="borderbottom">
+      <div className="border-top">
         <div className="container">
           <div className="event-item container-center main-view-container">
             <small className="calendar-name">#{name}</small>
