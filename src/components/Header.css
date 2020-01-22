@@ -15,6 +15,15 @@
     margin-left: 6px;
 }
 
+@media screen and (max-width: 412px) {
+    .header__first-col {
+        width: 66px;
+        height: 100px;
+        padding-top: 6px;
+        margin-left: 27px;
+    }
+}
+
 .header__second-col {
     display: flex;
     flex-direction: column;
@@ -48,9 +57,27 @@
     margin: 0;
 }
 
-.header__logo {
+.header__logo_big {
     width: 93px;
     height: 88px;
+}
+
+@media screen and (max-width: 412px) {
+    .header__logo_big {
+        display: none;
+    }
+}
+
+.header__logo_small {
+    margin-top: 15px;
+    width: 64px;
+    height: 59px;
+}
+
+@media screen and (min-width: 411px) {
+    .header__logo_small {
+        display: none;
+    }
 }
 
 .header__logo-link {

@@ -9,7 +9,8 @@ class Header extends Component {
       <header className="header">
         <div className="header__first-col">
          <Link className="reset-link-style" to="/">
-          <img className="header__logo" src={HeaderLogo} alt="Header Logo"/>
+          <img className="header__logo_big" src={HeaderLogo} alt="Header Logo"/>
+          <img className="header__logo_small" src={HeaderLogo} alt="Header Logo"/>
          </Link>
         </div>
         <div className="header__second-col">
