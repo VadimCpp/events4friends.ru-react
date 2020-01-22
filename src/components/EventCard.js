@@ -12,16 +12,19 @@ class EventCard extends Component {
 
   render() {
     const { event, name } = this.props;
+    const startDate = moment(event.start).format('LL');
+    const startTime = moment(event.start).format('HH:MM');
+
     return (
       <div className="borderbottom">
         <div className="container">
           <div className="event-item container-center main-view-container">
             <small className="calendar-name">#{name}</small>
             <span role="img" aria-label="Date">📅</span>
-            {event.start}
+            {startDate}
 
             <span role="img" aria-label="Time">🕗</span>
-            {"00"}
+            {startTime}
 
             － «
             {event.summary}
