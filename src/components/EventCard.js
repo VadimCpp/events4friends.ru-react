@@ -32,8 +32,13 @@ class EventCard extends Component {
 
             <span role="img" aria-label="Location">📍</span>
             {event.location}
-            <br></br>
-            <a href={event.reference}> Ссылка на источник </a>
+
+            {event.reference && (
+              <span>
+                <br></br>
+                <a href={event.reference}> Ссылка на источник </a>
+              </span>
+            )}
           </div>
         </div>
       </div>

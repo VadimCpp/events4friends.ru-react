@@ -32,7 +32,13 @@ class GoogleCalendar {
         const description = item.description;
         const location = item.location;
         const contact = item.creator.email;
-        const reference = item.htmlLink;
+        //
+        // NOTE!
+        // С мобильного устройства сайт гугл календаря выглядит плохо,
+        // по-этому ссылка спрятана.
+        //
+        // const reference = item.htmlLink;
+        const reference = null;
   
         const event = new Event(eventId, start, end, summary, description, location, contact, reference);
 
