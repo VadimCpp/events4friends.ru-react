@@ -47,7 +47,7 @@ class AfishaKalinigrad {
           });
           
           // "#11_01_2020@afisha_39" -> "11 января 2020 г"
-          resultDate = moment(resultDate, 'DD_MM_YYYY@afisha_39').format('LL');
+          resultDate = moment(resultDate, 'DD_MM_YYYY@afisha_39').format();
         }
       } 
     }
