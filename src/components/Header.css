@@ -3,6 +3,7 @@
     height: 100px;
     width: 280px;
     background: #ffffff;
+    margin-top: 20px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -60,6 +61,8 @@
 .header__logo_big {
     width: 93px;
     height: 88px;
+    border: 1px solid rgba(77, 77, 77, .2);
+    border-radius: 3px;
 }
 
 @media screen and (max-width: 412px) {
@@ -72,6 +75,8 @@
     margin-top: 15px;
     width: 64px;
     height: 59px;
+    border: 1px solid rgba(77, 77, 77, .2);
+    border-radius: 3px;
 }
 
 @media screen and (min-width: 411px) {
