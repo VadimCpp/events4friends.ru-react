@@ -14,8 +14,8 @@
 .event-time,
 .event-summary,
 .event-location {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 3px;
+  padding-right: 7px;
 }
 
 .event-more {

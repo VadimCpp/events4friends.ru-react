@@ -21,10 +21,10 @@ class EventCard extends Component {
           <div className="event-item container-center main-view-container">
             <small className="calendar-name">#{name}</small>
             <span role="img" aria-label="Date">📅</span>
-            {startDate}
+            <span className="event-date">{startDate}</span>
 
             <span role="img" aria-label="Time">🕗</span>
-            {startTime}
+            <span className="event-time">{startTime}</span>
 
             － «
             {event.summary}
