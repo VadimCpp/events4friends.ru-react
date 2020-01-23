@@ -77,18 +77,26 @@ class EventView extends Component {
 
                       <span role="img" aria-label="Location">📍</span>
                       {event.location}
-
-                      {event.reference && (
-                        <div>
-                          <br></br>
-                          <a href={event.reference}> Ссылка на источник </a>
-                        </div>
-                      )}
                     </p>
                     <p>
                       {event.description}
                     </p>
                   </div>
+                  {event.reference && (
+                    <ButtonExternalLink 
+                      href={event.reference}
+                      icon="/icons/icon_external_link.png" 
+                      title="Ссылка на источник"
+                      style={{
+                        display: "block",
+                        width: 250,
+                        marginRight: 'auto',
+                        marginLeft: 'auto',
+                        marginTop: 28,
+                        borderColor: "rgb(77, 77, 77)",
+                      }} 
+                    />
+                  )}                  
                 </div>
               )}
             </div>
