@@ -34,59 +34,63 @@ class EventView extends Component {
 
     return (
       <div className="event-view">
-        <div className="container container-center event-view-container">
-          <div>
-            <ButtonLink 
-              to="/list" 
-              icon="/icons/icon_arrow_back.png"
-              title="К списку"
-              style={{ 
-                width: 155,
-                display: 'block',
-                marginRight: 'auto',
-                marginLeft: 'auto',
-                marginBottom: 10,
-                borderColor: 'rgba(77, 77, 77, .2)'
-              }}
-            />
-            { !event && (
-              <p>
-                К сожалению, событие не найдено. ;(
-              </p>
-            )}
-            { event && (
-              <div className="container">
-                <div className="event-item container-center main-view-container">
-                  { name && (
-                    <small className="calendar-name">#{name}</small>
-                  )}
-                  <p>
-                    <span role="img" aria-label="Date">📅</span>
-                    <span className="event-date">{startDate}</span>
-
-                    <span role="img" aria-label="Time">🕗</span>
-                    <span className="event-time">{startTime}</span>
-
-                    － «
-                    {event.summary}
-                    »
-
-                    <span role="img" aria-label="Location">📍</span>
-                    {event.location}
-
-                    {event.reference && (
-                      <div>
-                        <br></br>
-                        <a href={event.reference}> Ссылка на источник </a>
-                      </div>
+        <div>
+          <ButtonLink 
+            to="/list" 
+            icon="/icons/icon_arrow_back.png"
+            title="К списку"
+            style={{ 
+              width: 155,
+              display: 'block',
+              marginRight: 'auto',
+              marginLeft: 'auto',
+              marginBottom: 26,
+              borderColor: 'rgba(77, 77, 77, .2)'
+            }}
+          />
+        </div>
+        <div className="border-top">
+          <div className="container container-center">
+            <div>
+              { !event && (
+                <p>
+                  К сожалению, событие не найдено. ;(
+                </p>
+              )}
+              { event && (
+                <div className="container">
+                  <div className="event-item container-center main-view-container">
+                    { name && (
+                      <small className="calendar-name">#{name}</small>
                     )}
-                  </p>
-                  <p>
-                    {event.description}
-                  </p>
+                    <p>
+                      <span role="img" aria-label="Date">📅</span>
+                      <span className="event-date">{startDate}</span>
+
+                      <span role="img" aria-label="Time">🕗</span>
+                      <span className="event-time">{startTime}</span>
+
+                      － «
+                      {event.summary}
+                      »
+
+                      <span role="img" aria-label="Location">📍</span>
+                      {event.location}
+
+                      {event.reference && (
+                        <div>
+                          <br></br>
+                          <a href={event.reference}> Ссылка на источник </a>
+                        </div>
+                      )}
+                    </p>
+                    <p>
+                      {event.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
