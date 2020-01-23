@@ -12,7 +12,7 @@ class EventCard extends Component {
 
   render() {
     const { event, name } = this.props;
-    const startDate = moment(event.start).format('LL');
+    const startDate = moment(event.start).format('D MMMM, dddd');;
     const startTime = moment(event.start).format('HH:mm');
 
     return (

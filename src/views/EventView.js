@@ -30,7 +30,7 @@ class EventView extends Component {
     const { eventsSources } = this.props;
     const { event, name } = this.getEventFromSourcesById(eventsSources, eventId);    
     
-    const startDate = event ? moment(event.start).format('LL') : 'Не указано';
+    const startDate = event ? moment(event.start).format('D MMMM, dddd') : 'Не указано';
     const startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
 
     return (
