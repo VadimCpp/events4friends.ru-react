@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventCard from '../components/EventCard.js';
+import ButtonLink from '../components/ButtonLink';
 import './ListView.css';
 
 class ListView extends Component {
@@ -47,6 +48,21 @@ class ListView extends Component {
 
     return (
       <div className="main-view">
+        <div>
+          <ButtonLink 
+            to="/" 
+            icon="/icons/icon_arrow_back.png"
+            title="На главную"
+            style={{ 
+              width: 175,
+              display: 'block',
+              marginRight: 'auto',
+              marginLeft: 'auto',
+              marginBottom: 10,
+              borderColor: 'rgba(77, 77, 77, .2)'
+            }}
+          />
+        </div>
         <div className="pt-3">
           { commonList.length ? commonList.map(eventItem => this.displayEvent(eventItem.event, eventItem.source)) : null }
         </div>
