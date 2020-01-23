@@ -13,7 +13,7 @@ class EventCard extends Component {
   render() {
     const { event, name } = this.props;
     const startDate = moment(event.start).format('LL');
-    const startTime = moment(event.start).format('HH:MM');
+    const startTime = moment(event.start).format('HH:mm');
 
     return (
       <div className="border-top">
