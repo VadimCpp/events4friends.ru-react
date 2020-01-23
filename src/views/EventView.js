@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import ButtonLink from '../components/ButtonLink';
+import ButtonExternalLink from '../components/ButtonExternalLink'
 import 'moment/locale/ru';
 import './EventView.css';
 
@@ -93,6 +94,35 @@ class EventView extends Component {
             </div>
           </div>
         </div>
+        <div className="border-top">
+          <div className="container container-center pt-4 pb-5">
+            <p>Обсудить событие в чате:</p>
+            <ButtonExternalLink 
+              href="https://t.me/events4friends" 
+              icon="/icons/telegram.png" 
+              style={{
+                borderColor: "#139BD0",
+                margin: 8
+              }} 
+            />
+            <ButtonExternalLink 
+              href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8" 
+              icon="/icons/wa.png"
+              style={{
+                borderColor: "#57BB63",
+                margin: 8
+              }} 
+            />
+            <ButtonExternalLink 
+              href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
+              icon="/icons/viber.png" 
+              style={{
+                borderColor: "#7C519B",
+                margin: 8
+              }} 
+            />
+          </div>
+        </div>     
       </div>
     )
   }
