@@ -49,7 +49,7 @@ class WelcomeView extends Component {
           <div className="container container-center">
             <p>Выберите мессенджер для общения:</p>
             <ButtonExternalLink 
-              href="https://t.me/events4friends" 
+              href="https://tglink.ru/events4friends" 
               icon="/icons/telegram.png" 
               style={{
                 borderColor: "#139BD0",
