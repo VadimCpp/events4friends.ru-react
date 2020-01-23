@@ -6,16 +6,6 @@
   position: relative;
 }
 
-.events-view-container {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.event-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 .reset-link-style {
   color: #444;
 }

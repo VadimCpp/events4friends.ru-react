@@ -33,7 +33,7 @@ class EventView extends Component {
     const startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
 
     return (
-      <div className="event-view">
+      <div>
         <div>
           <ButtonLink 
             to="/list" 
