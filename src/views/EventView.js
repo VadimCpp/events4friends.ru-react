@@ -50,16 +50,16 @@ class EventView extends Component {
           />
         </div>
         <div className="border-top">
-          <div className="container container-center">
-            <div>
+          <div className="container">
+            <div className="event-item container-center">
               { !event && (
                 <p>
                   К сожалению, событие не найдено. ;(
                 </p>
               )}
               { event && (
-                <div className="container">
-                  <div className="event-item container-center main-view-container">
+                <div>
+                  <div>
                     { name && (
                       <small className="calendar-name">#{name}</small>
                     )}

@@ -19,7 +19,7 @@ class EventCard extends Component {
       <Link className="reset-link-style" to={`/event/${event.id}`}>
         <div className="border-top">
           <div className="container">
-            <div className="event-item container-center main-view-container">            
+            <div className="event-item container-center">            
               <small className="calendar-name">#{name}</small>
               <div className="d-flex align-items-center">
                 <div>
