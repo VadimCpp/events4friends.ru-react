@@ -17,18 +17,18 @@ class EventView extends Component {
       for (let j = 0; j < events.length; j++) {
         const event = events[j];
         if (event.id === eventId) {
-          return event;
+          return { event, name: source.name };
         }
       }
     }
-    return null;
+    return { event: null, name: null };
   }
 
   render() {
     const eventId = this.props.match.params.id;
     const { eventsSources } = this.props;
-    const event = this.getEventFromSourcesById(eventsSources, eventId);
-
+    const { event, name } = this.getEventFromSourcesById(eventsSources, eventId);    
+    
     const startDate = event ? moment(event.start).format('LL') : 'Не указано';
     const startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
 
@@ -56,9 +56,11 @@ class EventView extends Component {
             )}
             { event && (
               <div className="container">
-                <div className="event-item container-center main-view-container">            
-                  <small className="calendar-name">#{event.name}</small>
-                  <p>    
+                <div className="event-item container-center main-view-container">
+                  { name && (
+                    <small className="calendar-name">#{name}</small>
+                  )}
+                  <p>
                     <span role="img" aria-label="Date">📅</span>
                     <span className="event-date">{startDate}</span>
 
