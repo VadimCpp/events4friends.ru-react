@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import ButtonLink from '../components/ButtonLink';
+import 'moment/locale/ru';
 import './EventView.css';
 
 class EventView extends Component {
@@ -27,6 +29,9 @@ class EventView extends Component {
     const { eventsSources } = this.props;
     const event = this.getEventFromSourcesById(eventsSources, eventId);
 
+    const startDate = event ? moment(event.start).format('LL') : 'Не указано';
+    const startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
+
     return (
       <div className="event-view">
         <div className="container container-center event-view-container">
@@ -50,9 +55,35 @@ class EventView extends Component {
               </p>
             )}
             { event && (
-              <p>
-                {JSON.stringify(event)}
-              </p>
+              <div className="container">
+                <div className="event-item container-center main-view-container">            
+                  <small className="calendar-name">#{event.name}</small>
+                  <p>    
+                    <span role="img" aria-label="Date">📅</span>
+                    <span className="event-date">{startDate}</span>
+
+                    <span role="img" aria-label="Time">🕗</span>
+                    <span className="event-time">{startTime}</span>
+
+                    － «
+                    {event.summary}
+                    »
+
+                    <span role="img" aria-label="Location">📍</span>
+                    {event.location}
+
+                    {event.reference && (
+                      <div>
+                        <br></br>
+                        <a href={event.reference}> Ссылка на источник </a>
+                      </div>
+                    )}
+                  </p>
+                  <p>
+                    {event.description}
+                  </p>
+                </div>
+              </div>
             )}
           </div>
         </div>
