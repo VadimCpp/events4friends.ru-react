@@ -72,3 +72,12 @@
   width: 40px;
   height: 40px;
 }
+
+.reset-link-style {
+	color: #444;
+}
+
+.reset-link-style:hover {
+    color: #444;
+    text-decoration: none;
+}
