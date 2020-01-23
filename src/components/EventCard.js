@@ -16,7 +16,7 @@ class EventCard extends Component {
     const startTime = moment(event.start).format('HH:mm');
 
     return (
-      <Link className="reset-link-style" to="/">
+      <Link className="reset-link-style" to={`/event/${event.id}`}>
         <div className="border-top">
           <div className="container">
             <div className="event-item container-center main-view-container">            

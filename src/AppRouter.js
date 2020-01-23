@@ -5,7 +5,7 @@ import ListView from "./views/ListView.js";
 // import MapView from "./views/MapView.js";
 // import ArchiveView from "./views/ArchiveView.js";
 import LoadingView from "./views/LoadingView.js";
-// import EventView from './views/EventView'
+import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";
 import WelcomeView from "./views/WelcomeView.js";
 import EventsSource from "./model/EventsSource";
@@ -95,17 +95,23 @@ class AppRouter extends Component {
                 <Header />
                 <div>
                   <Route path="/" exact component={WelcomeView} />
-                  <Route path="/list/" render={props => (
-                    <ListView {...props} getEvent={this.getEvent} eventsSources={eventsSources} />
-                  )} />
+                  <Route 
+                    path="/list/"
+                    render={props => (
+                      <ListView {...props} eventsSources={eventsSources} />
+                    )}
+                  />
+                  <Route
+                    path="/event/:id"
+                    render={props => (
+                      <EventView {...props} eventsSources={eventsSources} />
+                    )}
+                  />
+
                   {/* <Route path="/map/" render={props => (
                     <MapView {...props} googleEvents={events} getEvent={this.getEvent} />
                   )} />
                   <Route path="/about/" component={AboutView} />
-                  <Route path="/event/:id"
-                    render={props => (<EventView {...props}
-                      googleEvents={everyEvents}
-                      getEvent={this.getEvent} />)} />
                   <Route path="/archive/" render={props => (<ArchiveView {...props}
                     googleEvents={pastEvents}
                     getEvent={this.getEvent} />)} /> */}
