@@ -41,7 +41,7 @@ class EventView extends Component {
               icon="/icons/icon_arrow_back.png"
               title="К списку"
               style={{ 
-                width: 175,
+                width: 155,
                 display: 'block',
                 marginRight: 'auto',
                 marginLeft: 'auto',
