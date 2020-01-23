@@ -18,27 +18,34 @@ class EventCard extends Component {
     return (
       <div className="border-top">
         <div className="container">
-          <div className="event-item container-center main-view-container">
+          <div className="event-item container-center main-view-container">            
             <small className="calendar-name">#{name}</small>
-            <span role="img" aria-label="Date">📅</span>
-            <span className="event-date">{startDate}</span>
+            <div className="d-flex align-items-center">
+              <div>
+                <span role="img" aria-label="Date">📅</span>
+                <span className="event-date">{startDate}</span>
 
-            <span role="img" aria-label="Time">🕗</span>
-            <span className="event-time">{startTime}</span>
+                <span role="img" aria-label="Time">🕗</span>
+                <span className="event-time">{startTime}</span>
 
-            － «
-            {event.summary}
-            »
+                － «
+                {event.summary}
+                »
 
-            <span role="img" aria-label="Location">📍</span>
-            {event.location}
+                <span role="img" aria-label="Location">📍</span>
+                {event.location}
 
-            {event.reference && (
-              <span>
-                <br></br>
-                <a href={event.reference}> Ссылка на источник </a>
-              </span>
-            )}
+                {event.reference && (
+                  <span>
+                    <br></br>
+                    <a href={event.reference}> Ссылка на источник </a>
+                  </span>
+                )}
+              </div>
+              <div className="button">
+                <img src={"/icons/icon_arrow_forward.png"} alt="le-icon" className="button__image" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
