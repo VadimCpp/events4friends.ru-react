@@ -78,9 +78,9 @@ class EventView extends Component {
                       <span role="img" aria-label="Location">📍</span>
                       {event.location}
                     </p>
-                    <p>
-                      {event.description}
-                    </p>
+                    <div>
+                      <p dangerouslySetInnerHTML={{ __html: event.description }} />
+                    </div>
                   </div>
                   {event.reference && (
                     <ButtonExternalLink 
