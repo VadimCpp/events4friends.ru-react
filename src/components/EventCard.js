@@ -21,7 +21,7 @@ class EventCard extends Component {
           <div className="container">
             <div className="event-item container-center">            
               <small className="calendar-name">#{name}</small>
-              <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center justify-content-between">
                 <div>
                   <span role="img" aria-label="Date">📅</span>
                   <span className="event-date">{startDate}</span>
