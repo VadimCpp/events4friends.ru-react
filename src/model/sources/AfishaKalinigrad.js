@@ -17,7 +17,7 @@ class AfishaKalinigrad {
     let resultDate = null;
 
     if (text) {
-      const dateFormat = /#\d\d_[а-я]+\d\d\d\d@afisha_39/;
+      const dateFormat = /#(\d\d|\d)_[а-я]+\d\d\d\d@afisha_39/;
       const regex = RegExp(dateFormat);
 
       if (regex.test(text)) {
