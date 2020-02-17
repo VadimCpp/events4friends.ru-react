@@ -17,7 +17,7 @@ class AfishaKalinigrad {
     let resultDate = null;
 
     if (text) {
-      const dateFormat = /#(\d\d|\d)_[а-я]+\d\d\d\d@afisha_39/;
+      const dateFormat = /#(\d\d|\d)_[а-я]+\d\d\d\d@afisha_39([ ]*,?[ ]*\d\d(\.|:)\d\d)?/;
       const regex = RegExp(dateFormat);
 
       if (regex.test(text)) {
@@ -154,7 +154,7 @@ class AfishaKalinigrad {
             'wall.get',
             {
               owner_id: -93114971,
-              count: 5,
+              count: 20,
               v: "5.103"
             },
             function(r) {
