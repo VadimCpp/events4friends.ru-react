@@ -25,6 +25,8 @@ yarn-error.log*
 package-lock.json
 yarn.lock
 .eslintre.json
+
+.idea
 /vendor/
 phpcs.xml
 phpunit.xml
