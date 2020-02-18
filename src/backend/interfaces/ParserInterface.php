@@ -2,6 +2,8 @@
 
 namespace VadimCpp\events4friends\backend\interfaces;
 
+use VadimCpp\events4friends\backend\models\EventModel;
+
 /**
  * Interface ParserInterface
  *
@@ -13,7 +15,7 @@ interface ParserInterface
      * @param int $month
      * @param int $year
      *
-     * @return string
+     * @return EventModel[]
      */
     public function parse($month, $year);
 }
