@@ -2,7 +2,7 @@
 
 namespace VadimCpp\events4friends\backend\parsers;
 
-use simplehtmldom\HtmlWeb;
+use simplehtmldom\HtmlDocument;
 use VadimCpp\events4friends\backend\interfaces\ParserInterface;
 use VadimCpp\events4friends\backend\models\EventModel;
 
@@ -13,10 +13,17 @@ use VadimCpp\events4friends\backend\models\EventModel;
  */
 class Lib39Parser implements ParserInterface
 {
+    const ID = 'lib39';
+
     /**
      * @var string
      */
-    private $domain = 'https://lib39.ru';
+    private $protocol = 'https';
+
+    /**
+     * @var string
+     */
+    private $domain = 'lib39.ru';
 
     /**
      * @var string
@@ -28,6 +35,11 @@ class Lib39Parser implements ParserInterface
      */
     private $detail = '/events/activities/detail.php?activities={0}';
 
+    public function getId()
+    {
+        return self::ID;
+    }
+
     /**
      * @param int $month
      * @param int $year
@@ -36,13 +48,6 @@ class Lib39Parser implements ParserInterface
      */
     public function parse($month, $year)
     {
-        /*
-        $result = [];
-        for ($i=1;$i<=10;$i++) {
-            $result[] = new ReflectionClass(EventModel::class);
-        }
-        return $result;
-        */
         return $this->parseList($month, $year);
     }
 
@@ -54,10 +59,15 @@ class Lib39Parser implements ParserInterface
      */
     private function parseList($month, $year)
     {
-        $html = (new HtmlWeb())->load(sprintf($this->domain . $this->list, $month, $year));
-        foreach ($html->find('td.NewsCalDefault') as $el) {
-            d($el->plaintext);
-        }
+        $url = sprintf($this->protocol . '://' . $this->domain . $this->list, $month, $year);
+        $raw = file_get_contents($url);
+        $document = new HtmlDocument();
+        dd($document->load($raw));
+
+//        $html = (new HtmlWeb())->load(sprintf($this->protocol . '://' . $this->domain . $this->list, $month, $year));
+//        foreach ($html->find('td.NewsCalDefault') as $el) {
+//            d($el->plaintext);
+//        }
     }
 
     /**

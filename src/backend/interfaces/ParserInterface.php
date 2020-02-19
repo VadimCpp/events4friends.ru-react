@@ -12,6 +12,11 @@ use VadimCpp\events4friends\backend\models\EventModel;
 interface ParserInterface
 {
     /**
+     * @return string
+     */
+    public function getId();
+
+    /**
      * @param int $month
      * @param int $year
      *
