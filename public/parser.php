@@ -1,6 +1,8 @@
 <?php
 
-// set_time_limit(0);
+declare(strict_types=1);
+set_time_limit(0);
+
 use VadimCpp\events4friends\backend\interfaces\ParserInterface;
 use VadimCpp\events4friends\backend\parsers\Lib39Parser;
 
@@ -38,6 +40,9 @@ try {
         [
             'success' => false,
             'message' => $ex->getMessage(),
-        ]);
+        ],
+        JSON_THROW_ON_ERROR,
+        512
+    );
 }
 exit;

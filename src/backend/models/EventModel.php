@@ -49,6 +49,28 @@ class EventModel implements \JsonSerializable
      */
     public $reference;
 
+    /**
+     * @var array
+     */
+    public $special = [];
+
+    /**
+     * EventModel constructor.
+     *
+     * @param array $params
+     */
+    public function __construct(array $params)
+    {
+        foreach ($params as $property => $value) {
+            if (property_exists($this, $property)){
+                $this->{$property} = $value;
+            }
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function jsonSerialize()
     {
         return array_filter(get_object_vars($this));

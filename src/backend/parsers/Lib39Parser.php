@@ -2,7 +2,9 @@
 
 namespace VadimCpp\events4friends\backend\parsers;
 
-use simplehtmldom\HtmlDocument;
+use DateTime;
+use Exception;
+use simplehtmldom\HtmlWeb;
 use VadimCpp\events4friends\backend\interfaces\ParserInterface;
 use VadimCpp\events4friends\backend\models\EventModel;
 
@@ -18,24 +20,22 @@ class Lib39Parser implements ParserInterface
     /**
      * @var string
      */
-    private $protocol = 'https';
+    private $domain = 'https://lib39.ru';
 
     /**
      * @var string
      */
-    private $domain = 'lib39.ru';
+    private $list = '/events/activities/index.php?month=%d&year=%d&print=Y';
 
     /**
      * @var string
      */
-    private $list = '/events/activities/index.php?month=%d&year=%d';
+    private $address = 'Калининград, проспект Мира, 9/11';
 
     /**
-     * @var string
+     * @return string
      */
-    private $detail = '/events/activities/detail.php?activities={0}';
-
-    public function getId()
+    public function getId() : string
     {
         return self::ID;
     }
@@ -46,37 +46,82 @@ class Lib39Parser implements ParserInterface
      *
      * @return EventModel[]
      */
-    public function parse($month, $year)
+    public function parse($month, $year) : array
     {
-        return $this->parseList($month, $year);
+        $result = [];
+        $events = $this->getList($month, $year);
+        foreach ($events as $event) {
+            $result[] = $this->getEvent($event);
+        }
+        return $result;
     }
 
     /**
+     * It looks ugly, but it works
+     *
      * @param int $month
      * @param int $year
      *
-     * @return EventModel[]
+     * @return array
      */
-    private function parseList($month, $year)
+    private function getList($month, $year) : array
     {
-        $url = sprintf($this->protocol . '://' . $this->domain . $this->list, $month, $year);
-        $raw = file_get_contents($url);
-        $document = new HtmlDocument();
-        dd($document->load($raw));
-
-//        $html = (new HtmlWeb())->load(sprintf($this->protocol . '://' . $this->domain . $this->list, $month, $year));
-//        foreach ($html->find('td.NewsCalDefault') as $el) {
-//            d($el->plaintext);
-//        }
+        $url = sprintf($this->domain . $this->list, $month, $year);
+        $html = (new HtmlWeb())->load($url);
+        $events = [];
+        foreach ($html->find('table.NewsCalTable td') as $cell) {
+            $day = $cell->find('span', 0)->plaintext;
+            if ($day > 0) {
+                foreach ($cell->find('.NewsCalNews') as $container) {
+                    foreach ($container->find('a') as $link) {
+                        try {
+                            $time = pattern('([0-9]{2}:[0-9]{2})')->match($container->innertext)->first();
+                            $events[]  = new EventModel(
+                                [
+                                    'id' => (int)pattern('[0-9]+')->match($link->href)->first(),
+                                    'start' => (new DateTime(
+                                        $day . '.' . $month . '.' . $year . ' ' . $time,
+                                        new \DateTimeZone('Europe/Kaliningrad')
+                                    ))->format(DATE_ATOM),
+                                    'summary' => $link->plaintext,
+                                    //'description' => '',
+                                    //'location' => '',
+                                    //'contact' => '',
+                                    'reference' => $this->domain . $link->href,
+                                ]
+                            );
+                        } catch (Exception $ex) {
+                            // Parsing error - skip record
+                        }
+                    }
+                }
+            }
+        }
+        // Prevent memory leak issues
+        unset($html);
+        return $events;
     }
 
     /**
-     * @param $eventId
+     * Hydrate event with it's details
+     *
+     * @param EventModel $event
      *
      * @return EventModel
      */
-    private function parseEvent($eventId)
+    private function getEvent(EventModel $event) : EventModel
     {
-        return new EventModel();
+        $html = (new HtmlWeb())->load($event->reference . '&print=Y');
+        $content = $html->find('.news-detail');
+        $h3 = $content->find('h3', 0)->plaintext;
+
+        foreach ($content->find('p') as $row) {
+
+        }
+
+        // Prevent memory leak issues
+        unset($html);
+        dd($event);
+        return $event;
     }
 }

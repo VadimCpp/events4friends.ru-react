@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "43611c3ca79a4181ad69b765c7923234",
+    "content-hash": "77998955e093acf808ebeaf4cb232dcf",
     "packages": [
         {
             "name": "larapack/dd",
@@ -41,6 +41,67 @@
             ],
             "description": "`dd` is a helper method in Laravel. This package will add the `dd` to your application.",
             "time": "2016-12-15T09:34:34+00:00"
+        },
+        {
+            "name": "rawr/t-regx",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/T-Regx/T-Regx.git",
+                "reference": "29662007526a180cba069daf65bca3ae8a814cf3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/T-Regx/T-Regx/zipball/29662007526a180cba069daf65bca3ae8a814cf3",
+                "reference": "29662007526a180cba069daf65bca3ae8a814cf3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "kelunik/fqn-check": "^0.1.3",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^7.5",
+                "rawr/cross-data-providers": "^2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "helper/helper.php"
+                ],
+                "psr-4": {
+                    "TRegx\\": "src/TRegx"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "The most advanced PHP regexp library. Clean, descriptive wrapper functions enhancing PCRE extension methods.",
+            "keywords": [
+                "OOP",
+                "PCRE",
+                "TDD",
+                "automatic delimiters",
+                "clean",
+                "delimiters",
+                "expression",
+                "php",
+                "preg",
+                "preg_match",
+                "preg_match_all",
+                "preg_quote",
+                "preg_replace",
+                "preg_replace_callback",
+                "prepared patterns",
+                "regex",
+                "regexp",
+                "regular",
+                "t-regx"
+            ],
+            "time": "2020-02-18T13:15:08+00:00"
         },
         {
             "name": "simplehtmldom/simplehtmldom",
@@ -1891,12 +1952,14 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "simplehtmldom/simplehtmldom": 5,
-        "larapack/dd": 20
+        "larapack/dd": 20,
+        "rawr/t-regx": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3"
+        "php": "^7.3",
+        "ext-json": "*"
     },
     "platform-dev": []
 }

@@ -6,7 +6,8 @@
         "php": "^7.3",
         "simplehtmldom/simplehtmldom": "^2.0@RC",
         "larapack/dd": "dev-master",
-        "ext-json": "*"
+        "ext-json": "*",
+        "rawr/t-regx": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0",
