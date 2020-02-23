@@ -55,7 +55,7 @@ class EventView extends Component {
             <div className="event-item container-center">
               { !event && (
                 <p align="center">
-                  Чтобы увидеть это мероприятие, необходимо авторизоваться ВКонтакте.
+                  Чтобы увидеть это мероприятие, необходимо авторизоваться ВКонтакте.*
                 </p>
               )}
               { event && (
