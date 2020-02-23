@@ -54,8 +54,8 @@ class EventView extends Component {
           <div className="container">
             <div className="event-item container-center">
               { !event && (
-                <p>
-                  К сожалению, событие не найдено. ;(
+                <p align="center">
+                  Чтобы увидеть это мероприятие, необходимо авторизоваться ВКонтакте.
                 </p>
               )}
               { event && (
@@ -130,7 +130,12 @@ class EventView extends Component {
               }} 
             />
           </div>
-        </div>     
+        </div> 
+        <div className="container container-center">
+          <p className="welcomeview__footer">
+            * потому что такие меры безопасности ВКонтакте'
+          </p>
+        </div>    
       </div>
     )
   }
