@@ -28,19 +28,19 @@ class EventView extends Component {
   render() {
     const eventId = this.props.match.params.id;
     const { eventsSources } = this.props;
-    const { event, name } = this.getEventFromSourcesById(eventsSources, eventId);    
-    
+    const { event, name } = this.getEventFromSourcesById(eventsSources, eventId);
+
     const startDate = event ? moment(event.start).format('D MMMM, dddd') : 'Не указано';
     const startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
 
     return (
       <div>
         <div>
-          <ButtonLink 
-            to="/list" 
+          <ButtonLink
+            to="/list"
             icon="/icons/icon_arrow_back.png"
             title="К списку"
-            style={{ 
+            style={{
               width: 155,
               display: 'block',
               marginRight: 'auto',
@@ -53,15 +53,29 @@ class EventView extends Component {
         <div className="border-top">
           <div className="container">
             <div className="event-item container-center">
-              { !event && (
+              {!event && (
                 <p align="center">
                   Чтобы увидеть это мероприятие, необходимо авторизоваться ВКонтакте.*
+                
+                <ButtonExternalLink
+                  href="alert: TODO"
+                  icon="/icons/vk.png"
+                  style={{
+                    borderColor: "#4D76A1",
+                    margin: 8,
+                    width: 250,
+                    display: 'block',
+                    marginRight: 'auto',
+                    marginLeft: 'auto',
+                  }}
+                  title="Войти ВК"
+                />
                 </p>
               )}
-              { event && (
+              {event && (
                 <div>
                   <div>
-                    { name && (
+                    {name && (
                       <small className="calendar-name">#{name}</small>
                     )}
                     <p>
@@ -83,9 +97,9 @@ class EventView extends Component {
                     </div>
                   </div>
                   {event.reference && (
-                    <ButtonExternalLink 
+                    <ButtonExternalLink
                       href={event.reference}
-                      icon="/icons/icon_external_link.png" 
+                      icon="/icons/icon_external_link.png"
                       title="Ссылка на источник"
                       style={{
                         display: "block",
@@ -94,9 +108,9 @@ class EventView extends Component {
                         marginLeft: 'auto',
                         marginTop: 28,
                         borderColor: "rgb(77, 77, 77)",
-                      }} 
+                      }}
                     />
-                  )}                  
+                  )}
                 </div>
               )}
             </div>
@@ -105,37 +119,37 @@ class EventView extends Component {
         <div className="border-top">
           <div className="container container-center pt-4 pb-5">
             <p>Обсудить событие в чате:</p>
-            <ButtonExternalLink 
-              href="https://tglink.ru/events4friends" 
-              icon="/icons/telegram.png" 
+            <ButtonExternalLink
+              href="https://tglink.ru/events4friends"
+              icon="/icons/telegram.png"
               style={{
                 borderColor: "#139BD0",
                 margin: 8
-              }} 
+              }}
             />
-            <ButtonExternalLink 
-              href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8" 
+            <ButtonExternalLink
+              href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
               icon="/icons/wa.png"
               style={{
                 borderColor: "#57BB63",
                 margin: 8
-              }} 
+              }}
             />
-            <ButtonExternalLink 
+            <ButtonExternalLink
               href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-              icon="/icons/viber.png" 
+              icon="/icons/viber.png"
               style={{
                 borderColor: "#7C519B",
                 margin: 8
-              }} 
+              }}
             />
           </div>
-        </div> 
+        </div>
         <div className="container container-center">
           <p className="welcomeview__footer">
             * потому что такие меры безопасности ВКонтакте'
           </p>
-        </div>    
+        </div>
       </div>
     )
   }
