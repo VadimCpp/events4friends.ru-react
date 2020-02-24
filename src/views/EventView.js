@@ -62,7 +62,7 @@ class EventView extends Component {
                   icon="/icons/vk.png"
                   style={{
                     borderColor: "#4D76A1",
-                    margin: 8,
+                    margin: 30,
                     width: 250,
                     display: 'block',
                     marginRight: 'auto',
