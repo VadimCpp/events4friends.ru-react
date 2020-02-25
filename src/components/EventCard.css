@@ -69,6 +69,8 @@
 }
 
 .button__image {
+  position: relative;
+  top : 13px;
   width: 40px;
   height: 40px;
 }
