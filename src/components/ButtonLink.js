@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import './ButtonLink.css'
 
 function ButtonLink({ to, icon, title, style }) {
-  var CName = "link__image_for_navigation";
-    if (icon == "/icons/icon_list.png"){
-        CName = "link_image_WelcomeList"    
+  var CName = "link_image_WelcomeList";
+    if (icon == "/icons/icon_arrow_back.png"){
+        CName = "link__image_for_navigation"    
     }
   return (
     <Link className="link" to={to} style={style}>
