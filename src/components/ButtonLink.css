@@ -13,9 +13,11 @@
   text-decoration: none;
 }
 
-.link__image {
-  width: 40px;
-  height: 40px;
+.link__image_for_navigation {
+  position: relative;
+  bottom: 2px;
+  width: 10px;
+  height: 10px;
 }
 
 .link__text {

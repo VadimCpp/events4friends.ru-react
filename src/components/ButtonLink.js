@@ -5,7 +5,7 @@ import './ButtonLink.css'
 function ButtonLink({ to, icon, title, style }) {
   return (
     <Link className="link" to={to} style={style}>
-      <img src={icon} alt="le-icon" className="link__image" />
+      <img src={icon} alt="le-icon" className="link__image_for_navigation" />
       <span className="link__text"> {title} </span>
     </Link>
   ) 
