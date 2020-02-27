@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './ButtonLink.css'
 
 function ButtonLink({ to, icon, title, style }) {
-  var CName = "link_image_welcome_list";
+  let CName = "link_image_welcome_list";
     if (icon == "/icons/icon_arrow_back.png"){
         CName = "link__image_for_navigation"    
     }
