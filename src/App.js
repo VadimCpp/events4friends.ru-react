@@ -7,7 +7,58 @@ import { AuthContext } from './context/AuthContext'
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    }
+  }
+
   componentDidMount() {
+    if (window.VK) {
+      const that = this;
+
+      console.log('VK Init started')
+      const vk = window.VK;
+      vk.init({
+        apiId: 7272040
+      });
+      //
+      // Проверка авторизации пользователя:
+      // https://vk.com/dev/openapi?f=3.4.%20VK.Auth.getLoginStatus
+      //
+      vk.Auth.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          console.log('VK Login status: connected');
+          if (response.session && response.session.user) {
+            const user = response.session.user
+            console.log('VK User exists:', user);
+            that.setState({
+              user
+            })
+          } else {
+            console.log('VK User dos not exists, session:', response.session);
+            vk.Auth.login(function(loginResponse) {
+              console.log('VK User signed in');
+              if (
+                loginResponse 
+                && loginResponse.session
+                && loginResponse.session.user
+              ) {
+                const user = loginResponse.session.user
+                console.log('VK User to set:', user);
+                that.setState({
+                  user
+                })
+              }
+            });  
+          }
+        } else {
+          // Ignore
+        }
+      });      
+    }
+
     //
     // NOTE!
     // Add here all new icons used in the app.
@@ -39,7 +90,7 @@ class App extends Component {
 
   render() {
     return (
-      <AuthContext.Provider value={{ userName: 'Анон' }}>
+      <AuthContext.Provider value={{ user: this.state.user }}>
         <div className="App">
           <AppRouter />
         </div>

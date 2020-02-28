@@ -141,9 +141,6 @@ class AfishaKalinigrad {
 
     if (window.VK) {
       const vk = window.VK;
-      vk.init({
-        apiId: 7272040
-      });
       //
       // Проверка авторизации пользователя:
       // https://vk.com/dev/openapi?f=3.4.%20VK.Auth.getLoginStatus

@@ -10,11 +10,29 @@ class WelcomeView extends Component {
       <div className="welcomeview">
         <div className="welcomeview__block">
           <AuthContext.Consumer>
-            {({ userName }) => (
-              <div className="container container-center">
-                <span>Добро пожаловать в цифровое пространство, {userName}!</span>
-              </div>
-            )}
+            {({ user }) => {
+              let userName = null
+              if (user) {
+                const { first_name, last_name, nickname } = user;
+                if (first_name && last_name) {
+                  userName = `${first_name} ${last_name}`
+                } else if (nickname) {
+                  userName = `${nickname}`
+                } else if (first_name) {
+                  userName = `${first_name}`
+                }
+              }
+              return (
+                <div className="container container-center">
+                  { userName ? (
+                      <span>Добро пожаловать в цифровое пространство, {userName}!</span>
+                    ) : (
+                      <span>Добро пожаловать в цифровое пространство!</span>
+                    )
+                  }
+                </div>
+              )
+            }}
           </AuthContext.Consumer>
         </div>
         
