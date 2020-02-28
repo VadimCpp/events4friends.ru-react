@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ClipboardJS from 'clipboard';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
+import { faShare, faSurprise } from '@fortawesome/free-solid-svg-icons';
 import AppRouter from './AppRouter.js'
+import { AuthContext } from './context/AuthContext'
 import './App.css';
 
 class App extends Component {
@@ -38,9 +39,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <AppRouter />
-      </div>
+      <AuthContext.Provider value={{ userName: 'Анон' }}>
+        <div className="App">
+          <AppRouter />
+        </div>
+      </AuthContext.Provider>
     );
   }
 }

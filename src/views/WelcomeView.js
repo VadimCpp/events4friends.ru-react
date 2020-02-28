@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ButtonLink from '../components/ButtonLink'
 import ButtonExternalLink from '../components/ButtonExternalLink'
+import { AuthContext } from '../context/AuthContext'
 import './WelcomeView.css'
 
 class WelcomeView extends Component {
@@ -8,9 +9,13 @@ class WelcomeView extends Component {
     return (
       <div className="welcomeview">
         <div className="welcomeview__block">
-          <div className="container container-center">
-            <span>Добро пожаловать в цифровое общественное публичное пространство!</span>
-          </div>
+          <AuthContext.Consumer>
+            {({ userName }) => (
+              <div className="container container-center">
+                <span>Добро пожаловать в цифровое пространство, {userName}!</span>
+              </div>
+            )}
+          </AuthContext.Consumer>
         </div>
         
         <div className="welcomeview__block">
