@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
-import ButtonExternalLink from '../components/ButtonExternalLink'
+import ButtonExternalLink from '../components/ButtonExternalLink';
+import { AuthContext } from '../context/AuthContext';
 import 'moment/locale/ru';
 import './EventView.css';
 
@@ -54,23 +56,25 @@ class EventView extends Component {
           <div className="container">
             <div className="event-item container-center">
               {!event && (
-                <p align="center">
-                  Чтобы увидеть это мероприятие, необходимо авторизоваться ВКонтакте.*
-                
-                <ButtonExternalLink
-                  href="alert: TODO"
-                  icon="/icons/vk.png"
-                  style={{
-                    borderColor: "#4D76A1",
-                    margin: 30,
-                    width: 250,
-                    display: 'block',
-                    marginRight: 'auto',
-                    marginLeft: 'auto',
-                  }}
-                  title="Войти ВК"
-                />
-                </p>
+                <div>
+                  <p align="center">
+                    Чтобы увидеть это мероприятие, необходимо авторизоваться ВКонтакте.*
+                  </p>
+                  <AuthContext.Consumer>
+                    {({ signIn }) => {
+                      return (
+                        <Button
+                          onPress={() => signIn()}
+                          tag="button"
+                          icon="/icons/vk.png"
+                          borderColor="#4D76A1"
+                        >
+                          <span>Войти ВК</span>
+                        </Button>
+                      )
+                    }}
+                  </AuthContext.Consumer>
+                </div>
               )}
               {event && (
                 <div>

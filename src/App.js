@@ -10,7 +10,31 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null      
+    }
+  }
+
+  signIn = () => {
+    if (window.VK) {
+      const that = this;
+
+      console.log('VK Login started')
+      const vk = window.VK;
+
+      vk.Auth.login(function(loginResponse) {
+        console.log('VK User signed in');
+        if (
+          loginResponse 
+          && loginResponse.session
+          && loginResponse.session.user
+        ) {
+          const user = loginResponse.session.user
+          console.log('VK User to set:', user);
+          that.setState({
+            user
+          })
+        }
+      });
     }
   }
 
@@ -97,7 +121,10 @@ class App extends Component {
 
   render() {
     return (
-      <AuthContext.Provider value={{ user: this.state.user }}>
+      <AuthContext.Provider value={{
+        user: this.state.user,
+        signIn: this.signIn
+      }}>
         <div className="App">
           <AppRouter />
         </div>

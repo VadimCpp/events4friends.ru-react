@@ -1,9 +1,19 @@
 import React from 'react'
 import './Button.css'
 
-function Button({ tag: Tag = "a", icon, children, borderColor = "#4d4d4d", ...props }) {
+function Button({
+  tag: Tag = "button",
+  borderColor = "#4d4d4d",
+  onPress = () => {},
+  icon, 
+  children,
+}) {
   return (
-    <Tag className="welcomeview__button" {...props} style={{ borderColor }}>
+    <Tag 
+      onClick={onPress}
+      className="welcomeview__button"
+      style={{ borderColor }}
+    >
       <div className="welcomeview__image">
         <img src={icon} alt={children} width="40" height="40" />
       </div>
