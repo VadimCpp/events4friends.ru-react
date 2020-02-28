@@ -37,6 +37,13 @@ class App extends Component {
               user
             })
           } else {
+            //
+            // NOTE!
+            // Chrome browser shares cookies:
+            // https://stackoverflow.com/questions/6627752/turn-off-chrome-processes-sharing-session-cookie
+            // But session.user is empty
+            // In this case do login to obtain user name
+            //
             console.log('VK User dos not exists, session:', response.session);
             vk.Auth.login(function(loginResponse) {
               console.log('VK User signed in');
