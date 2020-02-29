@@ -63,14 +63,16 @@ class EventView extends Component {
                   <AuthContext.Consumer>
                     {({ signIn }) => {
                       return (
-                        <Button
-                          onPress={() => signIn()}
-                          tag="button"
-                          icon="/icons/vk.png"
-                          borderColor="#4D76A1"
-                        >
-                          <span>Войти ВК</span>
-                        </Button>
+                        <p align="center">
+                          <Button
+                            onPress={() => signIn()}
+                            tag="button"
+                            icon="/icons/vk.png"
+                            borderColor="#4D76A1"
+                          >
+                            <span>Войти ВК</span>
+                          </Button>
+                        </p>
                       )
                     }}
                   </AuthContext.Consumer>
