@@ -38,6 +38,28 @@ class App extends Component {
     }
   }
 
+  signOut = () => {
+    if (window.VK) {
+      const that = this;
+
+      console.log('VK Logout started')
+      const vk = window.VK;
+
+      vk.Auth.logout(function(loginResponse) {
+        console.log('VK User signed out', loginResponse);
+        if (
+          loginResponse 
+          && loginResponse.session === null
+        ) {
+          console.log('VK User to set: null');
+          that.setState({
+            user: null
+          })
+        }
+      });
+    }
+  }  
+
   componentDidMount() {
     if (window.VK) {
       const that = this;
@@ -123,7 +145,8 @@ class App extends Component {
     return (
       <AuthContext.Provider value={{
         user: this.state.user,
-        signIn: this.signIn
+        signIn: this.signIn,
+        signOut: this.signOut,
       }}>
         <div className="App">
           <AppRouter />
