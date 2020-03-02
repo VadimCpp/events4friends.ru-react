@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
 import ButtonExternalLink from '../components/ButtonExternalLink';
-import { AuthContext } from '../context/AuthContext';
 import 'moment/locale/ru';
 import './EventView.css';
 
@@ -58,24 +56,12 @@ class EventView extends Component {
               {!event && (
                 <div>
                   <p align="center">
-                    Чтобы увидеть это мероприятие, необходимо авторизоваться ВКонтакте.*
+                    Мероприятие недоступно <span role="img" aria-label="sad">🙁</span>
                   </p>
-                  <AuthContext.Consumer>
-                    {({ signIn }) => {
-                      return (
-                        <p align="center">
-                          <Button
-                            onPress={() => signIn()}
-                            tag="button"
-                            icon="/icons/vk.png"
-                            borderColor="#4D76A1"
-                          >
-                            <span>Войти ВК</span>
-                          </Button>
-                        </p>
-                      )
-                    }}
-                  </AuthContext.Consumer>
+                  <p align="center">
+                    Попробуйте вернуться на главную страницу сайта
+                    и выполнить вход ВК *
+                  </p>
                 </div>
               )}
               {event && (
@@ -153,7 +139,7 @@ class EventView extends Component {
         </div>
         <div className="container container-center">
           <p className="welcomeview__footer">
-            * потому что такие меры безопасности ВКонтакте'
+            * потому что для доступа к событиям ВКонтакте необходима авторизация
           </p>
         </div>
       </div>
