@@ -10,3 +10,10 @@
   color: #aaa;
   padding: .5rem 0;
 }
+
+.btn-link-vk {
+  vertical-align: baseline !important;
+  padding: 0 !important;
+  margin: 0;
+  text-decoration: underline;
+}
