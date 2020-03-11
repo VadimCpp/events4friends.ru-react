@@ -48,12 +48,8 @@ class Lib39Parser implements ParserInterface
      */
     public function parse($month, $year) : array
     {
-        $result = [];
         $events = $this->getList($month, $year);
-        foreach ($events as $event) {
-            $result[] = $this->getEvent($event);
-        }
-        return $result;
+        return $events;
     }
 
     /**
@@ -69,8 +65,11 @@ class Lib39Parser implements ParserInterface
         $url = sprintf($this->domain . $this->list, $month, $year);
         $html = (new HtmlWeb())->load($url);
         $events = [];
+        $day = 0;
         foreach ($html->find('table.NewsCalTable td') as $cell) {
-            $day = $cell->find('span', 0)->plaintext;
+            if($span = $day = $cell->find('span', 0)) {
+                $day = $span->plaintext;
+            }
             if ($day > 0) {
                 foreach ($cell->find('.NewsCalNews') as $container) {
                     foreach ($container->find('a') as $link) {
@@ -84,9 +83,8 @@ class Lib39Parser implements ParserInterface
                                         new \DateTimeZone('Europe/Kaliningrad')
                                     ))->format(DATE_ATOM),
                                     'summary' => $link->plaintext,
-                                    //'description' => '',
-                                    //'location' => '',
-                                    //'contact' => '',
+                                    'location' => $this->address,
+                                    'contact' => $this->contact,
                                     'reference' => $this->domain . $link->href,
                                 ]
                             );
@@ -97,31 +95,9 @@ class Lib39Parser implements ParserInterface
                 }
             }
         }
+
         // Prevent memory leak issues
         unset($html);
         return $events;
-    }
-
-    /**
-     * Hydrate event with it's details
-     *
-     * @param EventModel $event
-     *
-     * @return EventModel
-     */
-    private function getEvent(EventModel $event) : EventModel
-    {
-        $html = (new HtmlWeb())->load($event->reference . '&print=Y');
-        $content = $html->find('.news-detail');
-        $h3 = $content->find('h3', 0)->plaintext;
-
-        foreach ($content->find('p') as $row) {
-
-        }
-
-        // Prevent memory leak issues
-        unset($html);
-        dd($event);
-        return $event;
     }
 }
