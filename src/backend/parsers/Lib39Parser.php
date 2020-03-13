@@ -33,6 +33,11 @@ class Lib39Parser implements ParserInterface
     private $address = 'Калининград, проспект Мира, 9/11';
 
     /**
+     * @var string
+     */
+    private $contact = 'Справки по тел.: 21-68-82';
+
+    /**
      * @return string
      */
     public function getId() : string
