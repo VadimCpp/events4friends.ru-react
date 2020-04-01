@@ -13,19 +13,19 @@ class WelcomeView extends Component {
           <AuthContext.Consumer>
             {({ user, signOut }) => {
               let userName = null
+              let userAuthorized = false
               if (user) {
-                const { first_name, last_name, nickname } = user;
-                if (first_name && last_name) {
-                  userName = `${first_name} ${last_name}`
-                } else if (nickname) {
-                  userName = `${nickname}`
-                } else if (first_name) {
-                  userName = `${first_name}`
-                }
+                const { isAnonymous, displayName } = user;
+                if (isAnonymous) {
+                  userName = 'Аноним'
+                } else {
+                  userName = displayName || 'Не указано'
+                  userAuthorized = true
+                } 
               }
               return (
                 <div className="container container-center">
-                  { userName ? (
+                  { userAuthorized ? (
                       <div>
                         <span>Добро пожаловать в цифровое пространство, {userName}! </span>
                         <button
@@ -37,7 +37,11 @@ class WelcomeView extends Component {
                       </div>
                     ) : (
                       <div>
-                        <span>Добро пожаловать в цифровое пространство! </span>
+                        { userName ? (
+                          <span>Добро пожаловать в цифровое пространство, {userName}! </span>
+                        ) : (
+                          <span>Добро пожаловать в цифровое пространство! </span>
+                        )}
                         <button
                           className="btn btn-link btn-link-vk"
                           onClick={() => {
