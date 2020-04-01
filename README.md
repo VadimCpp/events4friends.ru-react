@@ -11,7 +11,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 | end         | строка | нет         | конец, dateTime                                         |
 | summary     | строка | да          | короткое название мероприятия                           |
 | description | текст  | нет         | полное описание                                         |
-| location    | строка | да          | адрес мероприятия                                       |
+| isOnline    | булево | да          | true - онлайн, false - офлайн                           |
+| location    | строка | да          | адрес мероприятия/ссылка мероприятия                    |
 | contact     | строка | да          | контакт организатора                                    |
 | reference   | строка | нет         | ссылка на источник                                      |
 
