@@ -16,6 +16,24 @@ class App extends Component {
     super(props);
     this.state = {
       user: null,
+      services: [
+        {
+          id: 'service5',
+          name: 'HR сообщество (initial)',
+          service: 'Трудовое право',
+          description: 'В нашем чате мы предлегаем бесплатные консультации по трудовому праву. Вы знаете, что работодатель не имеет права Вас сократить в столь нелегкое время? А мы знаем!',
+          isFree: true,
+          telegram: 'hrchatv2'
+        },
+        {
+          id: 'service6',
+          name: 'IT сообщество (initial)',
+          service: 'IT консультации',
+          description: 'В нашем сообществе мы предлагаем бесплатные консультации по всем вопросам ИТ. Мы знаем все!',
+          isFree: true,
+          telegram: 'frontendbasics'
+        },
+      ],
       config: {
         description: "Цифровое пространство (initial)",
         name: "events4friends (initial)",
@@ -128,7 +146,7 @@ class App extends Component {
       }}>
         <DataContext.Provider value={{
           events: [],
-          services: [],
+          services: this.state.services,
           config: this.state.config,
         }}>
           <div className="App">

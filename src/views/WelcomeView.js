@@ -67,6 +67,23 @@ class WelcomeView extends Component {
         
         <div className="welcomeview__block">
           <div className="container container-center">
+            <p>Рекомендуем ознакомиться (это важно):</p>
+
+            <ButtonLink 
+              to="/services" 
+              icon="/icons/icon_service.png"
+              title="Наши услуги"
+              style={{ 
+                width: 250,
+                display: 'block',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                marginBottom: 10
+              }}
+            />
+          </div>
+
+          <div className="container container-center mt-5">
             <p>Мероприятия тут:</p>
 
             <ButtonLink 
