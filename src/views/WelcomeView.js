@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import ButtonLink from '../components/ButtonLink'
 import ButtonExternalLink from '../components/ButtonExternalLink'
 import { AuthContext } from '../context/AuthContext'
+import { DataContext } from '../context/DataContext'
 import './WelcomeView.css'
 
 class WelcomeView extends Component {
@@ -10,27 +12,50 @@ class WelcomeView extends Component {
       <div className="welcomeview">
         <div className="welcomeview__block">
           <AuthContext.Consumer>
-            {({ user }) => {
+            {({ user, signOut }) => {
               let userName = null
-              if (user) {
-                const { first_name, last_name, nickname } = user;
-                if (first_name && last_name) {
-                  userName = `${first_name} ${last_name}`
-                } else if (nickname) {
-                  userName = `${nickname}`
-                } else if (first_name) {
-                  userName = `${first_name}`
-                }
-              }
+              let userAuthorized = false
+              //
+              // TODO:
+              // Uncomment when login is ready
+              //
+              // if (user) {
+              //   const { isAnonymous, displayName } = user;
+              //   if (isAnonymous) {
+              //     userName = 'Аноним'
+              //   } else {
+              //     userName = displayName || 'Не указано'
+              //     userAuthorized = true
+              //   } 
+              // }
               return (
                 <div className="container container-center">
-                  { userName ? (
+                  { userAuthorized ? (
                       <div>
                         <span>Добро пожаловать в цифровое пространство, {userName}! </span>
+                        <button
+                          className="btn btn-link btn-link-vk"
+                          onClick={() => signOut()}
+                        >
+                          <span>Выйти</span>
+                        </button>
                       </div>
                     ) : (
                       <div>
-                        <span>Добро пожаловать в цифровое пространство!</span>
+                        { userName ? (
+                          <span>Добро пожаловать в цифровое пространство, {userName}! </span>
+                        ) : (
+                          <span>Добро пожаловать в цифровое пространство! </span>
+                        )}
+                        {/* TODO: Uncomment when login is ready */}
+                        {/* <button
+                          className="btn btn-link btn-link-vk"
+                          onClick={() => {
+                            this.props.history.push('signin/')
+                          }}
+                        >
+                          <span>Войти</span>
+                        </button> */}
                       </div>
                     )
                   }
@@ -42,6 +67,23 @@ class WelcomeView extends Component {
         
         <div className="welcomeview__block">
           <div className="container container-center">
+            <p>Рекомендуем ознакомиться (это важно):</p>
+
+            <ButtonLink 
+              to="/services" 
+              icon="/icons/icon_service.png"
+              title="Наши услуги"
+              style={{ 
+                width: 250,
+                display: 'block',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                marginBottom: 10
+              }}
+            />
+          </div>
+
+          <div className="container container-center mt-5">
             <p>Мероприятия тут:</p>
 
             <ButtonLink 
@@ -121,15 +163,25 @@ class WelcomeView extends Component {
           </div>
         </div>
 
-        <div className="container container-center">
-          <p className="welcomeview__footer">
-            Здесь действуют правила поведения в общественных местах.
-            Разработано в <a href="https://roscomputing.com/">Роскомпьютинг</a>.
-          </p>
-        </div>
+        <DataContext.Consumer>
+          {({ config }) => {
+            return (
+              <div className="container container-center">
+                <p className="welcomeview__footer">
+                  Здесь действуют правила поведения в общественных местах.
+                  Разработано в <a href="https://roscomputing.com/">Роскомпьютинг</a>.
+                  <span> Конфигурация: </span>
+                  <span> name - {config.name},</span>
+                  <span> description - {config.description},</span>
+                  <span> version - {config.version}.</span>
+                </p>
+              </div>
+            )
+          }}
+        </DataContext.Consumer>        
       </div>
     )
   }
 }
 
-export default WelcomeView
+export default withRouter(WelcomeView);

@@ -8,6 +8,10 @@ import LoadingView from "./views/LoadingView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";
 import WelcomeView from "./views/WelcomeView.js";
+import LoginView from "./views/LoginView.js";
+import ServicesView from "./views/ServicesView.js";
+import ServiceView from "./views/ServiceView.js";
+
 import EventsSource from "./model/EventsSource";
 import Header from './components/Header.js'
 
@@ -94,6 +98,8 @@ class AppRouter extends Component {
                 <Header />
                 <div>
                   <Route path="/" exact component={WelcomeView} />
+                  <Route path="/signin/" exact component={LoginView} />
+                  <Route path="/services/" exact component={ServicesView} />                  
                   <Route 
                     path="/list/"
                     render={props => (
@@ -106,6 +112,12 @@ class AppRouter extends Component {
                       <EventView {...props} eventsSources={eventsSources} />
                     )}
                   />
+                  <Route
+                    path="/service/:id"
+                    render={props => (
+                      <ServiceView {...props}/>
+                    )}
+                  />                  
 
                   {/* <Route path="/map/" render={props => (
                     <MapView {...props} googleEvents={events} getEvent={this.getEvent} />
