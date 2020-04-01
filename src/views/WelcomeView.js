@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ButtonLink from '../components/ButtonLink'
 import ButtonExternalLink from '../components/ButtonExternalLink'
 import { AuthContext } from '../context/AuthContext'
+import { DataContext } from '../context/DataContext'
 import './WelcomeView.css'
 
 class WelcomeView extends Component {
@@ -136,12 +137,22 @@ class WelcomeView extends Component {
           </div>
         </div>
 
-        <div className="container container-center">
-          <p className="welcomeview__footer">
-            Здесь действуют правила поведения в общественных местах.
-            Разработано в <a href="https://roscomputing.com/">Роскомпьютинг</a>.
-          </p>
-        </div>
+        <DataContext.Consumer>
+          {({ config }) => {
+            return (
+              <div className="container container-center">
+                <p className="welcomeview__footer">
+                  Здесь действуют правила поведения в общественных местах.
+                  Разработано в <a href="https://roscomputing.com/">Роскомпьютинг</a>.
+                  <span> Конфигурация: </span>
+                  <span> name - {config.name},</span>
+                  <span> description - {config.description},</span>
+                  <span> version - {config.version}.</span>
+                </p>
+              </div>
+            )
+          }}
+        </DataContext.Consumer>        
       </div>
     )
   }

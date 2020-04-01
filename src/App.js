@@ -8,13 +8,19 @@ import "firebase/firestore";
 
 import AppRouter from './AppRouter.js'
 import { AuthContext } from './context/AuthContext'
+import { DataContext } from './context/DataContext'
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null      
+      user: null,
+      config: {
+        description: "Цифровое пространство (initial)",
+        name: "events4friends (initial)",
+        version: '0.1 (initial)'
+      },      
     }
   }
 
@@ -58,11 +64,59 @@ class App extends Component {
     };
 
     firebase.initializeApp(firebaseConfig);
+
+    //
+    // NOTE!
+    // Listen to onAuthStateChanged
+    //
+    const that = this
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in.
+        console.log('User is logged in successfully:', user);
+        that.setState({ user });
+        that.getConfig();
+      } else {
+        // User is signed out.
+        that.setState({ user: null });
+      }
+    });
+
+    //
+    // NOTE!
+    // Log in anonymously
+    //
+    firebase.auth().signInAnonymously().catch(function(error) {
+      console.warn('Error signing in anonymously, skip: ', error);
+    });
   }
 
   componentWillUnmount() {
     this.clipboard = null;
     clearTimeout(this.timer);
+  }
+
+  getConfig = () => {
+    //
+    // NOTE!
+    // Load config from firebase
+    //
+    const that = this
+    const db = firebase.firestore();
+    db.collection("config").doc('general').get()
+    .then(function(doc) {
+        if (doc.exists) {
+          console.log("Get config successfully from Firebase");
+          that.setState({
+            config: doc.data()
+          })
+        } else {
+          console.warn('Error getting config, skip: ', doc);
+        }
+    })
+    .catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
   }
 
   render() {
@@ -72,9 +126,15 @@ class App extends Component {
         signIn: () => {},
         signOut: () => {},
       }}>
-        <div className="App">
-          <AppRouter />
-        </div>
+        <DataContext.Provider value={{
+          events: [],
+          services: [],
+          config: this.state.config,
+        }}>
+          <div className="App">
+            <AppRouter />
+          </div>
+        </DataContext.Provider>
       </AuthContext.Provider>
     );
   }
