@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import ButtonLink from '../components/ButtonLink'
 import ButtonExternalLink from '../components/ButtonExternalLink'
 import { AuthContext } from '../context/AuthContext'
@@ -45,7 +46,7 @@ class WelcomeView extends Component {
                         <button
                           className="btn btn-link btn-link-vk"
                           onClick={() => {
-                            console.log('TODO: navigate to login screen')
+                            this.props.history.push('signin/')
                           }}
                         >
                           <span>Войти</span>
@@ -162,4 +163,4 @@ class WelcomeView extends Component {
   }
 }
 
-export default WelcomeView
+export default withRouter(WelcomeView);
