@@ -42,7 +42,6 @@ class ServicesView extends Component {
           <DataContext.Consumer>
             {({ services }) => {
               return services.map(service => this.displayService(service))
-              
             }}
           </DataContext.Consumer> 
         </div>

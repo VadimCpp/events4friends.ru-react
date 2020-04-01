@@ -147,16 +147,11 @@ class App extends Component {
     const db = firebase.firestore();
     db.collection("services").get()
     .then(function(querySnapshot) {
-      querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        
-     });
-     const services = querySnapshot.docs.map(item => ({ ...item.data(), id: item.id }))
-     that.setState({ services })
+      const services = querySnapshot.docs.map(item => ({ ...item.data(), id: item.id }))
+      that.setState({ services })
     })
     .catch(function(error) {
-        console.error("Error getting services, skip: ", error);
+      console.error("Error getting services, skip: ", error);
     });    
   }
 
