@@ -4,7 +4,7 @@ import './ButtonLink.css'
 
 function ButtonLink({ to, icon, title, style }) {
   let CName = "link_image_welcome_list";
-  if (icon == "/icons/icon_arrow_back.png"){
+  if (icon === "/icons/icon_arrow_back.png"){
       CName = "link_image_for_navigation"    
   }
   return (

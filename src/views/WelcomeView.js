@@ -10,7 +10,7 @@ class WelcomeView extends Component {
       <div className="welcomeview">
         <div className="welcomeview__block">
           <AuthContext.Consumer>
-            {({ user, signIn, signOut }) => {
+            {({ user }) => {
               let userName = null
               if (user) {
                 const { first_name, last_name, nickname } = user;
@@ -27,22 +27,10 @@ class WelcomeView extends Component {
                   { userName ? (
                       <div>
                         <span>Добро пожаловать в цифровое пространство, {userName}! </span>
-                        <button
-                          className="btn btn-link btn-link-vk"
-                          onClick={() => signOut()}
-                        >
-                          <span>Выйти из ВК</span>
-                        </button>
                       </div>
                     ) : (
                       <div>
                         <span>Добро пожаловать в цифровое пространство!</span>
-                        <button
-                          className="btn btn-link btn-link-vk"
-                          onClick={() => signIn()}
-                        >
-                          <span>Войти ВК</span>
-                        </button>
                       </div>
                     )
                   }

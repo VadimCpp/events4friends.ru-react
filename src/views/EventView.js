@@ -137,11 +137,6 @@ class EventView extends Component {
             />
           </div>
         </div>
-        <div className="container container-center">
-          <p className="welcomeview__footer">
-            * потому что для доступа к событиям ВКонтакте необходима авторизация
-          </p>
-        </div>
       </div>
     )
   }

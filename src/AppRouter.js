@@ -25,7 +25,6 @@ class AppRouter extends Component {
       new EventsSource('Право на город - Календарь', 'pravonagorod%40gmail.com'),
       new EventsSource('Events For Friends - Календарь', 'dveenjcu4k5ktd3k8pv4iul2bk@group.calendar.google.com'),
       new EventsSource('Утро с Тедди - Календарь', '97oe212v23kfm97rnp7b1fv94c@group.calendar.google.com'),
-      new EventsSource('Янтарная афиша - ВКонтакте', 'https://vk.com/afisha_39'),
     ];
 
     const eventsSourcesLehgth = eventsSources.length;
