@@ -94,6 +94,7 @@ class App extends Component {
         console.log('User is logged in successfully:', user);
         that.setState({ user });
         that.getConfig();
+        that.getServices();
       } else {
         // User is signed out.
         that.setState({ user: null });
@@ -133,8 +134,30 @@ class App extends Component {
         }
     })
     .catch(function(error) {
-        console.error("Error adding document: ", error);
+        console.error("Error getting config, skip: ", error);
     });
+  }
+
+  getServices = () => {
+    //
+    // NOTE!
+    // Load services from firebase
+    //
+    const that = this
+    const db = firebase.firestore();
+    db.collection("services").get()
+    .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        
+     });
+     const services = querySnapshot.docs.map(item => ({ ...item.data(), id: item.id }))
+     that.setState({ services })
+    })
+    .catch(function(error) {
+        console.error("Error getting services, skip: ", error);
+    });    
   }
 
   render() {
