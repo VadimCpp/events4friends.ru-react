@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Button from '../components/Button'
 import ButtonLink from '../components/ButtonLink'
 import { AuthContext } from '../context/AuthContext'
 
@@ -44,9 +45,32 @@ class LoginView extends Component {
                           />
                       </div>
                     ) : (
-                      <div>
-                        <span>TODO:</span>
-                      </div>
+                      <form>
+                        <div className="textinput">
+                          <label>
+                            <span className="textinput__label">
+                              E-mail:
+                            </span>
+                            <input className="textinput__input" type="email" id="login" name="login" />
+                          </label>
+                        </div>
+                        <div className="textinput">
+                          <label>
+                            <span className="textinput__label">
+                              Пароль:
+                            </span>
+                            <input className="textinput__input" type="password" id="password" name="password" />
+                          </label>
+                        </div>
+                        <Button
+                          onPress={() => {
+                            alert('TODO: sign in')
+                          }}
+                          icon="/icons/icon_login.png"
+                        >
+                          Войти
+                        </Button>
+                      </form>
                     )
                   }
                 </div>
