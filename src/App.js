@@ -91,7 +91,7 @@ class App extends Component {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in.
-        console.log('User is logged in successfully:', user);
+        console.log('User is logged in successfully');
         that.setState({ user });
         that.getConfig();
         that.getServices();
@@ -134,7 +134,7 @@ class App extends Component {
         }
     })
     .catch(function(error) {
-        console.error("Error getting config, skip: ", error);
+      console.warn("Error getting config, skip: ", error);
     });
   }
 
@@ -151,7 +151,7 @@ class App extends Component {
       that.setState({ services })
     })
     .catch(function(error) {
-      console.error("Error getting services, skip: ", error);
+      console.warn("Error getting services, skip: ", error);
     });    
   }
 

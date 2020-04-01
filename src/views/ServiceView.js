@@ -56,7 +56,7 @@ class EventView extends Component {
                         <h2>
                           {service.service || 'Не указано'}
                           {service.isFree && (
-                            <span className="text-success">(безоплатно)</span>
+                            <span className="text-success"> (бесплатно)</span>
                           )}
                         </h2>
                         <p> {service.description || 'Не указано'} </p>
@@ -121,7 +121,7 @@ class EventView extends Component {
         
         <div className="border-top">
           <div className="container container-center pt-4 pb-5">
-            <p>Обсудить событие в чате:</p>
+            <p>Обсудить услугу в чате:</p>
             <ButtonExternalLink
               href="https://tglink.ru/events4friends"
               icon="/icons/telegram.png"
