@@ -100,14 +100,6 @@ class App extends Component {
         that.setState({ user: null });
       }
     });
-
-    //
-    // NOTE!
-    // Log in anonymously
-    //
-    firebase.auth().signInAnonymously().catch(function(error) {
-      console.warn('Error signing in anonymously, skip: ', error);
-    });
   }
 
   componentWillUnmount() {
