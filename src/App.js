@@ -100,14 +100,6 @@ class App extends Component {
         that.setState({ user: null });
       }
     });
-
-    //
-    // NOTE!
-    // Log in anonymously
-    //
-    firebase.auth().signInAnonymously().catch(function(error) {
-      console.warn('Error signing in anonymously, skip: ', error);
-    });
   }
 
   componentWillUnmount() {
@@ -154,13 +146,32 @@ class App extends Component {
       console.warn("Error getting services, skip: ", error);
     });    
   }
+    
+  signIn = (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
+  }
+  
+  signOut = () => {
+    console.log('Sign user out')
+    firebase.auth().signOut();
+  }
 
   render() {
     return (
       <AuthContext.Provider value={{
         user: this.state.user,
-        signIn: () => {},
-        signOut: () => {},
+        signIn: this.signIn,
+        signOut: this.signOut,
       }}>
         <DataContext.Provider value={{
           events: [],
