@@ -2,16 +2,36 @@ import React, { Component } from 'react'
 import Button from '../components/Button'
 import ButtonLink from '../components/ButtonLink'
 import { AuthContext } from '../context/AuthContext'
+import * as firebase from 'firebase/app';
+import "firebase/auth";
 
 import './LoginView.css'
 
 class LoginView extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      login: '',
+      password: '',
+    }
+  }
+
+  handleLoginChange = (e) => {
+    this.setState({ login: e.target.value });
+  }
+
+  handlePasswordChange = (e) => {
+    this.setState({ password: e.target.value });
+  }
+
   render() {
+    const { login, password } = this.state;
+
     return (
       <div className="loginview">
         <div className="loginview__block">
         <AuthContext.Consumer>
-            {({ user }) => {
+            {({ user, signIn }) => {
               let userName = null
               let userAuthorized = false
               if (user) {
@@ -45,13 +65,20 @@ class LoginView extends Component {
                           />
                       </div>
                     ) : (
-                      <form>
+                      <div>
                         <div className="textinput">
                           <label>
                             <span className="textinput__label">
                               E-mail:
                             </span>
-                            <input className="textinput__input" type="email" id="login" name="login" />
+                            <input
+                              className="textinput__input"
+                              type="email"
+                              id="login"
+                              name="login"
+                              value={login}
+                              onChange={this.handleLoginChange}
+                            />
                           </label>
                         </div>
                         <div className="textinput">
@@ -59,18 +86,25 @@ class LoginView extends Component {
                             <span className="textinput__label">
                               Пароль:
                             </span>
-                            <input className="textinput__input" type="password" id="password" name="password" />
+                            <input
+                              className="textinput__input"
+                              type="password"
+                              id="password"
+                              name="password"
+                              value={password}
+                              onChange={this.handlePasswordChange}
+                            />
                           </label>
                         </div>
                         <Button
                           onPress={() => {
-                            alert('TODO: sign in')
+                            signIn(login, password)
                           }}
                           icon="/icons/icon_login.png"
                         >
                           Войти
                         </Button>
-                      </form>
+                      </div>
                     )
                   }
                 </div>

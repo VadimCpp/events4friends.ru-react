@@ -15,19 +15,15 @@ class WelcomeView extends Component {
             {({ user, signOut }) => {
               let userName = null
               let userAuthorized = false
-              //
-              // TODO:
-              // Uncomment when login is ready
-              //
-              // if (user) {
-              //   const { isAnonymous, displayName } = user;
-              //   if (isAnonymous) {
-              //     userName = 'Аноним'
-              //   } else {
-              //     userName = displayName || 'Не указано'
-              //     userAuthorized = true
-              //   } 
-              // }
+              if (user) {
+                const { isAnonymous, displayName } = user;
+                if (isAnonymous) {
+                  userName = 'Аноним'
+                } else {
+                  userName = displayName || 'Не указано'
+                  userAuthorized = true
+                } 
+              }
               return (
                 <div className="container container-center">
                   { userAuthorized ? (
@@ -47,15 +43,14 @@ class WelcomeView extends Component {
                         ) : (
                           <span>Добро пожаловать в цифровое пространство! </span>
                         )}
-                        {/* TODO: Uncomment when login is ready */}
-                        {/* <button
+                        <button
                           className="btn btn-link btn-link-vk"
                           onClick={() => {
                             this.props.history.push('signin/')
                           }}
                         >
                           <span>Войти</span>
-                        </button> */}
+                        </button>
                       </div>
                     )
                   }
