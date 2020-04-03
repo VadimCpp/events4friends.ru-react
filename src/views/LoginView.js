@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from '../components/Button'
 import ButtonLink from '../components/ButtonLink'
+import ButtonExternalLink from '../components/ButtonExternalLink'
 import { AuthContext } from '../context/AuthContext'
 import "firebase/auth";
 
@@ -110,7 +111,39 @@ class LoginView extends Component {
               )
             }}
           </AuthContext.Consumer>
-        </div>            
+        </div> 
+        <div className="loginview__block">
+          <div className="container container-center">
+            <p>
+              Вход в систему дает возможность создавать услуги и мероприятия.
+              Логин и пароль можно получить в одном из чатов:
+            </p>
+            <ButtonExternalLink 
+              href="https://tglink.ru/events4friends" 
+              icon="/icons/telegram.png" 
+              style={{
+                borderColor: "#139BD0",
+                margin: 8
+              }} 
+            />
+            <ButtonExternalLink 
+              href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8" 
+              icon="/icons/wa.png"
+              style={{
+                borderColor: "#57BB63",
+                margin: 8
+              }} 
+            />
+            <ButtonExternalLink 
+              href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
+              icon="/icons/viber.png" 
+              style={{
+                borderColor: "#7C519B",
+                margin: 8
+              }} 
+            />
+          </div>
+        </div>                   
       </div>
     )
   }
