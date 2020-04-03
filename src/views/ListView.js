@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventCard from '../components/EventCard.js';
 import ButtonLink from '../components/ButtonLink';
+import { AuthContext } from '../context/AuthContext'
 import './ListView.css';
 
 class ListView extends Component {
@@ -63,6 +64,41 @@ class ListView extends Component {
             }}
           />
         </div>
+        <AuthContext.Consumer>
+          {({ user }) => {
+            let userAuthorized = false
+            if (user) {
+              const { isAnonymous } = user;
+              if (isAnonymous === false) {
+                userAuthorized = true
+              }
+            }
+            console.log('userAuthorized', userAuthorized)
+            return userAuthorized ? (
+              <div>
+                <ButtonLink 
+                  to="/newevent" 
+                  icon="/icons/icon_plus.png"
+                  title="Сделать анонс"
+                  style={{ 
+                    width: 205,
+                    display: 'block',
+                    marginRight: 'auto',
+                    marginLeft: 'auto',
+                    marginBottom: 10,
+                    borderColor: 'rgba(77, 77, 77, .2)'
+                  }}
+                />
+              </div>
+            ) : (
+              <div>
+                <p>
+                  Для того, чтобы добавлять мероприятия, выполните вход
+                </p>
+              </div>
+            )
+          }}
+        </AuthContext.Consumer>
         <div className="pt-3">
           { commonList.length ? commonList.map(eventItem => this.displayEvent(eventItem.event, eventItem.source)) : null }
         </div>

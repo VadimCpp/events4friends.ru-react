@@ -99,9 +99,10 @@ class App extends Component {
         } else {
           console.log('onAuthStateChanged: user is logged in successfully');
         }
-        that.setState({ user });
-        that.getConfig();
-        that.getServices();
+        that.setState({ user }, () => {
+          that.getConfig();
+          that.getServices();  
+        });
       } else {
         console.log('onAuthStateChanged: user is not loggen in, login anonimously');
         //
