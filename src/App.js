@@ -90,14 +90,28 @@ class App extends Component {
     const that = this
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        //
+        // NOTE!
         // User is signed in.
-        console.log('User is logged in successfully');
+        //
+        if (user.isAnonymous) {
+          console.log('onAuthStateChanged: user is logged in anonymously');
+        } else {
+          console.log('onAuthStateChanged: user is logged in successfully');
+        }
         that.setState({ user });
         that.getConfig();
         that.getServices();
       } else {
-        // User is signed out.
+        console.log('onAuthStateChanged: user is not loggen in, login anonimously');
+        //
+        // NOTE!
+        // Log in anonymously
+        //        
         that.setState({ user: null });
+        firebase.auth().signInAnonymously().catch(function(error) {
+          console.warn('Error signing in anonymously, skip: ', error);
+        });
       }
     });
   }

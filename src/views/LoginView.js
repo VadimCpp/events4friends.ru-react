@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Button from '../components/Button'
 import ButtonLink from '../components/ButtonLink'
 import { AuthContext } from '../context/AuthContext'
-import * as firebase from 'firebase/app';
 import "firebase/auth";
 
 import './LoginView.css'
