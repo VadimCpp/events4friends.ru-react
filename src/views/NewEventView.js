@@ -101,7 +101,7 @@ class NewEventView extends Component {
           this.props.history.push(`signin/${id}`)
         })
       } else {
-        alert('Извините, невозможно ссоздать мероприятие. Обратитесь в техподдержку.')
+        alert('Извините, невозможно создать мероприятие. Обратитесь в техподдержку.')
         console.warn('Error user data, skip')
       }
     } else {
