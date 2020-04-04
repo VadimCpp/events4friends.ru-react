@@ -182,6 +182,27 @@ class App extends Component {
     firebase.auth().signOut();
   }
 
+  createEvent = (data, callback) => {
+    console.log('Create event, data:', data)
+
+    const db = firebase.firestore();
+    db.collection("events").add(data)
+    .then((data) => {
+      if (data && data.id && callback) {
+        callback(data.id)
+      } else {
+        console.warn('Something went wrong, contact support');
+        alert('Что-то пошло не так при создании события. Пожалуйста, обратитесь в службу поддержки.')
+  
+      }
+    })
+    .catch((error) => {
+      console.warn('Error creating event', error);
+      alert('Не удалось создать событие. Пожалуйста, обратитесь в службу поддержки.')
+    })
+    
+  }
+
   render() {
     return (
       <AuthContext.Provider value={{
@@ -191,6 +212,7 @@ class App extends Component {
       }}>
         <DataContext.Provider value={{
           events: [],
+          createEvent: this.createEvent,
           services: this.state.services,
           config: this.state.config,
         }}>

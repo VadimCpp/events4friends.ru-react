@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import Button from '../components/Button'
 import ButtonLink from '../components/ButtonLink';
 import ButtonExternalLink from '../components/ButtonExternalLink';
 import { AuthContext } from '../context/AuthContext'
+import { DataContext } from '../context/DataContext'
 import './NewEventView.css';
 
 class NewEventView extends Component {
@@ -51,7 +53,7 @@ class NewEventView extends Component {
     this.setState({ reference: e.target.value });
   }
 
-  createNewEventForUser = (user) => {
+  createNewEventForUser = (user, createEvent) => {
     const {
       summary,
       description,
@@ -94,13 +96,14 @@ class NewEventView extends Component {
           end,
           reference
         }
-
-        alert('TODO:')
+        createEvent(event, (id) => {
+          console.log('Event created successfully, open it')
+          this.props.history.push(`signin/${id}`)
+        })
       } else {
         alert('Извините, невозможно ссоздать мероприятие. Обратитесь в техподдержку.')
         console.warn('Error user data, skip')
       }
-      console.log('todo:', user)
     } else {
       console.warn('Error verify data, skip')
     }
@@ -145,147 +148,153 @@ class NewEventView extends Component {
             }
 
             return userAuthorized ? (
-              <div className="neweventview">
-                <div className="textinput">
-                  <label>
-                    <p className="text-left">
-                      Короткое название мероприятия:
-                    </p>
-                    <input
-                      className="textinput__input"
-                      type="text"
-                      name="summary"
-                      value={summary}
-                      onChange={this.handleSummaryChange}
-                    />
-                  </label>
-                </div>
-                <div className="textinput">
-                  <label>
-                    <p className="text-left">
-                      Полное описание:
-                    </p>
-                    <input
-                      className="textinput__input"
-                      type="text"
-                      name="description"
-                      value={description}
-                      onChange={this.handleDescriptionChange}
-                    />
-                  </label>
-                </div>
-                <div className="textinput">
-                  <p className="text-left">
-                    Где будет мероприятие?
-                  </p>
-                  <p>
-                    <label>
-                      <span className="text-left">
-                        Онлайн
-                      </span>
-                      <input
-                        className="textinput__input"
-                        type="radio"
-                        name="isOnline"
-                        checked={isOnline}
-                        onChange={this.handleIsOnlineChange}
-                      />
-                    </label>
-                  </p>
-                  <p>
-                    <label>
-                      <span className="text-left">
-                        Офлайн
-                      </span>
-                      <input
-                        className="textinput__input"
-                        type="radio"
-                        name="isOnline"
-                        checked={!isOnline}
-                        onChange={this.handleIsOfflineChange}
-                      />
-                    </label>
-                  </p>
-                </div>
-                <div className="textinput">
-                  <label>
-                    <p className="text-left">
-                      {isOnline ? 'Ссылка онлайн мероприятия:' : 'Укажите адрес встречи:'}
-                    </p>
-                    <input
-                      className="textinput__input"
-                      type="text"
-                      name="location"
-                      value={location}
-                      onChange={this.handleLocationChange}
-                    />
-                  </label>
-                </div>                
-                <div className="textinput">
-                  <label>
-                    <p className="text-left">
-                      Начало мероприятия:
-                    </p>
-                    <input
-                      className="textinput__input"
-                      type="datetime-local"
-                      name="start"
-                      value={start}
-                      onChange={this.handleStartChange}
-                    />
-                  </label>
-                </div> 
-                <div className="textinput">
-                  <label>
-                    <p className="text-left">
-                      Окончание мероприятия (необязательно):
-                    </p>
-                    <input
-                      className="textinput__input"
-                      type="datetime-local"
-                      name="end"
-                      value={end}
-                      onChange={this.handleEndChange}
-                    />
-                  </label>
-                </div>
-                <div className="textinput">
-                  <label>
-                    <p className="text-left">
-                      Контакт организатора:
-                    </p>
-                    <input
-                      className="textinput__input"
-                      type="text"
-                      name="location"
-                      value={user.email}
-                      disabled
-                    />
-                  </label>
-                </div>
-                <div className="textinput">
-                  <label>
-                    <p className="text-left">
-                      Ссылка на источник (необязательно):
-                    </p>
-                    <input
-                      className="textinput__input"
-                      type="text"
-                      name="reference"
-                      value={reference}
-                      onChange={this.handleReferenceChange}
-                    />
-                  </label>
-                </div>                                                    
-                <Button
-                  onPress={() => {
-                    this.createNewEventForUser(user)
-                  }}
-                  icon="/icons/icon_plus.png"
-                >
-                  Создать
-                </Button>
-              </div>
+              <DataContext.Consumer>
+                {({ createEvent }) => {
+                  return (
+                    <div className="neweventview">
+                      <div className="textinput">
+                        <label>
+                          <p className="text-left">
+                            Короткое название мероприятия:
+                          </p>
+                          <input
+                            className="textinput__input"
+                            type="text"
+                            name="summary"
+                            value={summary}
+                            onChange={this.handleSummaryChange}
+                          />
+                        </label>
+                      </div>
+                      <div className="textinput">
+                        <label>
+                          <p className="text-left">
+                            Полное описание:
+                          </p>
+                          <input
+                            className="textinput__input"
+                            type="text"
+                            name="description"
+                            value={description}
+                            onChange={this.handleDescriptionChange}
+                          />
+                        </label>
+                      </div>
+                      <div className="textinput">
+                        <p className="text-left">
+                          Где будет мероприятие?
+                        </p>
+                        <p>
+                          <label>
+                            <span className="text-left">
+                              Онлайн
+                            </span>
+                            <input
+                              className="textinput__input"
+                              type="radio"
+                              name="isOnline"
+                              checked={isOnline}
+                              onChange={this.handleIsOnlineChange}
+                            />
+                          </label>
+                        </p>
+                        <p>
+                          <label>
+                            <span className="text-left">
+                              Офлайн
+                            </span>
+                            <input
+                              className="textinput__input"
+                              type="radio"
+                              name="isOnline"
+                              checked={!isOnline}
+                              onChange={this.handleIsOfflineChange}
+                            />
+                          </label>
+                        </p>
+                      </div>
+                      <div className="textinput">
+                        <label>
+                          <p className="text-left">
+                            {isOnline ? 'Ссылка онлайн мероприятия:' : 'Укажите адрес встречи:'}
+                          </p>
+                          <input
+                            className="textinput__input"
+                            type="text"
+                            name="location"
+                            value={location}
+                            onChange={this.handleLocationChange}
+                          />
+                        </label>
+                      </div>                
+                      <div className="textinput">
+                        <label>
+                          <p className="text-left">
+                            Начало мероприятия:
+                          </p>
+                          <input
+                            className="textinput__input"
+                            type="datetime-local"
+                            name="start"
+                            value={start}
+                            onChange={this.handleStartChange}
+                          />
+                        </label>
+                      </div> 
+                      <div className="textinput">
+                        <label>
+                          <p className="text-left">
+                            Окончание мероприятия (необязательно):
+                          </p>
+                          <input
+                            className="textinput__input"
+                            type="datetime-local"
+                            name="end"
+                            value={end}
+                            onChange={this.handleEndChange}
+                          />
+                        </label>
+                      </div>
+                      <div className="textinput">
+                        <label>
+                          <p className="text-left">
+                            Контакт организатора:
+                          </p>
+                          <input
+                            className="textinput__input"
+                            type="text"
+                            name="location"
+                            value={user.email}
+                            disabled
+                          />
+                        </label>
+                      </div>
+                      <div className="textinput">
+                        <label>
+                          <p className="text-left">
+                            Ссылка на источник (необязательно):
+                          </p>
+                          <input
+                            className="textinput__input"
+                            type="text"
+                            name="reference"
+                            value={reference}
+                            onChange={this.handleReferenceChange}
+                          />
+                        </label>
+                      </div>                                                    
+                      <Button
+                        onPress={() => {
+                          this.createNewEventForUser(user, createEvent)
+                        }}
+                        icon="/icons/icon_plus.png"
+                      >
+                        Создать
+                      </Button>
+                    </div>
+                  )
+                }}
+              </DataContext.Consumer>
             ) : (
               <div>
                 <p>
@@ -331,4 +340,4 @@ class NewEventView extends Component {
   }
 }
 
-export default NewEventView;
+export default withRouter(NewEventView);
