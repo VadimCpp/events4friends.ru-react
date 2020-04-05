@@ -90,14 +90,30 @@ class App extends Component {
     const that = this
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        //
+        // NOTE!
         // User is signed in.
-        console.log('User is logged in successfully');
-        that.setState({ user });
-        that.getConfig();
-        that.getServices();
+        //
+        if (user.isAnonymous) {
+          console.log('onAuthStateChanged: user is logged in anonymously');
+        } else {
+          console.log('onAuthStateChanged: user is logged in successfully');
+        }
+        that.setState({ user }, () => {
+          that.getConfig();
+          that.getServices();  
+        });
       } else {
-        // User is signed out.
-        that.setState({ user: null });
+        console.log('onAuthStateChanged: user is not loggen in, login anonimously');
+        //
+        // NOTE!
+        // Log in anonymously
+        //        
+        that.setState({ user: null }, () => {
+          firebase.auth().signInAnonymously().catch(function(error) {
+            console.warn('Error signing in anonymously, skip: ', error);
+          });  
+        });
       }
     });
   }
@@ -166,6 +182,27 @@ class App extends Component {
     firebase.auth().signOut();
   }
 
+  createEvent = (data, callback) => {
+    console.log('Create event, data:', data)
+
+    const db = firebase.firestore();
+    db.collection("events").add(data)
+    .then((data) => {
+      if (data && data.id && callback) {
+        callback(data.id)
+      } else {
+        console.warn('Something went wrong, contact support');
+        alert('Что-то пошло не так при создании события. Пожалуйста, обратитесь в службу поддержки.')
+  
+      }
+    })
+    .catch((error) => {
+      console.warn('Error creating event', error);
+      alert('Не удалось создать событие. Пожалуйста, обратитесь в службу поддержки.')
+    })
+    
+  }
+
   render() {
     return (
       <AuthContext.Provider value={{
@@ -175,6 +212,7 @@ class App extends Component {
       }}>
         <DataContext.Provider value={{
           events: [],
+          createEvent: this.createEvent,
           services: this.state.services,
           config: this.state.config,
         }}>
