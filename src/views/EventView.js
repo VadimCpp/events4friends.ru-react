@@ -82,9 +82,14 @@ class EventView extends Component {
                       onPress={() => {
                         if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
                           this.setState({ deletingInProgress: true }, () => {
-                            deleteEvent(event.id, () => {
-                              console.log('Event deleted successfully, navigate to list view')
-                              this.props.history.push(`/list`)
+                            deleteEvent(event.id, (success) => {
+                              if (success) {
+                                console.log('Event deleted successfully, navigate to list view');
+                                this.props.history.push(`/list`);
+                              } else {
+                                console.log('Failde to delete event');
+                                this.setState({ deletingInProgress: false });
+                              }                              
                             })
                           })
                         }

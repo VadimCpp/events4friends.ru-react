@@ -236,8 +236,9 @@ class App extends Component {
 
     const db = firebase.firestore();
     db.collection("events").doc(eventId).delete().then(function() {
-      callback()
+      callback(true)
     }).catch(function(error) {
+      callback(false)
       console.warn("Error removing document:", error);
       alert('Не удалось удалить событие. Пожалуйста, обратитесь в службу поддержки.')
     });
