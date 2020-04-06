@@ -98,12 +98,30 @@ class EventView extends Component {
                             {event.summary}
                             »
 
-                            <span role="img" aria-label="Location">📍</span>
-                            {event.location}
+                            {event.isOnline ? (
+                              <span>
+                                <span role="img" aria-label="Location"> 🕸</span>
+                                Всемирная паутина
+                              </span>
+                            ) : (
+                              <span>
+                                <span role="img" aria-label="Location"> 📍</span>
+                                {event.location}
+                              </span>
+                            )}
+                            
                           </p>
                           <div>
                             <p dangerouslySetInnerHTML={{ __html: event.description }} />
                           </div>
+                          <p>
+                            {event.isOnline && (
+                              <span>
+                                Ссылка на онлайн трансляцию: <br />
+                                <a href={event.location}>{event.location}</a>
+                              </span>
+                            )}
+                          </p>
                         </div>
                         {event.reference && (
                           <ButtonExternalLink
@@ -130,7 +148,7 @@ class EventView extends Component {
         </DataContext.Consumer>
         <div className="border-top">
           <div className="container container-center pt-4 pb-5">
-            <p>Обсудить событие в чате:</p>
+            <p>Обсудить анонс мероприятия в чате:</p>
             <ButtonExternalLink
               href="https://tglink.ru/events4friends"
               icon="/icons/telegram.png"

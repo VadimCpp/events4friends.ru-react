@@ -33,8 +33,17 @@ class EventCard extends Component {
                   {event.summary}
                   »
 
-                  <span role="img" aria-label="Location">📍</span>
-                  {event.location}
+                  {event.isOnline ? (
+                    <span>
+                      <span role="img" aria-label="Location"> 🕸</span>
+                      Всемирная паутина
+                    </span>
+                  ) : (
+                    <span>
+                      <span role="img" aria-label="Location"> 📍</span>
+                      {event.location}
+                    </span>
+                  )}
                 </div>
                 <div className="button">
                   <img src={"/icons/icon_arrow_forward.png"} alt="le-icon" className="button__image" />
