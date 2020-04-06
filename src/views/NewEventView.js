@@ -98,7 +98,7 @@ class NewEventView extends Component {
         }
         createEvent(event, (id) => {
           console.log('Event created successfully, open it')
-          this.props.history.push(`signin/${id}`)
+          this.props.history.push(`event/${id}`)
         })
       } else {
         alert('Извините, невозможно создать мероприятие. Обратитесь в техподдержку.')
