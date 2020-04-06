@@ -82,33 +82,52 @@ class EventView extends Component {
                     console.log('user.email:', user ? user.email : null)
                     console.log('event.contact:', event ? event.contact : null)
 
-                    const isAbleToDelete = !this.state.deletingInProgress 
+                    const isAbleToDeleteOrEdit = !this.state.deletingInProgress 
                       && user 
                       && event 
                       && user.email === event.contact
                       && name === 'Events For Friends - База данных'
-                    return isAbleToDelete ? (
-                      <div>
-                        <Button
-                          onPress={() => {
-                            if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
-                              this.setState({ deletingInProgress: true }, () => {
-                                deleteEvent(event.id, (success) => {
-                                  if (success) {
-                                    console.log('Event deleted successfully, navigate to list view');
-                                    this.props.history.push(`/list`);
-                                  } else {
-                                    console.log('Failde to delete event');
-                                    this.setState({ deletingInProgress: false });
-                                  }                              
+                    return isAbleToDeleteOrEdit ? (
+                      <div className="controls">
+                        <div>
+                          <Button
+                            onPress={() => {
+                              if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
+                                this.setState({ deletingInProgress: true }, () => {
+                                  deleteEvent(event.id, (success) => {
+                                    if (success) {
+                                      console.log('Event deleted successfully, navigate to list view');
+                                      this.props.history.push(`/list`);
+                                    } else {
+                                      console.log('Failde to delete event');
+                                      this.setState({ deletingInProgress: false });
+                                    }                              
+                                  })
                                 })
-                              })
-                            }
-                          }}
-                          icon="/icons/icon_delete.png"
-                        >
-                          Удалить
-                        </Button>
+                              }
+                            }}
+                            icon="/icons/icon_delete.png"
+                            borderColor="rgba(77, 77, 77, .2)"
+                          >
+                            Удалить
+                          </Button>
+                        </div>
+                        <div>
+                          <ButtonLink 
+                            to={`/editevent/${event.id}`}
+                            icon="/icons/icon_edit.png"
+                            title="Изменить"
+                            style={{ 
+                              width: 165,
+                              display: 'block',
+                              marginRight: 'auto',
+                              marginLeft: 'auto',
+                              marginTop: 8,
+                              marginBottom: 8,
+                              borderColor: 'rgba(77, 77, 77, .2)'
+                            }}
+                          />
+                        </div>
                       </div>
                     ) : null
                   }}

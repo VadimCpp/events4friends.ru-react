@@ -14,3 +14,10 @@
   color: #444;
   text-decoration: none;
 }
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 10px;  
+}
