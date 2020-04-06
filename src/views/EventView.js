@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import moment from 'moment';
 import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
@@ -8,6 +9,12 @@ import 'moment/locale/ru';
 import './EventView.css';
 
 class EventView extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      deletingInProgress: false,
+    }
+  }
 
   /**
    * @param {Array<EventSource>} sources 
@@ -53,7 +60,7 @@ class EventView extends Component {
           />
         </div>
         <DataContext.Consumer>
-          {({ events }) => {
+          {({ events, deleteEvent }) => {
             
             if (event === null) {
               for(let i = 0; i < events.length; i++) {
@@ -69,18 +76,25 @@ class EventView extends Component {
             
             return (
               <div>
-                <div>
-                  <Button
-                    onPress={() => {
-                      if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
-                        console.log('Delete')
-                      }
-                    }}
-                    icon="/icons/icon_delete.png"
-                  >
-                    Удалить
-                  </Button>
-                </div>
+                { !this.state.deletingInProgress && (
+                  <div>
+                    <Button
+                      onPress={() => {
+                        if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
+                          this.setState({ deletingInProgress: true }, () => {
+                            deleteEvent(event.id, () => {
+                              console.log('Event deleted successfully, navigate to list view')
+                              this.props.history.push(`/list`)
+                            })
+                          })
+                        }
+                      }}
+                      icon="/icons/icon_delete.png"
+                    >
+                      Удалить
+                    </Button>
+                  </div>
+                )}
                 <div className="border-top">
                   <div className="container">
                     <div className="event-item container-center">
@@ -195,4 +209,4 @@ class EventView extends Component {
   }
 }
 
-export default EventView;
+export default withRouter(EventView);
