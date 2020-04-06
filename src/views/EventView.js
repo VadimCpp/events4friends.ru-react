@@ -79,9 +79,6 @@ class EventView extends Component {
               <div>
                 <AuthContext.Consumer>
                   {({ user }) => {
-                    console.log('user.email:', user ? user.email : null)
-                    console.log('event.contact:', event ? event.contact : null)
-
                     const isAbleToDeleteOrEdit = !this.state.deletingInProgress 
                       && user 
                       && event 
