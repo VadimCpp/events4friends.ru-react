@@ -4,6 +4,7 @@ import moment from 'moment';
 import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
 import ButtonExternalLink from '../components/ButtonExternalLink';
+import { AuthContext } from '../context/AuthContext'
 import { DataContext } from '../context/DataContext'
 import 'moment/locale/ru';
 import './EventView.css';
@@ -76,30 +77,42 @@ class EventView extends Component {
             
             return (
               <div>
-                { !this.state.deletingInProgress && (
-                  <div>
-                    <Button
-                      onPress={() => {
-                        if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
-                          this.setState({ deletingInProgress: true }, () => {
-                            deleteEvent(event.id, (success) => {
-                              if (success) {
-                                console.log('Event deleted successfully, navigate to list view');
-                                this.props.history.push(`/list`);
-                              } else {
-                                console.log('Failde to delete event');
-                                this.setState({ deletingInProgress: false });
-                              }                              
-                            })
-                          })
-                        }
-                      }}
-                      icon="/icons/icon_delete.png"
-                    >
-                      Удалить
-                    </Button>
-                  </div>
-                )}
+                <AuthContext.Consumer>
+                  {({ user }) => {
+                    console.log('user.email:', user ? user.email : null)
+                    console.log('event.contact:', event ? event.contact : null)
+
+                    const isAbleToDelete = !this.state.deletingInProgress 
+                      && user 
+                      && event 
+                      && user.email === event.contact
+                      && name === 'Events For Friends - База данных'
+                    return isAbleToDelete ? (
+                      <div>
+                        <Button
+                          onPress={() => {
+                            if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
+                              this.setState({ deletingInProgress: true }, () => {
+                                deleteEvent(event.id, (success) => {
+                                  if (success) {
+                                    console.log('Event deleted successfully, navigate to list view');
+                                    this.props.history.push(`/list`);
+                                  } else {
+                                    console.log('Failde to delete event');
+                                    this.setState({ deletingInProgress: false });
+                                  }                              
+                                })
+                              })
+                            }
+                          }}
+                          icon="/icons/icon_delete.png"
+                        >
+                          Удалить
+                        </Button>
+                      </div>
+                    ) : null
+                  }}
+                </AuthContext.Consumer>
                 <div className="border-top">
                   <div className="container">
                     <div className="event-item container-center">
