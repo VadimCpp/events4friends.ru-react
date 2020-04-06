@@ -14,10 +14,10 @@ class NewEventView extends Component {
       summary: 'Название',
       description: 'Описание',
       isOnline: true,
-      location: 'Место/Ссылка',
+      location: '',
       start: '',
       end: '',
-      reference: 'Ссылка на источник',
+      reference: '',
     }
   }
 
@@ -171,13 +171,15 @@ class NewEventView extends Component {
                           <p className="text-left">
                             Полное описание:
                           </p>
-                          <input
+                          <textarea 
                             className="textinput__input"
-                            type="text"
-                            name="description"
-                            value={description}
+                            name="message"
+                            rows="10"
+                            cols="80"
                             onChange={this.handleDescriptionChange}
-                          />
+                          >
+                            {description}
+                          </textarea>
                         </label>
                       </div>
                       <div className="textinput">
