@@ -14,6 +14,7 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.unsubscribeFromEventsChanges = () => {}
     this.state = {
       user: null,
       services: [
@@ -34,6 +35,7 @@ class App extends Component {
           telegram: 'frontendbasics'
         },
       ],
+      events: [],
       config: {
         description: "Цифровое пространство (initial)",
         name: "events4friends (initial)",
@@ -101,7 +103,8 @@ class App extends Component {
         }
         that.setState({ user }, () => {
           that.getConfig();
-          that.getServices();  
+          that.getServices();
+          that.subscribeForEventsChanges()
         });
       } else {
         console.log('onAuthStateChanged: user is not loggen in, login anonimously');
@@ -119,6 +122,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
+    this.unsubscribeFromEventsChanges();
     this.clipboard = null;
     clearTimeout(this.timer);
   }
@@ -161,6 +165,30 @@ class App extends Component {
     .catch(function(error) {
       console.warn("Error getting services, skip: ", error);
     });    
+  }
+
+  subscribeForEventsChanges = () => {
+    //
+    // NOTE!
+    // Get realtime updates with Cloud Firestore
+    // https://firebase.google.com/docs/firestore/query-data/listen
+    //
+    const that = this
+    const db = firebase.firestore();
+
+    console.log('Subscribe for events changes')
+
+    this.unsubscribeFromEventsChanges = db.collection('events')
+      .onSnapshot(async snapshot => {
+        if (snapshot && snapshot.docs && snapshot.docs.length) {
+          const events = snapshot.docs.reduce((result, item) => {
+            return [...result, { ...item.data(), id: item.id }]
+          }, [])
+          that.setState({ events }, () => {
+            console.log('Get shapshot: events updated successfully')
+          })
+        }
+      })
   }
     
   signIn = (email, password) => {
@@ -211,7 +239,7 @@ class App extends Component {
         signOut: this.signOut,
       }}>
         <DataContext.Provider value={{
-          events: [],
+          events: this.state.events,
           createEvent: this.createEvent,
           services: this.state.services,
           config: this.state.config,
