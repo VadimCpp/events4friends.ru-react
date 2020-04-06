@@ -177,9 +177,8 @@ class NewEventView extends Component {
                             rows="10"
                             cols="80"
                             onChange={this.handleDescriptionChange}
-                          >
-                            {description}
-                          </textarea>
+                            value={description}
+                          />
                         </label>
                       </div>
                       <div className="textinput">

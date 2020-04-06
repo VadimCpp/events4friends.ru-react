@@ -231,6 +231,18 @@ class App extends Component {
     
   }
 
+  deleteEvent = (eventId, callback) => {
+    console.log('Delete event, eventId:', eventId)
+
+    const db = firebase.firestore();
+    db.collection("events").doc(eventId).delete().then(function() {
+      callback()
+    }).catch(function(error) {
+      console.warn("Error removing document:", error);
+      alert('Не удалось удалить событие. Пожалуйста, обратитесь в службу поддержки.')
+    });
+  }
+
   render() {
     return (
       <AuthContext.Provider value={{
@@ -241,6 +253,7 @@ class App extends Component {
         <DataContext.Provider value={{
           events: this.state.events,
           createEvent: this.createEvent,
+          deleteEvent: this.deleteEvent,
           services: this.state.services,
           config: this.state.config,
         }}>
