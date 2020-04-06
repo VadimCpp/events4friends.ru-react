@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
 import ButtonExternalLink from '../components/ButtonExternalLink';
 import { DataContext } from '../context/DataContext'
@@ -67,79 +68,93 @@ class EventView extends Component {
             }
             
             return (
-              <div className="border-top">
-                <div className="container">
-                  <div className="event-item container-center">
-                    {!event && (
-                      <div>
-                        <p align="center">
-                          Мероприятие недоступно <span role="img" aria-label="sad">🙁</span>
-                        </p>
-                        <p align="center">
-                          Попробуйте вернуться на главную страницу сайта
-                          и выполнить вход ВК *
-                        </p>
-                      </div>
-                    )}
-                    {event && (
-                      <div>
+              <div>
+                <div>
+                  <Button
+                    onPress={() => {
+                      if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
+                        console.log('Delete')
+                      }
+                    }}
+                    icon="/icons/icon_delete.png"
+                  >
+                    Удалить
+                  </Button>
+                </div>
+                <div className="border-top">
+                  <div className="container">
+                    <div className="event-item container-center">
+                      {!event && (
                         <div>
-                          {name && (
-                            <small className="calendar-name">#{name}</small>
-                          )}
-                          <p>
-                            <span role="img" aria-label="Date">📅</span>
-                            <span className="event-date">{startDate}</span>
-
-                            <span role="img" aria-label="Time">🕗</span>
-                            <span className="event-time">{startTime}</span>
-
-                            － «
-                            {event.summary}
-                            »
-
-                            {event.isOnline ? (
-                              <span>
-                                <span role="img" aria-label="Location"> 🕸</span>
-                                Всемирная паутина
-                              </span>
-                            ) : (
-                              <span>
-                                <span role="img" aria-label="Location"> 📍</span>
-                                {event.location}
-                              </span>
-                            )}
-                            
+                          <p align="center">
+                            Мероприятие недоступно <span role="img" aria-label="sad">🙁</span>
                           </p>
-                          <div>
-                            <p dangerouslySetInnerHTML={{ __html: event.description }} />
-                          </div>
-                          <p>
-                            {event.isOnline && (
-                              <span>
-                                Ссылка на онлайн трансляцию: <br />
-                                <a href={event.location}>{event.location}</a>
-                              </span>
-                            )}
+                          <p align="center">
+                            Попробуйте вернуться на главную страницу сайта
+                            и выполнить вход ВК *
                           </p>
                         </div>
-                        {event.reference && (
-                          <ButtonExternalLink
-                            href={event.reference}
-                            icon="/icons/icon_external_link.png"
-                            title="Ссылка на источник"
-                            style={{
-                              display: "block",
-                              width: 250,
-                              marginRight: 'auto',
-                              marginLeft: 'auto',
-                              marginTop: 28,
-                              borderColor: "rgb(77, 77, 77)",
-                            }}
-                          />
-                        )}
-                      </div>
-                    )}
+                      )}
+                      {event && (
+                        <div>
+                          <div>
+                            {name && (
+                              <small className="calendar-name">#{name}</small>
+                            )}
+                            <p>
+                              <span role="img" aria-label="Date">📅</span>
+                              <span className="event-date">{startDate}</span>
+
+                              <span role="img" aria-label="Time">🕗</span>
+                              <span className="event-time">{startTime}</span>
+
+                              － «
+                              {event.summary}
+                              »
+
+                              {event.isOnline ? (
+                                <span>
+                                  <span role="img" aria-label="Location"> 🕸</span>
+                                  Всемирная паутина
+                                </span>
+                              ) : (
+                                <span>
+                                  <span role="img" aria-label="Location"> 📍</span>
+                                  {event.location}
+                                </span>
+                              )}
+                              
+                            </p>
+                            <div>
+                              <p dangerouslySetInnerHTML={{ __html: event.description }} />
+                            </div>
+                            <p>
+                              {event.isOnline && (
+                                <span>
+                                  Ссылка на онлайн трансляцию: <br />
+                                  <a href={event.location}>{event.location}</a>
+                                </span>
+                              )}
+                            </p>
+                          </div>
+                          {event.reference && (
+                            <ButtonExternalLink
+                              href={event.reference}
+                              icon="/icons/icon_external_link.png"
+                              title="Ссылка на источник"
+                              style={{
+                                display: "block",
+                                width: 250,
+                                marginRight: 'auto',
+                                marginLeft: 'auto',
+                                marginTop: 28,
+                                borderColor: "rgb(77, 77, 77)",
+                              }}
+                            />
+                          )}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
