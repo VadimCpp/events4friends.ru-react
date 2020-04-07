@@ -231,6 +231,22 @@ class App extends Component {
     
   }
 
+  createEvent = (data, callback) => {
+    console.log('Update event, data:', data)
+
+    const db = firebase.firestore();
+    db.collection("events").doc(data.id).update(data)
+    .then(() => {
+      console.log("Document successfully updated!");
+      callback(true)
+    })
+    .catch((error) => {
+      console.warn('Error updating event', error);
+      callback(false)
+    })
+    
+  }
+
   deleteEvent = (eventId, callback) => {
     console.log('Delete event, eventId:', eventId)
 
@@ -255,6 +271,7 @@ class App extends Component {
           events: this.state.events,
           createEvent: this.createEvent,
           deleteEvent: this.deleteEvent,
+          editEvent: this.editEvent,
           services: this.state.services,
           config: this.state.config,
         }}>
