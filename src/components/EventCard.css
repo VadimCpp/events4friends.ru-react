@@ -68,6 +68,14 @@
   color: #999;
 }
 
+.calendar-owner {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
 .button__image {
   position: relative;
   top : 13px;

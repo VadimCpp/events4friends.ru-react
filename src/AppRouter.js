@@ -12,6 +12,7 @@ import LoginView from "./views/LoginView.js";
 import ServicesView from "./views/ServicesView.js";
 import ServiceView from "./views/ServiceView.js";
 import NewEventView from "./views/NewEventView.js";
+import EditEventView from "./views/EditEventView.js";
 
 import EventsSource from "./model/EventsSource";
 import Header from './components/Header.js'
@@ -119,7 +120,14 @@ class AppRouter extends Component {
                     render={props => (
                       <ServiceView {...props}/>
                     )}
-                  />                  
+                  />
+                  <Route
+                    path="/editevent/:id"
+                    render={props => (
+                      <EditEventView {...props}/>
+                    )}
+                  />
+                  
 
                   {/* <Route path="/map/" render={props => (
                     <MapView {...props} googleEvents={events} getEvent={this.getEvent} />

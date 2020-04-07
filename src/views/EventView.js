@@ -4,6 +4,7 @@ import moment from 'moment';
 import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
 import ButtonExternalLink from '../components/ButtonExternalLink';
+import { AuthContext } from '../context/AuthContext'
 import { DataContext } from '../context/DataContext'
 import 'moment/locale/ru';
 import './EventView.css';
@@ -76,25 +77,58 @@ class EventView extends Component {
             
             return (
               <div>
-                { !this.state.deletingInProgress && (
-                  <div>
-                    <Button
-                      onPress={() => {
-                        if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
-                          this.setState({ deletingInProgress: true }, () => {
-                            deleteEvent(event.id, () => {
-                              console.log('Event deleted successfully, navigate to list view')
-                              this.props.history.push(`/list`)
-                            })
-                          })
-                        }
-                      }}
-                      icon="/icons/icon_delete.png"
-                    >
-                      Удалить
-                    </Button>
-                  </div>
-                )}
+                <AuthContext.Consumer>
+                  {({ user }) => {
+                    const isAbleToDeleteOrEdit = !this.state.deletingInProgress 
+                      && user 
+                      && event 
+                      && user.email === event.contact
+                      && name === 'Events For Friends - База данных'
+                    return isAbleToDeleteOrEdit ? (
+                      <div className="controls">
+                        <div>
+                          <Button
+                            onPress={() => {
+                              if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
+                                this.setState({ deletingInProgress: true }, () => {
+                                  deleteEvent(event.id, (success) => {
+                                    if (success) {
+                                      console.log('Event deleted successfully, navigate to list view');
+                                      this.props.history.push(`/list`);
+                                    } else {
+                                      console.log('Failde to delete event');
+                                      this.setState({ deletingInProgress: false });
+                                    }                              
+                                  })
+                                })
+                              }
+                            }}
+                            icon="/icons/icon_delete.png"
+                            borderColor="rgba(77, 77, 77, .2)"
+                          >
+                            Удалить
+                          </Button>
+                        </div>
+                        <div>
+                          <ButtonLink 
+                            to={`/editevent/${event.id}`}
+                            icon="/icons/icon_edit.png"
+                            title="Изменить"
+                            style={{ 
+                              width: 165,
+                              display: 'block',
+                              marginRight: 'auto',
+                              marginLeft: 'auto',
+                              marginTop: 8,
+                              marginBottom: 8,
+                              borderColor: 'rgba(77, 77, 77, .2)'
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ) : null
+                  }}
+                </AuthContext.Consumer>
                 <div className="border-top">
                   <div className="container">
                     <div className="event-item container-center">

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link, withRouter } from "react-router-dom";
+import { AuthContext } from '../context/AuthContext'
 import 'moment/locale/ru';
 import './EventCard.css';
 
@@ -19,7 +20,20 @@ class EventCard extends Component {
       <Link className="reset-link-style" to={`/event/${event.id}`}>
         <div className="border-top">
           <div className="container">
-            <div className="event-item container-center">            
+            <div className="event-item container-center">
+              <AuthContext.Consumer>
+                {({ user }) => {
+                  const isOwner = user 
+                    && event 
+                    && user.email === event.contact
+                    && name === 'Events For Friends - База данных'
+                  return isOwner ? (
+                    <small className="calendar-owner text-success">
+                      Мой анонс
+                    </small>
+                  ) : null
+                }}
+              </AuthContext.Consumer>                          
               <small className="calendar-name">#{name}</small>
               <div className="d-flex align-items-center justify-content-between">
                 <div>

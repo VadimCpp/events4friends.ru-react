@@ -211,7 +211,7 @@ class App extends Component {
   }
 
   createEvent = (data, callback) => {
-    console.log('Create event, data:', data)
+    console.log('Creating event')
 
     const db = firebase.firestore();
     db.collection("events").add(data)
@@ -228,7 +228,21 @@ class App extends Component {
       console.warn('Error creating event', error);
       alert('Не удалось создать событие. Пожалуйста, обратитесь в службу поддержки.')
     })
-    
+  }
+
+  editEvent = (data, docId, callback) => {
+    console.log('Updating event')
+
+    const db = firebase.firestore();
+    db.collection("events").doc(docId).update(data)
+    .then(() => {
+      console.log("Document successfully updated!");
+      callback(true)
+    })
+    .catch((error) => {
+      console.warn('Error updating event', error);
+      callback(false)
+    })
   }
 
   deleteEvent = (eventId, callback) => {
@@ -236,8 +250,9 @@ class App extends Component {
 
     const db = firebase.firestore();
     db.collection("events").doc(eventId).delete().then(function() {
-      callback()
+      callback(true)
     }).catch(function(error) {
+      callback(false)
       console.warn("Error removing document:", error);
       alert('Не удалось удалить событие. Пожалуйста, обратитесь в службу поддержки.')
     });
@@ -254,6 +269,7 @@ class App extends Component {
           events: this.state.events,
           createEvent: this.createEvent,
           deleteEvent: this.deleteEvent,
+          editEvent: this.editEvent,
           services: this.state.services,
           config: this.state.config,
         }}>
