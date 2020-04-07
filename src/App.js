@@ -211,7 +211,7 @@ class App extends Component {
   }
 
   createEvent = (data, callback) => {
-    console.log('Create event, data:', data)
+    console.log('Creating event')
 
     const db = firebase.firestore();
     db.collection("events").add(data)
@@ -228,14 +228,13 @@ class App extends Component {
       console.warn('Error creating event', error);
       alert('Не удалось создать событие. Пожалуйста, обратитесь в службу поддержки.')
     })
-    
   }
 
-  createEvent = (data, callback) => {
-    console.log('Update event, data:', data)
+  editEvent = (data, docId, callback) => {
+    console.log('Updating event')
 
     const db = firebase.firestore();
-    db.collection("events").doc(data.id).update(data)
+    db.collection("events").doc(docId).update(data)
     .then(() => {
       console.log("Document successfully updated!");
       callback(true)
@@ -244,7 +243,6 @@ class App extends Component {
       console.warn('Error updating event', error);
       callback(false)
     })
-    
   }
 
   deleteEvent = (eventId, callback) => {

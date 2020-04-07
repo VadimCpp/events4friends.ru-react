@@ -11,13 +11,15 @@ class EditEventView extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      summary: 'Название',
-      description: 'Описание',
+      summary: '',
+      description: '',
       isOnline: true,
       location: '',
       start: '',
       end: '',
       reference: '',
+      id: '',
+      updatingEvent: false,
     }
   }
 
@@ -62,6 +64,7 @@ class EditEventView extends Component {
       start,
       end,              
       reference,
+      id,
     } = this.state;
 
     //
@@ -96,12 +99,17 @@ class EditEventView extends Component {
           end,
           reference
         }
-        editEvent(event, () => {
-          console.log('Event updated successfully, open it')
-          // this.props.history.push(`event/${id}`)
+        editEvent(event, id, (aSuccess) => {
+          if (aSuccess) {
+            console.log('Event updated successfully, open it')
+            this.props.history.push(`/event/${id}`)
+          } else {
+            this.setState({ updatingEvent: false })
+            alert('Не удалось изменить событие. Пожалуйста, обратитесь в службу поддержки.')
+          }
         })
       } else {
-        alert('Извините, невозможно создать мероприятие. Обратитесь в техподдержку.')
+        alert('Извините, невозможно изменить мероприятие. Обратитесь в техподдержку.')
         console.warn('Error user data, skip')
       }
     } else {
@@ -137,6 +145,7 @@ class EditEventView extends Component {
               start,
               end,              
               reference,
+              updatingEvent,
             } = this.state;
 
             let userAuthorized = false
@@ -149,8 +158,29 @@ class EditEventView extends Component {
 
             return userAuthorized ? (
               <DataContext.Consumer>
-                {({ editEvent }) => {
-                  return (
+                {({ events, editEvent }) => {
+                  const eventId = this.props.match.params.id;
+                  let event = null;
+                  for(let i = 0; i < events.length; i++) {
+                    if (eventId === events[i].id) {
+                      event = events[i]
+                      if (event.id !== this.state.id) {
+                        this.setState({
+                          summary: event.summary,
+                          description: event.description,
+                          isOnline: event.isOnline,
+                          location: event.location,
+                          start: event.start,
+                          end: event.end,
+                          reference: event.reference,
+                          id: event.id,
+                        });
+                      }
+                      break;
+                    }
+                  }
+
+                  return event ? (
                     <div className="neweventview">
                       <div className="textinput">
                         <label>
@@ -283,15 +313,33 @@ class EditEventView extends Component {
                             onChange={this.handleReferenceChange}
                           />
                         </label>
-                      </div>                                                    
-                      <Button
-                        onPress={() => {
-                          this.editEventForUser(user, editEvent)
-                        }}
-                        icon="/icons/icon_save.png"
-                      >
-                        Сохранить
-                      </Button>
+                      </div>
+                      {updatingEvent ? (
+                        <div>
+                          <p>
+                            Сохраняем событие...
+                          </p>
+                        </div>
+                      ) : (                                                 
+                        <Button
+                          onPress={() => {
+                            this.setState({ updatingEvent: true }, () => {
+                              this.editEventForUser(user, editEvent)
+                            })
+                          }}
+                          icon="/icons/icon_save.png"
+                        >
+                          Сохранить
+                        </Button>
+                      )}
+                    </div>
+                  ) : (
+                    <div>
+                      <p>
+                        Событие не найдено, возможно оно удалено. 
+                        Рекомендуем вернуться к списку анонсов
+                        и выбрать мероприятие еще раз.
+                      </p>
                     </div>
                   )
                 }}
@@ -308,7 +356,7 @@ class EditEventView extends Component {
         
         <div className="border-top">
           <div className="container container-center pt-4 pb-5">
-            <p>У вас есть вопросы о том, как добавить мероприятие? 
+            <p>У вас есть вопросы о том, как редактировать мероприятие? 
               Задайте вопрос в чате:</p>
             <ButtonExternalLink
               href="https://tglink.ru/events4friends"
