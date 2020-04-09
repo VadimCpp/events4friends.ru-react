@@ -211,13 +211,15 @@ class App extends Component {
   }
 
   createEvent = (data, callback) => {
-    console.log('Creating event')
+    const that = this;
+    console.log('Creating event');
 
     const db = firebase.firestore();
     db.collection("events").add(data)
     .then((data) => {
       if (data && data.id && callback) {
         callback(data.id)
+        that.updateTelegramPinnedMessage()
       } else {
         console.warn('Something went wrong, contact support');
         alert('Что-то пошло не так при создании события. Пожалуйста, обратитесь в службу поддержки.')
@@ -231,6 +233,7 @@ class App extends Component {
   }
 
   editEvent = (data, docId, callback) => {
+    const that = this;
     console.log('Updating event')
 
     const db = firebase.firestore();
@@ -238,6 +241,7 @@ class App extends Component {
     .then(() => {
       console.log("Document successfully updated!");
       callback(true)
+      that.updateTelegramPinnedMessage()
     })
     .catch((error) => {
       console.warn('Error updating event', error);
@@ -246,11 +250,13 @@ class App extends Component {
   }
 
   deleteEvent = (eventId, callback) => {
+    const that = this;
     console.log('Delete event, eventId:', eventId)
 
     const db = firebase.firestore();
     db.collection("events").doc(eventId).delete().then(function() {
       callback(true)
+      that.updateTelegramPinnedMessage()
     }).catch(function(error) {
       callback(false)
       console.warn("Error removing document:", error);
@@ -258,6 +264,19 @@ class App extends Component {
     });
   }
 
+  updateTelegramPinnedMessage = () => {
+    console.log('Updating Telegram pinned message')
+    fetch("https://events4friendsbot.herokuapp.com/update",
+    {
+        body: {},
+        method: "post"
+    }).then(data => { 
+        console.log('Updating Telegram pinned message done:', data);
+    }).catch(error => {
+        console.warn('Failed to update Telegram pinned message:', error)
+    })
+  }
+  
   render() {
     return (
       <AuthContext.Provider value={{
