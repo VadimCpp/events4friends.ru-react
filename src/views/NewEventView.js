@@ -299,7 +299,15 @@ class NewEventView extends Component {
             ) : (
               <div>
                 <p>
-                  Для того, чтобы добавлять мероприятия, выполните вход
+                  Для того, чтобы добавлять мероприятия, выполните&nbsp;
+                  <button
+                    className="btn btn-link btn-link-vk"
+                    onClick={() => {
+                      this.props.history.push('signin/')
+                    }}
+                  >
+                    <span>вход</span>
+                  </button>
                 </p>
               </div>
             )
