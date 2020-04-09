@@ -53,7 +53,7 @@ class LoginView extends Component {
                           <ButtonLink
                             to="/"
                             icon="/icons/icon_arrow_back.png"
-                            title="Вернуться на эран приветствия"
+                            title="Вернуться на экран приветствия"
                             style={{
                               width: 155,
                               display: 'block',
