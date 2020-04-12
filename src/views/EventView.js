@@ -115,20 +115,33 @@ class EventView extends Component {
                       <div className="border-top">
                         <div className="container">
                           <div className="event-item container-center">
-                            {!event && loadingStatuses.connectingToFirebase && (
-                              <div>
+                            {!event
+                              && loadingStatuses.connectingToFirebase
+                              && (
                                 <p align="center">
                                   Подключаемся к базе данных...
                                 </p>
-                              </div>
-                            )}
-                            {!event && !loadingStatuses.connectingToFirebase && (
+                              )
+                            }
+                            {!event
+                              && !loadingStatuses.connectingToFirebase
+                              && loadingStatuses.loadingEvents
+                              && (
+                                <p align="center">
+                                  Загружаем событие...
+                                </p>
+                              )
+                            }
+                            {!event
+                              && !loadingStatuses.connectingToFirebase
+                              && !loadingStatuses.loadingEvents
+                              && (
                               <div>
                                 <p align="center">
                                   Мероприятие недоступно <span role="img" aria-label="sad">🙁</span>
                                 </p>
                                 <p align="center">
-                                  Возможно, оно было удалено.
+                                  Возможно, оно было удалено или Вы открыли «битую» ссылку.
                                 </p>
                               </div>
                             )}

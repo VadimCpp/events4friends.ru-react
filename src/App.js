@@ -25,6 +25,7 @@ class App extends Component {
         version: null,
       },
       connectingToFirebase: true,
+      loadingEvents: true,
     }
   }
 
@@ -171,7 +172,10 @@ class App extends Component {
           const events = snapshot.docs.reduce((result, item) => {
             return [...result, { ...item.data(), id: item.id }]
           }, [])
-          that.setState({ events }, () => {
+          that.setState({ 
+            events,
+            loadingEvents: false,
+          }, () => {
             console.log('Get shapshot: events updated successfully')
           })
         }
@@ -271,8 +275,9 @@ class App extends Component {
         signIn: this.signIn,
         signOut: this.signOut,
         loadingStatuses: {
-          connectingToFirebase: this.state.connectingToFirebase
-        }
+          connectingToFirebase: this.state.connectingToFirebase,
+          loadingEvents: this.state.loadingEvents,
+        },
       }}>
         <DataContext.Provider value={{
           events: this.state.events,
