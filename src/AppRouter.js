@@ -105,25 +105,25 @@ class AppRouter extends Component {
                   <Route 
                     path="/list/"
                     render={props => (
-                      <ListView {...props} eventsSources={eventsSources} />
+                      <ListView {...props} />
                     )}
                   />
                   <Route
                     path="/event/:id"
                     render={props => (
-                      <EventView {...props} eventsSources={eventsSources} />
+                      <EventView {...props} />
                     )}
                   />
                   <Route
                     path="/service/:id"
                     render={props => (
-                      <ServiceView {...props}/>
+                      <ServiceView {...props} />
                     )}
                   />
                   <Route
                     path="/editevent/:id"
                     render={props => (
-                      <EditEventView {...props}/>
+                      <EditEventView {...props} />
                     )}
                   />
                   
