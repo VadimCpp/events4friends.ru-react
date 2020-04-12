@@ -17,31 +17,8 @@ class EventView extends Component {
     }
   }
 
-  /**
-   * @param {Array<EventSource>} sources 
-   * @param {string} eventId 
-   */
-  getEventFromSourcesById(sources, eventId) {
-    for (let i = 0; i < sources.length; i++) {
-      const source = sources[i];
-      const events = source.getEvents();
-      for (let j = 0; j < events.length; j++) {
-        const event = events[j];
-        if (event.id === eventId) {
-          return { event, name: source.name };
-        }
-      }
-    }
-    return { event: null, name: null };
-  }
-
   render() {
     const eventId = this.props.match.params.id;
-    const { eventsSources } = this.props;
-    let { event, name } = this.getEventFromSourcesById(eventsSources, eventId);
-
-    let startDate = event ? moment(event.start).format('D MMMM, dddd') : 'Не указано';
-    let startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
 
     return (
       <div>
@@ -63,15 +40,18 @@ class EventView extends Component {
         <DataContext.Consumer>
           {({ events, deleteEvent }) => {
             
-            if (event === null) {
-              for(let i = 0; i < events.length; i++) {
-                if (eventId === events[i].id) {
-                  event = events[i]
-                  name = 'Events For Friends - База данных'
-                  startDate = event ? moment(event.start).format('D MMMM, dddd') : 'Не указано';
-                  startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
-                  break;
-                }
+            let event = null;
+            let name = null;
+            let startDate = 'Не указано';
+            let startTime = 'Не указано';
+
+            for(let i = 0; i < events.length; i++) {
+              if (eventId === events[i].id) {
+                event = events[i]
+                name = 'База данных events4friends'
+                startDate = event ? moment(event.start).format('D MMMM, dddd') : 'Не указано';
+                startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
+                break;
               }
             }
             
@@ -83,7 +63,7 @@ class EventView extends Component {
                       && user 
                       && event 
                       && user.email === event.contact
-                      && name === 'Events For Friends - База данных'
+                      && name === 'База данных events4friends'
                     return isAbleToDeleteOrEdit ? (
                       <div className="controls">
                         <div>
