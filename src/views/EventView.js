@@ -63,7 +63,7 @@ class EventView extends Component {
                       && user 
                       && event 
                       && user.email === event.contact
-                      && name === 'База данных events4friends'
+                      && name === 'База данных events4friends'                      
                     return isAbleToDeleteOrEdit ? (
                       <div className="controls">
                         <div>
@@ -109,82 +109,94 @@ class EventView extends Component {
                     ) : null
                   }}
                 </AuthContext.Consumer>
-                <div className="border-top">
-                  <div className="container">
-                    <div className="event-item container-center">
-                      {!event && (
-                        <div>
-                          <p align="center">
-                            Мероприятие недоступно <span role="img" aria-label="sad">🙁</span>
-                          </p>
-                          <p align="center">
-                            Попробуйте вернуться на главную страницу сайта
-                            и выполнить вход ВК *
-                          </p>
-                        </div>
-                      )}
-                      {event && (
-                        <div>
-                          <div>
-                            {name && (
-                              <small className="calendar-name">#{name}</small>
+                <AuthContext.Consumer>
+                  {({ loadingStatuses }) => {
+                    return (
+                      <div className="border-top">
+                        <div className="container">
+                          <div className="event-item container-center">
+                            {!event && loadingStatuses.connectingToFirebase && (
+                              <div>
+                                <p align="center">
+                                  Подключаемся к базе данных...
+                                </p>
+                              </div>
                             )}
-                            <p>
-                              <span role="img" aria-label="Date">📅</span>
-                              <span className="event-date">{startDate}</span>
-
-                              <span role="img" aria-label="Time">🕗</span>
-                              <span className="event-time">{startTime}</span>
-
-                              － «
-                              {event.summary}
-                              »
-
-                              {event.isOnline ? (
-                                <span>
-                                  <span role="img" aria-label="Location"> 🕸</span>
-                                  Всемирная паутина
-                                </span>
-                              ) : (
-                                <span>
-                                  <span role="img" aria-label="Location"> 📍</span>
-                                  {event.location}
-                                </span>
-                              )}
-                              
-                            </p>
-                            <div>
-                              <p dangerouslySetInnerHTML={{ __html: event.description }} />
-                            </div>
-                            <p>
-                              {event.isOnline && (
-                                <span>
-                                  Ссылка на онлайн трансляцию: <br />
-                                  <a href={event.location}>{event.location}</a>
-                                </span>
-                              )}
-                            </p>
+                            {!event && !loadingStatuses.connectingToFirebase && (
+                              <div>
+                                <p align="center">
+                                  Мероприятие недоступно <span role="img" aria-label="sad">🙁</span>
+                                </p>
+                                <p align="center">
+                                  Возможно, оно было удалено.
+                                </p>
+                              </div>
+                            )}
+                            {event && (
+                              <div>
+                                <div>
+                                  {name && (
+                                    <small className="calendar-name">#{name}</small>
+                                  )}
+                                  <p>
+                                    <span role="img" aria-label="Date">📅</span>
+                                    <span className="event-date">{startDate}</span>
+      
+                                    <span role="img" aria-label="Time">🕗</span>
+                                    <span className="event-time">{startTime}</span>
+      
+                                    － «
+                                    {event.summary}
+                                    »
+      
+                                    {event.isOnline ? (
+                                      <span>
+                                        <span role="img" aria-label="Location"> 🕸</span>
+                                        Всемирная паутина
+                                      </span>
+                                    ) : (
+                                      <span>
+                                        <span role="img" aria-label="Location"> 📍</span>
+                                        {event.location}
+                                      </span>
+                                    )}
+                                    
+                                  </p>
+                                  <div>
+                                    <p dangerouslySetInnerHTML={{ __html: event.description }} />
+                                  </div>
+                                  <p>
+                                    {event.isOnline && (
+                                      <span>
+                                        Ссылка на онлайн трансляцию: <br />
+                                        <a href={event.location}>{event.location}</a>
+                                      </span>
+                                    )}
+                                  </p>
+                                </div>
+                                {event.reference && (
+                                  <ButtonExternalLink
+                                    href={event.reference}
+                                    icon="/icons/icon_external_link.png"
+                                    title="Ссылка на источник"
+                                    style={{
+                                      display: "block",
+                                      width: 250,
+                                      marginRight: 'auto',
+                                      marginLeft: 'auto',
+                                      marginTop: 28,
+                                      borderColor: "rgb(77, 77, 77)",
+                                    }}
+                                  />
+                                )}
+                              </div>
+                            )}
                           </div>
-                          {event.reference && (
-                            <ButtonExternalLink
-                              href={event.reference}
-                              icon="/icons/icon_external_link.png"
-                              title="Ссылка на источник"
-                              style={{
-                                display: "block",
-                                width: 250,
-                                marginRight: 'auto',
-                                marginLeft: 'auto',
-                                marginTop: 28,
-                                borderColor: "rgb(77, 77, 77)",
-                              }}
-                            />
-                          )}
                         </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                      </div>                      
+                    )
+                  }}
+                </AuthContext.Consumer>
               </div>
             )
           }}
