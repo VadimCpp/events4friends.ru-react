@@ -26,42 +26,23 @@ class ListView extends Component {
   }
 
   render() {
-    const { eventsSources } = this.props;
-
-    let commonList = [];
-
-    eventsSources.forEach(source => {
-      const events = source.getEvents();
-
-      if (!events || !events.length) {
-        return;
-      }
-      
-      events.forEach(event => {
-        commonList.push({source, event});
-      });
-    });
-
     return (
       <DataContext.Consumer>
         {({ events }) => {
-          
-          const unifiedFBEvents = events.map((item) => { 
+          const eventsList = events.map((item) => { 
             return {
               event: item,
               source: {
-                name: 'Events For Friends - База данных'
+                name: 'База данных events4friends'
               },
             }
           });
 
-          commonList = [ ...unifiedFBEvents, ...commonList ]
-
-          commonList.sort((firstEl, secondEl) => {
+          eventsList.sort((firstEl, secondEl) => {
             return firstEl.event.start > secondEl.event.start ? -1 : 1;
           });
       
-          commonList.length = 10;
+          eventsList.length = 50;
 
           return (
             <div className="main-view">
@@ -116,7 +97,7 @@ class ListView extends Component {
                 }}
               </AuthContext.Consumer>
               <div className="pt-3">
-                { commonList.length ? commonList.map(eventItem => this.displayEvent(eventItem.event, eventItem.source)) : null }
+                { eventsList.length ? eventsList.map(eventItem => this.displayEvent(eventItem.event, eventItem.source)) : null }
               </div>
             </div>
           )

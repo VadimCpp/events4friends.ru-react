@@ -17,30 +17,15 @@ class App extends Component {
     this.unsubscribeFromEventsChanges = () => {}
     this.state = {
       user: null,
-      services: [
-        {
-          id: 'service5',
-          name: 'HR сообщество (initial)',
-          service: 'Трудовое право',
-          description: 'В нашем чате мы предлегаем бесплатные консультации по трудовому праву. Вы знаете, что работодатель не имеет права Вас сократить в столь нелегкое время? А мы знаем!',
-          isFree: true,
-          telegram: 'hrchatv2'
-        },
-        {
-          id: 'service6',
-          name: 'IT сообщество (initial)',
-          service: 'IT консультации',
-          description: 'В нашем сообществе мы предлагаем бесплатные консультации по всем вопросам ИТ. Мы знаем все!',
-          isFree: true,
-          telegram: 'frontendbasics'
-        },
-      ],
+      services: [],
       events: [],
       config: {
-        description: "Цифровое пространство (initial)",
-        name: "events4friends (initial)",
-        version: '0.1 (initial)'
-      },      
+        description: null,
+        name: null,
+        version: null,
+      },
+      connectingToFirebase: true,
+      loadingEvents: true,
     }
   }
 
@@ -101,13 +86,16 @@ class App extends Component {
         } else {
           console.log('onAuthStateChanged: user is logged in successfully');
         }
-        that.setState({ user }, () => {
+        that.setState({
+          user, 
+          connectingToFirebase: false
+        }, () => {
           that.getConfig();
           that.getServices();
           that.subscribeForEventsChanges()
         });
       } else {
-        console.log('onAuthStateChanged: user is not loggen in, login anonimously');
+        console.log('onAuthStateChanged: user is not loggen in, login anonymously');
         //
         // NOTE!
         // Log in anonymously
@@ -184,7 +172,10 @@ class App extends Component {
           const events = snapshot.docs.reduce((result, item) => {
             return [...result, { ...item.data(), id: item.id }]
           }, [])
-          that.setState({ events }, () => {
+          that.setState({ 
+            events,
+            loadingEvents: false,
+          }, () => {
             console.log('Get shapshot: events updated successfully')
           })
         }
@@ -283,6 +274,10 @@ class App extends Component {
         user: this.state.user,
         signIn: this.signIn,
         signOut: this.signOut,
+        loadingStatuses: {
+          connectingToFirebase: this.state.connectingToFirebase,
+          loadingEvents: this.state.loadingEvents,
+        },
       }}>
         <DataContext.Provider value={{
           events: this.state.events,

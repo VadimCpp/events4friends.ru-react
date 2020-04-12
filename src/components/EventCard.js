@@ -26,7 +26,7 @@ class EventCard extends Component {
                   const isOwner = user 
                     && event 
                     && user.email === event.contact
-                    && name === 'Events For Friends - База данных'
+                    && name === 'База данных events4friends'
                   return isOwner ? (
                     <small className="calendar-owner text-success">
                       Мой анонс

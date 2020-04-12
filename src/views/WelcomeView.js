@@ -93,19 +93,6 @@ class WelcomeView extends Component {
                 marginBottom: 10
               }}
             />
-{/* 
-            <ButtonLink 
-              to="/map" 
-              icon="/icons/icon_map.png"
-              title="Открыть карту"
-              style={{ 
-                width: 250,
-                display: 'block',
-                marginRight: 'auto',
-                marginLeft: 'auto',
-                marginBottom: 10
-              }}
-            /> */}
           </div>
         </div>
 
