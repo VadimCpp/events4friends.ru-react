@@ -62,12 +62,12 @@ class WelcomeView extends Component {
         
         <div className="welcomeview__block">
           <div className="container container-center">
-            <p>Рекомендуем ознакомиться (это важно):</p>
+            <p>Мероприятия тут:</p>
 
             <ButtonLink 
-              to="/services" 
-              icon="/icons/icon_service.png"
-              title="Наши услуги"
+              to="/list" 
+              icon="/icons/icon_list.png"
+              title="Наши мероприятия"
               style={{ 
                 width: 250,
                 display: 'block',
@@ -79,12 +79,12 @@ class WelcomeView extends Component {
           </div>
 
           <div className="container container-center mt-5">
-            <p>Мероприятия тут:</p>
+            <p>Также рекомендуем:</p>
 
             <ButtonLink 
-              to="/list" 
-              icon="/icons/icon_list.png"
-              title="Открыть список"
+              to="/services" 
+              icon="/icons/icon_service.png"
+              title="Наши услуги"
               style={{ 
                 width: 250,
                 display: 'block',
