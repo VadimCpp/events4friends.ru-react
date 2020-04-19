@@ -15,6 +15,7 @@ class NewEventView extends Component {
       description: 'Описание',
       isOnline: true,
       location: '',
+      timezone: '+0200', // ISO-8601
       start: '',
       end: '',
       reference: '',
@@ -35,6 +36,10 @@ class NewEventView extends Component {
 
   handleIsOfflineChange = () => {
     this.setState({ isOnline: false });
+  }
+
+  handleTimeZoneChange = (timezone) => {
+    this.setState({ timezone });
   }
 
   handleLocationChange = (e) => {
@@ -59,6 +64,7 @@ class NewEventView extends Component {
       description,
       isOnline,
       location,
+      timezone,
       start,
       end,              
       reference,
@@ -92,6 +98,7 @@ class NewEventView extends Component {
           isOnline,
           location,
           contact: user.email,
+          timezone,
           start,
           end,
           reference
@@ -134,6 +141,7 @@ class NewEventView extends Component {
               description,
               isOnline,
               location,
+              timezone,
               start,
               end,              
               reference,
@@ -227,7 +235,44 @@ class NewEventView extends Component {
                             onChange={this.handleLocationChange}
                           />
                         </label>
-                      </div>                
+                      </div>
+                      <div className="textinput">
+                        <p className="text-left">
+                          Часовая зона?
+                        </p>
+                        <p>
+                          <label>
+                            <span className="text-left">
+                              Калининград (GMT+2)
+                            </span>
+                            <input
+                              className="textinput__input"
+                              type="radio"
+                              name="timeZone"
+                              checked={timezone === '+0200'}
+                              onChange={() => {
+                                this.handleTimeZoneChange('+0200')
+                              }}
+                            />
+                          </label>
+                        </p>
+                        <p>
+                          <label>
+                            <span className="text-left">
+                              Москва (GMT+3)
+                            </span>
+                            <input
+                              className="textinput__input"
+                              type="radio"
+                              name="timeZone"
+                              checked={timezone === '+0300'}
+                              onChange={() => {
+                                this.handleTimeZoneChange('+0300')
+                              }}
+                            />
+                          </label>
+                        </p>
+                      </div>              
                       <div className="textinput">
                         <label>
                           <p className="text-left">
