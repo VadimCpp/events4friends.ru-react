@@ -159,8 +159,8 @@ class EventView extends Component {
       
                                     <span role="img" aria-label="Time">🕗</span>
                                     <span className="event-time">{startTime}</span>
-                                    { timezone === '+0200' &&  <span>(Клд)</span>}
-                                    { timezone === '+0300' &&  <span>(Мск)</span>}
+                                    { timezone === '+0200' &&  <span className="event-timezone">(Клд)</span>}
+                                    { timezone === '+0300' &&  <span className="event-timezone">(Мск)</span>}
                                     － «
                                     {event.summary}
                                     »
