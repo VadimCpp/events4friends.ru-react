@@ -11,11 +11,19 @@
 }
 
 .event-date,
-.event-time,
 .event-summary,
 .event-location {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.event-time {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.event-timezone {
+  padding-right: 7px;
 }
 
 .event-more {
