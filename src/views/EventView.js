@@ -190,21 +190,6 @@ class EventView extends Component {
                                     )}
                                   </p>
                                 </div>
-                                {event.reference && (
-                                  <ButtonExternalLink
-                                    href={event.reference}
-                                    icon="/icons/icon_external_link.png"
-                                    title="Ссылка на источник"
-                                    style={{
-                                      display: "block",
-                                      width: 250,
-                                      marginRight: 'auto',
-                                      marginLeft: 'auto',
-                                      marginTop: 28,
-                                      borderColor: "rgb(77, 77, 77)",
-                                    }}
-                                  />
-                                )}
                               </div>
                             )}
                           </div>

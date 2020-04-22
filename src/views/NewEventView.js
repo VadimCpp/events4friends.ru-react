@@ -18,7 +18,6 @@ class NewEventView extends Component {
       timezone: '+0200', // ISO-8601
       start: '',
       end: '',
-      reference: '',
     }
   }
 
@@ -54,10 +53,6 @@ class NewEventView extends Component {
     this.setState({ end: e.target.value });
   }
 
-  handleReferenceChange = (e) => {
-    this.setState({ reference: e.target.value });
-  }
-
   createNewEventForUser = (user, createEvent) => {
     const {
       summary,
@@ -67,7 +62,6 @@ class NewEventView extends Component {
       timezone,
       start,
       end,              
-      reference,
     } = this.state;
 
     //
@@ -101,7 +95,6 @@ class NewEventView extends Component {
           timezone,
           start,
           end,
-          reference
         }
         createEvent(event, (id) => {
           console.log('Event created successfully, open it')
@@ -143,8 +136,7 @@ class NewEventView extends Component {
               location,
               timezone,
               start,
-              end,              
-              reference,
+              end,
             } = this.state;
 
             let userAuthorized = false
@@ -314,21 +306,7 @@ class NewEventView extends Component {
                             disabled
                           />
                         </label>
-                      </div>
-                      <div className="textinput">
-                        <label>
-                          <p className="text-left">
-                            Ссылка на источник (необязательно):
-                          </p>
-                          <input
-                            className="textinput__input"
-                            type="text"
-                            name="reference"
-                            value={reference}
-                            onChange={this.handleReferenceChange}
-                          />
-                        </label>
-                      </div>                                                    
+                      </div>                                               
                       <Button
                         onPress={() => {
                           this.createNewEventForUser(user, createEvent)

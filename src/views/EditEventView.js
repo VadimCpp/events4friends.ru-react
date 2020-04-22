@@ -18,7 +18,6 @@ class EditEventView extends Component {
       timezone: '+0200',
       start: '',
       end: '',
-      reference: '',
       id: '',
       updatingEvent: false,
     }
@@ -56,10 +55,6 @@ class EditEventView extends Component {
     this.setState({ end: e.target.value });
   }
 
-  handleReferenceChange = (e) => {
-    this.setState({ reference: e.target.value });
-  }
-
   editEventForUser = (user, editEvent) => {
     const {
       summary,
@@ -69,7 +64,6 @@ class EditEventView extends Component {
       timezone,
       start,
       end,              
-      reference,
       id,
     } = this.state;
 
@@ -104,7 +98,6 @@ class EditEventView extends Component {
           timezone,
           start,
           end,
-          reference
         }
         editEvent(event, id, (aSuccess) => {
           if (aSuccess) {
@@ -152,7 +145,6 @@ class EditEventView extends Component {
               timezone,
               start,
               end,              
-              reference,
               updatingEvent,
             } = this.state;
 
@@ -181,7 +173,6 @@ class EditEventView extends Component {
                           timezone: event.timezone,
                           start: event.start,
                           end: event.end,
-                          reference: event.reference,
                           id: event.id,
                         });
                       }
@@ -343,20 +334,6 @@ class EditEventView extends Component {
                             name="location"
                             value={user.email}
                             disabled
-                          />
-                        </label>
-                      </div>
-                      <div className="textinput">
-                        <label>
-                          <p className="text-left">
-                            Ссылка на источник (необязательно):
-                          </p>
-                          <input
-                            className="textinput__input"
-                            type="text"
-                            name="reference"
-                            value={reference}
-                            onChange={this.handleReferenceChange}
                           />
                         </label>
                       </div>
