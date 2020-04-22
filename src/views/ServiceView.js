@@ -59,7 +59,7 @@ class EventView extends Component {
                             <span className="text-success"> (бесплатно)</span>
                           )}
                         </h2>
-                        <p> {service.description || 'Не указано'} </p>
+                        <p dangerouslySetInnerHTML={{ __html: service.description }} />
                         <p>
                           <span>Предоставляет услугу: </span>
                           <strong>
