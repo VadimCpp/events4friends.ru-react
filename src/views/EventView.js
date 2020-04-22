@@ -184,7 +184,7 @@ class EventView extends Component {
                                   <p>
                                     {event.isOnline && (
                                       <span>
-                                        Ссылка на онлайн трансляцию: <br />
+                                        Ссылка для подключения к онлайн трансляции: <br />
                                         <a href={event.location}>{event.location}</a>
                                       </span>
                                     )}
