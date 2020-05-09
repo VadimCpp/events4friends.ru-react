@@ -168,7 +168,7 @@ class EventView extends Component {
                                     {event.isOnline ? (
                                       <span>
                                         <span role="img" aria-label="Location"> 🕸</span>
-                                        Всемирная паутина
+                                        Онлайн
                                       </span>
                                     ) : (
                                       <span>
