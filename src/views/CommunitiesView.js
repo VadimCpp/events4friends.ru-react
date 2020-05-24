@@ -59,7 +59,13 @@ class CommunitiesView extends Component {
             />
           </div>
         </div>
-
+        <div className="border-top mt-3 mb-3">
+          <p className="mt-3">
+            Для добавления Вашего чата или группы сообщества,
+            напишите пожалуйста программисту ВКонтакте:<br />
+            <a href="https://vk.com/vadimcpp">Вадим Канинский</a>
+          </p>
+        </div>
         <div className="border-top">
           <div className="container container-center pt-4 pb-5">
             <p>Наше мобильное приложение:</p>
