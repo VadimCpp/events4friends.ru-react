@@ -79,8 +79,25 @@ class WelcomeView extends Component {
             />
           </div>
 
-          <div className="container container-center mt-5">
-            <p>Также рекомендуем:</p>
+          <div className="container container-center mt-4">
+            <p>Сообщества (формируются):</p>
+
+            <ButtonLink 
+              to="/communities" 
+              icon="/icons/icon_community.png"
+              title="Наши сообщества"
+              style={{ 
+                width: 250,
+                display: 'block',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                marginBottom: 10
+              }}
+            />
+          </div>
+
+          <div className="container container-center mt-4">
+            <p>Услуги (формируются):</p>
 
             <ButtonLink 
               to="/services" 
