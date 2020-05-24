@@ -35,6 +35,7 @@
     "react-moment": "^0.8.4",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^3.0.1",
+    "react-store-badges": "^1.5.0",
     "reactstrap": "^6.5.0"
   },
   "devDependencies": {
