@@ -24,7 +24,7 @@ class CommunitiesView extends Component {
           />
         </div>
         <div className="border-top mt-3">
-          <p className="mt-3">Все чаты сообществ Калининграда</p>
+          <p className="mt-3">Все сообщества Калининграда</p>
           <div className="container container-center mt-2">
             <ButtonExternalLink
               href="https://tglink.ru/veloafishagroup"

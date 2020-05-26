@@ -68,7 +68,7 @@ class WelcomeView extends Component {
             <ButtonLink 
               to="/list" 
               icon="/icons/icon_list.png"
-              title="Наши мероприятия"
+              title="Все мероприятия"
               style={{ 
                 width: 250,
                 display: 'block',
@@ -85,7 +85,7 @@ class WelcomeView extends Component {
             <ButtonLink 
               to="/communities" 
               icon="/icons/icon_community.png"
-              title="Наши сообщества"
+              title="Все сообщества"
               style={{ 
                 width: 250,
                 display: 'block',
@@ -102,7 +102,7 @@ class WelcomeView extends Component {
             <ButtonLink 
               to="/services" 
               icon="/icons/icon_service.png"
-              title="Наши услуги"
+              title="Все услуги"
               style={{ 
                 width: 250,
                 display: 'block',
