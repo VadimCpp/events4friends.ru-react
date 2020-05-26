@@ -69,7 +69,7 @@ class CommunitiesView extends Component {
               }}
             />
           </div>
-          <div className="container container-center pb-4">
+          <div className="container container-center">
             <ButtonExternalLink
               href="https://vk.com/velosreda39"
               icon="/icons/vk.png"
@@ -79,7 +79,18 @@ class CommunitiesView extends Component {
                 margin: 8
               }}
             />
-          </div>           
+          </div>
+          <div className="container container-center pb-4">
+            <ButtonExternalLink
+              href="https://vk.com/club195213043"
+              icon="/icons/vk.png"
+              title="ВелоЧерепашки-39 Дети"
+              style={{
+                borderColor: "#4D76A1",
+                margin: 8
+              }}
+            />
+          </div>                    
         </div>
         <div className="border-top mt-3 mb-3">
           <p className="mt-3">
