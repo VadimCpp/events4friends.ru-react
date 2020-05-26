@@ -38,11 +38,11 @@ class CommunitiesView extends Component {
           </div>
           <div className="container container-center">
             <ButtonExternalLink
-              href="https://tglink.ru/velocherepashki039"
-              icon="/icons/telegram.png"
+              href="https://vk.com/velocherepashki039"
+              icon="/icons/vk.png"
               title="Велочерепашки"
               style={{
-                borderColor: "#139BD0",
+                borderColor: "#4D76A1",
                 margin: 8
               }}
             />
