@@ -63,7 +63,7 @@ class EventCard extends Component {
                   )}
                 </div>
                 <div className="button">
-                  <img src={"/icons/icon_arrow_forward.png"} alt="le-icon" className="button__image" />
+                  <img src={"/icons/icon_arrow_forward.png"} alt="➡️" className="button__image" />
                 </div>
               </div>
             </div>

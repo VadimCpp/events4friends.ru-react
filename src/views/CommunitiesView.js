@@ -29,6 +29,7 @@ class CommunitiesView extends Component {
             <ButtonExternalLink
               href="https://tglink.ru/veloafishagroup"
               icon="/icons/telegram.png"
+              alt="telegram"
               title="ВелоАфиша Чат"
               style={{
                 borderColor: "#139BD0",
@@ -40,6 +41,7 @@ class CommunitiesView extends Component {
             <ButtonExternalLink
               href="https://vk.com/velocherepashki039"
               icon="/icons/vk.png"
+              alt="vk"
               title="Велочерепашки"
               style={{
                 borderColor: "#4D76A1",
@@ -51,6 +53,7 @@ class CommunitiesView extends Component {
             <ButtonExternalLink
               href="https://vk.com/club195226782"
               icon="/icons/vk.png"
+              alt="vk"
               title="MTB LOVE"
               style={{
                 borderColor: "#4D76A1",
@@ -62,6 +65,7 @@ class CommunitiesView extends Component {
             <ButtonExternalLink
               href="https://vk.com/velozapad"
               icon="/icons/vk.png"
+              alt="vk"
               title="Велозапад"
               style={{
                 borderColor: "#4D76A1",
@@ -73,6 +77,7 @@ class CommunitiesView extends Component {
             <ButtonExternalLink
               href="https://vk.com/velosreda39"
               icon="/icons/vk.png"
+              alt="vk"
               title="Велосреда"
               style={{
                 borderColor: "#4D76A1",
@@ -84,6 +89,7 @@ class CommunitiesView extends Component {
             <ButtonExternalLink
               href="https://vk.com/club195213043"
               icon="/icons/vk.png"
+              alt="vk"
               title="ВелоЧерепашки-39 Дети"
               style={{
                 borderColor: "#4D76A1",
