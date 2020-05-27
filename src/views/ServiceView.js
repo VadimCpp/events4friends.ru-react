@@ -89,6 +89,7 @@ class EventView extends Component {
                             <ButtonExternalLink
                               href={`https://tglink.ru/${service.telegram}`}
                               icon="/icons/telegram.png"
+                              alt="telegram"
                               style={{
                                 borderColor: "#139BD0",
                                 margin: 8
@@ -102,6 +103,7 @@ class EventView extends Component {
                             <ButtonExternalLink
                               href={`https://wa.me/${service.whatsapp}?text=${encodeURI('Привет, меня интересует услуга ' + service.service + ', которую я нашел на сайте events4friends.ru')}`}
                               icon="/icons/wa.png"
+                              alt="whatsapp"
                               style={{
                                 borderColor: "#57BB63",
                                 margin: 8
@@ -125,6 +127,7 @@ class EventView extends Component {
             <ButtonExternalLink
               href="https://tglink.ru/events4friends"
               icon="/icons/telegram.png"
+              alt="telegram"
               style={{
                 borderColor: "#139BD0",
                 margin: 8
@@ -133,6 +136,7 @@ class EventView extends Component {
             <ButtonExternalLink
               href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
               icon="/icons/wa.png"
+              alt="whatsapp"
               style={{
                 borderColor: "#57BB63",
                 margin: 8
@@ -141,6 +145,7 @@ class EventView extends Component {
             <ButtonExternalLink
               href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
               icon="/icons/viber.png"
+              alt="viber"
               style={{
                 borderColor: "#7C519B",
                 margin: 8
