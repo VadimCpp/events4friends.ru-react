@@ -10,15 +10,15 @@ class CommunitiesView extends Component {
       <div>
         <div>
           <ButtonLink
-            to="/list"
+            to="/"
             icon="/icons/icon_arrow_back.png"
-            title="К списку"
+            title="На главную"
             style={{
-              width: 155,
+              width: 175,
               display: 'block',
               marginRight: 'auto',
               marginLeft: 'auto',
-              marginBottom: 26,
+              marginBottom: 10,
               borderColor: 'rgba(77, 77, 77, .2)'
             }}
           />
