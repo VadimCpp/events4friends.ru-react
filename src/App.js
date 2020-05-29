@@ -92,7 +92,7 @@ class App extends Component {
         }, () => {
           that.getConfig();
           that.getServices();
-          that.subscribeForEventsChanges()
+          that.subscribeForEventsChanges();
         });
       } else {
         console.log('onAuthStateChanged: user is not loggen in, login anonymously');
