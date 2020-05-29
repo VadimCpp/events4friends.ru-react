@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import ButtonLink from '../components/ButtonLink'
+import Button from '../components/Button'
 import ButtonExternalLink from '../components/ButtonExternalLink'
 import { AuthContext } from '../context/AuthContext'
 import "firebase/auth";
@@ -28,7 +28,9 @@ class ProfileView extends Component {
               let userAuthorized = false
               if (user) {
                 const { isAnonymous } = user;
-                displayName = displayName ? displayName : (user.displayName || '');
+                if (user.displayName && !displayName) {
+                  displayName = user.displayName;
+                }
                 if (isAnonymous) {
                   this.props.history.push('/signin');
                 } else {
@@ -61,19 +63,19 @@ class ProfileView extends Component {
                             />
                           </label>
                         </div>
-                        <ButtonLink
-                          to="/"
-                          icon="/icons/icon_arrow_back.png"
-                          title="Сохранить и продолжить"
-                          style={{
-                            width: 155,
-                            display: 'block',
-                            marginRight: 'auto',
-                            marginLeft: 'auto',
-                            marginBottom: 26,
-                            borderColor: 'rgba(77, 77, 77, .2)'
+                        <Button
+                          onPress={() => {
+                            if (!displayName) {
+                              alert('Заполните пожалуйста профиль');
+                            } else {
+                              alert('todo');
+                            }
+                            
                           }}
-                        />
+                          icon="/icons/icon_arrow_back.png"
+                        >
+                          Сохранить и продолжить
+                        </Button>
                       </div>
                     ) : (
                       <div>
