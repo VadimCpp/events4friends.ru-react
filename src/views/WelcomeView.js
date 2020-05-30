@@ -18,9 +18,7 @@ class WelcomeView extends Component {
               let userAuthorized = false
               if (user) {
                 const { isAnonymous, displayName } = user;
-                if (isAnonymous) {
-                  userName = 'Аноним'
-                } else {
+                if (!isAnonymous) {
                   userName = displayName || 'Не указано'
                   userAuthorized = true
                 } 
@@ -29,7 +27,15 @@ class WelcomeView extends Component {
                 <div className="container container-center">
                   { userAuthorized ? (
                       <div>
-                        <span>Добро пожаловать в цифровое пространство, {userName}! </span>
+                        <span>Добро пожаловать в цифровое пространство, </span>
+                        <button
+                          className="btn btn-link btn-link-vk"
+                          onClick={() => this.props.history.push('/profile')}
+                        >
+                          <span>{userName}</span>
+                        </button>
+                        <span>!</span>
+                        <br />
                         <button
                           className="btn btn-link btn-link-vk"
                           onClick={() => signOut()}
@@ -39,11 +45,7 @@ class WelcomeView extends Component {
                       </div>
                     ) : (
                       <div>
-                        { userName ? (
-                          <span>Добро пожаловать в цифровое пространство, {userName}! </span>
-                        ) : (
-                          <span>Добро пожаловать в цифровое пространство! </span>
-                        )}
+                        <span>Добро пожаловать в цифровое пространство! </span>
                         <button
                           className="btn btn-link btn-link-vk"
                           onClick={() => {

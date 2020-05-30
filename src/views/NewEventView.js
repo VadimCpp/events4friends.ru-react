@@ -92,6 +92,7 @@ class NewEventView extends Component {
           isOnline,
           location,
           contact: user.email,
+          name: user.displayName,
           timezone,
           start,
           end,
@@ -301,12 +302,26 @@ class NewEventView extends Component {
                           <input
                             className="textinput__input"
                             type="text"
-                            name="location"
+                            name="contact"
                             value={user.email}
                             disabled
                           />
                         </label>
-                      </div>                                               
+                      </div> 
+                      <div className="textinput">
+                        <label>
+                          <p className="text-left">
+                            Имя организатора:
+                          </p>
+                          <input
+                            className="textinput__input"
+                            type="text"
+                            name="name"
+                            value={user.displayName}
+                            disabled
+                          />
+                        </label>
+                      </div>                                                                    
                       <Button
                         onPress={() => {
                           this.createNewEventForUser(user, createEvent)

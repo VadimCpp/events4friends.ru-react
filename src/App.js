@@ -92,7 +92,7 @@ class App extends Component {
         }, () => {
           that.getConfig();
           that.getServices();
-          that.subscribeForEventsChanges()
+          that.subscribeForEventsChanges();
         });
       } else {
         console.log('onAuthStateChanged: user is not loggen in, login anonymously');
@@ -201,6 +201,22 @@ class App extends Component {
     firebase.auth().signOut();
   }
 
+  updateProfile = (displayName) => {
+    const that = this;
+    const user = firebase.auth().currentUser;
+
+    console.log('Updating user profile...');
+    user.updateProfile({
+      displayName,
+    }).then(function() {
+      that.setState({ user }, () => {
+        console.log('User profile has been updated succesfully');
+      });
+    }).catch(function(error) {
+      console.warn('Error updating user profile:', error);
+    });
+  }
+
   createEvent = (data, callback) => {
     const that = this;
     console.log('Creating event');
@@ -274,6 +290,7 @@ class App extends Component {
         user: this.state.user,
         signIn: this.signIn,
         signOut: this.signOut,
+        updateProfile: this.updateProfile,
         loadingStatuses: {
           connectingToFirebase: this.state.connectingToFirebase,
           loadingEvents: this.state.loadingEvents,

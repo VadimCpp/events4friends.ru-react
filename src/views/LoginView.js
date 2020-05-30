@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import Button from '../components/Button'
 import ButtonLink from '../components/ButtonLink'
 import ButtonExternalLink from '../components/ButtonExternalLink'
@@ -39,7 +40,10 @@ class LoginView extends Component {
                 if (isAnonymous) {
                   userName = 'Аноним'
                 } else {
-                  userName = displayName || 'Не указано'
+                  userName = displayName
+                  if (!userName) {
+                    this.props.history.push('/profile');
+                  }
                   userAuthorized = true
                 } 
               }
@@ -152,4 +156,4 @@ class LoginView extends Component {
   }
 }
 
-export default LoginView;
+export default withRouter(LoginView);

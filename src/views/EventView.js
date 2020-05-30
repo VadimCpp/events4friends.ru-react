@@ -190,6 +190,14 @@ class EventView extends Component {
                                       </span>
                                     )}
                                   </p>
+                                  <p>
+                                    {event.name && (
+                                      <span>
+                                        Организатор мероприятия: <br />
+                                        {event.name}
+                                      </span>
+                                    )}
+                                  </p>                                  
                                 </div>
                               </div>
                             )}

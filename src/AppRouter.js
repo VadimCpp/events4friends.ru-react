@@ -12,6 +12,7 @@ import ServiceView from "./views/ServiceView.js";
 import NewEventView from "./views/NewEventView.js";
 import EditEventView from "./views/EditEventView.js";
 import CommunitiesView from "./views/CommunitiesView.js";
+import ProfileView from "./views/ProfileView.js";
 
 import Header from './components/Header.js'
 
@@ -27,6 +28,7 @@ class AppRouter extends Component {
             <Route path="/services/" exact component={ServicesView} />
             <Route path="/newevent/" exact component={NewEventView} />
             <Route path="/communities/" exact component={CommunitiesView} />
+            <Route path="/profile/" exact component={ProfileView} />
             <Route 
               path="/list/"
               render={props => (
