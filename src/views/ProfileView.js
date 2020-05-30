@@ -24,7 +24,7 @@ class ProfileView extends Component {
       <div className="loginview">
         <div className="loginview__block">
         <AuthContext.Consumer>
-            {({ user }) => {
+            {({ user, updateProfile }) => {
               let userAuthorized = false
               if (user) {
                 const { isAnonymous } = user;
@@ -68,9 +68,9 @@ class ProfileView extends Component {
                             if (!displayName) {
                               alert('Заполните пожалуйста профиль');
                             } else {
-                              alert('todo');
+                              updateProfile(displayName);
+                              this.props.history.push('/');
                             }
-                            
                           }}
                           icon="/icons/icon_arrow_back.png"
                         >

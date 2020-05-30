@@ -201,6 +201,11 @@ class App extends Component {
     firebase.auth().signOut();
   }
 
+  updateProfile = (displayName) => {
+    console.log('Update user profile')
+    alert(`TODO: update user's name to ${displayName}`);
+  }
+
   createEvent = (data, callback) => {
     const that = this;
     console.log('Creating event');
@@ -274,6 +279,7 @@ class App extends Component {
         user: this.state.user,
         signIn: this.signIn,
         signOut: this.signOut,
+        updateProfile: this.updateProfile,
         loadingStatuses: {
           connectingToFirebase: this.state.connectingToFirebase,
           loadingEvents: this.state.loadingEvents,
