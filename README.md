@@ -12,6 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 | isOnline    | булево | да          | true - онлайн, false - офлайн                           |
 | location    | строка | да          | адрес мероприятия/ссылка мероприятия                    |
 | contact     | строка | да          | контакт организатора                                    |
+| name        | строка | да          | имя организатора                                        |
 | timestamp   | строка | да          | часовой пояс может принимать значения '+0200'(Калининград) или '+0300'(Москва)|
 | start       | строка | да          | начало, dateTime, например "2019-09-14T11:00:00", ISO-8601       |
 | end         | строка | нет         | конец, dateTime                                         |
