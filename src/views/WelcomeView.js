@@ -18,9 +18,7 @@ class WelcomeView extends Component {
               let userAuthorized = false
               if (user) {
                 const { isAnonymous, displayName } = user;
-                if (isAnonymous) {
-                  userName = 'Аноним'
-                } else {
+                if (!isAnonymous) {
                   userName = displayName || 'Не указано'
                   userAuthorized = true
                 } 
@@ -47,11 +45,7 @@ class WelcomeView extends Component {
                       </div>
                     ) : (
                       <div>
-                        { userName ? (
-                          <span>Добро пожаловать в цифровое пространство, {userName}! </span>
-                        ) : (
-                          <span>Добро пожаловать в цифровое пространство! </span>
-                        )}
+                        <span>Добро пожаловать в цифровое пространство! </span>
                         <button
                           className="btn btn-link btn-link-vk"
                           onClick={() => {
