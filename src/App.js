@@ -202,8 +202,19 @@ class App extends Component {
   }
 
   updateProfile = (displayName) => {
-    console.log('Update user profile')
-    alert(`TODO: update user's name to ${displayName}`);
+    const that = this;
+    const user = firebase.auth().currentUser;
+
+    console.log('Updating user profile...');
+    user.updateProfile({
+      displayName,
+    }).then(function() {
+      that.setState({ user }, () => {
+        console.log('User profile has been updated succesfully');
+      });
+    }).catch(function(error) {
+      console.warn('Error updating user profile:', error);
+    });
   }
 
   createEvent = (data, callback) => {
