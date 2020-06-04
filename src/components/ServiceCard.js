@@ -13,6 +13,13 @@ class ServiceCard extends Component {
   render() {
     const { service, name } = this.props;
 
+    let priceTag = null;
+    if (service.isFree) {
+      priceTag = <span className="serviceFree">бесплатно</span>;
+    } else if (service.price) {
+      priceTag = <span>от {service.price} руб.</span>;
+    }
+
     return (
       <Link className="reset-link-style" to={`/service/${service.id}`}>
         <div className="border-top">
@@ -22,6 +29,8 @@ class ServiceCard extends Component {
               <div className="d-flex align-items-center justify-content-between">
                 <div>
                   {service.service}
+                  <span>&nbsp;</span>
+                  {priceTag}
                 </div>
                 <div className="button">
                   <img src={"/icons/icon_arrow_forward.png"} alt="➡️" className="button__image" />
