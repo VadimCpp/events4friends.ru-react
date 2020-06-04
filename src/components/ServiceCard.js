@@ -30,6 +30,8 @@ class ServiceCard extends Component {
                   {service.service}
                   <span>&nbsp;</span>
                   {priceTag}
+                  <br />
+                  <small>{service.name}</small>
                 </div>
                 <div className="button">
                   <img src={"/icons/icon_arrow_forward.png"} alt="➡️" className="service-button__image" />
