@@ -21,7 +21,7 @@ class ServiceCard extends Component {
               <small className="calendar-name">#{name}</small>
               <div className="d-flex align-items-center justify-content-between">
                 <div>
-                  {service.description}
+                  {service.service}
                 </div>
                 <div className="button">
                   <img src={"/icons/icon_arrow_forward.png"} alt="➡️" className="button__image" />
