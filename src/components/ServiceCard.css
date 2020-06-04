@@ -76,9 +76,7 @@
   color: #999;
 }
 
-.button__image {
-  position: relative;
-  top : 13px;
+.service-button__image {
   width: 10px;
   height: 10px;
 }
@@ -90,4 +88,8 @@
 .reset-link-style:hover {
     color: #444;
     text-decoration: none;
+}
+
+.serviceFree {
+  color: #24BA7B;
 }

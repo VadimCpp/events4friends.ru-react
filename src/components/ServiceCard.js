@@ -11,20 +11,30 @@ class ServiceCard extends Component {
   }
 
   render() {
-    const { service, name } = this.props;
+    const { service } = this.props;
+
+    let priceTag = null;
+    if (service.isFree) {
+      priceTag = <span className="serviceFree">бесплатно</span>;
+    } else if (service.price) {
+      priceTag = <span>от {service.price} руб.</span>;
+    }
 
     return (
       <Link className="reset-link-style" to={`/service/${service.id}`}>
         <div className="border-top">
           <div className="container">
             <div className="event-item container-center">            
-              <small className="calendar-name">#{name}</small>
               <div className="d-flex align-items-center justify-content-between">
                 <div>
                   {service.service}
+                  <span>&nbsp;</span>
+                  {priceTag}
+                  <br />
+                  <small>{service.name}</small>
                 </div>
                 <div className="button">
-                  <img src={"/icons/icon_arrow_forward.png"} alt="➡️" className="button__image" />
+                  <img src={"/icons/icon_arrow_forward.png"} alt="➡️" className="service-button__image" />
                 </div>
               </div>
             </div>
