@@ -11,7 +11,7 @@ class ServiceCard extends Component {
   }
 
   render() {
-    const { service, name } = this.props;
+    const { service } = this.props;
 
     let priceTag = null;
     if (service.isFree) {
@@ -25,7 +25,6 @@ class ServiceCard extends Component {
         <div className="border-top">
           <div className="container">
             <div className="event-item container-center">            
-              <small className="calendar-name">#{name}</small>
               <div className="d-flex align-items-center justify-content-between">
                 <div>
                   {service.service}

@@ -14,7 +14,6 @@ class ServicesView extends Component {
       <div key={service.id}>
         <ServiceCard
           service={service}
-          name={service.service}
         />
       </div>
     );
