@@ -6,7 +6,21 @@ import { AuthContext } from '../context/AuthContext'
 import { DataContext } from '../context/DataContext'
 import './ListView.css';
 
+const EventsFilterType = {
+  Upcoming: 'UPCOMING_EVENTS',
+  Past: 'PAST_EVENTS',
+  // TODO: add more types here
+};
+
 class ListView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      filterType: EventsFilterType.Upcoming,
+    };
+  }
+
   /**
    * @param {Event} event 
    * @param {EventsSource} source 
@@ -27,6 +41,8 @@ class ListView extends Component {
   }
 
   render() {
+    const { filterType } = this.state;
+ 
     return (
       <DataContext.Consumer>
         {({ events }) => {
@@ -98,7 +114,20 @@ class ListView extends Component {
                 }}
               </AuthContext.Consumer>
               <div className="pt-3">
-                <EventsFilter />
+                <EventsFilter
+                  onFilterTypeChange={(value) => this.setState({filterType: value})}
+                  filterType={filterType}
+                  upcoming={EventsFilterType.Upcoming} 
+                  past={EventsFilterType.Past}
+                />
+              </div>
+              <div>
+                {filterType === EventsFilterType.Upcoming && (
+                  <p>Показать предстоящие</p>
+                )}
+                {filterType === EventsFilterType.Past && (
+                  <p>Показать прошедшие</p>
+                )}
               </div>
               <div className="pt-3">
                 { eventsList.length ? eventsList.map(eventItem => this.displayEvent(eventItem.event, eventItem.source)) : null }

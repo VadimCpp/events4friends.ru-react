@@ -1,47 +1,47 @@
 import React, { Component } from 'react';
 import './EventsFilter.css';
 
-const EventsFilterType = {
-  Upcoming: 'UPCOMING_EVENTS',
-  Past: 'PAST_EVENTS',
-  // TODO: add more types here
-};
-
 class EventsFilter extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      filterType: EventsFilterType.Upcoming,
-    };
   }
 
   render() {
-    const { filterType } = this.state;
+    const { onFilterTypeChange, filterType, upcoming, past } = this.props;
 
     return (
       <div className="events-filter">
         <span className="events-filter__label">Фильтр:</span>
         <button
           className={
-            filterType === EventsFilterType.Upcoming
+            filterType === upcoming
             ? "events-filter__button events-filter__button--disabled"
             : "events-filter__button"
           }
           onClick={() => {
-            this.setState({ filterType: EventsFilterType.Upcoming })
+            if (filterType !== upcoming) {
+              this.setState({ filterType: upcoming });
+              if (onFilterTypeChange) {
+                onFilterTypeChange(upcoming);
+              }
+            }
           }}
         >
           Предстоящие
         </button>
         <button
           className={
-            filterType === EventsFilterType.Past
+            filterType === past
             ? "events-filter__button events-filter__button--disabled"
             : "events-filter__button"
           }
           onClick={() => {
-            this.setState({ filterType: EventsFilterType.Past })
+            if (filterType !== past) {
+              this.setState({ filterType: past });
+              if (onFilterTypeChange) {
+                onFilterTypeChange(past);
+              }
+            }
           }}
         >
           Прошедшие
