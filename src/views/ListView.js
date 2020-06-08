@@ -1,11 +1,27 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import EventCard from '../components/EventCard.js';
 import ButtonLink from '../components/ButtonLink';
+import EventsFilter from '../components/EventsFilter';
 import { AuthContext } from '../context/AuthContext'
 import { DataContext } from '../context/DataContext'
 import './ListView.css';
 
+const EventsFilterType = {
+  Upcoming: 'UPCOMING_EVENTS',
+  Past: 'PAST_EVENTS',
+  // TODO: add more types here
+};
+
 class ListView extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      filterType: EventsFilterType.Upcoming,
+    };
+  }
+
   /**
    * @param {Event} event 
    * @param {EventsSource} source 
@@ -26,10 +42,47 @@ class ListView extends Component {
   }
 
   render() {
+    const { filterType } = this.state;
+ 
     return (
       <DataContext.Consumer>
         {({ events }) => {
-          const eventsList = events.map((item) => { 
+          const now = new Date();
+          let sortedEvents = [...events];
+
+          if (filterType === EventsFilterType.Upcoming) {
+            sortedEvents = sortedEvents.filter((event) => {
+              return event.start && event.timezone
+                ? moment(`${event.start}${event.timezone}`).toDate() > now
+                : false;
+            });
+
+            sortedEvents.sort((a, b) => {
+              if (a.start > b.start) {
+                return 1;
+              } else if (a.start < b.start) {
+                return -1;
+              }
+              return 0;
+            });
+          } else if (filterType === EventsFilterType.Past) {
+            sortedEvents = sortedEvents.filter((event) => {
+              return event.start && event.timezone
+                ? moment(`${event.start}${event.timezone}`).toDate() < now
+                : false;
+            });
+
+            sortedEvents.sort((a, b) => {
+              if (a.start < b.start) {
+                return 1;
+              } else if (a.start > b.start) {
+                return -1;
+              }
+              return 0;
+            });
+          }
+
+          const eventsList = sortedEvents.map((item) => { 
             return {
               event: item,
               source: {
@@ -37,12 +90,6 @@ class ListView extends Component {
               },
             }
           });
-
-          eventsList.sort((firstEl, secondEl) => {
-            return firstEl.event.start > secondEl.event.start ? -1 : 1;
-          });
-      
-          eventsList.length = 50;
 
           return (
             <div className="main-view">
@@ -96,6 +143,14 @@ class ListView extends Component {
                   )
                 }}
               </AuthContext.Consumer>
+              <div className="container pt-3">
+                <EventsFilter
+                  onFilterTypeChange={(value) => this.setState({filterType: value})}
+                  filterType={filterType}
+                  upcoming={EventsFilterType.Upcoming} 
+                  past={EventsFilterType.Past}
+                />
+              </div>
               <div className="pt-3">
                 { eventsList.length ? eventsList.map(eventItem => this.displayEvent(eventItem.event, eventItem.source)) : null }
               </div>
