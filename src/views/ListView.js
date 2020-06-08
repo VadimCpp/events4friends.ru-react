@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventCard from '../components/EventCard.js';
 import ButtonLink from '../components/ButtonLink';
+import EventsFilter from '../components/EventsFilter';
 import { AuthContext } from '../context/AuthContext'
 import { DataContext } from '../context/DataContext'
 import './ListView.css';
@@ -96,6 +97,9 @@ class ListView extends Component {
                   )
                 }}
               </AuthContext.Consumer>
+              <div className="pt-3">
+                <EventsFilter />
+              </div>
               <div className="pt-3">
                 { eventsList.length ? eventsList.map(eventItem => this.displayEvent(eventItem.event, eventItem.source)) : null }
               </div>
