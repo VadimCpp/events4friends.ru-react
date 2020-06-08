@@ -143,7 +143,7 @@ class ListView extends Component {
                   )
                 }}
               </AuthContext.Consumer>
-              <div className="pt-3">
+              <div className="container pt-3">
                 <EventsFilter
                   onFilterTypeChange={(value) => this.setState({filterType: value})}
                   filterType={filterType}
