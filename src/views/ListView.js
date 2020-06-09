@@ -71,7 +71,7 @@ class ListView extends Component {
                 ? moment(`${event.start}${event.timezone}`).toDate() < now
                 : false;
             });
-            
+
             sortedEvents.sort((a, b) => {
               if (a.start < b.start) {
                 return 1;
