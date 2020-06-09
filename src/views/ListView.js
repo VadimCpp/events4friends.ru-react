@@ -43,7 +43,7 @@ class ListView extends Component {
 
   render() {
     const { filterType } = this.state;
- 
+
     return (
       <DataContext.Consumer>
         {({ events }) => {
@@ -71,7 +71,7 @@ class ListView extends Component {
                 ? moment(`${event.start}${event.timezone}`).toDate() < now
                 : false;
             });
-
+            
             sortedEvents.sort((a, b) => {
               if (a.start < b.start) {
                 return 1;

@@ -1,29 +1,29 @@
 .service-sort {
-    display        : flex;
-    justify-content: center;
-    align-items    : center;
-    flex-wrap      : wrap;
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  flex-wrap      : wrap;
 }
 
 .service-sort__label {
-    padding-right: 0px;
+  padding-right: 0px;
 }
 
 .service-sort__button {
-    border-radius   : 30px;
-    padding         : 8px 20px;
-    margin-left     : 15px;
-    margin-bottom   : 5px;
-    margin-top      : 5px;
-    border-width    : 0;
-    background-color: #EC7B28;
-    color           : white;
+  border-radius   : 30px;
+  padding         : 8px 20px;
+  margin-left     : 15px;
+  margin-bottom   : 5px;
+  margin-top      : 5px;
+  border-width    : 0;
+  background-color: #EC7B28;
+  color           : white;
 }
 
 .service-sort__button--disabled {
-    background-color: rgba(170, 170, 170);
+  background-color: rgba(170, 170, 170);
 }
 
 .service-sort__button:focus {
-    outline: none;
+  outline: none;
 }
