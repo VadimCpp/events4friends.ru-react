@@ -43,7 +43,7 @@ class ListView extends Component {
 
   render() {
     const { filterType } = this.state;
- 
+
     return (
       <DataContext.Consumer>
         {({ events }) => {
