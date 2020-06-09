@@ -1,58 +1,58 @@
 import React, { Component } from 'react';
 import './ServiceSort.css';
 
-const ServiceSortingType = {
-    SortByName: 'SORT_BY_NAME',
-    SortByService: 'SORT_BY_SERVICE',
-    SortByPrice: 'SORT_BY_PRICE'
-}
 
 class ServiceSort extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            sortType: ServiceSortingType.SortByName
-        }
     }
 
     render() {
-        const { sortType } = this.state
+        const { sortType, sortByName, sortByPrice, sortByService, onSortTypeChange } = this.props;
 
         return (
             <div className="container service-sort">
                 <span className="service-sort__label">Сортировка:</span>
                 <button
                     className={
-                        sortType === ServiceSortingType.SortByName
+                        sortType === sortByName
                             ? "service-sort__button service-sort__button--disabled"
                             : "service-sort__button"
                     }
                     onClick={() => {
-                        this.setState({ sortType: ServiceSortingType.SortByName })
+                        if (sortType !== sortByName) {
+                            this.setState({ sortType: sortByName })
+                            if (onSortTypeChange) onSortTypeChange(sortByName)
+                        }
                     }}
                 >
                     Имя
                 </button>
                 <button
                     className={
-                        sortType === ServiceSortingType.SortByService
+                        sortType === sortByService
                             ? "service-sort__button service-sort__button--disabled"
                             : "service-sort__button"
                     }
                     onClick={() => {
-                        this.setState({ sortType: ServiceSortingType.SortByService })
+                        if (sortType !== sortByService) {
+                            this.setState({ sortType: sortByService })
+                            if (onSortTypeChange) onSortTypeChange(sortByService)
+                        }
                     }}
                 >
                     Услуга
                 </button>
                 <button
-                    className={sortType === ServiceSortingType.SortByPrice
+                    className={sortType === sortByPrice
                         ? "service-sort__button service-sort__button--disabled"
                         : "service-sort__button"
                     }
                     onClick={() => {
-                        this.setState({ sortType: ServiceSortingType.SortByPrice })
+                        if (sortType !== sortByPrice) {
+                            this.setState({ sortType: sortByPrice })
+                            if (onSortTypeChange) onSortTypeChange(sortByPrice)
+                        }
                     }}
                 >
                     Цена

@@ -5,7 +5,19 @@ import { DataContext } from '../context/DataContext'
 import './ServicesView.css';
 import ServiceSort from '../components/ServiceSort';
 
+const ServiceSortingType = {
+  SortByName: 'SORT_BY_NAME',
+  SortByService: 'SORT_BY_SERVICE',
+  SortByPrice: 'SORT_BY_PRICE'
+}
+
 class ServicesView extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {sortType: ServiceSortingType.SortByName}
+  }
+
   displayService(service) {
     if (!service) {
       return null;
@@ -21,6 +33,8 @@ class ServicesView extends Component {
   }
 
   render() {
+    const { sortType } = this.state;
+
     return (
       <div className="main-view">
         <div>
@@ -38,7 +52,19 @@ class ServicesView extends Component {
             }}
           />
         </div>
-        <ServiceSort />
+        {/* <ServiceSort /> */}
+        <ServiceSort 
+          onSortTypeChange={(value) => this.setState({sortType: value})}
+          sortType = {sortType}
+          sortByName = {ServiceSortingType.SortByName}
+          sortByService = {ServiceSortingType.SortByService}
+          sortByPrice = {ServiceSortingType.SortByPrice}
+        />
+        <div>
+          {sortType === ServiceSortingType.SortByName && (<p>Сортировка по категории: Имя</p>)}
+          {sortType === ServiceSortingType.SortByService && (<p>Сортировка по категории: Услуга</p>)}
+          {sortType === ServiceSortingType.SortByPrice && (<p>Сортировка по категории: Цена</p>)}
+        </div>
         <div className="pt-3">
           <DataContext.Consumer>
             {({ services }) => {
