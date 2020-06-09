@@ -6,17 +6,7 @@ let ServiceSort = (props) => {
 
     return (
         <div className="container service-sort">
-            <span className="service-sort__label">Сортировка:</span>
-            <button
-                className={
-                    sortType === sortByName
-                        ? "service-sort__button service-sort__button--disabled"
-                        : "service-sort__button"
-                }
-                onClick={() => (sortType !== sortByName && onSortTypeChange) ? onSortTypeChange(sortByName) : false}
-            >
-                Имя
-            </button>
+            <span className="service-sort__label">Сортировка:</span>            
             <button
                 className={
                     sortType === sortByService
@@ -26,6 +16,16 @@ let ServiceSort = (props) => {
                 onClick={() => (sortType !== sortByService && onSortTypeChange) ? onSortTypeChange(sortByService) : false}
             >
                 Услуга
+            </button>
+            <button
+                className={
+                    sortType === sortByName
+                        ? "service-sort__button service-sort__button--disabled"
+                        : "service-sort__button"
+                }
+                onClick={() => (sortType !== sortByName && onSortTypeChange) ? onSortTypeChange(sortByName) : false}
+            >
+                Имя
             </button>
             <button
                 className={sortType === sortByPrice

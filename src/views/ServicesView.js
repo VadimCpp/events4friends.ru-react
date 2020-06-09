@@ -15,14 +15,14 @@ class ServicesView extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {sortType: ServiceSortingType.SortByName}
+    this.state = { sortType: ServiceSortingType.SortByService }
   }
 
   displayService(service) {
     if (!service) {
       return null;
     }
-    
+
     return (
       <div key={service.id}>
         <ServiceCard
@@ -38,11 +38,11 @@ class ServicesView extends Component {
     return (
       <div className="main-view">
         <div>
-          <ButtonLink 
-            to="/" 
+          <ButtonLink
+            to="/"
             icon="/icons/icon_arrow_back.png"
             title="На главную"
-            style={{ 
+            style={{
               width: 175,
               display: 'block',
               marginRight: 'auto',
@@ -52,25 +52,50 @@ class ServicesView extends Component {
             }}
           />
         </div>
-        {/* <ServiceSort /> */}
-        <ServiceSort 
-          onSortTypeChange={(value) => this.setState({sortType: value})}
-          sortType = {sortType}
-          sortByName = {ServiceSortingType.SortByName}
-          sortByService = {ServiceSortingType.SortByService}
-          sortByPrice = {ServiceSortingType.SortByPrice}
+
+        <ServiceSort
+          onSortTypeChange={(value) => this.setState({ sortType: value })}
+          sortType={sortType}
+          sortByName={ServiceSortingType.SortByName}
+          sortByService={ServiceSortingType.SortByService}
+          sortByPrice={ServiceSortingType.SortByPrice}
         />
-        <div>
-          {sortType === ServiceSortingType.SortByName && (<p>Сортировка по категории: Имя</p>)}
-          {sortType === ServiceSortingType.SortByService && (<p>Сортировка по категории: Услуга</p>)}
-          {sortType === ServiceSortingType.SortByPrice && (<p>Сортировка по категории: Цена</p>)}
-        </div>
+
         <div className="pt-3">
           <DataContext.Consumer>
             {({ services }) => {
-              return services.map(service => this.displayService(service))
+              let sortedServices = [...services];
+
+              if (sortType === ServiceSortingType.SortByName) {
+                sortedServices = sortedServices.sort((a, b) => {
+                  return a.name ? a.name.localeCompare(b.name) : 0;
+                });
+              } else if (sortType === ServiceSortingType.SortByService) {
+                sortedServices = sortedServices.sort((a, b) => {
+                  return a.service ? a.service.localeCompare(b.service) : 0;
+                });
+              } else if (sortType === ServiceSortingType.SortByPrice) {
+                sortedServices = sortedServices.sort((a, b) => {
+                  if (a.isFree && b.isFree) {
+                    return 0;
+                  } else if (a.isFree) {
+                    return -1;
+                  } else if (b.isFree) {
+                    return 1;
+                  } else if (a.price && b.price) {
+                    return a.price < b.price ? -1 : 0;
+                  } else if (a.price && !b.price) {
+                    return -1;
+                  } else if (a.price && !b.price) {
+                    return 1;
+                  }
+                  return 0;
+                });
+              }
+
+              return sortedServices.map(service => this.displayService(service))
             }}
-          </DataContext.Consumer> 
+          </DataContext.Consumer>
         </div>
       </div>
     )
