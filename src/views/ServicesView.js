@@ -3,6 +3,7 @@ import ServiceCard from '../components/ServiceCard';
 import ButtonLink from '../components/ButtonLink';
 import { DataContext } from '../context/DataContext'
 import './ServicesView.css';
+import ServiceSort from '../components/ServiceSort';
 
 class ServicesView extends Component {
   displayService(service) {
@@ -37,6 +38,7 @@ class ServicesView extends Component {
             }}
           />
         </div>
+        <ServiceSort />
         <div className="pt-3">
           <DataContext.Consumer>
             {({ services }) => {
