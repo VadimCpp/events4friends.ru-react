@@ -19,6 +19,13 @@ class ServicesView extends Component {
   }
 
   displayService(service) {
+    const { sortType } = this.state;
+    let highlightName = new Boolean();
+
+    (sortType === 'SORT_BY_NAME') 
+    ? highlightName = true 
+    : highlightName = false;
+
     if (!service) {
       return null;
     }
@@ -27,6 +34,7 @@ class ServicesView extends Component {
       <div key={service.id}>
         <ServiceCard
           service={service}
+          highlightName={highlightName}
         />
       </div>
     );

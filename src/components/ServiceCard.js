@@ -11,28 +11,49 @@ class ServiceCard extends Component {
   }
 
   render() {
-    const { service } = this.props;
+    const { service, highlightName } = this.props;
 
-    let priceTag = null;
-    if (service.isFree) {
-      priceTag = <span className="serviceFree">бесплатно</span>;
-    } else if (service.price) {
-      priceTag = <span>от {service.price} руб.</span>;
+    const ServiceContent = () => {
+      let priceTag = null;
+      
+      if (service.isFree) {
+        priceTag = <span className="serviceFree">бесплатно</span>;
+      } else if (service.price) {
+        priceTag = <span>от {service.price} руб.</span>;
+      }
+
+      if (highlightName) {
+        return (
+          <div>
+            {service.name}
+            <br />
+            <small>
+              {service.service}
+              <span>&nbsp;</span>
+              {priceTag}
+            </small>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            {service.service}
+            <span>&nbsp;</span>
+            {priceTag}
+            <br />
+            <small>{service.name}</small>
+          </div>
+        )
+      }
     }
 
     return (
       <Link className="reset-link-style" to={`/service/${service.id}`}>
         <div className="border-top">
           <div className="container">
-            <div className="event-item container-center">            
+            <div className="event-item container-center">
               <div className="d-flex align-items-center justify-content-between">
-                <div>
-                  {service.service}
-                  <span>&nbsp;</span>
-                  {priceTag}
-                  <br />
-                  <small>{service.name}</small>
-                </div>
+                <ServiceContent />
                 <div className="button">
                   <img src={"/icons/icon_arrow_forward.png"} alt="➡️" className="service-button__image" />
                 </div>
@@ -44,6 +65,5 @@ class ServiceCard extends Component {
     )
   }
 }
-
 
 export default withRouter(ServiceCard);
