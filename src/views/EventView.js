@@ -25,7 +25,7 @@ class EventView extends Component {
       <div>
         <div>
           <ButtonLink
-            to="/list"
+            to="/events"
             icon="/icons/icon_arrow_back.png"
             title="К списку"
             style={{
@@ -77,7 +77,7 @@ class EventView extends Component {
                                   deleteEvent(event.id, (success) => {
                                     if (success) {
                                       console.log('Event deleted successfully, navigate to list view');
-                                      this.props.history.push(`/list`);
+                                      this.props.history.push(`/events`);
                                     } else {
                                       console.log('Failde to delete event');
                                       this.setState({ deletingInProgress: false });

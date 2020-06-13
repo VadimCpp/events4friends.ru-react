@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
 // import AboutView from "./views/AboutView.js";
-import ListView from "./views/ListView.js";
+import EventsView from "./views/EventsView.js";
 // import ArchiveView from "./views/ArchiveView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";
@@ -30,9 +30,9 @@ class AppRouter extends Component {
             <Route path="/communities/" exact component={CommunitiesView} />
             <Route path="/profile/" exact component={ProfileView} />
             <Route 
-              path="/list/"
+              path="/events/"
               render={props => (
-                <ListView {...props} />
+                <EventsView {...props} />
               )}
             />
             <Route

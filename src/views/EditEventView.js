@@ -123,7 +123,7 @@ class EditEventView extends Component {
       <div>
         <div>
           <ButtonLink
-            to="/list"
+            to='/events'
             icon="/icons/icon_arrow_back.png"
             title="К списку"
             style={{

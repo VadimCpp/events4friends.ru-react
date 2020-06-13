@@ -5,7 +5,7 @@ import ButtonLink from '../components/ButtonLink';
 import EventsFilter from '../components/EventsFilter';
 import { AuthContext } from '../context/AuthContext'
 import { DataContext } from '../context/DataContext'
-import './ListView.css';
+import './EventsView.css';
 
 const EventsFilterType = {
   Upcoming: 'UPCOMING_EVENTS',
@@ -13,7 +13,7 @@ const EventsFilterType = {
   // TODO: add more types here
 };
 
-class ListView extends Component {
+class EventsView extends Component {
   constructor(props) {
     super(props);
 
@@ -162,4 +162,4 @@ class ListView extends Component {
   }
 }
 
-export default ListView;
+export default EventsView;
