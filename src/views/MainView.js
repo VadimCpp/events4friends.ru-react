@@ -211,9 +211,6 @@ class MainView extends Component {
             <p className="pt-3"> На главной пока только список событий. Все остальное в разделе &quot;О нас&quot;. </p>
             <p>
               <Button color="warning">
-                <Link className="reset-link-style" to="/archive">Архив</Link>
-              </Button>
-              <Button color="warning">
                 <Link className="reset-link-style" to="/about">О нас</Link>
               </Button>
               <button
@@ -240,12 +237,6 @@ class MainView extends Component {
         <div className="pt-3">
           {/*<Map allEvents={allMapEvents}/>*/}
           { allListEvents.length ? allListEvents.map(event => this.displayEvent(event.event, event.calendarName)) : null }
-          { !allListEvents.length && (
-            <p>
-              <span>Список событий пуст. Загляните в </span>
-              <Link to="/archive">архив</Link>
-            </p>
-          )}
         </div>
       </div>
     )
