@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
-// import AboutView from "./views/AboutView.js";
 import EventsView from "./views/EventsView.js";
-// import ArchiveView from "./views/ArchiveView.js";
 import EventView from './views/EventView'
 import ScrollToTop from "./components/ScrollToTop.js";
 import WelcomeView from "./views/WelcomeView.js";
@@ -35,6 +33,19 @@ class AppRouter extends Component {
                 <EventsView {...props} />
               )}
             />
+            {/*
+              NOTE!
+              В старой версии сайта присутствовала страница с адресом list
+              Оставляем list как редирект.
+
+              TODO: удалить через полгода, в январе 2021 
+            */}
+            <Route 
+              path="/list/"
+              render={props => (
+                <EventsView {...props} />
+              )}
+            />            
             <Route
               path="/event/:id"
               render={props => (
@@ -53,13 +64,6 @@ class AppRouter extends Component {
                 <EditEventView {...props} />
               )}
             />
-            
-
-            {/*
-            <Route path="/about/" component={AboutView} />
-            <Route path="/archive/" render={props => (<ArchiveView {...props}
-              googleEvents={pastEvents}
-              getEvent={this.getEvent} />)} /> */}
           </div>
 
         </ScrollToTop>

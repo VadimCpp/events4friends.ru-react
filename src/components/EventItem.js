@@ -420,8 +420,7 @@ class EventItem extends Component {
 
 
             {((this.props.match.path === '/') 
-              || (this.props.match.path === '/events/')
-              || (this.props.match.path === '/archive/')) ? this.moreInfo() : this.renderInfoBlock()}
+              || (this.props.match.path === '/events/')) ? this.moreInfo() : this.renderInfoBlock()}
 
           </div>
         </div>
