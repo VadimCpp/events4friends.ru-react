@@ -30,7 +30,7 @@ class AppRouter extends Component {
             <Route path="/communities/" exact component={CommunitiesView} />
             <Route path="/profile/" exact component={ProfileView} />
             <Route 
-              path="/list/"
+              path="/events/"
               render={props => (
                 <EventsView {...props} />
               )}
