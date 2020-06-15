@@ -13,8 +13,9 @@ class EventCard extends Component {
 
   render() {
     const { event, name } = this.props;
-    const startDate = moment(event.start).format('D MMMM, dddd');
-    const startTime = moment(event.start).format('HH:mm');
+
+    const startDate = moment(`${event.start}${event.timezone}`).format('D MMMM, dddd');
+    const startTime = moment(`${event.start}${event.timezone}`).format('HH:mm');
     const timezone = event.timezone;
 
     return (
