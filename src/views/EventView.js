@@ -45,15 +45,13 @@ class EventView extends Component {
             let name = null;
             let startDate = 'Не указано';
             let startTime = 'Не указано';
-            let timezone = null;
 
             for(let i = 0; i < events.length; i++) {
               if (eventId === events[i].id) {
                 event = events[i]
                 name = 'База данных events4friends'
-                startDate = event ? moment(event.start).format('D MMMM, dddd') : 'Не указано';
-                startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
-                timezone = event.timezone;
+                startDate = event ? moment(`${event.start}${event.timezone}`).format('D MMMM, dddd') : 'Не указано';
+                startTime = event ? moment(`${event.start}${event.timezone}`).format('HH:mm') : 'Не указано';
                 break;
               }
             }
@@ -160,8 +158,6 @@ class EventView extends Component {
       
                                     <span role="img" aria-label="Time">🕗</span>
                                     <span className="event-time">{startTime}</span>
-                                    { timezone === '+0200' &&  <span className="event-timezone">(Клд)</span>}
-                                    { timezone === '+0300' &&  <span className="event-timezone">(Мск)</span>}
                                     － «
                                     {event.summary}
                                     »
