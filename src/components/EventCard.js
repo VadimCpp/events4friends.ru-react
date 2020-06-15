@@ -13,8 +13,9 @@ class EventCard extends Component {
 
   render() {
     const { event, name } = this.props;
-    const startDate = moment(event.start).format('D MMMM, dddd');
-    const startTime = moment(event.start).format('HH:mm');
+
+    const startDate = moment(`${event.start}${event.timezone}`).format('D MMMM, dddd');
+    const startTime = moment(`${event.start}${event.timezone}`).format('HH:mm');
     const timezone = event.timezone;
 
     return (
@@ -43,8 +44,6 @@ class EventCard extends Component {
 
                   <span role="img" aria-label="Time">🕗</span>
                   <span className="event-time">{startTime}</span>
-                  { timezone === '+0200' &&  <span className="event-timezone">(Клд)</span>}
-                  { timezone === '+0300' &&  <span className="event-timezone">(Мск)</span>}
 
                   － «
                   {event.summary}
