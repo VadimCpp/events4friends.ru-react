@@ -124,7 +124,10 @@ class NewEventView extends Component {
               marginRight: 'auto',
               marginLeft: 'auto',
               marginBottom: 26,
-              borderColor: 'rgba(77, 77, 77, .2)'
+              borderColor: 'rgba(77, 77, 77, .2)',
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              borderRadius: "48px"
             }}
           />
         </div>

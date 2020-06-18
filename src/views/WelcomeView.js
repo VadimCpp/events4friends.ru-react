@@ -76,7 +76,8 @@ class WelcomeView extends Component {
                 display: 'block',
                 marginRight: 'auto',
                 marginLeft: 'auto',
-                marginBottom: 10
+                marginBottom: 10,
+                borderRadius: "48px"
               }}
             />
           </div>
@@ -93,7 +94,8 @@ class WelcomeView extends Component {
                 display: 'block',
                 marginRight: 'auto',
                 marginLeft: 'auto',
-                marginBottom: 10
+                marginBottom: 10,
+                borderRadius: "48px"
               }}
             />
           </div>
@@ -110,7 +112,8 @@ class WelcomeView extends Component {
                 display: 'block',
                 marginRight: 'auto',
                 marginLeft: 'auto',
-                marginBottom: 10
+                marginBottom: 10,
+                borderRadius: "48px"
               }}
             />
           </div>
@@ -125,7 +128,8 @@ class WelcomeView extends Component {
               alt="telegram"
               style={{
                 borderColor: "#139BD0",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"
               }} 
             />
             <ButtonExternalLink 
@@ -134,7 +138,8 @@ class WelcomeView extends Component {
               alt="whatsapp"
               style={{
                 borderColor: "#57BB63",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"
               }} 
             />
             <ButtonExternalLink 
@@ -143,7 +148,8 @@ class WelcomeView extends Component {
               alt="viber"
               style={{
                 borderColor: "#7C519B",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"
               }} 
             />
           </div>
@@ -163,6 +169,7 @@ class WelcomeView extends Component {
                 display: 'block',
                 marginRight: 'auto',
                 marginLeft: 'auto',
+                borderRadius: "48px"
               }}
               title="Открыть ВКонтакте"
             />

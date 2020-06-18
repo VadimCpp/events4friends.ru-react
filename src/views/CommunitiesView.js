@@ -19,7 +19,10 @@ class CommunitiesView extends Component {
               marginRight: 'auto',
               marginLeft: 'auto',
               marginBottom: 10,
-              borderColor: 'rgba(77, 77, 77, .2)'
+              borderColor: 'rgba(77, 77, 77, .2)',
+              borderRadius: "48px",
+              paddingTop: "16px",
+              paddingBottom: "16px"
             }}
           />
         </div>
@@ -33,7 +36,8 @@ class CommunitiesView extends Component {
               title="ВелоАфиша Чат"
               style={{
                 borderColor: "#139BD0",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px",
               }}
             />
           </div>
@@ -45,7 +49,8 @@ class CommunitiesView extends Component {
               title="Велочерепашки"
               style={{
                 borderColor: "#4D76A1",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px",
               }}
             />
           </div>
@@ -57,7 +62,8 @@ class CommunitiesView extends Component {
               title="MTB LOVE"
               style={{
                 borderColor: "#4D76A1",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px",
               }}
             />
           </div>
@@ -69,7 +75,8 @@ class CommunitiesView extends Component {
               title="Велозапад"
               style={{
                 borderColor: "#4D76A1",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px",
               }}
             />
           </div>
@@ -81,7 +88,8 @@ class CommunitiesView extends Component {
               title="Велосреда"
               style={{
                 borderColor: "#4D76A1",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px",
               }}
             />
           </div>
@@ -93,7 +101,8 @@ class CommunitiesView extends Component {
               title="ВелоЧерепашки-39 Дети"
               style={{
                 borderColor: "#4D76A1",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px",
               }}
             />
           </div>
@@ -105,7 +114,8 @@ class CommunitiesView extends Component {
               title="OpenRoad39"
               style={{
                 borderColor: "#139BD0",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px",
               }}
             />
           </div>              
