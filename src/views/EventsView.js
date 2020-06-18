@@ -104,7 +104,10 @@ class EventsView extends Component {
                     marginRight: 'auto',
                     marginLeft: 'auto',
                     marginBottom: 10,
-                    borderColor: 'rgba(77, 77, 77, .2)'
+                    borderColor: 'rgba(77, 77, 77, .2)',
+                    borderRadius: "48px",
+                    paddingTop: "16px",
+                    paddingBottom: "16px"
                   }}
                 />
               </div>
@@ -130,7 +133,8 @@ class EventsView extends Component {
                           marginRight: 'auto',
                           marginLeft: 'auto',
                           marginBottom: 10,
-                          borderColor: 'rgba(77, 77, 77, .2)'
+                          borderColor: 'rgba(77, 77, 77, .2)',
+                          borderRadius: "48px"
                         }}
                       />
                     </div>

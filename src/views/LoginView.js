@@ -59,12 +59,13 @@ class LoginView extends Component {
                             icon="/icons/icon_arrow_back.png"
                             title="Вернуться на экран приветствия"
                             style={{
-                              width: 155,
+                              width: 200,
                               display: 'block',
                               marginRight: 'auto',
                               marginLeft: 'auto',
                               marginBottom: 26,
-                              borderColor: 'rgba(77, 77, 77, .2)'
+                              borderColor: 'rgba(77, 77, 77, .2)',
+                              borderRadius: "48px"
                             }}
                           />
                       </div>
@@ -128,7 +129,8 @@ class LoginView extends Component {
               alt="telegram"
               style={{
                 borderColor: "#139BD0",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"
               }} 
             />
             <ButtonExternalLink 
@@ -137,7 +139,8 @@ class LoginView extends Component {
               alt="whatsapp"
               style={{
                 borderColor: "#57BB63",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"
               }} 
             />
             <ButtonExternalLink 
@@ -146,7 +149,8 @@ class LoginView extends Component {
               alt="viber"
               style={{
                 borderColor: "#7C519B",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"
               }} 
             />
           </div>

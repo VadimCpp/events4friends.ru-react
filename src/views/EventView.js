@@ -34,7 +34,10 @@ class EventView extends Component {
               marginRight: 'auto',
               marginLeft: 'auto',
               marginBottom: 26,
-              borderColor: 'rgba(77, 77, 77, .2)'
+              borderColor: 'rgba(77, 77, 77, .2)',
+              paddingTop: "16px",
+              paddingBottom: "16px",
+              borderRadius: "48px"
             }}
           />
         </div>
@@ -216,7 +219,8 @@ class EventView extends Component {
               alt="telegram"
               style={{
                 borderColor: "#139BD0",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"                
               }}
             />
             <ButtonExternalLink
@@ -225,7 +229,8 @@ class EventView extends Component {
               alt="whatsapp"
               style={{
                 borderColor: "#57BB63",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"
               }}
             />
             <ButtonExternalLink
@@ -234,7 +239,8 @@ class EventView extends Component {
               alt="viber"
               style={{
                 borderColor: "#7C519B",
-                margin: 8
+                margin: 8,
+                borderRadius: "48px"
               }}
             />
           </div>
