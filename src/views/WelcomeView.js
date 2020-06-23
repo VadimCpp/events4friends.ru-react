@@ -69,7 +69,7 @@ class WelcomeView extends Component {
 
             <ButtonLink 
               to="/events" 
-              icon="/icons/icon_list1.svg"
+              icon="/icons/icon_list.svg"
               title="Все мероприятия"
               style={{ 
                 width: 250,

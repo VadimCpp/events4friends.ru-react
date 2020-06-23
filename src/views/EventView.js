@@ -85,7 +85,7 @@ class EventView extends Component {
                                 })
                               }
                             }}
-                            icon="/icons/icon_delete1.svg"
+                            icon="/icons/icon_delete.svg"
                             borderColor="rgba(77, 77, 77, .2)"
                           >
                             Удалить
