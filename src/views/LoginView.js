@@ -56,7 +56,7 @@ class LoginView extends Component {
                         </p>
                           <ButtonLink
                             to="/"
-                            icon="/icons/icon_arrow_back.png"
+                            icon="/icons/icon_arrow_back.svg"
                             title="Вернуться на экран приветствия"
                             style={{
                               width: 200,
@@ -105,7 +105,7 @@ class LoginView extends Component {
                           onPress={() => {
                             signIn(login, password)
                           }}
-                          icon="/icons/icon_login.png"
+                          icon="/icons/icon_login.svg"
                         >
                           Войти
                         </Button>
@@ -125,7 +125,7 @@ class LoginView extends Component {
             </p>
             <ButtonExternalLink 
               href="https://tglink.ru/events4friends" 
-              icon="/icons/telegram.png" 
+              icon="/icons/telegram.svg" 
               alt="telegram"
               style={{
                 borderColor: "#139BD0",
@@ -135,7 +135,7 @@ class LoginView extends Component {
             />
             <ButtonExternalLink 
               href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8" 
-              icon="/icons/wa.png"
+              icon="/icons/whatsapp.svg"
               alt="whatsapp"
               style={{
                 borderColor: "#57BB63",
@@ -145,7 +145,7 @@ class LoginView extends Component {
             />
             <ButtonExternalLink 
               href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-              icon="/icons/viber.png" 
+              icon="/icons/viber.svg" 
               alt="viber"
               style={{
                 borderColor: "#7C519B",

@@ -96,7 +96,7 @@ class EventsView extends Component {
               <div>
                 <ButtonLink 
                   to="/" 
-                  icon="/icons/icon_arrow_back.png"
+                  icon="/icons/icon_arrow_back.svg"
                   title="На главную"
                   style={{ 
                     width: 175,
@@ -105,9 +105,7 @@ class EventsView extends Component {
                     marginLeft: 'auto',
                     marginBottom: 10,
                     borderColor: 'rgba(77, 77, 77, .2)',
-                    borderRadius: "48px",
-                    paddingTop: "16px",
-                    paddingBottom: "16px"
+                    borderRadius: "48px"
                   }}
                 />
               </div>
@@ -125,10 +123,10 @@ class EventsView extends Component {
                     <div>
                       <ButtonLink 
                         to="/newevent" 
-                        icon="/icons/icon_plus.png"
+                        icon="/icons/icon_plus.svg"
                         title="Сделать анонс"
                         style={{ 
-                          width: 205,
+                          width: 200,
                           display: 'block',
                           marginRight: 'auto',
                           marginLeft: 'auto',

@@ -14,8 +14,8 @@ function Button({
       className="welcomeview__button"
       style={{ borderColor }}
     >
-      <div className="welcomeview__image">
-        <img src={icon} alt={children} width="40" height="40" />
+      <div className="welcomeview__image__wrapper">
+        <img src={icon} alt={children} className="welcomeview__image"/>
       </div>
       {children &&
         <div className="welcomeview__text">

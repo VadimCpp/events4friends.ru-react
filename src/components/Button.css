@@ -18,6 +18,21 @@
   text-decoration: none;
 }
 
+.welcomeview__button:focus {
+  outline: none;
+}
+
 .welcomeview__text {
   padding-left: .5rem;
+}
+
+.welcomeview__image__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcomeview__image {
+  width: 30px;
+  height: 30px;
 }

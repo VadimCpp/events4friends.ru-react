@@ -48,7 +48,7 @@ class ServicesView extends Component {
         <div>
           <ButtonLink
             to="/"
-            icon="/icons/icon_arrow_back.png"
+            icon="/icons/icon_arrow_back.svg"
             title="На главную"
             style={{
               width: 175,
@@ -57,9 +57,7 @@ class ServicesView extends Component {
               marginLeft: 'auto',
               marginBottom: 10,
               borderColor: 'rgba(77, 77, 77, .2)',
-              borderRadius: "48px",
-              paddingTop: "16px",
-              paddingBottom: "16px"
+              borderRadius: "48px"
             }}
           />
         </div>

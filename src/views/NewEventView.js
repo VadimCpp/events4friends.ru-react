@@ -116,17 +116,15 @@ class NewEventView extends Component {
         <div>
           <ButtonLink
             to="/events"
-            icon="/icons/icon_arrow_back.png"
+            icon="/icons/icon_arrow_back.svg"
             title="К списку"
             style={{
               width: 155,
               display: 'block',
               marginRight: 'auto',
               marginLeft: 'auto',
-              marginBottom: 26,
+              marginBottom: 10,
               borderColor: 'rgba(77, 77, 77, .2)',
-              paddingTop: "16px",
-              paddingBottom: "16px",
               borderRadius: "48px"
             }}
           />
@@ -329,7 +327,7 @@ class NewEventView extends Component {
                         onPress={() => {
                           this.createNewEventForUser(user, createEvent)
                         }}
-                        icon="/icons/icon_plus.png"
+                        icon="/icons/icon_plus.svg"
                       >
                         Создать
                       </Button>
@@ -361,29 +359,32 @@ class NewEventView extends Component {
               Задайте вопрос в чате:</p>
             <ButtonExternalLink
               href="https://tglink.ru/events4friends"
-              icon="/icons/telegram.png"
+              icon="/icons/telegram.svg"
               alt="telegram"
               style={{
                 borderColor: "#139BD0",
-                margin: 8
+                margin: 8,
+                borderRadius: "38px"
               }}
             />
             <ButtonExternalLink
               href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
-              icon="/icons/wa.png"
+              icon="/icons/whatsapp.svg"
               alt="whatsapp"
               style={{
                 borderColor: "#57BB63",
-                margin: 8
+                margin: 8,
+                borderRadius: "38px"
               }}
             />
             <ButtonExternalLink
               href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-              icon="/icons/viber.png"
+              icon="/icons/viber.svg"
               alt="viber"
               style={{
                 borderColor: "#7C519B",
-                margin: 8
+                margin: 8,
+                borderRadius: "38px"
               }}
             />
           </div>

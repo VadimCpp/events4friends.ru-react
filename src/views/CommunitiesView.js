@@ -11,7 +11,7 @@ class CommunitiesView extends Component {
         <div>
           <ButtonLink
             to="/"
-            icon="/icons/icon_arrow_back.png"
+            icon="/icons/icon_arrow_back.svg"
             title="На главную"
             style={{
               width: 175,
@@ -20,9 +20,7 @@ class CommunitiesView extends Component {
               marginLeft: 'auto',
               marginBottom: 10,
               borderColor: 'rgba(77, 77, 77, .2)',
-              borderRadius: "48px",
-              paddingTop: "16px",
-              paddingBottom: "16px"
+              borderRadius: "48px"
             }}
           />
         </div>
@@ -31,7 +29,7 @@ class CommunitiesView extends Component {
           <div className="container container-center mt-2">
             <ButtonExternalLink
               href="https://tglink.ru/veloafishagroup"
-              icon="/icons/telegram.png"
+              icon="/icons/telegram.svg"
               alt="telegram"
               title="ВелоАфиша Чат"
               style={{
@@ -44,7 +42,7 @@ class CommunitiesView extends Component {
           <div className="container container-center">
             <ButtonExternalLink
               href="https://vk.com/velocherepashki039"
-              icon="/icons/vk.png"
+              icon="/icons/vk.svg"
               alt="vk"
               title="Велочерепашки"
               style={{
@@ -57,7 +55,7 @@ class CommunitiesView extends Component {
           <div className="container container-center">
             <ButtonExternalLink
               href="https://vk.com/club195226782"
-              icon="/icons/vk.png"
+              icon="/icons/vk.svg"
               alt="vk"
               title="MTB LOVE"
               style={{
@@ -70,7 +68,7 @@ class CommunitiesView extends Component {
           <div className="container container-center">
             <ButtonExternalLink
               href="https://vk.com/velozapad"
-              icon="/icons/vk.png"
+              icon="/icons/vk.svg"
               alt="vk"
               title="Велозапад"
               style={{
@@ -83,7 +81,7 @@ class CommunitiesView extends Component {
           <div className="container container-center">
             <ButtonExternalLink
               href="https://vk.com/velosreda39"
-              icon="/icons/vk.png"
+              icon="/icons/vk.svg"
               alt="vk"
               title="Велосреда"
               style={{
@@ -96,7 +94,7 @@ class CommunitiesView extends Component {
           <div className="container container-center">
             <ButtonExternalLink
               href="https://vk.com/club195213043"
-              icon="/icons/vk.png"
+              icon="/icons/vk.svg"
               alt="vk"
               title="ВелоЧерепашки-39 Дети"
               style={{
@@ -109,7 +107,7 @@ class CommunitiesView extends Component {
           <div className="container container-center pb-4">
             <ButtonExternalLink
               href="https://tglink.ru/OpenRoad39"
-              icon="/icons/telegram.png"
+              icon="/icons/telegram.svg"
               alt="telegram"
               title="OpenRoad39"
               style={{

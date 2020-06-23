@@ -69,7 +69,7 @@ class WelcomeView extends Component {
 
             <ButtonLink 
               to="/events" 
-              icon="/icons/icon_list.png"
+              icon="/icons/icon_list1.svg"
               title="Все мероприятия"
               style={{ 
                 width: 250,
@@ -87,7 +87,7 @@ class WelcomeView extends Component {
 
             <ButtonLink 
               to="/communities" 
-              icon="/icons/icon_community.png"
+              icon="/icons/icon_community.svg"
               title="Все сообщества"
               style={{ 
                 width: 250,
@@ -105,7 +105,7 @@ class WelcomeView extends Component {
 
             <ButtonLink 
               to="/services" 
-              icon="/icons/icon_service.png"
+              icon="/icons/icon_service.svg"
               title="Все услуги"
               style={{ 
                 width: 250,
@@ -124,32 +124,33 @@ class WelcomeView extends Component {
             <p>Выберите мессенджер для общения:</p>
             <ButtonExternalLink 
               href="https://tglink.ru/events4friends" 
-              icon="/icons/telegram.png" 
+              icon="/icons/telegram.svg" 
               alt="telegram"
               style={{
-                borderColor: "#139BD0",
+                fill: "red",
                 margin: 8,
-                borderRadius: "48px"
+                borderRadius: "48px",
+                borderColor: '#039be5'
               }} 
             />
             <ButtonExternalLink 
               href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8" 
-              icon="/icons/wa.png"
+              icon="/icons/whatsapp.svg"
               alt="whatsapp"
               style={{
-                borderColor: "#57BB63",
                 margin: 8,
-                borderRadius: "48px"
+                borderRadius: "48px",
+                borderColor: "#4caf50"
               }} 
             />
             <ButtonExternalLink 
               href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-              icon="/icons/viber.png" 
+              icon="/icons/viber.svg" 
               alt="viber"
               style={{
-                borderColor: "#7C519B",
                 margin: 8,
-                borderRadius: "48px"
+                borderRadius: "48px",
+                borderColor: "#9838b2"
               }} 
             />
           </div>
@@ -160,16 +161,16 @@ class WelcomeView extends Component {
             <p>Действует группа ВКонтакте:</p>            
             <ButtonExternalLink 
               href="https://vk.com/kldevents4friends"
-              icon="/icons/vk.png" 
+              icon="/icons/vk.svg" 
               alt="vk"
               style={{
-                borderColor: "#4D76A1",
                 margin: 8,
                 width: 250,
                 display: 'block',
                 marginRight: 'auto',
                 marginLeft: 'auto',
-                borderRadius: "48px"
+                borderRadius: "48px",
+                borderColor: "#4b729f"
               }}
               title="Открыть ВКонтакте"
             />
