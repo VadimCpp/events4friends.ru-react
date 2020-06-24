@@ -55,7 +55,7 @@ class ServiceCard extends Component {
               <div className="d-flex align-items-center justify-content-between">
                 <ServiceContent />
                 <div className="button">
-                  <img src={"/icons/icon_arrow_forward.png"} alt="➡️" className="service-button__image" />
+                  <img src={"/icons/icon_arrow_forward.svg"} alt="➡️" className="service-button__image" />
                 </div>
               </div>
             </div>

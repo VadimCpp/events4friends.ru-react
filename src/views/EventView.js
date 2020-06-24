@@ -26,17 +26,15 @@ class EventView extends Component {
         <div>
           <ButtonLink
             to="/events"
-            icon="/icons/icon_arrow_back.png"
+            icon="/icons/icon_arrow_back.svg"
             title="К списку"
             style={{
               width: 155,
               display: 'block',
               marginRight: 'auto',
               marginLeft: 'auto',
-              marginBottom: 26,
+              marginBottom: 10,
               borderColor: 'rgba(77, 77, 77, .2)',
-              paddingTop: "16px",
-              paddingBottom: "16px",
               borderRadius: "48px"
             }}
           />
@@ -87,7 +85,7 @@ class EventView extends Component {
                                 })
                               }
                             }}
-                            icon="/icons/icon_delete.png"
+                            icon="/icons/icon_delete.svg"
                             borderColor="rgba(77, 77, 77, .2)"
                           >
                             Удалить
@@ -96,16 +94,16 @@ class EventView extends Component {
                         <div>
                           <ButtonLink 
                             to={`/editevent/${event.id}`}
-                            icon="/icons/icon_edit.png"
+                            icon="/icons/icon_edit.svg"
                             title="Изменить"
                             style={{ 
-                              width: 165,
                               display: 'block',
                               marginRight: 'auto',
                               marginLeft: 'auto',
                               marginTop: 8,
                               marginBottom: 8,
-                              borderColor: 'rgba(77, 77, 77, .2)'
+                              borderColor: 'rgba(77, 77, 77, .2)',
+                              borderRadius: '48px'
                             }}
                           />
                         </div>
@@ -215,7 +213,7 @@ class EventView extends Component {
             <p>Обсудить анонс мероприятия в чате:</p>
             <ButtonExternalLink
               href="https://tglink.ru/events4friends"
-              icon="/icons/telegram.png"
+              icon="/icons/telegram.svg"
               alt="telegram"
               style={{
                 borderColor: "#139BD0",
@@ -225,7 +223,7 @@ class EventView extends Component {
             />
             <ButtonExternalLink
               href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
-              icon="/icons/wa.png"
+              icon="/icons/whatsapp.svg"
               alt="whatsapp"
               style={{
                 borderColor: "#57BB63",
@@ -235,7 +233,7 @@ class EventView extends Component {
             />
             <ButtonExternalLink
               href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-              icon="/icons/viber.png"
+              icon="/icons/viber.svg"
               alt="viber"
               style={{
                 borderColor: "#7C519B",
