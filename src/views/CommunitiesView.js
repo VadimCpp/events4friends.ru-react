@@ -28,6 +28,19 @@ class CommunitiesView extends Component {
           <p className="mt-3">Все сообщества Калининграда</p>
           <div className="container container-center mt-2">
             <ButtonExternalLink
+              href="https://invite.viber.com/?g2=AQB3E%2BjqSG%2B%2F9Uui8NoBuwBJtIg4H%2F7Mb1RtXXmz1VW8WmCXCXQDkeP5kgzpOdBx"
+              icon="/icons/viber.svg"
+              alt="telegram"
+              title="МТВ Трещалка"
+              style={{
+                borderColor: "#7C519B",
+                margin: 8,
+                borderRadius: "48px",
+              }}
+            />
+          </div>
+          <div className="container container-center">
+            <ButtonExternalLink
               href="https://tglink.ru/veloafishagroup"
               icon="/icons/telegram.svg"
               alt="telegram"
