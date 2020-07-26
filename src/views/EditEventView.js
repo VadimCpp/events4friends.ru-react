@@ -18,6 +18,7 @@ class EditEventView extends Component {
       timezone: '+0200',
       start: '',
       end: '',
+      name: '',
       id: '',
       updatingEvent: false,
     }
@@ -55,6 +56,10 @@ class EditEventView extends Component {
     this.setState({ end: e.target.value });
   }
 
+  handleNameChange = (e) => {
+    this.setState({ name: e.target.value });
+  }
+
   editEventForUser = (user, editEvent) => {
     const {
       summary,
@@ -63,7 +68,8 @@ class EditEventView extends Component {
       location,
       timezone,
       start,
-      end,              
+      end,
+      name,             
       id,
     } = this.state;
 
@@ -85,6 +91,9 @@ class EditEventView extends Component {
     } else if (!start) {
       verified = false;
       alert('Пожалуйста, укажите время начала мероприятия');
+    } else if (!name) {
+      verified = false;
+      alert('Пожалуйста, укажите имя организатора');
     }
 
     if (verified) {
@@ -95,7 +104,7 @@ class EditEventView extends Component {
           isOnline,
           location,
           contact: user.email,
-          name: user.displayName,
+          name,
           timezone,
           start,
           end,
@@ -146,7 +155,8 @@ class EditEventView extends Component {
               location,
               timezone,
               start,
-              end,              
+              end,
+              name,
               updatingEvent,
             } = this.state;
 
@@ -175,6 +185,7 @@ class EditEventView extends Component {
                           timezone: event.timezone,
                           start: event.start,
                           end: event.end,
+                          name: event.name,
                           id: event.id,
                         });
                       }
@@ -348,8 +359,8 @@ class EditEventView extends Component {
                             className="textinput__input"
                             type="text"
                             name="name"
-                            value={user.displayName}
-                            disabled
+                            value={name}
+                            onChange={this.handleNameChange}
                           />
                         </label>
                       </div>
