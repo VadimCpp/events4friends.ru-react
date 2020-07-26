@@ -88,7 +88,7 @@ class EventView extends Component {
                         { service.telegram && (
                           <p>
                             <ButtonExternalLink
-                              href={`https://tglink.ru/${service.telegram}`}
+                              href={`tg://resolve?domain=${service.telegram}`}
                               icon="/icons/telegram.svg"
                               alt="telegram"
                               style={{
@@ -128,7 +128,7 @@ class EventView extends Component {
           <div className="container container-center pt-4 pb-5">
             <p>Обсудить услугу в чате:</p>
             <ButtonExternalLink
-              href="https://tglink.ru/events4friends"
+              href="tg://resolve?domain=events4friends"
               icon="/icons/telegram.svg"
               alt="telegram"
               style={{

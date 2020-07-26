@@ -94,7 +94,7 @@ class ProfileView extends Component {
               Пожалуйста, заполните свой профиль. Если Вам не понятно, как это сделать, задайте вопрос в чат.
             </p>
             <ButtonExternalLink 
-              href="https://tglink.ru/events4friends" 
+              href="tg://resolve?domain=events4friends" 
               icon="/icons/telegram.svg" 
               alt="telegram"
               style={{

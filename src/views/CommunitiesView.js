@@ -41,7 +41,7 @@ class CommunitiesView extends Component {
           </div>
           <div className="container container-center">
             <ButtonExternalLink
-              href="https://tglink.ru/veloafishagroup"
+              href="tg://resolve?domain=veloafishagroup"
               icon="/icons/telegram.svg"
               alt="telegram"
               title="ВелоАфиша Чат"
@@ -119,7 +119,7 @@ class CommunitiesView extends Component {
           </div>
           <div className="container container-center pb-4">
             <ButtonExternalLink
-              href="https://tglink.ru/OpenRoad39"
+              href="tg://resolve?domain=OpenRoad39"
               icon="/icons/telegram.svg"
               alt="telegram"
               title="OpenRoad39"

@@ -217,7 +217,7 @@ class EventView extends Component {
           <div className="container container-center pt-4 pb-4">
             <p>Обсудить анонс мероприятия в чате:</p>
             <ButtonExternalLink
-              href="https://tglink.ru/events4friends"
+              href="tg://resolve?domain=events4friends"
               icon="/icons/telegram.svg"
               alt="telegram"
               style={{

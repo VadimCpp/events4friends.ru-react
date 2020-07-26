@@ -409,7 +409,7 @@ class EditEventView extends Component {
             <p>У вас есть вопросы о том, как редактировать мероприятие? 
               Задайте вопрос в чате:</p>
             <ButtonExternalLink
-              href="https://tglink.ru/events4friends"
+              href="tg://resolve?domain=events4friends"
               icon="/icons/telegram.svg"
               alt="telegram"
               style={{
