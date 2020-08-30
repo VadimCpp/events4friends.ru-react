@@ -124,7 +124,7 @@ class LoginView extends Component {
               Логин и пароль можно получить в одном из чатов:
             </p>
             <ButtonExternalLink 
-              href="https://tglink.ru/events4friends" 
+              href="tg://resolve?domain=events4friends" 
               icon="/icons/telegram.svg" 
               alt="telegram"
               style={{
