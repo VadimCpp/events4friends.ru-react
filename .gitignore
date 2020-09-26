@@ -30,3 +30,5 @@ yarn.lock
 /vendor/
 phpcs.xml
 phpunit.xml
+
+.vscode

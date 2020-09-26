@@ -1,57 +1,58 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import Button from '../components/Button'
-import ButtonLink from '../components/ButtonLink';
-import ButtonExternalLink from '../components/ButtonExternalLink';
-import { AuthContext } from '../context/AuthContext'
-import { DataContext } from '../context/DataContext'
-import './NewEventView.css';
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import Button from "../components/Button";
+import ButtonLink from "../components/ButtonLink";
+import ButtonExternalLink from "../components/ButtonExternalLink";
+import { AuthContext } from "../context/AuthContext";
+import { DataContext } from "../context/DataContext";
+import { ReachTextEditor } from "../components/RichTextEditor";
+import "./NewEventView.css";
 
 class NewEventView extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      summary: 'Название',
-      description: 'Описание',
+      summary: "Название",
+      description: "Описание",
       isOnline: true,
-      location: '',
-      timezone: '+0200', // ISO-8601
-      start: '',
-      end: '',
-    }
+      location: "",
+      timezone: "+0200", // ISO-8601
+      start: "",
+      end: ""
+    };
   }
 
-  handleSummaryChange = (e) => {
+  handleSummaryChange = e => {
     this.setState({ summary: e.target.value });
-  }
+  };
 
-  handleDescriptionChange = (e) => {
-    this.setState({ description: e.target.value });
-  }
+  handleDescriptionChange = value => {
+    this.setState({ description: value });
+  };
 
   handleIsOnlineChange = () => {
     this.setState({ isOnline: true });
-  }
+  };
 
   handleIsOfflineChange = () => {
     this.setState({ isOnline: false });
-  }
+  };
 
-  handleTimeZoneChange = (timezone) => {
+  handleTimeZoneChange = timezone => {
     this.setState({ timezone });
-  }
+  };
 
-  handleLocationChange = (e) => {
+  handleLocationChange = e => {
     this.setState({ location: e.target.value });
-  }
+  };
 
-  handleStartChange = (e) => {
+  handleStartChange = e => {
     this.setState({ start: e.target.value });
-  }
+  };
 
-  handleEndChange = (e) => {
+  handleEndChange = e => {
     this.setState({ end: e.target.value });
-  }
+  };
 
   createNewEventForUser = (user, createEvent) => {
     const {
@@ -61,7 +62,7 @@ class NewEventView extends Component {
       location,
       timezone,
       start,
-      end,              
+      end
     } = this.state;
 
     //
@@ -72,16 +73,16 @@ class NewEventView extends Component {
 
     if (!summary) {
       verified = false;
-      alert('Пожалуйста, введите название мероприятия');
+      alert("Пожалуйста, введите название мероприятия");
     } else if (!description) {
       verified = false;
-      alert('Пожалуйста, введите полное описание мероприятия');
+      alert("Пожалуйста, введите полное описание мероприятия");
     } else if (!location) {
       verified = false;
-      alert('Пожалуйста, введите место проведения мероприятия');
+      alert("Пожалуйста, введите место проведения мероприятия");
     } else if (!start) {
       verified = false;
-      alert('Пожалуйста, укажите время начала мероприятия');
+      alert("Пожалуйста, укажите время начала мероприятия");
     }
 
     if (verified) {
@@ -95,20 +96,22 @@ class NewEventView extends Component {
           name: user.displayName,
           timezone,
           start,
-          end,
-        }
-        createEvent(event, (id) => {
-          console.log('Event created successfully, open it')
-          this.props.history.push(`event/${id}`)
-        })
+          end
+        };
+        createEvent(event, id => {
+          console.log("Event created successfully, open it");
+          this.props.history.push(`event/${id}`);
+        });
       } else {
-        alert('Извините, невозможно создать мероприятие. Обратитесь в техподдержку.')
-        console.warn('Error user data, skip')
+        alert(
+          "Извините, невозможно создать мероприятие. Обратитесь в техподдержку."
+        );
+        console.warn("Error user data, skip");
       }
     } else {
-      console.warn('Error verify data, skip')
+      console.warn("Error verify data, skip", verified);
     }
-  }
+  };
 
   render() {
     return (
@@ -120,17 +123,17 @@ class NewEventView extends Component {
             title="К списку"
             style={{
               width: 155,
-              display: 'block',
-              marginRight: 'auto',
-              marginLeft: 'auto',
+              display: "block",
+              marginRight: "auto",
+              marginLeft: "auto",
               marginBottom: 10,
-              borderColor: 'rgba(77, 77, 77, .2)',
+              borderColor: "rgba(77, 77, 77, .2)",
               borderRadius: "48px"
             }}
           />
         </div>
         <AuthContext.Consumer>
-          {({ user }) => {
+          {({ user = {} }) => {
             const {
               summary,
               description,
@@ -138,14 +141,14 @@ class NewEventView extends Component {
               location,
               timezone,
               start,
-              end,
+              end
             } = this.state;
 
-            let userAuthorized = false
+            let userAuthorized = false;
             if (user) {
               const { isAnonymous } = user;
               if (isAnonymous === false) {
-                userAuthorized = true
+                userAuthorized = true;
               }
             }
 
@@ -169,29 +172,19 @@ class NewEventView extends Component {
                         </label>
                       </div>
                       <div className="textinput">
-                        <label>
-                          <p className="text-left">
-                            Полное описание:
-                          </p>
-                          <textarea 
-                            className="textinput__input"
-                            name="message"
-                            rows="10"
-                            cols="80"
+                        <p className="text-left">Полное описание:</p>
+                        <div className="rte-container">
+                          <ReachTextEditor
                             onChange={this.handleDescriptionChange}
-                            value={description}
+                            description={description}
                           />
-                        </label>
+                        </div>
                       </div>
                       <div className="textinput">
-                        <p className="text-left">
-                          Где будет мероприятие?
-                        </p>
+                        <p className="text-left">Где будет мероприятие?</p>
                         <p>
                           <label>
-                            <span className="text-left">
-                              Онлайн
-                            </span>
+                            <span className="text-left">Онлайн</span>
                             <input
                               className="textinput__input"
                               type="radio"
@@ -203,9 +196,7 @@ class NewEventView extends Component {
                         </p>
                         <p>
                           <label>
-                            <span className="text-left">
-                              Офлайн
-                            </span>
+                            <span className="text-left">Офлайн</span>
                             <input
                               className="textinput__input"
                               type="radio"
@@ -219,7 +210,9 @@ class NewEventView extends Component {
                       <div className="textinput">
                         <label>
                           <p className="text-left">
-                            {isOnline ? 'Ссылка онлайн мероприятия:' : 'Укажите адрес встречи:'}
+                            {isOnline
+                              ? "Ссылка онлайн мероприятия:"
+                              : "Укажите адрес встречи:"}
                           </p>
                           <input
                             className="textinput__input"
@@ -231,9 +224,7 @@ class NewEventView extends Component {
                         </label>
                       </div>
                       <div className="textinput">
-                        <p className="text-left">
-                          Часовая зона?
-                        </p>
+                        <p className="text-left">Часовая зона?</p>
                         <p>
                           <label>
                             <span className="text-left">
@@ -243,35 +234,31 @@ class NewEventView extends Component {
                               className="textinput__input"
                               type="radio"
                               name="timeZone"
-                              checked={timezone === '+0200'}
+                              checked={timezone === "+0200"}
                               onChange={() => {
-                                this.handleTimeZoneChange('+0200')
+                                this.handleTimeZoneChange("+0200");
                               }}
                             />
                           </label>
                         </p>
                         <p>
                           <label>
-                            <span className="text-left">
-                              Москва (GMT+3)
-                            </span>
+                            <span className="text-left">Москва (GMT+3)</span>
                             <input
                               className="textinput__input"
                               type="radio"
                               name="timeZone"
-                              checked={timezone === '+0300'}
+                              checked={timezone === "+0300"}
                               onChange={() => {
-                                this.handleTimeZoneChange('+0300')
+                                this.handleTimeZoneChange("+0300");
                               }}
                             />
                           </label>
                         </p>
-                      </div>              
+                      </div>
                       <div className="textinput">
                         <label>
-                          <p className="text-left">
-                            Начало мероприятия:
-                          </p>
+                          <p className="text-left">Начало мероприятия:</p>
                           <input
                             className="textinput__input"
                             type="datetime-local"
@@ -280,7 +267,7 @@ class NewEventView extends Component {
                             onChange={this.handleStartChange}
                           />
                         </label>
-                      </div> 
+                      </div>
                       <div className="textinput">
                         <label>
                           <p className="text-left">
@@ -297,42 +284,38 @@ class NewEventView extends Component {
                       </div>
                       <div className="textinput">
                         <label>
-                          <p className="text-left">
-                            Контакт организатора:
-                          </p>
+                          <p className="text-left">Контакт организатора:</p>
                           <input
                             className="textinput__input"
                             type="text"
                             name="contact"
-                            value={user.email}
+                            value={user?.email}
                             disabled
                           />
                         </label>
-                      </div> 
+                      </div>
                       <div className="textinput">
                         <label>
-                          <p className="text-left">
-                            Имя организатора:
-                          </p>
+                          <p className="text-left">Имя организатора:</p>
                           <input
                             className="textinput__input"
                             type="text"
                             name="name"
-                            value={user.displayName}
+                            value={user?.displayName}
                             disabled
                           />
                         </label>
-                      </div>                                                                    
+                      </div>
                       <Button
                         onPress={() => {
-                          this.createNewEventForUser(user, createEvent)
+                          this.createNewEventForUser(user, createEvent);
                         }}
                         icon="/icons/icon_plus.svg"
                       >
                         Создать
                       </Button>
                     </div>
-                  )
+                  );
                 }}
               </DataContext.Consumer>
             ) : (
@@ -342,21 +325,23 @@ class NewEventView extends Component {
                   <button
                     className="btn btn-link btn-link-vk"
                     onClick={() => {
-                      this.props.history.push('signin/')
+                      this.props.history.push("signin/");
                     }}
                   >
                     <span>вход</span>
                   </button>
                 </p>
               </div>
-            )
+            );
           }}
-        </AuthContext.Consumer> 
-        
+        </AuthContext.Consumer>
+
         <div className="border-top">
           <div className="container container-center pt-4 pb-5">
-            <p>У вас есть вопросы о том, как добавить мероприятие? 
-              Задайте вопрос в чате:</p>
+            <p>
+              У вас есть вопросы о том, как добавить мероприятие? Задайте вопрос
+              в чате:
+            </p>
             <ButtonExternalLink
               href="tg://resolve?domain=events4friends"
               icon="/icons/telegram.svg"
@@ -390,7 +375,7 @@ class NewEventView extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

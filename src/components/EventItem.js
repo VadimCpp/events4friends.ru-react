@@ -418,7 +418,6 @@ class EventItem extends Component {
         <span role="img" aria-label="Location">📍</span>
             {this.formatLocation()}
 
-
             {((this.props.match.path === '/') 
               || (this.props.match.path === '/events/')) ? this.moreInfo() : this.renderInfoBlock()}
 
@@ -428,6 +427,5 @@ class EventItem extends Component {
     )
   }
 }
-
 
 export default withRouter(EventItem);

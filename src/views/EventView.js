@@ -48,7 +48,7 @@ class EventView extends Component {
             let startTime = 'Не указано';
             let timezone = null;
 
-            for(let i = 0; i < events.length; i++) {
+            for (let i = 0; i < events.length; i++) {
               if (eventId === events[i].id) {
                 event = events[i]
                 name = 'База данных events4friends'
