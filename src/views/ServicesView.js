@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
-import ServiceCard from '../components/ServiceCard';
-import ButtonLink from '../components/ButtonLink';
-import { DataContext } from '../context/DataContext'
-import './ServicesView.css';
-import ServiceSort from '../components/ServiceSort';
+import React, { Component } from "react";
+import ServiceCard from "../components/ServiceCard";
+import ButtonLink from "../components/ButtonLink";
+import { DataContext } from "../context/DataContext";
+import ServiceSort from "../components/ServiceSort";
+import "./ServicesView.css";
 
 const ServiceSortingType = {
-  SortByName: 'SORT_BY_NAME',
-  SortByService: 'SORT_BY_SERVICE',
-  SortByPrice: 'SORT_BY_PRICE'
-}
+  SortByName: "SORT_BY_NAME",
+  SortByService: "SORT_BY_SERVICE",
+  SortByPrice: "SORT_BY_PRICE"
+};
 
 class ServicesView extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.state = { sortType: ServiceSortingType.SortByService }
+    this.state = { sortType: ServiceSortingType.SortByService };
   }
 
   displayService(service) {
     const { sortType } = this.state;
-    let highlightName = new Boolean();
+    let highlightName = false;
 
-    (sortType === 'SORT_BY_NAME') 
-    ? highlightName = true 
-    : highlightName = false;
+    if (sortType === "SORT_BY_NAME") {
+      highlightName = true;
+    }
 
     if (!service) {
       return null;
@@ -32,10 +32,7 @@ class ServicesView extends Component {
 
     return (
       <div key={service.id}>
-        <ServiceCard
-          service={service}
-          highlightName={highlightName}
-        />
+        <ServiceCard service={service} highlightName={highlightName} />
       </div>
     );
   }
@@ -52,18 +49,18 @@ class ServicesView extends Component {
             title="На главную"
             style={{
               width: 175,
-              display: 'block',
-              marginRight: 'auto',
-              marginLeft: 'auto',
+              display: "block",
+              marginRight: "auto",
+              marginLeft: "auto",
               marginBottom: 10,
-              borderColor: 'rgba(77, 77, 77, .2)',
+              borderColor: "rgba(77, 77, 77, .2)",
               borderRadius: "48px"
             }}
           />
         </div>
 
         <ServiceSort
-          onSortTypeChange={(value) => this.setState({ sortType: value })}
+          onSortTypeChange={value => this.setState({ sortType: value })}
           sortType={sortType}
           sortByName={ServiceSortingType.SortByName}
           sortByService={ServiceSortingType.SortByService}
@@ -102,12 +99,14 @@ class ServicesView extends Component {
                 });
               }
 
-              return sortedServices.map(service => this.displayService(service))
+              return sortedServices.map(service =>
+                this.displayService(service)
+              );
             }}
           </DataContext.Consumer>
         </div>
       </div>
-    )
+    );
   }
 }
 

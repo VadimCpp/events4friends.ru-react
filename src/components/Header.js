@@ -5,7 +5,7 @@ import './Header.css';
 
 class Header extends Component {
   render() {
-    return(
+    return (
       <header className="header">
         <div className="header__first-col">
          <Link className="reset-link-style" to="/">

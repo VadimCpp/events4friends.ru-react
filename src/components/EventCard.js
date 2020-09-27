@@ -75,5 +75,4 @@ class EventCard extends Component {
   }
 }
 
-
 export default withRouter(EventCard);

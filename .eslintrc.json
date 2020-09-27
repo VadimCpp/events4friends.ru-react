@@ -9,9 +9,31 @@
     "prettier/react"
   ],
   "rules": {
-    "react/prop-types": 0
+    "import/prefer-default-export": 0,
+    "react/prop-types": 0,
+    "quote-props": [
+      "error",
+      "as-needed"
+    ],
+    "keyword-spacing": [
+      "error",
+      {
+        "before": true
+      }
+    ],
+    "no-multiple-empty-lines": [
+      2,
+      {
+        "max": 1
+      }
+    ]
   },
-  "plugins": ["react", "import", "jsx-a11y"],
+  "plugins": [
+    "react",
+    "import",
+    "jsx-a11y",
+    "react-hooks"
+  ],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
