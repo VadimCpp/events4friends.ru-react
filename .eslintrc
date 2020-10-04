@@ -42,7 +42,11 @@
         "usePrettierrc": true
       }
     ],
-    "semi": 1,
+    "semi": "error",
+    "indent": [
+      "error",
+      2
+    ],
     "quotes": [
       "error",
       "single",
