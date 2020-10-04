@@ -10,8 +10,7 @@
 		"test": "react-scripts test",
 		"predeploy": "npm run build",
 		"eject": "react-scripts eject",
-		"eslint": "eslint src --ext .js --fix",
-		"format": "prettier --write"
+		"eslint": "eslint src --ext .js --fix"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
