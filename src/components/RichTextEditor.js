@@ -8,7 +8,7 @@ const plugins = [
   "insertdatetime media table paste code help wordcount",
 ];
 
-const toolbar = `emoticons | undo redo | formatselect | bold italic backcolor | 
+const toolbar = `emoticons | undo redo | formatselect | bold italic forecolor backcolor | 
 alignleft aligncenter alignright alignjustify |
 bullist numlist outdent indent | removeformat | help`;
 
