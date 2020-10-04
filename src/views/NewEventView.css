@@ -19,5 +19,7 @@
 }
 
 .rte-container {
-  width: 350px;
+  width: 100%;
+  min-width: 300px;
+  max-width: 960px;
 }
