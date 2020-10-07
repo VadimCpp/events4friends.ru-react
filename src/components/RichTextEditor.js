@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Editor } from "@tinymce/tinymce-react";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Editor } from '@tinymce/tinymce-react';
 
 const plugins = [
-  "emoticons advlist autolink lists link image charmap print preview anchor",
-  "searchreplace visualblocks code fullscreen",
-  "insertdatetime media table paste code help wordcount",
+  'emoticons advlist autolink lists link image charmap print preview anchor',
+  'searchreplace visualblocks code fullscreen',
+  'insertdatetime media table paste code help wordcount',
 ];
 
 const toolbar = `emoticons | undo redo | formatselect | bold italic forecolor backcolor | 
@@ -14,7 +14,7 @@ bullist numlist outdent indent | removeformat | help`;
 
 const init = {
   height: 300,
-  width: "100%",
+  width: '100%',
   menubar: false,
   plugins,
   toolbar,

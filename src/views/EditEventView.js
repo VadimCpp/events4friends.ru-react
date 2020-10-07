@@ -1,27 +1,29 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import Button from "../components/Button";
-import ButtonLink from "../components/ButtonLink";
-import ButtonExternalLink from "../components/ButtonExternalLink";
-import { AuthContext } from "../context/AuthContext";
-import { DataContext } from "../context/DataContext";
-import { ReachTextEditor } from "../components/RichTextEditor";
-import "./EditEventView.css";
+/* eslint-disable max-len */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Button from '../components/Button';
+import ButtonLink from '../components/ButtonLink';
+import ButtonExternalLink from '../components/ButtonExternalLink';
+import { AuthContext } from '../context/AuthContext';
+import { DataContext } from '../context/DataContext';
+import { ReachTextEditor } from '../components/RichTextEditor';
+import './EditEventView.css';
 
 class EditEventView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      summary: "",
-      description: "",
+      summary: '',
+      description: '',
       isOnline: true,
-      location: "",
-      timezone: "+0200",
-      start: "",
-      end: "",
-      name: "",
-      id: "",
-      updatingEvent: false
+      location: '',
+      timezone: '+0200',
+      start: '',
+      end: '',
+      name: '',
+      id: '',
+      updatingEvent: false,
     };
   }
 
@@ -71,7 +73,7 @@ class EditEventView extends Component {
       start,
       end,
       name,
-      id
+      id,
     } = this.state;
 
     //
@@ -82,19 +84,19 @@ class EditEventView extends Component {
 
     if (!summary) {
       verified = false;
-      alert("Пожалуйста, введите название мероприятия");
+      alert('Пожалуйста, введите название мероприятия');
     } else if (!description) {
       verified = false;
-      alert("Пожалуйста, введите полное описание мероприятия");
+      alert('Пожалуйста, введите полное описание мероприятия');
     } else if (!location) {
       verified = false;
-      alert("Пожалуйста, введите место проведения мероприятия");
+      alert('Пожалуйста, введите место проведения мероприятия');
     } else if (!start) {
       verified = false;
-      alert("Пожалуйста, укажите время начала мероприятия");
+      alert('Пожалуйста, укажите время начала мероприятия');
     } else if (!name) {
       verified = false;
-      alert("Пожалуйста, укажите имя организатора");
+      alert('Пожалуйста, укажите имя организатора');
     }
 
     if (verified) {
@@ -108,27 +110,27 @@ class EditEventView extends Component {
           name,
           timezone,
           start,
-          end
+          end,
         };
         editEvent(event, id, aSuccess => {
           if (aSuccess) {
-            console.log("Event updated successfully, open it");
+            console.info('Event updated successfully, open it');
             this.props.history.push(`/event/${id}`);
           } else {
             this.setState({ updatingEvent: false });
             alert(
-              "Не удалось изменить событие. Пожалуйста, обратитесь в службу поддержки."
+              'Не удалось изменить событие. Пожалуйста, обратитесь в службу поддержки.',
             );
           }
         });
       } else {
         alert(
-          "Извините, невозможно изменить мероприятие. Обратитесь в техподдержку."
+          'Извините, невозможно изменить мероприятие. Обратитесь в техподдержку.',
         );
-        console.warn("Error user data, skip");
+        console.warn('Error user data, skip');
       }
     } else {
-      console.warn("Error verify data, skip");
+      console.warn('Error verify data, skip');
     }
   };
 
@@ -142,12 +144,12 @@ class EditEventView extends Component {
             title="К списку"
             style={{
               width: 155,
-              display: "block",
-              marginRight: "auto",
-              marginLeft: "auto",
+              display: 'block',
+              marginRight: 'auto',
+              marginLeft: 'auto',
               marginBottom: 10,
-              borderColor: "rgba(77, 77, 77, .2)",
-              borderRadius: "48px"
+              borderColor: 'rgba(77, 77, 77, .2)',
+              borderRadius: '48px',
             }}
           />
         </div>
@@ -162,7 +164,7 @@ class EditEventView extends Component {
               start,
               end,
               name,
-              updatingEvent
+              updatingEvent,
             } = this.state;
 
             let userAuthorized = false;
@@ -178,6 +180,8 @@ class EditEventView extends Component {
                 {({ events, editEvent }) => {
                   const eventId = this.props.match.params.id;
                   let event = null;
+                  // TODO: исправить обновление state в render
+
                   for (let i = 0; i < events.length; i++) {
                     if (eventId === events[i].id) {
                       event = events[i];
@@ -191,13 +195,12 @@ class EditEventView extends Component {
                           start: event.start,
                           end: event.end,
                           name: event.name,
-                          id: event.id
+                          id: event.id,
                         });
                       }
                       break;
                     }
                   }
-
                   return event ? (
                     <div className="neweventview">
                       <div className="textinput">
@@ -254,8 +257,8 @@ class EditEventView extends Component {
                         <label>
                           <p className="text-left">
                             {isOnline
-                              ? "Ссылка онлайн мероприятия:"
-                              : "Укажите адрес встречи:"}
+                              ? 'Ссылка онлайн мероприятия:'
+                              : 'Укажите адрес встречи:'}
                           </p>
                           <input
                             className="textinput__input"
@@ -277,9 +280,9 @@ class EditEventView extends Component {
                               className="textinput__input"
                               type="radio"
                               name="timeZone"
-                              checked={timezone === "+0200"}
+                              checked={timezone === '+0200'}
                               onChange={() => {
-                                this.handleTimeZoneChange("+0200");
+                                this.handleTimeZoneChange('+0200');
                               }}
                             />
                           </label>
@@ -291,9 +294,9 @@ class EditEventView extends Component {
                               className="textinput__input"
                               type="radio"
                               name="timeZone"
-                              checked={timezone === "+0300"}
+                              checked={timezone === '+0300'}
                               onChange={() => {
-                                this.handleTimeZoneChange("+0300");
+                                this.handleTimeZoneChange('+0300');
                               }}
                             />
                           </label>
@@ -396,8 +399,8 @@ class EditEventView extends Component {
               icon="/icons/telegram.svg"
               alt="telegram"
               style={{
-                borderColor: "#139BD0",
-                margin: 8
+                borderColor: '#139BD0',
+                margin: 8,
               }}
             />
             <ButtonExternalLink
@@ -405,8 +408,8 @@ class EditEventView extends Component {
               icon="/icons/whatsapp.svg"
               alt="whatsapp"
               style={{
-                borderColor: "#57BB63",
-                margin: 8
+                borderColor: '#57BB63',
+                margin: 8,
               }}
             />
             <ButtonExternalLink
@@ -414,8 +417,8 @@ class EditEventView extends Component {
               icon="/icons/viber.svg"
               alt="viber"
               style={{
-                borderColor: "#7C519B",
-                margin: 8
+                borderColor: '#7C519B',
+                margin: 8,
               }}
             />
           </div>

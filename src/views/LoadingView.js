@@ -1,29 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Progress } from 'reactstrap';
 
 import './LoadingView.css';
 
-class LoadingView extends Component {
-  render() {
-    return (
-      <div className="loading-view">
-        <div className="container">
-          <p>
-            Загружаем события...
-          </p>
-          <p>
-            {this.props.loadingNumber} из {this.props.loadingTotal} : {this.props.loadingName}
-          </p>
-          <div>
-            <Progress
-              value={this.props.loadingNumber}
-              max={this.props.loadingTotal}
-            />
-          </div>
+const LoadingView = ({ loadingNumber, loadingTotal, loadingName }) => {
+  return (
+    <div className="loading-view">
+      <div className="container">
+        <p>Загружаем события...</p>
+        <p>{`${loadingNumber} из ${loadingNumber} : ${loadingName}`}</p>
+        <div>
+          <Progress value={loadingNumber} max={loadingTotal} />
         </div>
       </div>
-    )
-  }
-}
+    </div>
+  );
+};
 
 export default LoadingView;

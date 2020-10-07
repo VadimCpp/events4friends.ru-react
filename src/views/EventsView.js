@@ -1,15 +1,16 @@
-import React, { Component } from "react";
-import moment from "moment";
-import EventCard from "../components/EventCard.js";
-import ButtonLink from "../components/ButtonLink";
-import EventsFilter from "../components/EventsFilter";
-import { AuthContext } from "../context/AuthContext";
-import { DataContext } from "../context/DataContext";
-import "./EventsView.css";
+/* eslint-disable indent */
+import React, { Component } from 'react';
+import moment from 'moment';
+import EventCard from '../components/EventCard';
+import ButtonLink from '../components/ButtonLink';
+import EventsFilter from '../components/EventsFilter';
+import { AuthContext } from '../context/AuthContext';
+import { DataContext } from '../context/DataContext';
+import './EventsView.css';
 
 const EventsFilterType = {
-  Upcoming: "UPCOMING_EVENTS",
-  Past: "PAST_EVENTS"
+  Upcoming: 'UPCOMING_EVENTS',
+  Past: 'PAST_EVENTS',
   // TODO: add more types here
 };
 
@@ -18,7 +19,7 @@ class EventsView extends Component {
     super(props);
 
     this.state = {
-      filterType: EventsFilterType.Upcoming
+      filterType: EventsFilterType.Upcoming,
     };
   }
 
@@ -57,7 +58,8 @@ class EventsView extends Component {
             sortedEvents.sort((a, b) => {
               if (a.start > b.start) {
                 return 1;
-              } else if (a.start < b.start) {
+              }
+              if (a.start < b.start) {
                 return -1;
               }
               return 0;
@@ -72,7 +74,8 @@ class EventsView extends Component {
             sortedEvents.sort((a, b) => {
               if (a.start < b.start) {
                 return 1;
-              } else if (a.start > b.start) {
+              }
+              if (a.start > b.start) {
                 return -1;
               }
               return 0;
@@ -83,8 +86,8 @@ class EventsView extends Component {
             return {
               event: item,
               source: {
-                name: "База данных events4friends"
-              }
+                name: 'База данных events4friends',
+              },
             };
           });
 
@@ -97,12 +100,12 @@ class EventsView extends Component {
                   title="На главную"
                   style={{
                     width: 175,
-                    display: "block",
-                    marginRight: "auto",
-                    marginLeft: "auto",
+                    display: 'block',
+                    marginRight: 'auto',
+                    marginLeft: 'auto',
                     marginBottom: 10,
-                    borderColor: "rgba(77, 77, 77, .2)",
-                    borderRadius: "48px"
+                    borderColor: 'rgba(77, 77, 77, .2)',
+                    borderRadius: '48px',
                   }}
                 />
               </div>
@@ -116,6 +119,10 @@ class EventsView extends Component {
                     }
                   }
 
+                  const warnMessage = (
+                    <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
+                  );
+
                   return userAuthorized ? (
                     <div>
                       <ButtonLink
@@ -124,21 +131,17 @@ class EventsView extends Component {
                         title="Сделать анонс"
                         style={{
                           width: 200,
-                          display: "block",
-                          marginRight: "auto",
-                          marginLeft: "auto",
+                          display: 'block',
+                          marginRight: 'auto',
+                          marginLeft: 'auto',
                           marginBottom: 10,
-                          borderColor: "rgba(77, 77, 77, .2)",
-                          borderRadius: "48px"
+                          borderColor: 'rgba(77, 77, 77, .2)',
+                          borderRadius: '48px',
                         }}
                       />
                     </div>
                   ) : (
-                    <div>
-                      <p>
-                        Для того, чтобы добавлять мероприятия, выполните вход
-                      </p>
-                    </div>
+                    <div>{warnMessage}</div>
                   );
                 }}
               </AuthContext.Consumer>
@@ -155,7 +158,7 @@ class EventsView extends Component {
               <div className="pt-3">
                 {eventsList.length
                   ? eventsList.map(eventItem =>
-                      this.displayEvent(eventItem.event, eventItem.source)
+                      this.displayEvent(eventItem.event, eventItem.source),
                     )
                   : null}
               </div>

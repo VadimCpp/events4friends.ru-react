@@ -1,9 +1,7 @@
 import React from 'react';
 
 const defaultData = {
-  userName: "Anonymous",
+  userName: 'Anonymous',
 };
 
-export const AuthContext = React.createContext(
-  defaultData
-);
+export const AuthContext = React.createContext(defaultData);
