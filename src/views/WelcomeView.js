@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactStoreBadges from 'react-store-badges';
 import ButtonLink from '../components/ButtonLink';
@@ -8,60 +8,58 @@ import { DataContext } from '../context/DataContext';
 import './WelcomeView.css';
 
 const WelcomeView = ({ history }) => {
+  const authContext = useContext(AuthContext);
+  const dataContext = useContext(DataContext);
+
+  let userName = null;
+  let userAuthorized = false;
+  if (authContext.user) {
+    const { isAnonymous, displayName } = authContext.user;
+    if (!isAnonymous) {
+      userName = displayName || 'Не указано';
+      userAuthorized = true;
+    }
+  }
+
   return (
     <div className="welcomeview">
       <div className="welcomeview__block">
-        <AuthContext.Consumer>
-          {({ user, signOut }) => {
-            let userName = null;
-            let userAuthorized = false;
-            if (user) {
-              const { isAnonymous, displayName } = user;
-              if (!isAnonymous) {
-                userName = displayName || 'Не указано';
-                userAuthorized = true;
-              }
-            }
-            return (
-              <div className="container container-center">
-                {userAuthorized ? (
-                  <div>
-                    <span>Добро пожаловать в цифровое пространство, </span>
-                    <button
-                      type="button"
-                      className="btn btn-link btn-link-vk"
-                      onClick={() => history.push('/profile')}
-                    >
-                      <span>{userName}</span>
-                    </button>
-                    <span>!</span>
-                    <br />
-                    <button
-                      type="button"
-                      className="btn btn-link btn-link-vk"
-                      onClick={() => signOut()}
-                    >
-                      <span>Выйти</span>
-                    </button>
-                  </div>
-                ) : (
-                  <div>
-                    <span>Добро пожаловать в цифровое пространство! </span>
-                    <button
-                      type="button"
-                      className="btn btn-link btn-link-vk"
-                      onClick={() => {
-                        history.push('signin/');
-                      }}
-                    >
-                      <span>Войти</span>
-                    </button>
-                  </div>
-                )}
-              </div>
-            );
-          }}
-        </AuthContext.Consumer>
+        <div className="container container-center">
+          {userAuthorized ? (
+            <div>
+              <span>Добро пожаловать в цифровое пространство, </span>
+              <button
+                type="button"
+                className="btn btn-link btn-link-vk"
+                onClick={() => history.push('/profile')}
+              >
+                <span>{userName}</span>
+              </button>
+              <span>!</span>
+              <br />
+              <button
+                type="button"
+                className="btn btn-link btn-link-vk"
+                onClick={() => authContext.signOut()}
+              >
+                <span>Выйти</span>
+              </button>
+            </div>
+          ) : (
+            <div>
+              <span>Добро пожаловать в цифровое пространство! </span>
+              <button
+                type="button"
+                className="btn btn-link btn-link-vk"
+                onClick={() => {
+                  history.push('signin/');
+                }}
+              >
+                <span>Войти</span>
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="welcomeview__block">
@@ -202,23 +200,16 @@ const WelcomeView = ({ history }) => {
         </div>
       </div>
 
-      <DataContext.Consumer>
-        {({ config }) => {
-          return (
-            <div className="container container-center">
-              <p className="welcomeview__footer">
-                Здесь действуют правила поведения в общественных местах.
-                Разработано в{' '}
-                <a href="https://roscomputing.com/">Роскомпьютинг</a>.
-                <span> Конфигурация: </span>
-                <span> name - {config.name},</span>
-                <span> description - {config.description},</span>
-                <span> version - {config.version}.</span>
-              </p>
-            </div>
-          );
-        }}
-      </DataContext.Consumer>
+      <div className="container container-center">
+        <p className="welcomeview__footer">
+          Здесь действуют правила поведения в общественных местах. Разработано в{' '}
+          <a href="https://roscomputing.com/">Роскомпьютинг</a>.
+          <span> Конфигурация: </span>
+          <span> name - {dataContext.config.name},</span>
+          <span> description - {dataContext.config.description},</span>
+          <span> version - {dataContext.config.version}.</span>
+        </p>
+      </div>
     </div>
   );
 };
