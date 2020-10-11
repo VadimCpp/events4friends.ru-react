@@ -212,6 +212,6 @@ function WelcomeView({ history }) {
       </div>
     </div>
   );
-};
+}
 
 export default withRouter(WelcomeView);
