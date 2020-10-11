@@ -9,6 +9,8 @@ import './WelcomeView.css';
 
 function WelcomeView({ history }) {
   const authContext = useContext(AuthContext);
+  const dataContext = useContext(DataContext);
+
   let userName = null;
   let userAuthorized = false;
   if (authContext.user) {
@@ -198,23 +200,16 @@ function WelcomeView({ history }) {
         </div>
       </div>
 
-      <DataContext.Consumer>
-        {({ config }) => {
-          return (
-            <div className="container container-center">
-              <p className="welcomeview__footer">
-                Здесь действуют правила поведения в общественных местах.
-                Разработано в{' '}
-                <a href="https://roscomputing.com/">Роскомпьютинг</a>.
-                <span> Конфигурация: </span>
-                <span> name - {config.name},</span>
-                <span> description - {config.description},</span>
-                <span> version - {config.version}.</span>
-              </p>
-            </div>
-          );
-        }}
-      </DataContext.Consumer>
+      <div className="container container-center">
+        <p className="welcomeview__footer">
+          Здесь действуют правила поведения в общественных местах. Разработано в{' '}
+          <a href="https://roscomputing.com/">Роскомпьютинг</a>.
+          <span> Конфигурация: </span>
+          <span> name - {dataContext.config.name},</span>
+          <span> description - {dataContext.config.description},</span>
+          <span> version - {dataContext.config.version}.</span>
+        </p>
+      </div>
     </div>
   );
 };
