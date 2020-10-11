@@ -6,6 +6,4 @@ const defaultData = {
   config: {},
 };
 
-export const DataContext = React.createContext(
-  defaultData
-);
+export const DataContext = React.createContext(defaultData);

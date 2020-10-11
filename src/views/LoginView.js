@@ -1,19 +1,20 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import Button from "../components/Button";
-import ButtonLink from "../components/ButtonLink";
-import ButtonExternalLink from "../components/ButtonExternalLink";
-import { AuthContext } from "../context/AuthContext";
-import "firebase/auth";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Button from '../components/Button';
+import ButtonLink from '../components/ButtonLink';
+import ButtonExternalLink from '../components/ButtonExternalLink';
+import { AuthContext } from '../context/AuthContext';
+import 'firebase/auth';
 
-import "./LoginView.css";
+import './LoginView.css';
 
 class LoginView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: "",
-      password: ""
+      login: '',
+      password: '',
     };
   }
 
@@ -38,11 +39,11 @@ class LoginView extends Component {
               if (user) {
                 const { isAnonymous, displayName } = user;
                 if (isAnonymous) {
-                  userName = "Аноним";
+                  userName = 'Аноним';
                 } else {
                   userName = displayName;
                   if (!userName) {
-                    this.props.history.push("/profile");
+                    this.props.history.push('/profile');
                   }
                   userAuthorized = true;
                 }
@@ -60,12 +61,12 @@ class LoginView extends Component {
                         title="Вернуться на экран приветствия"
                         style={{
                           width: 200,
-                          display: "block",
-                          marginRight: "auto",
-                          marginLeft: "auto",
+                          display: 'block',
+                          marginRight: 'auto',
+                          marginLeft: 'auto',
                           marginBottom: 26,
-                          borderColor: "rgba(77, 77, 77, .2)",
-                          borderRadius: "48px"
+                          borderColor: 'rgba(77, 77, 77, .2)',
+                          borderRadius: '48px',
                         }}
                       />
                     </div>
@@ -123,9 +124,9 @@ class LoginView extends Component {
               icon="/icons/telegram.svg"
               alt="telegram"
               style={{
-                borderColor: "#139BD0",
+                borderColor: '#139BD0',
                 margin: 8,
-                borderRadius: "48px"
+                borderRadius: '48px',
               }}
             />
             <ButtonExternalLink
@@ -133,9 +134,9 @@ class LoginView extends Component {
               icon="/icons/whatsapp.svg"
               alt="whatsapp"
               style={{
-                borderColor: "#57BB63",
+                borderColor: '#57BB63',
                 margin: 8,
-                borderRadius: "48px"
+                borderRadius: '48px',
               }}
             />
             <ButtonExternalLink
@@ -143,9 +144,9 @@ class LoginView extends Component {
               icon="/icons/viber.svg"
               alt="viber"
               style={{
-                borderColor: "#7C519B",
+                borderColor: '#7C519B',
                 margin: 8,
-                borderRadius: "48px"
+                borderRadius: '48px',
               }}
             />
           </div>

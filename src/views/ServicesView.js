@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import ServiceCard from "../components/ServiceCard";
-import ButtonLink from "../components/ButtonLink";
-import { DataContext } from "../context/DataContext";
-import ServiceSort from "../components/ServiceSort";
-import "./ServicesView.css";
+import React, { Component } from 'react';
+import ServiceCard from '../components/ServiceCard';
+import ButtonLink from '../components/ButtonLink';
+import { DataContext } from '../context/DataContext';
+import ServiceSort from '../components/ServiceSort';
+import './ServicesView.css';
 
 const ServiceSortingType = {
-  SortByName: "SORT_BY_NAME",
-  SortByService: "SORT_BY_SERVICE",
-  SortByPrice: "SORT_BY_PRICE"
+  SortByName: 'SORT_BY_NAME',
+  SortByService: 'SORT_BY_SERVICE',
+  SortByPrice: 'SORT_BY_PRICE',
 };
 
 class ServicesView extends Component {
@@ -22,7 +22,7 @@ class ServicesView extends Component {
     const { sortType } = this.state;
     let highlightName = false;
 
-    if (sortType === "SORT_BY_NAME") {
+    if (sortType === 'SORT_BY_NAME') {
       highlightName = true;
     }
 
@@ -49,12 +49,12 @@ class ServicesView extends Component {
             title="На главную"
             style={{
               width: 175,
-              display: "block",
-              marginRight: "auto",
-              marginLeft: "auto",
+              display: 'block',
+              marginRight: 'auto',
+              marginLeft: 'auto',
               marginBottom: 10,
-              borderColor: "rgba(77, 77, 77, .2)",
-              borderRadius: "48px"
+              borderColor: 'rgba(77, 77, 77, .2)',
+              borderRadius: '48px',
             }}
           />
         </div>
@@ -84,15 +84,20 @@ class ServicesView extends Component {
                 sortedServices = sortedServices.sort((a, b) => {
                   if (a.isFree && b.isFree) {
                     return 0;
-                  } else if (a.isFree) {
+                  }
+                  if (a.isFree) {
                     return -1;
-                  } else if (b.isFree) {
+                  }
+                  if (b.isFree) {
                     return 1;
-                  } else if (a.price && b.price) {
+                  }
+                  if (a.price && b.price) {
                     return a.price < b.price ? -1 : 0;
-                  } else if (a.price && !b.price) {
+                  }
+                  if (a.price && !b.price) {
                     return -1;
-                  } else if (a.price && !b.price) {
+                  }
+                  if (a.price && !b.price) {
                     return 1;
                   }
                   return 0;
@@ -100,7 +105,7 @@ class ServicesView extends Component {
               }
 
               return sortedServices.map(service =>
-                this.displayService(service)
+                this.displayService(service),
               );
             }}
           </DataContext.Consumer>
