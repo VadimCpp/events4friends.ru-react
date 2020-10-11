@@ -7,7 +7,7 @@ import { AuthContext } from '../context/AuthContext';
 import { DataContext } from '../context/DataContext';
 import './WelcomeView.css';
 
-function WelcomeView({ history }) {
+const WelcomeView = ({ history }) => {
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
 
@@ -212,6 +212,6 @@ function WelcomeView({ history }) {
       </div>
     </div>
   );
-}
+};
 
 export default withRouter(WelcomeView);
