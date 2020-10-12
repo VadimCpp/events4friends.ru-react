@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import moment from 'moment';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link, withRouter } from 'react-router-dom';
-import 'moment/locale/ru';
 import './ServiceCard.css';
 
 const ServiceCard = ({ service, highlightName }) => {
