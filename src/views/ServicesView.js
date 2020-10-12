@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ServiceCard from '../components/ServiceCard';
+import ServiceCard from '../components/ServiceCard/ServiceCard';
 import ButtonLink from '../components/ButtonLink';
 import { DataContext } from '../context/DataContext';
 import ServiceSort from '../components/ServiceSort';
