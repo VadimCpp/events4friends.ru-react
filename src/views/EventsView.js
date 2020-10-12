@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import React, { Component } from 'react';
 import moment from 'moment';
-import EventCard from '../components/EventCard/EventCard';
+import EventCard from '../components/EventCard';
 import ButtonLink from '../components/ButtonLink';
 import EventsFilter from '../components/EventsFilter';
 import { AuthContext } from '../context/AuthContext';

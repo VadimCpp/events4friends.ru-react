@@ -9,7 +9,7 @@ import './EventCard.css';
 const EventCard = ({ event, name }) => {
   useEffect(() => {
     moment.locale('ru');
-  });
+  }, []);
 
   const startDate = moment(event.start).format('D MMMM, dddd');
   const startTime = moment(event.start).format('HH:mm');
