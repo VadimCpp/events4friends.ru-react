@@ -8,7 +8,7 @@ import './ServiceCard.css';
 const ServiceCard = ({ service, highlightName }) => {
   useEffect(() => {
     moment.locale('ru');
-  });
+  }, []);
 
   const ServiceContent = () => {
     let priceTag = null;
