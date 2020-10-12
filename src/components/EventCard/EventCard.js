@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import moment from 'moment';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link, withRouter } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import 'moment/locale/ru';
 import './EventCard.css';
 
