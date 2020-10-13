@@ -1,38 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import moment from 'moment';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link, withRouter } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './EventCard.css';
 
+moment.locale('ru');
+
 const EventCard = ({ event, name }) => {
-  useEffect(() => {
-    moment.locale('ru');
-  }, []);
+  const authContext = useContext(AuthContext);
 
   const startDate = moment(event.start).format('D MMMM, dddd');
   const startTime = moment(event.start).format('HH:mm');
   const { timezone } = event;
+  const isOwner =
+    authContext.user &&
+    event &&
+    authContext.user.email === event.contact &&
+    name === 'База данных events4friends';
 
   return (
     <Link className="reset-link-style" to={`/event/${event.id}`}>
       <div className="border-top">
         <div className="container">
           <div className="event-item container-center">
-            <AuthContext.Consumer>
-              {({ user }) => {
-                const isOwner =
-                  user &&
-                  event &&
-                  user.email === event.contact &&
-                  name === 'База данных events4friends';
-                return isOwner ? (
-                  <small className="calendar-owner text-success">
-                    Мой анонс
-                  </small>
-                ) : null;
-              }}
-            </AuthContext.Consumer>
+            {isOwner ? (
+              <small className="calendar-owner text-success">Мой анонс</small>
+            ) : null}
             <small className="calendar-name">#{name}</small>
             <div className="d-flex align-items-center justify-content-between">
               <div>
