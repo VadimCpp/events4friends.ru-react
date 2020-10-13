@@ -25,13 +25,15 @@ const EventsView = () => {
    */
 
   const displayEvent = (event, source) => {
+    const { id } = event;
+    const { name } = source;
     if (!event || !source) {
       return null;
     }
 
     return (
-      <div key={event.id}>
-        <EventCard event={event} name={source.name} />
+      <div key={id}>
+        <EventCard event={event} name={name} />
       </div>
     );
   };
