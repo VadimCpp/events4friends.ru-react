@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import EventCard from '../components/EventCard';
 import ButtonLink from '../components/ButtonLink';
@@ -14,20 +14,15 @@ const EventsFilterType = {
   // TODO: add more types here
 };
 
-class EventsView extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      filterType: EventsFilterType.Upcoming,
-    };
-  }
+const EventsView = () => {
+  const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
 
   /**
    * @param {Event} event
    * @param {EventsSource} source
    */
-  displayEvent(event, source) {
+
+  const displayEvent = (event, source) => {
     if (!event || !source) {
       return null;
     }
@@ -37,137 +32,131 @@ class EventsView extends Component {
         <EventCard event={event} name={source.name} />
       </div>
     );
-  }
+  };
 
-  render() {
-    const { filterType } = this.state;
+  return (
+    <DataContext.Consumer>
+      {({ events }) => {
+        const now = new Date();
+        let sortedEvents = [...events];
 
-    return (
-      <DataContext.Consumer>
-        {({ events }) => {
-          const now = new Date();
-          let sortedEvents = [...events];
-
-          if (filterType === EventsFilterType.Upcoming) {
-            sortedEvents = sortedEvents.filter(event => {
-              return event.start && event.timezone
-                ? moment(`${event.start}${event.timezone}`).toDate() > now
-                : false;
-            });
-
-            sortedEvents.sort((a, b) => {
-              if (a.start > b.start) {
-                return 1;
-              }
-              if (a.start < b.start) {
-                return -1;
-              }
-              return 0;
-            });
-          } else if (filterType === EventsFilterType.Past) {
-            sortedEvents = sortedEvents.filter(event => {
-              return event.start && event.timezone
-                ? moment(`${event.start}${event.timezone}`).toDate() < now
-                : false;
-            });
-
-            sortedEvents.sort((a, b) => {
-              if (a.start < b.start) {
-                return 1;
-              }
-              if (a.start > b.start) {
-                return -1;
-              }
-              return 0;
-            });
-          }
-
-          const eventsList = sortedEvents.map(item => {
-            return {
-              event: item,
-              source: {
-                name: 'База данных events4friends',
-              },
-            };
+        if (filterType === EventsFilterType.Upcoming) {
+          sortedEvents = sortedEvents.filter(event => {
+            return event.start && event.timezone
+              ? moment(`${event.start}${event.timezone}`).toDate() > now
+              : false;
           });
 
-          return (
-            <div className="main-view">
-              <div>
-                <ButtonLink
-                  to="/"
-                  icon="/icons/icon_arrow_back.svg"
-                  title="На главную"
-                  style={{
-                    width: 175,
-                    display: 'block',
-                    marginRight: 'auto',
-                    marginLeft: 'auto',
-                    marginBottom: 10,
-                    borderColor: 'rgba(77, 77, 77, .2)',
-                    borderRadius: '48px',
-                  }}
-                />
-              </div>
-              <AuthContext.Consumer>
-                {({ user }) => {
-                  let userAuthorized = false;
-                  if (user) {
-                    const { isAnonymous } = user;
-                    if (isAnonymous === false) {
-                      userAuthorized = true;
-                    }
-                  }
+          sortedEvents.sort((a, b) => {
+            if (a.start > b.start) {
+              return 1;
+            }
+            if (a.start < b.start) {
+              return -1;
+            }
+            return 0;
+          });
+        } else if (filterType === EventsFilterType.Past) {
+          sortedEvents = sortedEvents.filter(event => {
+            return event.start && event.timezone
+              ? moment(`${event.start}${event.timezone}`).toDate() < now
+              : false;
+          });
 
-                  const warnMessage = (
-                    <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
-                  );
+          sortedEvents.sort((a, b) => {
+            if (a.start < b.start) {
+              return 1;
+            }
+            if (a.start > b.start) {
+              return -1;
+            }
+            return 0;
+          });
+        }
 
-                  return userAuthorized ? (
-                    <div>
-                      <ButtonLink
-                        to="/newevent"
-                        icon="/icons/icon_plus.svg"
-                        title="Сделать анонс"
-                        style={{
-                          width: 200,
-                          display: 'block',
-                          marginRight: 'auto',
-                          marginLeft: 'auto',
-                          marginBottom: 10,
-                          borderColor: 'rgba(77, 77, 77, .2)',
-                          borderRadius: '48px',
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div>{warnMessage}</div>
-                  );
+        const eventsList = sortedEvents.map(item => {
+          return {
+            event: item,
+            source: {
+              name: 'База данных events4friends',
+            },
+          };
+        });
+
+        return (
+          <div className="main-view">
+            <div>
+              <ButtonLink
+                to="/"
+                icon="/icons/icon_arrow_back.svg"
+                title="На главную"
+                style={{
+                  width: 175,
+                  display: 'block',
+                  marginRight: 'auto',
+                  marginLeft: 'auto',
+                  marginBottom: 10,
+                  borderColor: 'rgba(77, 77, 77, .2)',
+                  borderRadius: '48px',
                 }}
-              </AuthContext.Consumer>
-              <div className="container pt-3">
-                <EventsFilter
-                  onFilterTypeChange={value =>
-                    this.setState({ filterType: value })
-                  }
-                  filterType={filterType}
-                  upcoming={EventsFilterType.Upcoming}
-                  past={EventsFilterType.Past}
-                />
-              </div>
-              <div className="pt-3">
-                {eventsList.length
-                  ? eventsList.map(eventItem =>
-                      this.displayEvent(eventItem.event, eventItem.source),
-                    )
-                  : null}
-              </div>
+              />
             </div>
-          );
-        }}
-      </DataContext.Consumer>
-    );
-  }
-}
+            <AuthContext.Consumer>
+              {({ user }) => {
+                let userAuthorized = false;
+                if (user) {
+                  const { isAnonymous } = user;
+                  if (isAnonymous === false) {
+                    userAuthorized = true;
+                  }
+                }
+
+                const warnMessage = (
+                  <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
+                );
+
+                return userAuthorized ? (
+                  <div>
+                    <ButtonLink
+                      to="/newevent"
+                      icon="/icons/icon_plus.svg"
+                      title="Сделать анонс"
+                      style={{
+                        width: 200,
+                        display: 'block',
+                        marginRight: 'auto',
+                        marginLeft: 'auto',
+                        marginBottom: 10,
+                        borderColor: 'rgba(77, 77, 77, .2)',
+                        borderRadius: '48px',
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div>{warnMessage}</div>
+                );
+              }}
+            </AuthContext.Consumer>
+            <div className="container pt-3">
+              <EventsFilter
+                onFilterTypeChange={value => setFilterType(value)}
+                filterType={filterType}
+                upcoming={EventsFilterType.Upcoming}
+                past={EventsFilterType.Past}
+              />
+            </div>
+            <div className="pt-3">
+              {eventsList.length
+                ? eventsList.map(eventItem =>
+                    displayEvent(eventItem.event, eventItem.source),
+                  )
+                : null}
+            </div>
+          </div>
+        );
+      }}
+    </DataContext.Consumer>
+  );
+};
 
 export default EventsView;
