@@ -1,28 +1,30 @@
 import React from 'react';
 import moment from 'moment';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './ServiceCard.css';
 
 moment.locale('ru');
 
 const ServiceCard = ({ service, highlightName }) => {
+  const { isFree, price, name, service: typeOfService, id } = service;
+
   const ServiceContent = () => {
     let priceTag = null;
 
-    if (service.isFree) {
+    if (isFree) {
       priceTag = <span className="serviceFree">бесплатно</span>;
-    } else if (service.price) {
-      priceTag = <span>от {service.price} руб.</span>;
+    } else if (price) {
+      priceTag = <span>от {price} руб.</span>;
     }
 
     if (highlightName) {
       return (
         <div>
-          {service.name}
+          {name}
           <br />
           <small>
-            {service.service}
+            {typeOfService}
             <span>&nbsp;</span>
             {priceTag}
           </small>
@@ -31,17 +33,17 @@ const ServiceCard = ({ service, highlightName }) => {
     }
     return (
       <div>
-        {service.service}
+        {typeOfService}
         <span>&nbsp;</span>
         {priceTag}
         <br />
-        <small>{service.name}</small>
+        <small>{name}</small>
       </div>
     );
   };
 
   return (
-    <Link className="reset-link-style" to={`/service/${service.id}`}>
+    <Link className="reset-link-style" to={`/service/${id}`}>
       <div className="border-top">
         <div className="container">
           <div className="event-item container-center">
@@ -62,4 +64,4 @@ const ServiceCard = ({ service, highlightName }) => {
   );
 };
 
-export default withRouter(ServiceCard);
+export default ServiceCard;
