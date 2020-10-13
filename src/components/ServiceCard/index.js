@@ -1,14 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import moment from 'moment';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link, withRouter } from 'react-router-dom';
 import './ServiceCard.css';
 
-const ServiceCard = ({ service, highlightName }) => {
-  useEffect(() => {
-    moment.locale('ru');
-  }, []);
+moment.locale('ru');
 
+const ServiceCard = ({ service, highlightName }) => {
   const ServiceContent = () => {
     let priceTag = null;
 
