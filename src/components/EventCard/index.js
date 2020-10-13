@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import moment from 'moment';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './EventCard.css';
 
@@ -9,18 +9,18 @@ moment.locale('ru');
 
 const EventCard = ({ event, name }) => {
   const authContext = useContext(AuthContext);
+  const { start, contact, timezone, id, summary, isOnline, location } = event;
 
-  const startDate = moment(event.start).format('D MMMM, dddd');
-  const startTime = moment(event.start).format('HH:mm');
-  const { timezone } = event;
+  const startDate = moment(start).format('D MMMM, dddd');
+  const startTime = moment(start).format('HH:mm');
   const isOwner =
     authContext.user &&
     event &&
-    authContext.user.email === event.contact &&
+    authContext.user.email === contact &&
     name === 'База данных events4friends';
 
   return (
-    <Link className="reset-link-style" to={`/event/${event.id}`}>
+    <Link className="reset-link-style" to={`/event/${id}`}>
       <div className="border-top">
         <div className="container">
           <div className="event-item container-center">
@@ -44,8 +44,8 @@ const EventCard = ({ event, name }) => {
                 {timezone === '+0300' && (
                   <span className="event-timezone">Мск</span>
                 )}
-                － «{event.summary}»
-                {event.isOnline ? (
+                － «{summary}»
+                {isOnline ? (
                   <span>
                     <span role="img" aria-label="Location">
                       {' '}
@@ -59,7 +59,7 @@ const EventCard = ({ event, name }) => {
                       {' '}
                       📍
                     </span>
-                    {event.location}
+                    {location}
                   </span>
                 )}
               </div>
@@ -78,4 +78,4 @@ const EventCard = ({ event, name }) => {
   );
 };
 
-export default withRouter(EventCard);
+export default EventCard;
