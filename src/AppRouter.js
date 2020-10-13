@@ -35,7 +35,7 @@ class AppRouter extends PureComponent {
               В старой версии сайта присутствовала страница с адресом list
               Оставляем list как редирект.
 
-              TODO: удалить через полгода, в январе 2021 
+              TODO: удалить через полгода, в январе 2021
             */}
             <Route path="/list/" render={props => <EventsView {...props} />} />
             <Route

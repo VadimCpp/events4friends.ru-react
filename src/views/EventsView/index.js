@@ -1,11 +1,11 @@
 /* eslint-disable indent */
 import React, { useState, useContext } from 'react';
 import moment from 'moment';
-import EventCard from '../components/EventCard';
-import ButtonLink from '../components/ButtonLink';
-import EventsFilter from '../components/EventsFilter';
-import { AuthContext } from '../context/AuthContext';
-import { DataContext } from '../context/DataContext';
+import EventCard from '../../components/EventCard';
+import ButtonLink from '../../components/ButtonLink';
+import EventsFilter from '../../components/EventsFilter';
+import { AuthContext } from '../../context/AuthContext';
+import { DataContext } from '../../context/DataContext';
 import './EventsView.css';
 
 const EventsFilterType = {
