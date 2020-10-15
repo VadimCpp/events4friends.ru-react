@@ -48,6 +48,21 @@ const EventView = ({ match, history }) => {
     user.email === event.contact &&
     name === 'База данных events4friends';
 
+  const onPressDeleteEvent = () => {
+    if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
+      setDeletingInProgress(true);
+      deleteEvent(event.id, success => {
+        if (success) {
+          console.info('Event deleted successfully, navigate to list view');
+          history.push('/events');
+        } else {
+          console.info('Failed to delete event');
+          setDeletingInProgress(false);
+        }
+      });
+    }
+  };
+
   return (
     <div>
       <div>
@@ -71,26 +86,7 @@ const EventView = ({ match, history }) => {
           <div className="controls">
             <div>
               <Button
-                onPress={() => {
-                  if (
-                    window.confirm(
-                      'Вы уверены, что хотите удалить мероприятие?',
-                    )
-                  ) {
-                    setDeletingInProgress(true);
-                    deleteEvent(event.id, success => {
-                      if (success) {
-                        console.info(
-                          'Event deleted successfully, navigate to list view',
-                        );
-                        history.push('/events');
-                      } else {
-                        console.info('Failde to delete event');
-                        setDeletingInProgress(false);
-                      }
-                    });
-                  }
-                }}
+                onPress={onPressDeleteEvent}
                 icon="/icons/icon_delete.svg"
                 borderColor="rgba(77, 77, 77, .2)"
               >
