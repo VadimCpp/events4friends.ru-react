@@ -4,11 +4,11 @@ import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactStoreBadges from 'react-store-badges';
 import moment from 'moment';
-import Button from '../components/Button';
-import ButtonLink from '../components/ButtonLink';
-import ButtonExternalLink from '../components/ButtonExternalLink';
-import { AuthContext } from '../context/AuthContext';
-import { DataContext } from '../context/DataContext';
+import Button from '../../components/Button';
+import ButtonLink from '../../components/ButtonLink';
+import ButtonExternalLink from '../../components/ButtonExternalLink';
+import { AuthContext } from '../../context/AuthContext';
+import { DataContext } from '../../context/DataContext';
 import 'moment/locale/ru';
 import './EventView.css';
 
