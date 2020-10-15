@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import Button from '../components/Button';
 import ButtonLink from '../components/ButtonLink';
@@ -23,6 +23,8 @@ const EditEventView = ({ match, history }) => {
     id: '',
     updatingEvent: false,
   });
+  const authContext = useContext(AuthContext);
+  const dataContext = useContext(DataContext);
 
   const handleSummaryChange = e => {
     setState({ ...state, summary: e.target.value });
@@ -131,6 +133,54 @@ const EditEventView = ({ match, history }) => {
     }
   };
 
+  const {
+    summary,
+    description,
+    isOnline,
+    location,
+    timezone,
+    start,
+    end,
+    name,
+    updatingEvent,
+    id,
+  } = state;
+
+  let userAuthorized = false;
+  const { user } = authContext;
+  if (user) {
+    const { isAnonymous } = user;
+    if (isAnonymous === false) {
+      userAuthorized = true;
+    }
+  }
+
+  const { events, editEvent } = dataContext;
+  const eventId = match.params.id;
+  let event = null;
+  // TODO: исправить обновление state в render
+
+  for (let i = 0; i < events.length; i++) {
+    if (eventId === events[i].id) {
+      event = events[i];
+      if (event.id !== id) {
+        setState({
+          ...state,
+          summary: event.summary,
+          description: event.description,
+          isOnline: event.isOnline,
+          location: event.location,
+          timezone: event.timezone,
+          start: event.start,
+          end: event.end,
+          name: event.name,
+          id: event.id,
+        });
+      }
+      break;
+    }
+  }
+
   return (
     <div>
       <div>
@@ -149,243 +199,186 @@ const EditEventView = ({ match, history }) => {
           }}
         />
       </div>
-      <AuthContext.Consumer>
-        {({ user }) => {
-          const {
-            summary,
-            description,
-            isOnline,
-            location,
-            timezone,
-            start,
-            end,
-            name,
-            updatingEvent,
-            id,
-          } = state;
-
-          let userAuthorized = false;
-          if (user) {
-            const { isAnonymous } = user;
-            if (isAnonymous === false) {
-              userAuthorized = true;
-            }
-          }
-
-          return userAuthorized ? (
-            <DataContext.Consumer>
-              {({ events, editEvent }) => {
-                const eventId = match.params.id;
-                let event = null;
-                // TODO: исправить обновление state в render
-
-                for (let i = 0; i < events.length; i++) {
-                  if (eventId === events[i].id) {
-                    event = events[i];
-                    if (event.id !== id) {
-                      setState({
-                        ...state,
-                        summary: event.summary,
-                        description: event.description,
-                        isOnline: event.isOnline,
-                        location: event.location,
-                        timezone: event.timezone,
-                        start: event.start,
-                        end: event.end,
-                        name: event.name,
-                        id: event.id,
-                      });
-                    }
-                    break;
-                  }
-                }
-                return event ? (
-                  <div className="neweventview">
-                    <div className="textinput">
-                      <label>
-                        <p className="text-left">
-                          Короткое название мероприятия:
-                        </p>
-                        <input
-                          className="textinput__input"
-                          type="text"
-                          name="summary"
-                          value={summary}
-                          onChange={handleSummaryChange}
-                        />
-                      </label>
-                    </div>
-                    <div className="textinput">
-                      <p className="text-left">Полное описание:</p>
-                      <div className="rte-container">
-                        <ReachTextEditor
-                          onChange={handleDescriptionChange}
-                          description={description}
-                        />
-                      </div>
-                    </div>
-                    <div className="textinput">
-                      <p className="text-left">Где будет мероприятие?</p>
-                      <p>
-                        <label>
-                          <span className="text-left">Онлайн</span>
-                          <input
-                            className="textinput__input"
-                            type="radio"
-                            name="isOnline"
-                            checked={isOnline}
-                            onChange={handleIsOnlineChange}
-                          />
-                        </label>
-                      </p>
-                      <p>
-                        <label>
-                          <span className="text-left">Офлайн</span>
-                          <input
-                            className="textinput__input"
-                            type="radio"
-                            name="isOnline"
-                            checked={!isOnline}
-                            onChange={handleIsOfflineChange}
-                          />
-                        </label>
-                      </p>
-                    </div>
-                    <div className="textinput">
-                      <label>
-                        <p className="text-left">
-                          {isOnline
-                            ? 'Ссылка онлайн мероприятия:'
-                            : 'Укажите адрес встречи:'}
-                        </p>
-                        <input
-                          className="textinput__input"
-                          type="text"
-                          name="location"
-                          value={location}
-                          onChange={handleLocationChange}
-                        />
-                      </label>
-                    </div>
-                    <div className="textinput">
-                      <p className="text-left">Часовая зона?</p>
-                      <p>
-                        <label>
-                          <span className="text-left">
-                            Калининград (GMT+2)
-                          </span>
-                          <input
-                            className="textinput__input"
-                            type="radio"
-                            name="timeZone"
-                            checked={timezone === '+0200'}
-                            onChange={() => {
-                              handleTimeZoneChange('+0200');
-                            }}
-                          />
-                        </label>
-                      </p>
-                      <p>
-                        <label>
-                          <span className="text-left">Москва (GMT+3)</span>
-                          <input
-                            className="textinput__input"
-                            type="radio"
-                            name="timeZone"
-                            checked={timezone === '+0300'}
-                            onChange={() => {
-                              handleTimeZoneChange('+0300');
-                            }}
-                          />
-                        </label>
-                      </p>
-                    </div>
-                    <div className="textinput">
-                      <label>
-                        <p className="text-left">Начало мероприятия:</p>
-                        <input
-                          className="textinput__input"
-                          type="datetime-local"
-                          name="start"
-                          value={start}
-                          onChange={handleStartChange}
-                        />
-                      </label>
-                    </div>
-                    <div className="textinput">
-                      <label>
-                        <p className="text-left">
-                          Окончание мероприятия (необязательно):
-                        </p>
-                        <input
-                          className="textinput__input"
-                          type="datetime-local"
-                          name="end"
-                          value={end}
-                          onChange={handleEndChange}
-                        />
-                      </label>
-                    </div>
-                    <div className="textinput">
-                      <label>
-                        <p className="text-left">Контакт организатора:</p>
-                        <input
-                          className="textinput__input"
-                          type="text"
-                          name="contact"
-                          value={user.email}
-                          disabled
-                        />
-                      </label>
-                    </div>
-                    <div className="textinput">
-                      <label>
-                        <p className="text-left">Имя организатора:</p>
-                        <input
-                          className="textinput__input"
-                          type="text"
-                          name="name"
-                          value={name}
-                          onChange={handleNameChange}
-                        />
-                      </label>
-                    </div>
-                    {updatingEvent ? (
-                      <div>
-                        <p>Сохраняем событие...</p>
-                      </div>
-                    ) : (
-                      <Button
-                        onPress={() => {
-                          setState({ ...state, updatingEvent: true }, () => {
-                            editEventForUser(user, editEvent);
-                          });
-                        }}
-                        icon="/icons/icon_save.svg"
-                      >
-                        Сохранить
-                      </Button>
-                    )}
-                  </div>
-                ) : (
-                  <div>
-                    <p>
-                      Событие не найдено, возможно оно удалено. Рекомендуем
-                      вернуться к списку анонсов и выбрать мероприятие еще
-                      раз.
-                    </p>
-                  </div>
-                );
-              }}
-            </DataContext.Consumer>
+      {userAuthorized ? (
+        <>
+          {event ? (
+            <div className="neweventview">
+              <div className="textinput">
+                <label>
+                  <p className="text-left">Короткое название мероприятия:</p>
+                  <input
+                    className="textinput__input"
+                    type="text"
+                    name="summary"
+                    value={summary}
+                    onChange={handleSummaryChange}
+                  />
+                </label>
+              </div>
+              <div className="textinput">
+                <p className="text-left">Полное описание:</p>
+                <div className="rte-container">
+                  <ReachTextEditor
+                    onChange={handleDescriptionChange}
+                    description={description}
+                  />
+                </div>
+              </div>
+              <div className="textinput">
+                <p className="text-left">Где будет мероприятие?</p>
+                <p>
+                  <label>
+                    <span className="text-left">Онлайн</span>
+                    <input
+                      className="textinput__input"
+                      type="radio"
+                      name="isOnline"
+                      checked={isOnline}
+                      onChange={handleIsOnlineChange}
+                    />
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <span className="text-left">Офлайн</span>
+                    <input
+                      className="textinput__input"
+                      type="radio"
+                      name="isOnline"
+                      checked={!isOnline}
+                      onChange={handleIsOfflineChange}
+                    />
+                  </label>
+                </p>
+              </div>
+              <div className="textinput">
+                <label>
+                  <p className="text-left">
+                    {isOnline
+                      ? 'Ссылка онлайн мероприятия:'
+                      : 'Укажите адрес встречи:'}
+                  </p>
+                  <input
+                    className="textinput__input"
+                    type="text"
+                    name="location"
+                    value={location}
+                    onChange={handleLocationChange}
+                  />
+                </label>
+              </div>
+              <div className="textinput">
+                <p className="text-left">Часовая зона?</p>
+                <p>
+                  <label>
+                    <span className="text-left">Калининград (GMT+2)</span>
+                    <input
+                      className="textinput__input"
+                      type="radio"
+                      name="timeZone"
+                      checked={timezone === '+0200'}
+                      onChange={() => {
+                        handleTimeZoneChange('+0200');
+                      }}
+                    />
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <span className="text-left">Москва (GMT+3)</span>
+                    <input
+                      className="textinput__input"
+                      type="radio"
+                      name="timeZone"
+                      checked={timezone === '+0300'}
+                      onChange={() => {
+                        handleTimeZoneChange('+0300');
+                      }}
+                    />
+                  </label>
+                </p>
+              </div>
+              <div className="textinput">
+                <label>
+                  <p className="text-left">Начало мероприятия:</p>
+                  <input
+                    className="textinput__input"
+                    type="datetime-local"
+                    name="start"
+                    value={start}
+                    onChange={handleStartChange}
+                  />
+                </label>
+              </div>
+              <div className="textinput">
+                <label>
+                  <p className="text-left">
+                    Окончание мероприятия (необязательно):
+                  </p>
+                  <input
+                    className="textinput__input"
+                    type="datetime-local"
+                    name="end"
+                    value={end}
+                    onChange={handleEndChange}
+                  />
+                </label>
+              </div>
+              <div className="textinput">
+                <label>
+                  <p className="text-left">Контакт организатора:</p>
+                  <input
+                    className="textinput__input"
+                    type="text"
+                    name="contact"
+                    value={user.email}
+                    disabled
+                  />
+                </label>
+              </div>
+              <div className="textinput">
+                <label>
+                  <p className="text-left">Имя организатора:</p>
+                  <input
+                    className="textinput__input"
+                    type="text"
+                    name="name"
+                    value={name}
+                    onChange={handleNameChange}
+                  />
+                </label>
+              </div>
+              {updatingEvent ? (
+                <div>
+                  <p>Сохраняем событие...</p>
+                </div>
+              ) : (
+                <Button
+                  onPress={() => {
+                    setState({ ...state, updatingEvent: true }, () => {
+                      editEventForUser(user, editEvent);
+                    });
+                  }}
+                  icon="/icons/icon_save.svg"
+                >
+                  Сохранить
+                </Button>
+              )}
+            </div>
           ) : (
             <div>
-              <p>Для того, чтобы редактировать мероприятия, выполните вход</p>
+              <p>
+                Событие не найдено, возможно оно удалено. Рекомендуем вернуться
+                к списку анонсов и выбрать мероприятие еще раз.
+              </p>
             </div>
-          );
-        }}
-      </AuthContext.Consumer>
-
+          )}
+        </>
+      ) : (
+        <div>
+          <p>Для того, чтобы редактировать мероприятия, выполните вход</p>
+        </div>
+      )}
       <div className="border-top">
         <div className="container container-center pt-4 pb-5">
           <p>
