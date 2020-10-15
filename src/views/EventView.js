@@ -35,9 +35,7 @@ const EventView = ({ match, history }) => {
       startDate = event
         ? moment(event.start).format('D MMMM, dddd')
         : 'Не указано';
-      startTime = event
-        ? moment(event.start).format('HH:mm')
-        : 'Не указано';
+      startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
       timezone = events[i].timezone;
       break;
     }
@@ -121,9 +119,7 @@ const EventView = ({ match, history }) => {
           <div className="container">
             <div className="event-item container-center">
               {!event && loadingStatuses.connectingToFirebase && (
-                <p align="center">
-                  Подключаемся к базе данных...
-                </p>
+                <p align="center">Подключаемся к базе данных...</p>
               )}
               {!event &&
                 !loadingStatuses.connectingToFirebase &&
@@ -136,46 +132,31 @@ const EventView = ({ match, history }) => {
                   <div>
                     <p align="center">
                       Мероприятие недоступно{' '}
-                      <span role="img" aria-label="sad">
-
-                      </span>
+                      <span role="img" aria-label="sad" />
                     </p>
                     <p align="center">
-                      Возможно, оно было удалено или Вы открыли
-                      «битую» ссылку.
+                      Возможно, оно было удалено или Вы открыли «битую» ссылку.
                     </p>
                   </div>
                 )}
               {event && (
                 <div>
                   <div>
-                    {name && (
-                    <small className="calendar-name">
-                      #{name}
-                    </small>
-                    )}
+                    {name && <small className="calendar-name">#{name}</small>}
                     <p>
                       <span role="img" aria-label="Date">
                         📅
                       </span>
-                      <span className="event-date">
-                        {startDate}
-                      </span>
+                      <span className="event-date">{startDate}</span>
                       <span role="img" aria-label="Time">
                         🕗
                       </span>
-                      <span className="event-time">
-                        {startTime}
-                      </span>
+                      <span className="event-time">{startTime}</span>
                       {timezone === '+0200' && (
-                        <span className="event-timezone">
-                          Клд
-                        </span>
+                        <span className="event-timezone">Клд</span>
                       )}
                       {timezone === '+0300' && (
-                        <span className="event-timezone">
-                          Мск
-                        </span>
+                        <span className="event-timezone">Мск</span>
                       )}
                       － «{event.summary}»
                       {event.isOnline ? (
@@ -206,11 +187,8 @@ const EventView = ({ match, history }) => {
                     <p>
                       {event.isOnline && (
                         <span>
-                          Ссылка для подключения к онлайн
-                          трансляции: <br />
-                          <a href={event.location}>
-                            {event.location}
-                          </a>
+                          Ссылка для подключения к онлайн трансляции: <br />
+                          <a href={event.location}>{event.location}</a>
                         </span>
                       )}
                     </p>
