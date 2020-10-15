@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import Button from '../components/Button';
-import ButtonLink from '../components/ButtonLink';
-import ButtonExternalLink from '../components/ButtonExternalLink';
-import { AuthContext } from '../context/AuthContext';
-import { DataContext } from '../context/DataContext';
-import { ReachTextEditor } from '../components/RichTextEditor';
+import Button from '../../components/Button';
+import ButtonLink from '../../components/ButtonLink';
+import ButtonExternalLink from '../../components/ButtonExternalLink';
+import { AuthContext } from '../../context/AuthContext';
+import { DataContext } from '../../context/DataContext';
+import { ReachTextEditor } from '../../components/RichTextEditor';
 import './EditEventView.css';
 
 const EditEventView = ({ match, history }) => {
