@@ -23,7 +23,8 @@ const init = {
 export const ReachTextEditor = ({ description, onChange }) => {
   return (
     <Editor
-      initialValue={description}
+      value={description}
+      // initialValue={description}
       apiKey={process.env.REACT_APP_RTE_KEY}
       init={init}
       onEditorChange={onChange}

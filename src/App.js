@@ -265,6 +265,7 @@ class App extends Component {
         alert(
           'Не удалось создать событие. Пожалуйста, обратитесь в службу поддержки.',
         );
+        callback(null);
       });
   };
 
@@ -278,12 +279,12 @@ class App extends Component {
       .update(data)
       .then(() => {
         console.info('Document successfully updated!');
-        callback(true);
+        callback(docId);
         that.updateTelegramPinnedMessage();
       })
       .catch(error => {
         console.warn('Error updating event', error);
-        callback(false);
+        callback(null);
       });
   };
 
