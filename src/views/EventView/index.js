@@ -189,10 +189,10 @@ const EventView = ({ match, history }) => {
                       )}
                     </p>
                     <p>
-                      {name && (
+                      {event.name && (
                         <span>
                           Организатор мероприятия: <br />
-                          {name}
+                          {event.name}
                         </span>
                       )}
                     </p>
