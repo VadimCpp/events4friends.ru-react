@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import Button from '../components/Button';
-import ButtonExternalLink from '../components/ButtonExternalLink';
+import { AuthContext } from '../../context/AuthContext';
+import Button from '../../components/Button';
+import ButtonExternalLink from '../../components/ButtonExternalLink';
 
 const ProfileView = () => {
   const authContext = useContext(AuthContext);
