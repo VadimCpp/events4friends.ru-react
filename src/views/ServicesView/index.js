@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
-import ServiceCard from '../components/ServiceCard';
-import ButtonLink from '../components/ButtonLink';
-import { DataContext } from '../context/DataContext';
-import ServiceSort from '../components/ServiceSort';
+import ServiceCard from '../../components/ServiceCard';
+import ButtonLink from '../../components/ButtonLink';
+import { DataContext } from '../../context/DataContext';
+import ServiceSort from '../../components/ServiceSort';
 import './ServicesView.css';
 
 const ServiceSortingType = {
