@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactStoreBadges from 'react-store-badges';
-import ButtonLink from '../components/ButtonLink';
-import ButtonExternalLink from '../components/ButtonExternalLink';
-import { AuthContext } from '../context/AuthContext';
-import { DataContext } from '../context/DataContext';
+import ButtonLink from '../../components/ButtonLink';
+import ButtonExternalLink from '../../components/ButtonExternalLink';
+import { AuthContext } from '../../context/AuthContext';
+import { DataContext } from '../../context/DataContext';
 import './WelcomeView.css';
 
 const WelcomeView = ({ history }) => {

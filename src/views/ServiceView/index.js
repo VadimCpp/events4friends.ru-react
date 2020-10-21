@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 /* eslint-disable react/no-danger */
 import React from 'react';
-import ButtonLink from '../components/ButtonLink';
-import ButtonExternalLink from '../components/ButtonExternalLink';
-import { DataContext } from '../context/DataContext';
+import ButtonLink from '../../components/ButtonLink';
+import ButtonExternalLink from '../../components/ButtonExternalLink';
+import { DataContext } from '../../context/DataContext';
 import './ServiceView.css';
 
-const EventView = ({ match }) => {
+const ServiceView = ({ match }) => {
   const serviceId = match.params.id;
 
   return (
@@ -169,4 +169,4 @@ const EventView = ({ match }) => {
   );
 };
 
-export default EventView;
+export default ServiceView;

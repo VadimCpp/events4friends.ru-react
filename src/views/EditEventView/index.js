@@ -1,9 +1,9 @@
 import React, { useContext, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { DataContext } from '../context/DataContext';
+import { AuthContext } from '../../context/AuthContext';
+import { DataContext } from '../../context/DataContext';
 
-import EventForm from '../components/EventForm';
+import EventForm from '../../components/EventForm';
 
 const EditEventView = () => {
   const authContext = useContext(AuthContext);
