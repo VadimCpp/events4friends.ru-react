@@ -21,6 +21,7 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
 
     if (!verify(event)) {
       console.warn('verify fail');
+      setUpdatingEvent(false);
       return;
     }
 
