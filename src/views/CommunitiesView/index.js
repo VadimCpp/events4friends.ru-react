@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactStoreBadges from 'react-store-badges';
-import ButtonLink from '../components/ButtonLink';
-import ButtonExternalLink from '../components/ButtonExternalLink';
+import ButtonLink from '../../components/ButtonLink';
+import ButtonExternalLink from '../../components/ButtonExternalLink';
 
 const CommunitiesView = () => (
   <div>
