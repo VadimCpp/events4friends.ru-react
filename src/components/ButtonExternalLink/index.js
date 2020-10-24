@@ -1,13 +1,26 @@
 import React from 'react';
+import cn from 'classnames';
 import './ButtonExternalLink.css';
 
-function ButtonExternalLink({ href, icon, alt, title, style }) {
+const ButtonExternalLink = ({
+  href,
+  icon,
+  alt,
+  title,
+  style,
+  classList = [],
+  className = '',
+}) => {
   return (
-    <a className="link" href={href} style={style}>
+    <a
+      href={href}
+      style={style}
+      className={cn('link', className, [...classList])}
+    >
       <img src={icon} alt={alt || 'le-icon'} className="link__image" />
       {title && <span className="link__text"> {title} </span>}
     </a>
   );
-}
+};
 
 export default ButtonExternalLink;

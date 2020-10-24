@@ -1,13 +1,6 @@
 export const verify = event => {
   let verified = true;
-  const {
-    summary,
-    description,
-    location,
-    start,
-    // end, // не обязательный параметр?
-    name,
-  } = event;
+  const { summary, description, location, start, name } = event;
 
   if (!summary) {
     verified = false;
