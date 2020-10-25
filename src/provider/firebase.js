@@ -8,7 +8,6 @@ export const getConfig = async () => {
   // NOTE!
   // Load config from firebase
   //
-
   try {
     const db = firebase.firestore();
     const doc = await db
