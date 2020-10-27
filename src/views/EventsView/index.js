@@ -48,6 +48,7 @@ const EventsView = () => {
         : false;
     });
 
+    // TODO: неочевидная сортировка, рассмотреть сортировку дат, не строк
     sortedEvents.sort((a, b) => {
       if (a.start > b.start) {
         return 1;
@@ -103,15 +104,7 @@ const EventsView = () => {
           to="/"
           icon="/icons/icon_arrow_back.svg"
           title="На главную"
-          style={{
-            width: 175,
-            display: 'block',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-            marginBottom: 10,
-            borderColor: 'rgba(77, 77, 77, .2)',
-            borderRadius: '48px',
-          }}
+          classList={['button-link', 'events-view']}
         />
       </div>
       <>
@@ -121,15 +114,8 @@ const EventsView = () => {
               to="/newevent"
               icon="/icons/icon_plus.svg"
               title="Сделать анонс"
-              style={{
-                width: 200,
-                display: 'block',
-                marginRight: 'auto',
-                marginLeft: 'auto',
-                marginBottom: 10,
-                borderColor: 'rgba(77, 77, 77, .2)',
-                borderRadius: '48px',
-              }}
+              style={{ width: 200 }}
+              classList={['button-link', 'events-view']}
             />
           </div>
         ) : (

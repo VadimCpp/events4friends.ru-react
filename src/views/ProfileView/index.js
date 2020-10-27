@@ -22,7 +22,7 @@ const ProfileView = () => {
         setDisplayName(user.displayName);
       }
     }
-  }, []);
+  }, [displayName, history, user]);
 
   const handleDisplayNameChange = e => {
     setDisplayName(e.target.value);

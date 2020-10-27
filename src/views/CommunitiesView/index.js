@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import ReactStoreBadges from 'react-store-badges';
 import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
+import './CommunitiesView.css';
 
 const CommunitiesView = () => (
   <div>
@@ -11,15 +12,7 @@ const CommunitiesView = () => (
         to="/"
         icon="/icons/icon_arrow_back.svg"
         title="На главную"
-        style={{
-          width: 175,
-          display: 'block',
-          marginRight: 'auto',
-          marginLeft: 'auto',
-          marginBottom: 10,
-          borderColor: 'rgba(77, 77, 77, .2)',
-          borderRadius: '48px',
-        }}
+        className="communities-view__button-link"
       />
     </div>
     <div className="border-top mt-3">
@@ -30,11 +23,7 @@ const CommunitiesView = () => (
           icon="/icons/viber.svg"
           alt="telegram"
           title="МТВ Трещалка"
-          style={{
-            borderColor: '#7C519B',
-            margin: 8,
-            borderRadius: '48px',
-          }}
+          classList={['cv__button-external-link', 'mtv']}
         />
       </div>
       <div className="container container-center">
@@ -43,11 +32,7 @@ const CommunitiesView = () => (
           icon="/icons/telegram.svg"
           alt="telegram"
           title="ВелоАфиша Чат"
-          style={{
-            borderColor: '#139BD0',
-            margin: 8,
-            borderRadius: '48px',
-          }}
+          classList={['cv__button-external-link', 'telegram']}
         />
       </div>
       <div className="container container-center">
@@ -56,11 +41,7 @@ const CommunitiesView = () => (
           icon="/icons/vk.svg"
           alt="vk"
           title="Велочерепашки"
-          style={{
-            borderColor: '#4D76A1',
-            margin: 8,
-            borderRadius: '48px',
-          }}
+          className="cv__button-external-link"
         />
       </div>
       <div className="container container-center">
@@ -69,11 +50,7 @@ const CommunitiesView = () => (
           icon="/icons/vk.svg"
           alt="vk"
           title="MTB LOVE"
-          style={{
-            borderColor: '#4D76A1',
-            margin: 8,
-            borderRadius: '48px',
-          }}
+          className="cv__button-external-link"
         />
       </div>
       <div className="container container-center">
@@ -82,11 +59,7 @@ const CommunitiesView = () => (
           icon="/icons/vk.svg"
           alt="vk"
           title="Велозапад"
-          style={{
-            borderColor: '#4D76A1',
-            margin: 8,
-            borderRadius: '48px',
-          }}
+          className="cv__button-external-link"
         />
       </div>
       <div className="container container-center">
@@ -95,11 +68,7 @@ const CommunitiesView = () => (
           icon="/icons/vk.svg"
           alt="vk"
           title="Велосреда"
-          style={{
-            borderColor: '#4D76A1',
-            margin: 8,
-            borderRadius: '48px',
-          }}
+          className="cv__button-external-link"
         />
       </div>
       <div className="container container-center">
@@ -108,11 +77,7 @@ const CommunitiesView = () => (
           icon="/icons/vk.svg"
           alt="vk"
           title="ВелоЧерепашки-39 Дети"
-          style={{
-            borderColor: '#4D76A1',
-            margin: 8,
-            borderRadius: '48px',
-          }}
+          className="cv__button-external-link"
         />
       </div>
       <div className="container container-center pb-4">
@@ -121,11 +86,7 @@ const CommunitiesView = () => (
           icon="/icons/telegram.svg"
           alt="telegram"
           title="OpenRoad39"
-          style={{
-            borderColor: '#139BD0',
-            margin: 8,
-            borderRadius: '48px',
-          }}
+          classList={['cv__button-external-link', 'telegram']}
         />
       </div>
     </div>

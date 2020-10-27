@@ -20,7 +20,7 @@ const EditEventView = () => {
 
   let event = { id: null };
   if (routerParams.id) {
-    // IE 11
+    // IE 11, если не поддерживать можно использовать Array.find
     const events =
       dataContext.events &&
       dataContext.events.filter(evt => evt.id === routerParams.id);

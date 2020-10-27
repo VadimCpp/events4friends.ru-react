@@ -70,45 +70,25 @@ const EventView = ({ match, history }) => {
           to="/events"
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
-          style={{
-            width: 155,
-            display: 'block',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-            marginBottom: 10,
-            borderColor: 'rgba(77, 77, 77, .2)',
-            borderRadius: '48px',
-          }}
+          classList={['button-link', 'event-view']}
         />
       </div>
       <div>
         {isAbleToDeleteOrEdit ? (
           <div className="controls">
-            <div>
-              <Button
-                onPress={onPressDeleteEvent}
-                icon="/icons/icon_delete.svg"
-                borderColor="rgba(77, 77, 77, .2)"
-              >
-                Удалить
-              </Button>
-            </div>
-            <div>
-              <ButtonLink
-                to={`/editevent/${event.id}`}
-                icon="/icons/icon_edit.svg"
-                title="Изменить"
-                style={{
-                  display: 'block',
-                  marginRight: 'auto',
-                  marginLeft: 'auto',
-                  marginTop: 8,
-                  marginBottom: 8,
-                  borderColor: 'rgba(77, 77, 77, .2)',
-                  borderRadius: '48px',
-                }}
-              />
-            </div>
+            <Button
+              onPress={onPressDeleteEvent}
+              icon="/icons/icon_delete.svg"
+              classList={['button-link', 'event-view']}
+            >
+              Удалить
+            </Button>
+            <ButtonLink
+              to={`/editevent/${event.id}`}
+              icon="/icons/icon_edit.svg"
+              title="Изменить"
+              classList={['button-link', 'event-view']}
+            />
           </div>
         ) : null}
         <div className="border-top">

@@ -1,8 +1,17 @@
 import React from 'react';
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import './ButtonLink.css';
 
-function ButtonLink({ to, icon, alt, title, style }) {
+const ButtonLink = ({
+  to,
+  icon,
+  alt,
+  title,
+  style,
+  className = '',
+  classList = [],
+}) => {
   let CName = 'link_image_welcome_list';
 
   if (icon === '/icons/icon_arrow_back.svg') {
@@ -10,11 +19,15 @@ function ButtonLink({ to, icon, alt, title, style }) {
   }
 
   return (
-    <Link className="link" to={to} style={style}>
+    <Link
+      to={to}
+      style={style}
+      className={cn('link', className, [...classList])}
+    >
       <img src={icon} alt={alt || 'le-icon'} className={CName} />
       <span className="link__text"> {title} </span>
     </Link>
   );
-}
+};
 
 export default ButtonLink;
