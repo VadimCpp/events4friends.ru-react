@@ -100,7 +100,7 @@ const WelcomeView = ({ history }) => {
         </div>
 
         <div className="container container-center mt-4">
-          <p>Услуги (формируются):</p>
+          <p>Услуги:</p>
 
           <ButtonLink
             to="/services"
