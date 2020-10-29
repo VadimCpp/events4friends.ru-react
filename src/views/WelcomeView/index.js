@@ -82,12 +82,12 @@ const WelcomeView = ({ history }) => {
         </div>
 
         <div className="container container-center mt-4">
-          <p>Сообщества (формируются):</p>
+          <p>Услуги:</p>
 
           <ButtonLink
-            to="/communities"
-            icon="/icons/icon_community.svg"
-            title="Все сообщества"
+            to="/services"
+            icon="/icons/icon_service.svg"
+            title="Все услуги"
             style={{
               width: 250,
               display: 'block',
@@ -98,14 +98,14 @@ const WelcomeView = ({ history }) => {
             }}
           />
         </div>
-
+        
         <div className="container container-center mt-4">
-          <p>Услуги:</p>
+          <p>Сообщества (формируются):</p>
 
           <ButtonLink
-            to="/services"
-            icon="/icons/icon_service.svg"
-            title="Все услуги"
+            to="/communities"
+            icon="/icons/icon_community.svg"
+            title="Все сообщества"
             style={{
               width: 250,
               display: 'block',
