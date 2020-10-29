@@ -38,7 +38,7 @@ export const getServices = async () => {
       ...item.data(),
       id: item.id,
     }));
-    return { services };
+    return services;
   } catch (error) {
     console.warn('Error getting services, skip: ', error);
   }
