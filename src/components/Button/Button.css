@@ -1,0 +1,37 @@
+.welcomeview__button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  border: 1px solid #4d4d4d;
+  cursor: pointer;
+  line-height: 19px;
+  font-size: 16px;
+  color: #4d4d4d;
+  border-radius: 48px;
+}
+
+.welcomeview__button:hover {
+  border: 1px solid #4d4d4d;
+  color: #4d4d4d;
+  text-decoration: none;
+}
+
+.welcomeview__button:focus {
+  outline: none;
+}
+
+.welcomeview__text {
+  padding-left: 0.5rem;
+}
+
+.welcomeview__image__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcomeview__image {
+  width: 30px;
+  height: 30px;
+}

@@ -1,0 +1,23 @@
+.communities-view__button-link {
+  width: 175px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10;
+  border-color: rgba(77, 77, 77, 0.2);
+  border-radius: 48px;
+}
+
+.cv__button-external-link {
+  border-color: #4d76a1;
+  margin: 8px;
+  border-radius: 48px;
+}
+
+.mtv {
+  border-color: #7c519b;
+}
+
+.telegram {
+  border-color: #139bd0;
+}
