@@ -45,9 +45,11 @@ const App = () => {
   // TODO: подумать, как можно спрятать эту логику
   //
   const [currentUser, setCurrentUser] = useState(null);
+
   useEffect(() => {
     setCurrentUser(user);
   }, [user]);
+
   const updateProfileHandler = async displayName => {
     const updatedUser = await updateProfile(displayName);
     setCurrentUser(updatedUser);
