@@ -1,0 +1,25 @@
+.newserviceview {
+  padding: 20px 0;
+  border-bottom: 1px solid #dddddd;
+}
+
+.textinput {
+  padding: 10px 20px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.textinput__input {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 230px;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.rte-container {
+  width: 100%;
+  min-width: 300px;
+  max-width: 960px;
+}
