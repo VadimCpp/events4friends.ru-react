@@ -8,6 +8,7 @@ import {
   createEvent,
   deleteEvent,
   editEvent,
+  createService,
 } from './provider/firebase';
 
 import AppRouter from './AppRouter';
@@ -62,6 +63,7 @@ const App = () => {
           createEvent,
           deleteEvent,
           editEvent,
+          createService,
           services,
           config,
         }}

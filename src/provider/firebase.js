@@ -101,3 +101,29 @@ export const updateProfile = async displayName => {
     console.warn('Error updating user profile:', err);
   }
 };
+
+export const createService = (data, callback) => {
+  console.info('Creating service');
+
+  const db = firebase.firestore();
+  db.collection('services')
+    .add(data)
+    // eslint-disable-next-line no-shadow
+    .then(data => {
+      if (data && data.id && callback) {
+        callback(data.id);
+      } else {
+        console.warn('Something went wrong, contact support');
+        alert(
+          'Что-то пошло не так при создании услуги. Пожалуйста, обратитесь в службу поддержки.',
+        );
+      }
+    })
+    .catch(error => {
+      console.warn('Error creating service', error);
+      alert(
+        'Не удалось создать услугу. Пожалуйста, обратитесь в службу поддержки.',
+      );
+      callback(null);
+    });
+};
