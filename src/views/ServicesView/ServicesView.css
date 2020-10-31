@@ -9,7 +9,7 @@
 }
 
 .main-view-container {
-	background: rgba(255,255,255,0.15);	
+	background: rgba(255,255,255,0.15);
 }
 
 .list-item {
@@ -35,4 +35,13 @@
 
 .word-wrap {
 	word-wrap: break-word;
+}
+
+.services-view.button-link {
+	width: 175px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 10px;
+	border-color: rgba(77, 77, 77, 0.2);
+	border-radius: 48px;
 }

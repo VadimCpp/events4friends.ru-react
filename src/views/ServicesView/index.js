@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import ServiceCard from '../../components/ServiceCard';
 import ButtonLink from '../../components/ButtonLink';
 import { DataContext } from '../../context/DataContext';
+import { AuthContext } from '../../context/AuthContext';
 import ServiceSort from '../../components/ServiceSort';
 import './ServicesView.css';
 
@@ -13,7 +14,9 @@ const ServiceSortingType = {
 
 const ServicesView = () => {
   const dataContext = useContext(DataContext);
+  const authContext = useContext(AuthContext);
   const [sortType, setSortType] = useState(ServiceSortingType.SortByService);
+  const isAuth = authContext.user && !authContext.user.isAnonymous;
 
   const displayService = service => {
     let highlightName = false;
@@ -89,6 +92,23 @@ const ServicesView = () => {
             borderRadius: '48px',
           }}
         />
+        <>
+          {isAuth ? (
+            <div>
+              <ButtonLink
+                to="/newservice"
+                icon="/icons/icon_service_plus.svg"
+                title="Добавить услугу"
+                style={{ width: 200 }}
+                classList={['button-link', 'services-view']}
+              />
+            </div>
+          ) : (
+            <div>
+              <p>Для того, чтобы добавлять услуги, выполните вход</p>
+            </div>
+          )}
+        </>
       </div>
 
       <ServiceSort
