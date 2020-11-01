@@ -81,7 +81,7 @@ const App = () => {
     setState({ ...state, user: updatedUser });
   };
 
-  const { user, connectingToFirebase, loadingEvents, services, config } = state;
+  const { user, connectingToFirebase, services, config } = state;
 
   return (
     <AuthContext.Provider
@@ -92,7 +92,7 @@ const App = () => {
         updateProfile: updateProfileHandler,
         loadingStatuses: {
           connectingToFirebase,
-          loadingEvents,
+          loadingEvents: eventsState.loadingEvents,
         },
       }}
     >
