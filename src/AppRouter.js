@@ -10,6 +10,7 @@ import ServiceView from './views/ServiceView';
 import NewEventView from './views/NewEventView';
 import NewServiceView from './views/NewServiceView';
 import EditEventView from './views/EditEventView';
+import EditServiceView from './views/EditServiceView';
 import CommunitiesView from './views/CommunitiesView';
 import ProfileView from './views/ProfileView';
 import Header from './components/Header';
@@ -45,6 +46,7 @@ const AppRouter = () => {
             path="/editevent/:id"
             render={props => <EditEventView {...props} />}
           />
+          <Route path="/editservice/:id" exact component={EditServiceView} />
         </div>
       </ScrollToTop>
     </Router>
