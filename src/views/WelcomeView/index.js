@@ -204,9 +204,6 @@ const WelcomeView = ({ history }) => {
         <p className="welcomeview__footer">
           Здесь действуют правила поведения в общественных местах. Разработано в{' '}
           <a href="https://roscomputing.com/">Роскомпьютинг</a>.
-          <span> Конфигурация: </span>
-          <span> name - {dataContext.config.name},</span>
-          <span> description - {dataContext.config.description},</span>
           <span> version - {dataContext.config.version}.</span>
         </p>
       </div>
