@@ -52,6 +52,20 @@ const firebaseConfig = {
 };
 
 const App = () => {
+  //
+  // NOTE!
+  // В данном коде в один хук useState сохраняется целая большая структура данных,
+  // которая состоит из разнородных объектов.
+  //
+  // Логичнее было бы использовать для каждого значения отдельный хук, пример:
+  // const [events, setEvents] = useState([]);
+  // const [services, setServices] = useState([]);
+  //
+  // Хорошо будет, если главный компонент приложения содержит данные и коллекции,
+  // которые соответствуют данным и коллекциям в документации https://github.com/VadimCpp/events4friends-firestore
+  //
+  // TODO: избавиться от сложных структур данных initState и initEventsState
+  //
   const [state, setState] = useState(initState);
   const [eventsState, setEventsState] = useState(initEventsState);
 
