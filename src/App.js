@@ -28,8 +28,6 @@ const initState = {
   user: null,
   services: [],
   config: {
-    description: null,
-    name: null,
     version: null,
   },
   connectingToFirebase: true,
