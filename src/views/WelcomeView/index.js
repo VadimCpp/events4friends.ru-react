@@ -98,7 +98,7 @@ const WelcomeView = ({ history }) => {
             }}
           />
         </div>
-        
+
         <div className="container container-center mt-4">
           <p>Сообщества (формируются):</p>
 
