@@ -28,6 +28,21 @@ const App = () => {
   const { user } = useAuth();
   const { events, services, config } = useData();
 
+  //
+  // NOTE!
+  // Этот стейт создан только для одного случая, когда пользователь меняет свое ФИО
+  //
+  // TODO: подумать, как можно спрятать эту логику
+  //
+  const [currentUser, setCurrentUser] = useState(null);
+  useEffect(() => {
+    setCurrentUser(user);
+  }, [user]);
+  const updateProfileHandler = async displayName => {
+    const updatedUser = await updateProfile(displayName);
+    setCurrentUser(updatedUser);
+  };
+
   return (
     <AuthContext.Provider
       value={{
