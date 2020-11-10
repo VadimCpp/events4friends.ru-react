@@ -215,13 +215,3 @@ export const authAndSubscribe = async (initState, setState, setEventsState) => {
     console.error('Auth Error', error);
   }
 };
-
-export const fireBaseInitAndAuth = async (
-  config,
-  initState,
-  setState,
-  setEventsState,
-) => {
-  firebase.initializeApp(config);
-  await authAndSubscribe(initState, setState, setEventsState);
-};

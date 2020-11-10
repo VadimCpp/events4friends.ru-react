@@ -9,13 +9,15 @@ import {
   createEvent,
   deleteEvent,
   editEvent,
-  fireBaseInitAndAuth,
+  authAndSubscribe,
 } from './provider/firebase';
 
 import AppRouter from './AppRouter';
 import { AuthContext } from './context/AuthContext';
 import { DataContext } from './context/DataContext';
 import './App.css';
+
+import useAuth from './hooks/useAuth';
 
 //
 // NOTE!
@@ -37,18 +39,9 @@ const initEventsState = {
   events: [],
 };
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyBjAQdqx3qkki7MVb6dd1eASw-0UGs2Bg0',
-  authDomain: 'events4friends.firebaseapp.com',
-  databaseURL: 'https://events4friends.firebaseio.com',
-  projectId: 'events4friends',
-  storageBucket: 'events4friends.appspot.com',
-  messagingSenderId: '610960096409',
-  appId: '1:610960096409:web:337ff9ec4ca355a6c28c08',
-  measurementId: 'G-4T13RKFFSG',
-};
-
 const App = () => {
+  const { user } = useAuth();
+
   //
   // NOTE!
   // В данном коде в один хук useState сохраняется целая большая структура данных,
@@ -70,12 +63,7 @@ const App = () => {
 
   useEffect(() => {
     const initAndAuth = async () => {
-      await fireBaseInitAndAuth(
-        firebaseConfig,
-        initState,
-        setState,
-        setEventsState,
-      );
+      await authAndSubscribe(initState, setState, setEventsState);
     };
 
     initAndAuth();
@@ -90,7 +78,7 @@ const App = () => {
     setState({ ...state, user: updatedUser });
   };
 
-  const { user, connectingToFirebase, services, config } = state;
+  const { connectingToFirebase, services, config } = state;
 
   return (
     <AuthContext.Provider
