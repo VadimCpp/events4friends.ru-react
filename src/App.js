@@ -11,7 +11,6 @@ import {
   editEvent,
   fireBaseInitAndAuth,
 } from './provider/firebase';
-import { initClipboard, dropClipboard } from './provider/clipboard';
 
 import AppRouter from './AppRouter';
 import { AuthContext } from './context/AuthContext';
@@ -79,12 +78,10 @@ const App = () => {
       );
     };
 
-    initClipboard();
     initAndAuth();
 
     return () => {
       unsubscribeFromEventsChanges();
-      dropClipboard();
     };
   }, []);
 
