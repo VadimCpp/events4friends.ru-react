@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +8,6 @@ import {
   createEvent,
   deleteEvent,
   editEvent,
-  authAndSubscribe,
 } from './provider/firebase';
 
 import AppRouter from './AppRouter';
@@ -18,6 +16,7 @@ import { DataContext } from './context/DataContext';
 import './App.css';
 
 import useAuth from './hooks/useAuth';
+import useData from './hooks/useData';
 
 //
 // NOTE!
@@ -25,77 +24,26 @@ import useAuth from './hooks/useAuth';
 //
 library.add(faShare);
 
-const initState = {
-  user: null,
-  services: [],
-  config: {
-    version: null,
-  },
-  connectingToFirebase: true,
-};
-
-const initEventsState = {
-  loadingEvents: true,
-  events: [],
-};
-
 const App = () => {
   const { user } = useAuth();
-
-  //
-  // NOTE!
-  // В данном коде в один хук useState сохраняется целая большая структура данных,
-  // которая состоит из разнородных объектов.
-  //
-  // Логичнее было бы использовать для каждого значения отдельный хук, пример:
-  // const [events, setEvents] = useState([]);
-  // const [services, setServices] = useState([]);
-  //
-  // Хорошо будет, если главный компонент приложения содержит данные и коллекции,
-  // которые соответствуют данным и коллекциям в документации https://github.com/VadimCpp/events4friends-firestore
-  //
-  // TODO: избавиться от сложных структур данных initState и initEventsState
-  //
-  const [state, setState] = useState(initState);
-  const [eventsState, setEventsState] = useState(initEventsState);
-
-  const unsubscribeFromEventsChanges = () => {};
-
-  useEffect(() => {
-    const initAndAuth = async () => {
-      await authAndSubscribe(initState, setState, setEventsState);
-    };
-
-    initAndAuth();
-
-    return () => {
-      unsubscribeFromEventsChanges();
-    };
-  }, []);
-
-  const updateProfileHandler = async displayName => {
-    const updatedUser = await updateProfile(displayName);
-    setState({ ...state, user: updatedUser });
-  };
-
-  const { connectingToFirebase, services, config } = state;
+  const { events, services, config } = useData();
 
   return (
     <AuthContext.Provider
       value={{
-        user,
+        user: currentUser,
         signIn,
         signOut,
         updateProfile: updateProfileHandler,
         loadingStatuses: {
-          connectingToFirebase,
-          loadingEvents: eventsState.loadingEvents,
+          connectingToFirebase: false,
+          loadingEvents: false,
         },
       }}
     >
       <DataContext.Provider
         value={{
-          events: eventsState.events,
+          events,
           createEvent,
           deleteEvent,
           editEvent,

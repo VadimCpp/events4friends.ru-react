@@ -3,80 +3,6 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import { updateTelegramPinnedMessage } from './telegram';
 
-export const getConfig = async () => {
-  //
-  // NOTE!
-  // Load config from firebase
-  //
-  try {
-    const db = firebase.firestore();
-    const doc = await db
-      .collection('config')
-      .doc('general')
-      .get();
-
-    if (doc.exists) {
-      console.info('Get config successfully from Firebase');
-      return doc.data();
-    }
-    console.warn('Error getting config, skip: ', doc);
-    return null;
-  } catch (error) {
-    console.warn('Error getting config, skip: ', error);
-  }
-};
-
-export const getServices = async () => {
-  //
-  // NOTE!
-  // Load services from firebase
-  //
-  try {
-    const db = firebase.firestore();
-    const querySnapshot = await db.collection('services').get();
-    const services = querySnapshot.docs.map(item => ({
-      ...item.data(),
-      id: item.id,
-    }));
-    return services;
-  } catch (error) {
-    console.warn('Error getting services, skip: ', error);
-  }
-};
-
-export const subscribeForEventsChanges = setEventsState => {
-  //
-  // NOTE!
-  // Get realtime updates with Cloud Firestore
-  // https://firebase.google.com/docs/firestore/query-data/listen
-  //
-
-  try {
-    const db = firebase.firestore();
-    console.info('Subscribe for events changes');
-    return db.collection('events').onSnapshot(async snapshot => {
-      if (snapshot && snapshot.docs && snapshot.docs.length) {
-        const events = snapshot.docs.reduce((result, item) => {
-          return [
-            ...result,
-            {
-              ...item.data(),
-              id: item.id,
-            },
-          ];
-        }, []);
-        setEventsState({
-          events,
-          loadingEvents: false,
-        });
-        console.info('Get shapshot: events updated successfully');
-      }
-    });
-  } catch (error) {
-    console.warn('Subscribe for events error', error);
-  }
-};
-
 export const deleteEvent = (eventId, callback) => {
   console.info('Delete event, eventId:', eventId);
 
@@ -176,7 +102,7 @@ export const updateProfile = async displayName => {
   }
 };
 
-export const authAndSubscribe = async (initState, setState, setEventsState) => {
+export const authAndSubscribe = async (initState, setState) => {
   try {
     firebase.auth().onAuthStateChanged(async user => {
       if (user) {
@@ -190,14 +116,8 @@ export const authAndSubscribe = async (initState, setState, setEventsState) => {
           console.info('onAuthStateChanged: user is logged in successfully');
         }
 
-        const config = await getConfig();
-        const services = await getServices();
-        subscribeForEventsChanges(setEventsState);
-
         return setState({
           user,
-          config,
-          services,
           connectingToFirebase: false,
         });
       }
