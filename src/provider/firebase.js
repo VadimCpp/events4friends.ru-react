@@ -101,37 +101,3 @@ export const updateProfile = async displayName => {
     console.warn('Error updating user profile:', err);
   }
 };
-
-export const authAndSubscribe = async (initState, setState) => {
-  try {
-    firebase.auth().onAuthStateChanged(async user => {
-      if (user) {
-        //
-        // NOTE!
-        // User is signed in.
-        //
-        if (user.isAnonymous) {
-          console.info('onAuthStateChanged: user is logged in anonymously');
-        } else {
-          console.info('onAuthStateChanged: user is logged in successfully');
-        }
-
-        return setState({
-          user,
-          connectingToFirebase: false,
-        });
-      }
-      console.info(
-        'onAuthStateChanged: user is not loggen in, login anonymously',
-      );
-      //
-      // NOTE!
-      // Log in anonymously
-      //
-      await firebase.auth().signInAnonymously();
-      return setState(initState);
-    });
-  } catch (error) {
-    console.error('Auth Error', error);
-  }
-};
