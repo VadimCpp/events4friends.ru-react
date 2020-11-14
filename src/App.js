@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +8,6 @@ import {
   createEvent,
   deleteEvent,
   editEvent,
-  fireBaseInitAndAuth,
 } from './provider/firebase';
 
 import AppRouter from './AppRouter';
@@ -17,97 +15,50 @@ import { AuthContext } from './context/AuthContext';
 import { DataContext } from './context/DataContext';
 import './App.css';
 
+import useAuth from './hooks/useAuth';
+import useData from './hooks/useData';
+
 //
 // NOTE!
 // Add here all new icons used in the app.
 //
 library.add(faShare);
 
-const initState = {
-  user: null,
-  services: [],
-  config: {
-    version: null,
-  },
-  connectingToFirebase: true,
-};
-
-const initEventsState = {
-  loadingEvents: true,
-  events: [],
-};
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyBjAQdqx3qkki7MVb6dd1eASw-0UGs2Bg0',
-  authDomain: 'events4friends.firebaseapp.com',
-  databaseURL: 'https://events4friends.firebaseio.com',
-  projectId: 'events4friends',
-  storageBucket: 'events4friends.appspot.com',
-  messagingSenderId: '610960096409',
-  appId: '1:610960096409:web:337ff9ec4ca355a6c28c08',
-  measurementId: 'G-4T13RKFFSG',
-};
-
 const App = () => {
+  const { user } = useAuth();
+  const { events, services, config } = useData();
+
   //
   // NOTE!
-  // В данном коде в один хук useState сохраняется целая большая структура данных,
-  // которая состоит из разнородных объектов.
+  // Этот стейт создан только для одного случая, когда пользователь меняет свое ФИО
   //
-  // Логичнее было бы использовать для каждого значения отдельный хук, пример:
-  // const [events, setEvents] = useState([]);
-  // const [services, setServices] = useState([]);
+  // TODO: подумать, как можно спрятать эту логику
   //
-  // Хорошо будет, если главный компонент приложения содержит данные и коллекции,
-  // которые соответствуют данным и коллекциям в документации https://github.com/VadimCpp/events4friends-firestore
-  //
-  // TODO: избавиться от сложных структур данных initState и initEventsState
-  //
-  const [state, setState] = useState(initState);
-  const [eventsState, setEventsState] = useState(initEventsState);
-
-  const unsubscribeFromEventsChanges = () => {};
-
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    const initAndAuth = async () => {
-      await fireBaseInitAndAuth(
-        firebaseConfig,
-        initState,
-        setState,
-        setEventsState,
-      );
-    };
-
-    initAndAuth();
-
-    return () => {
-      unsubscribeFromEventsChanges();
-    };
-  }, []);
-
+    setCurrentUser(user);
+  }, [user]);
   const updateProfileHandler = async displayName => {
     const updatedUser = await updateProfile(displayName);
-    setState({ ...state, user: updatedUser });
+    setCurrentUser(updatedUser);
   };
-
-  const { user, connectingToFirebase, services, config } = state;
 
   return (
     <AuthContext.Provider
       value={{
-        user,
+        user: currentUser,
         signIn,
         signOut,
         updateProfile: updateProfileHandler,
         loadingStatuses: {
-          connectingToFirebase,
-          loadingEvents: eventsState.loadingEvents,
+          connectingToFirebase: false,
+          loadingEvents: false,
         },
       }}
     >
       <DataContext.Provider
         value={{
-          events: eventsState.events,
+          events,
           createEvent,
           deleteEvent,
           editEvent,
