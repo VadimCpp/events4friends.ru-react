@@ -63,7 +63,7 @@ export const subscribeForEventsChanges = onUpdate => {
   }
 };
 
-const useAuth = () => {
+const useData = () => {
   const [events, setEvents] = useState([]);
   const [services, setServices] = useState([]);
   const [config, setConfig] = useState({});
@@ -76,10 +76,17 @@ const useAuth = () => {
       setServices(theServices);
     };
 
+    //
+    // NOTE!
+    // Данные об услугах и конфигурации извлекаются только один раз при открытии сайта
+    // Для обновления данных сайт необходимо перегрузить
+    //
     getData();
-  }, []);
 
-  useEffect(() => {
+    //
+    // NOTE!
+    // Изменения данных в анонсах происходят автоматически без перезагрузки сайтов
+    //
     const unsubscribe = subscribeForEventsChanges(newEvents =>
       setEvents(newEvents),
     );
@@ -94,4 +101,4 @@ const useAuth = () => {
   return { events, services, config };
 };
 
-export default useAuth;
+export default useData;
