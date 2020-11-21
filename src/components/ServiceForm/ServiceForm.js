@@ -59,11 +59,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   return (
     <div className="newserviceview">
       <div className="textinput">
-        <label>
+        <label htmlFor="service">
           <p className="text-left">Название услуги:</p>
           <input
             className="textinput__input"
             type="text"
+            id="service"
             name="service"
             value={service.service}
             onChange={handlerChange}
@@ -72,11 +73,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </div>
 
       <div className="textinput">
-        <label>
+        <label htmlFor="service">
           <p className="text-left">Имя того, кто оказывает услугу:</p>
           <input
             className="textinput__input"
             type="text"
+            id="name"
             name="name"
             value={service.name}
             onChange={handlerChange}
@@ -97,11 +99,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       <div className="textinput">
         <p className="text-left">Услуга оказывается платно?</p>
         <p>
-          <label>
+          <label htmlFor="isFree_true">
             <span className="text-left">Да</span>
             <input
               className="textinput__input"
               type="radio"
+              id="isFree_true"
               name="isFree"
               checked={!service.isFree}
               onChange={handleIsFreeChange}
@@ -109,11 +112,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
           </label>
         </p>
         <p>
-          <label>
+          <label htmlFor="isFree_false">
             <span className="text-left">Нет</span>
             <input
               className="textinput__input"
               type="radio"
+              id="isFree_false"
               name="isFree"
               checked={service.isFree}
               onChange={handleIsFreeChange}
@@ -124,11 +128,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       <>
         {!service.isFree && (
           <div className="textinput">
-            <label>
+            <label htmlFor="price">
               <p className="text-left">Укажите стоимость услуги в рублях:</p>
               <input
                 className="textinput__input"
                 type="text"
+                id="price"
                 name="price"
                 value={service.price}
                 onChange={handlerChange}
@@ -140,11 +145,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </>
 
       <div className="textinput">
-        <label>
+        <label htmlFor="website">
           <p className="text-left">Cсылка на сайт:</p>
           <input
             className="textinput__input"
             type="text"
+            id="website"
             name="website"
             value={service.website}
             onChange={handlerChange}
@@ -153,11 +159,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </div>
 
       <div className="textinput">
-        <label>
+        <label htmlFor="instagram">
           <p className="text-left">Ссылка на инстаграм:</p>
           <input
             className="textinput__input"
             type="text"
+            id="instagram"
             name="instagram"
             value={service.instagram}
             onChange={handlerChange}
@@ -166,11 +173,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </div>
 
       <div className="textinput">
-        <label>
+        <label htmlFor="whatsapp">
           <p className="text-left">Номер в WhatsApp в формате 7XXX1234567:</p>
           <input
             className="textinput__input"
             type="text"
+            id="whatsapp"
             name="whatsapp"
             value={service.whatsapp}
             onChange={handlerChange}
@@ -179,11 +187,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </div>
 
       <div className="textinput">
-        <label>
+        <label htmlFor="telegram">
           <p className="text-left">ID пользователя в телеграм:</p>
           <input
             className="textinput__input"
             type="text"
+            id="telegram"
             name="telegram"
             value={service.telegram}
             onChange={handlerChange}
@@ -192,11 +201,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </div>
 
       <div className="textinput">
-        <label>
+        <label htmlFor="vkontakte">
           <p className="text-left">Ссылка ВКонтакте:</p>
           <input
             className="textinput__input"
             type="text"
+            id="vkontakte"
             name="vkontakte"
             value={service.vkontakte}
             onChange={handlerChange}
