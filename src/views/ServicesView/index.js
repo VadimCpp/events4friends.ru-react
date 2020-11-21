@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
-import ServiceCard from '../../components/ServiceCard';
-import ButtonLink from '../../components/ButtonLink';
 import { DataContext } from '../../context/DataContext';
 import { AuthContext } from '../../context/AuthContext';
+
+import ServiceCard from '../../components/ServiceCard';
+import ButtonLink from '../../components/ButtonLink';
 import ServiceSort from '../../components/ServiceSort';
 import './ServicesView.css';
 
@@ -82,15 +83,7 @@ const ServicesView = () => {
           to="/"
           icon="/icons/icon_arrow_back.svg"
           title="На главную"
-          style={{
-            width: 175,
-            display: 'block',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-            marginBottom: 10,
-            borderColor: 'rgba(77, 77, 77, .2)',
-            borderRadius: '48px',
-          }}
+          className="serviceView-arrowBack-btn"
         />
         <>
           {isAuth ? (
@@ -99,7 +92,6 @@ const ServicesView = () => {
                 to="/newservice"
                 icon="/icons/icon_service_plus.svg"
                 title="Добавить услугу"
-                style={{ width: 200 }}
                 classList={['button-link', 'services-view']}
               />
             </div>

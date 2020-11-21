@@ -1,18 +1,12 @@
 import React from 'react';
 import ButtonLink from '../ButtonLink';
 import ButtonExternalLink from '../ButtonExternalLink';
-
 import ServiceForm from './ServiceForm';
 import './ServiceForm.css';
 
-const ServiceFormView = ({
-  editMode = true,
-  service,
-  isAuth,
-  onSave = () => {},
-}) => {
+const ServiceFormView = ({ service, isAuth, onSave = () => {} }) => {
   const formContent = isAuth ? (
-    <ServiceForm defaultService={service} onSave={onSave} editMode={editMode} />
+    <ServiceForm defaultService={service} onSave={onSave} />
   ) : (
     <div>
       <p>Для того, чтобы редактировать услуги, выполните вход</p>
@@ -26,15 +20,7 @@ const ServiceFormView = ({
           to="/services"
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
-          style={{
-            width: 155,
-            display: 'block',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-            marginBottom: 10,
-            borderColor: 'rgba(77, 77, 77, .2)',
-            borderRadius: '48px',
-          }}
+          className="serviceFormView-arrowBack-btn"
         />
       </div>
 
@@ -50,28 +36,19 @@ const ServiceFormView = ({
             href="tg://resolve?domain=events4friends"
             icon="/icons/telegram.svg"
             alt="telegram"
-            style={{
-              borderColor: '#139BD0',
-              margin: 8,
-            }}
+            className="external_link_btn telegram_btn"
           />
           <ButtonExternalLink
             href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
             icon="/icons/whatsapp.svg"
             alt="whatsapp"
-            style={{
-              borderColor: '#57BB63',
-              margin: 8,
-            }}
+            className="external_link_btn whatsapp_btn"
           />
           <ButtonExternalLink
             href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
             icon="/icons/viber.svg"
             alt="viber"
-            style={{
-              borderColor: '#7C519B',
-              margin: 8,
-            }}
+            className="external_link_btn viber_btn"
           />
         </div>
       </div>

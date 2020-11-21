@@ -38,10 +38,20 @@
 }
 
 .services-view.button-link {
-	width: 175px;
+	width: 200px;
 	margin-right: auto;
 	margin-left: auto;
 	margin-bottom: 10px;
 	border-color: rgba(77, 77, 77, 0.2);
+	border-radius: 48px;
+}
+
+.serviceView-arrowBack-btn {
+	width: 175px;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+	margin-bottom: 10px;
+	border-color: rgba(77, 77, 77, .2);
 	border-radius: 48px;
 }

@@ -1,18 +1,18 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ReachTextEditor } from '../RichTextEditor';
-import Button from '../Button';
 import { verify, serviceInitState } from './helper';
 
+import { ReachTextEditor } from '../RichTextEditor';
+import Button from '../Button';
+
 const ServiceForm = ({ defaultService, onSave = () => {} }) => {
-  const history = useHistory();
-  const [service, updateServiceValue] = useState(serviceInitState);
+  const [service, setService] = useState(serviceInitState);
   const [updatingService, setUpdatingService] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     if (defaultService) {
-      updateServiceValue({ ...serviceInitState, ...defaultService });
+      setService({ ...serviceInitState, ...defaultService });
     }
   }, [defaultService]);
 
@@ -38,20 +38,21 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
     });
   };
 
-  const handlerChange = key => ({ target }) => {
-    const { value } = target;
-    updateServiceValue({ ...service, [key]: value });
+  const handlerChange = e => {
+    const { name, value } = e.currentTarget;
+    setService(prev => ({ ...prev, [name]: value }));
   };
 
-  const handlerDescriptionChange = val => {
-    updateServiceValue({ ...service, description: val });
-  };
+  const handlerDescriptionChange = useCallback(val => {
+    setService(prev => ({ ...prev, description: val }));
+  }, []);
 
-  const handleIsFreeChange = isFree => () => {
+  const handleIsFreeChange = () => {
+    const { isFree } = service;
     if (isFree === true) {
-      updateServiceValue({ ...service, price: '', isFree });
+      setService(prev => ({ ...prev, isFree: false }));
     } else {
-      updateServiceValue({ ...service, isFree });
+      setService(prev => ({ ...prev, price: '', isFree: true }));
     }
   };
 
@@ -65,7 +66,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             type="text"
             name="service"
             value={service.service}
-            onChange={handlerChange('service')}
+            onChange={handlerChange}
           />
         </label>
       </div>
@@ -78,7 +79,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             type="text"
             name="name"
             value={service.name}
-            onChange={handlerChange('name')}
+            onChange={handlerChange}
           />
         </label>
       </div>
@@ -103,7 +104,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
               type="radio"
               name="isFree"
               checked={!service.isFree}
-              onChange={handleIsFreeChange(false)}
+              onChange={handleIsFreeChange}
             />
           </label>
         </p>
@@ -115,7 +116,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
               type="radio"
               name="isFree"
               checked={service.isFree}
-              onChange={handleIsFreeChange(true)}
+              onChange={handleIsFreeChange}
             />
           </label>
         </p>
@@ -130,7 +131,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
                 type="text"
                 name="price"
                 value={service.price}
-                onChange={handlerChange('price')}
+                onChange={handlerChange}
                 disabled={service.isFree}
               />
             </label>
@@ -146,7 +147,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             type="text"
             name="website"
             value={service.website}
-            onChange={handlerChange('website')}
+            onChange={handlerChange}
           />
         </label>
       </div>
@@ -159,7 +160,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             type="text"
             name="instagram"
             value={service.instagram}
-            onChange={handlerChange('instagram')}
+            onChange={handlerChange}
           />
         </label>
       </div>
@@ -172,7 +173,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             type="text"
             name="whatsapp"
             value={service.whatsapp}
-            onChange={handlerChange('whatsapp')}
+            onChange={handlerChange}
           />
         </label>
       </div>
@@ -185,7 +186,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             type="text"
             name="telegram"
             value={service.telegram}
-            onChange={handlerChange('telegram')}
+            onChange={handlerChange}
           />
         </label>
       </div>
@@ -198,7 +199,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             type="text"
             name="vkontakte"
             value={service.vkontakte}
-            onChange={handlerChange('vkontakte')}
+            onChange={handlerChange}
           />
         </label>
       </div>

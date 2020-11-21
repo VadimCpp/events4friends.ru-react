@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 
-import ServiceForm from '../../components/ServiceForm';
+import ServiceFormView from '../../components/ServiceForm';
 
 const NewServiceView = () => {
   const authContext = useContext(AuthContext);
@@ -22,12 +22,7 @@ const NewServiceView = () => {
   };
 
   return (
-    <ServiceForm
-      editMode={false}
-      service={service}
-      isAuth={isAuth}
-      onSave={saveHandler}
-    />
+    <ServiceFormView service={service} isAuth={isAuth} onSave={saveHandler} />
   );
 };
 
