@@ -21,21 +21,6 @@ export const getConfig = async () => {
   }
 };
 
-export const getServices = async () => {
-  try {
-    const db = firebase.firestore();
-    const querySnapshot = await db.collection('services').get();
-    const services = querySnapshot.docs.map(item => ({
-      ...item.data(),
-      id: item.id,
-    }));
-    console.info('Get services successfully from Firebase');
-    return services;
-  } catch (error) {
-    console.warn('Error getting services, skip: ', error);
-  }
-};
-
 //
 // NOTE!
 // Get realtime updates with Cloud Firestore
@@ -63,6 +48,33 @@ export const subscribeForEventsChanges = onUpdate => {
   }
 };
 
+//
+// NOTE!
+// Get realtime updates with Cloud Firestore
+// https://firebase.google.com/docs/firestore/query-data/listen
+//
+export const subscribeForServicesChanges = onUpdate => {
+  try {
+    const db = firebase.firestore();
+    return db.collection('services').onSnapshot(async snapshot => {
+      if (snapshot && snapshot.docs && snapshot.docs.length) {
+        const services = snapshot.docs.reduce((result, item) => {
+          return [
+            ...result,
+            {
+              ...item.data(),
+              id: item.id,
+            },
+          ];
+        }, []);
+        onUpdate(services);
+      }
+    });
+  } catch (error) {
+    console.warn('Subscribe for services error', error);
+  }
+};
+
 const useData = () => {
   const [events, setEvents] = useState([]);
   const [services, setServices] = useState([]);
@@ -71,9 +83,7 @@ const useData = () => {
   useEffect(() => {
     const getData = async () => {
       const aConfig = await getConfig();
-      const theServices = await getServices();
       setConfig(aConfig);
-      setServices(theServices);
     };
 
     //
@@ -87,13 +97,20 @@ const useData = () => {
     // NOTE!
     // Изменения данных в анонсах происходят автоматически без перезагрузки сайтов
     //
-    const unsubscribe = subscribeForEventsChanges(newEvents =>
+    const unsubscribeFromEventsChanges = subscribeForEventsChanges(newEvents =>
       setEvents(newEvents),
     );
 
+    const unsubscribeFromServicesChanges = subscribeForServicesChanges(
+      newServices => setServices(newServices),
+    );
+
     return () => {
-      if (unsubscribe) {
-        unsubscribe();
+      if (unsubscribeFromEventsChanges) {
+        unsubscribeFromEventsChanges();
+      }
+      if (unsubscribeFromServicesChanges) {
+        unsubscribeFromServicesChanges();
       }
     };
   }, []);
