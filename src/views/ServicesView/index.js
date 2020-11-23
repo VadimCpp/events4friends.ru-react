@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
+import { DataContext } from '../../context/DataContext';
+import { AuthContext } from '../../context/AuthContext';
+
 import ServiceCard from '../../components/ServiceCard';
 import ButtonLink from '../../components/ButtonLink';
-import { DataContext } from '../../context/DataContext';
 import ServiceSort from '../../components/ServiceSort';
 import './ServicesView.css';
 
@@ -13,7 +15,9 @@ const ServiceSortingType = {
 
 const ServicesView = () => {
   const dataContext = useContext(DataContext);
+  const authContext = useContext(AuthContext);
   const [sortType, setSortType] = useState(ServiceSortingType.SortByService);
+  const isAuth = authContext.user && !authContext.user.isAnonymous;
 
   const displayService = service => {
     let highlightName = false;
@@ -79,16 +83,24 @@ const ServicesView = () => {
           to="/"
           icon="/icons/icon_arrow_back.svg"
           title="На главную"
-          style={{
-            width: 175,
-            display: 'block',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-            marginBottom: 10,
-            borderColor: 'rgba(77, 77, 77, .2)',
-            borderRadius: '48px',
-          }}
+          className="serviceView-arrowBack-btn"
         />
+        <>
+          {isAuth ? (
+            <div>
+              <ButtonLink
+                to="/newservice"
+                icon="/icons/icon_service_plus.svg"
+                title="Добавить услугу"
+                classList={['button-link', 'services-view']}
+              />
+            </div>
+          ) : (
+            <div>
+              <p>Для того, чтобы добавлять услуги, выполните вход</p>
+            </div>
+          )}
+        </>
       </div>
 
       <ServiceSort

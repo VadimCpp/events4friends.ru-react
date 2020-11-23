@@ -8,6 +8,9 @@ import {
   createEvent,
   deleteEvent,
   editEvent,
+  createService,
+  editService,
+  deleteService,
 } from './provider/firebase';
 
 import AppRouter from './AppRouter';
@@ -53,16 +56,20 @@ const App = () => {
         loadingStatuses: {
           connectingToFirebase: false,
           loadingEvents: false,
+          loadingServices: false,
         },
       }}
     >
       <DataContext.Provider
         value={{
           events,
+          services,
           createEvent,
           deleteEvent,
           editEvent,
-          services,
+          createService,
+          editService,
+          deleteService,
           config,
         }}
       >

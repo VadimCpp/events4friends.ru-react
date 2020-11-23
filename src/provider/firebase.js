@@ -101,3 +101,65 @@ export const updateProfile = async displayName => {
     console.warn('Error updating user profile:', err);
   }
 };
+
+export const createService = (data, callback) => {
+  console.info('Creating service');
+
+  const db = firebase.firestore();
+  db.collection('services')
+    .add(data)
+    // eslint-disable-next-line no-shadow
+    .then(data => {
+      if (data && data.id && callback) {
+        callback(data.id);
+      } else {
+        console.warn('Something went wrong, contact support');
+        alert(
+          'Что-то пошло не так при создании услуги. Пожалуйста, обратитесь в службу поддержки.',
+        );
+      }
+    })
+    .catch(error => {
+      console.warn('Error creating service', error);
+      alert(
+        'Не удалось создать услугу. Пожалуйста, обратитесь в службу поддержки.',
+      );
+      callback(null);
+    });
+};
+
+export const deleteService = (serviceId, callback) => {
+  console.info('Delete service, serviceId:', serviceId);
+
+  const db = firebase.firestore();
+  db.collection('services')
+    .doc(serviceId)
+    .delete()
+    .then(() => {
+      callback(true);
+    })
+    .catch(error => {
+      callback(false);
+      console.warn('Error removing document:', error);
+      alert(
+        'Не удалось удалить услугу. Пожалуйста, обратитесь в службу поддержки.',
+      );
+    });
+};
+
+export const editService = (data, docId, callback) => {
+  console.info('Updating service');
+
+  const db = firebase.firestore();
+  db.collection('services')
+    .doc(docId)
+    .update(data)
+    .then(() => {
+      console.info('Document successfully updated!');
+      callback(docId);
+    })
+    .catch(error => {
+      console.warn('Error updating service', error);
+      callback(null);
+    });
+};
