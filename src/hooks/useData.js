@@ -26,7 +26,7 @@ export const getConfig = async () => {
 // Get realtime updates with Cloud Firestore
 // https://firebase.google.com/docs/firestore/query-data/listen
 //
-export const subscribeForEventsChanges = onUpdate => {
+export const subscribeForEventsChanges = (onUpdate, afterSuccess, afterAll) => {
   try {
     const db = firebase.firestore();
     return db.collection('events').onSnapshot(async snapshot => {
@@ -41,10 +41,13 @@ export const subscribeForEventsChanges = onUpdate => {
           ];
         }, []);
         onUpdate(events);
+        afterSuccess(false);
       }
     });
   } catch (error) {
     console.warn('Subscribe for events error', error);
+  } finally {
+    afterAll(false);
   }
 };
 
@@ -53,7 +56,11 @@ export const subscribeForEventsChanges = onUpdate => {
 // Get realtime updates with Cloud Firestore
 // https://firebase.google.com/docs/firestore/query-data/listen
 //
-export const subscribeForServicesChanges = onUpdate => {
+export const subscribeForServicesChanges = (
+  onUpdate,
+  afterSuccess,
+  afterAll,
+) => {
   try {
     const db = firebase.firestore();
     return db.collection('services').onSnapshot(async snapshot => {
@@ -68,10 +75,13 @@ export const subscribeForServicesChanges = onUpdate => {
           ];
         }, []);
         onUpdate(services);
+        afterSuccess(false);
       }
     });
   } catch (error) {
     console.warn('Subscribe for services error', error);
+  } finally {
+    afterAll(false);
   }
 };
 
@@ -79,6 +89,9 @@ const useData = () => {
   const [events, setEvents] = useState([]);
   const [services, setServices] = useState([]);
   const [config, setConfig] = useState({});
+  const [connectingToFirebase, setConnectingToFirebase] = useState(true);
+  const [loadingEvents, setLoadingEvents] = useState(true);
+  const [loadingServices, setLoadingServices] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
@@ -97,12 +110,16 @@ const useData = () => {
     // NOTE!
     // Изменения данных в анонсах происходят автоматически без перезагрузки сайтов
     //
-    const unsubscribeFromEventsChanges = subscribeForEventsChanges(newEvents =>
-      setEvents(newEvents),
+    const unsubscribeFromEventsChanges = subscribeForEventsChanges(
+      newEvents => setEvents(newEvents),
+      setLoadingEvents,
+      setConnectingToFirebase,
     );
 
     const unsubscribeFromServicesChanges = subscribeForServicesChanges(
       newServices => setServices(newServices),
+      setLoadingServices,
+      setConnectingToFirebase,
     );
 
     return () => {
@@ -115,7 +132,14 @@ const useData = () => {
     };
   }, []);
 
-  return { events, services, config };
+  return {
+    events,
+    services,
+    config,
+    connectingToFirebase,
+    loadingEvents,
+    loadingServices,
+  };
 };
 
 export default useData;

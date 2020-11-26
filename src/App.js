@@ -29,7 +29,14 @@ library.add(faShare);
 
 const App = () => {
   const { user } = useAuth();
-  const { events, services, config } = useData();
+  const {
+    events,
+    services,
+    config,
+    connectingToFirebase,
+    loadingEvents,
+    loadingServices,
+  } = useData();
 
   //
   // NOTE!
@@ -53,11 +60,9 @@ const App = () => {
         signIn,
         signOut,
         updateProfile: updateProfileHandler,
-        loadingStatuses: {
-          connectingToFirebase: false,
-          loadingEvents: false,
-          loadingServices: false,
-        },
+        connectingToFirebase,
+        loadingEvents,
+        loadingServices,
       }}
     >
       <DataContext.Provider

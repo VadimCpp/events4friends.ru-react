@@ -20,7 +20,7 @@ const EventView = ({ match, history }) => {
   const dataContext = useContext(DataContext);
 
   const { events, deleteEvent } = dataContext;
-  const { user, loadingStatuses } = authContext;
+  const { user, loadingEvents, connectingToFirebase } = authContext;
 
   let event = null;
   let name = null;
@@ -94,27 +94,22 @@ const EventView = ({ match, history }) => {
         <div className="border-top">
           <div className="container">
             <div className="event-item container-center">
-              {!event && loadingStatuses.connectingToFirebase && (
+              {!event && connectingToFirebase && (
                 <p align="center">Подключаемся к базе данных...</p>
               )}
-              {!event &&
-                !loadingStatuses.connectingToFirebase &&
-                loadingStatuses.loadingEvents && (
-                  <p align="center">Загружаем событие...</p>
-                )}
-              {!event &&
-                !loadingStatuses.connectingToFirebase &&
-                !loadingStatuses.loadingEvents && (
-                  <div>
-                    <p align="center">
-                      Мероприятие недоступно{' '}
-                      <span role="img" aria-label="sad" />
-                    </p>
-                    <p align="center">
-                      Возможно, оно было удалено или Вы открыли «битую» ссылку.
-                    </p>
-                  </div>
-                )}
+              {!event && !connectingToFirebase && loadingEvents && (
+                <p align="center">Загружаем событие...</p>
+              )}
+              {!event && !connectingToFirebase && !loadingEvents && (
+                <div>
+                  <p align="center">
+                    Мероприятие недоступно <span role="img" aria-label="sad" />
+                  </p>
+                  <p align="center">
+                    Возможно, оно было удалено или Вы открыли «битую» ссылку.
+                  </p>
+                </div>
+              )}
               {event && (
                 <div>
                   <div>

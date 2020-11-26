@@ -18,6 +18,7 @@ const EventsView = () => {
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
+  const { user, connectingToFirebase, loadingEvents } = authContext;
 
   /**
    * @param {Event} event
@@ -86,8 +87,8 @@ const EventsView = () => {
   });
 
   let userAuthorized = false;
-  if (authContext.user) {
-    const { isAnonymous } = authContext.user;
+  if (user) {
+    const { isAnonymous } = user;
     if (isAnonymous === false) {
       userAuthorized = true;
     }
@@ -130,13 +131,25 @@ const EventsView = () => {
           past={EventsFilterType.Past}
         />
       </div>
-      <div className="pt-3">
-        {eventsList.length
-          ? eventsList.map(eventItem =>
-              displayEvent(eventItem.event, eventItem.source),
-            )
-          : null}
-      </div>
+      {connectingToFirebase ? (
+        <p align="center">Подключаемся к базе данных...</p>
+      ) : (
+        <>
+          {loadingEvents ? (
+            <p align="center">Загружаем события...</p>
+          ) : (
+            <>
+              {!!eventsList.length && (
+                <div className="pt-3">
+                  {eventsList.map(eventItem =>
+                    displayEvent(eventItem.event, eventItem.source),
+                  )}
+                </div>
+              )}
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 };
