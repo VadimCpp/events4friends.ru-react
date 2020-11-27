@@ -98,7 +98,7 @@ const WelcomeView = ({ history }) => {
             }}
           />
         </div>
-        
+
         <div className="container container-center mt-4">
           <p>Сообщества (формируются):</p>
 
@@ -172,6 +172,24 @@ const WelcomeView = ({ history }) => {
               borderColor: '#4b729f',
             }}
             title="Открыть ВКонтакте"
+          />
+          <p style={{ marginTop: '1rem'}}>
+            Следите за нами в Instagram:
+          </p>
+          <ButtonExternalLink
+            href="https://www.instagram.com/kldevents4friends/"
+            icon="/icons/instagram.svg"
+            alt="instagram"
+            style={{
+                margin: 8,
+                width: 250,
+                display: 'block',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                borderRadius: '48px',
+                borderColor: '#fd5949'
+            }}
+            title="Открыть Instagram"
           />
         </div>
       </div>
