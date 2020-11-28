@@ -17,8 +17,8 @@ const ServicesView = () => {
   const dataContext = useContext(DataContext);
   const authContext = useContext(AuthContext);
   const [sortType, setSortType] = useState(ServiceSortingType.SortByService);
-  const { user, connectingToFirebase, loadingServices } = authContext;
-  const { services } = dataContext;
+  const { user, connectingToFirebase } = authContext;
+  const { services, loadingServices } = dataContext;
   const isAuth = user && !user.isAnonymous;
 
   const displayService = service => {

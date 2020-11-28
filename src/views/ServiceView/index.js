@@ -17,8 +17,8 @@ const ServiceView = ({ match }) => {
   const dataContext = useContext(DataContext);
   const history = useHistory();
 
-  const { services, deleteService } = dataContext;
-  const { user, connectingToFirebase, loadingServices } = authContext;
+  const { services, loadingServices, deleteService } = dataContext;
+  const { user, connectingToFirebase } = authContext;
 
   let service = null;
   for (let i = 0; i < services.length; i++) {

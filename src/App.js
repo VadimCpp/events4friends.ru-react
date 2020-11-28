@@ -28,12 +28,11 @@ import useData from './hooks/useData';
 library.add(faShare);
 
 const App = () => {
-  const { user } = useAuth();
+  const { user, connectingToFirebase } = useAuth();
   const {
     events,
     services,
     config,
-    connectingToFirebase,
     loadingEvents,
     loadingServices,
   } = useData();
@@ -61,8 +60,6 @@ const App = () => {
         signOut,
         updateProfile: updateProfileHandler,
         connectingToFirebase,
-        loadingEvents,
-        loadingServices,
       }}
     >
       <DataContext.Provider
@@ -76,6 +73,8 @@ const App = () => {
           editService,
           deleteService,
           config,
+          loadingEvents,
+          loadingServices,
         }}
       >
         <div className="App">

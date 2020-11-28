@@ -19,8 +19,8 @@ const EventView = ({ match, history }) => {
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
 
-  const { events, deleteEvent } = dataContext;
-  const { user, loadingEvents, connectingToFirebase } = authContext;
+  const { events, loadingEvents, deleteEvent } = dataContext;
+  const { user, connectingToFirebase } = authContext;
 
   let event = null;
   let name = null;

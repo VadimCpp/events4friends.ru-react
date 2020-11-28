@@ -18,7 +18,8 @@ const EventsView = () => {
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
-  const { user, connectingToFirebase, loadingEvents } = authContext;
+  const { user, connectingToFirebase } = authContext;
+  const { events, loadingEvents } = dataContext;
 
   /**
    * @param {Event} event
@@ -40,7 +41,7 @@ const EventsView = () => {
   };
 
   const now = new Date();
-  let sortedEvents = [...dataContext.events];
+  let sortedEvents = [...events];
 
   if (filterType === EventsFilterType.Upcoming) {
     sortedEvents = sortedEvents.filter(event => {

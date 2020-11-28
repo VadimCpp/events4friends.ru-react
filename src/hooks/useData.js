@@ -26,7 +26,7 @@ export const getConfig = async () => {
 // Get realtime updates with Cloud Firestore
 // https://firebase.google.com/docs/firestore/query-data/listen
 //
-export const subscribeForEventsChanges = (onUpdate, afterSuccess, afterAll) => {
+export const subscribeForEventsChanges = (onUpdate, afterSuccess) => {
   try {
     const db = firebase.firestore();
     return db.collection('events').onSnapshot(async snapshot => {
@@ -46,8 +46,6 @@ export const subscribeForEventsChanges = (onUpdate, afterSuccess, afterAll) => {
     });
   } catch (error) {
     console.warn('Subscribe for events error', error);
-  } finally {
-    afterAll(false);
   }
 };
 
@@ -56,11 +54,7 @@ export const subscribeForEventsChanges = (onUpdate, afterSuccess, afterAll) => {
 // Get realtime updates with Cloud Firestore
 // https://firebase.google.com/docs/firestore/query-data/listen
 //
-export const subscribeForServicesChanges = (
-  onUpdate,
-  afterSuccess,
-  afterAll,
-) => {
+export const subscribeForServicesChanges = (onUpdate, afterSuccess) => {
   try {
     const db = firebase.firestore();
     return db.collection('services').onSnapshot(async snapshot => {
@@ -80,8 +74,6 @@ export const subscribeForServicesChanges = (
     });
   } catch (error) {
     console.warn('Subscribe for services error', error);
-  } finally {
-    afterAll(false);
   }
 };
 
@@ -89,7 +81,6 @@ const useData = () => {
   const [events, setEvents] = useState([]);
   const [services, setServices] = useState([]);
   const [config, setConfig] = useState({});
-  const [connectingToFirebase, setConnectingToFirebase] = useState(true);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [loadingServices, setLoadingServices] = useState(true);
 
@@ -113,13 +104,11 @@ const useData = () => {
     const unsubscribeFromEventsChanges = subscribeForEventsChanges(
       newEvents => setEvents(newEvents),
       setLoadingEvents,
-      setConnectingToFirebase,
     );
 
     const unsubscribeFromServicesChanges = subscribeForServicesChanges(
       newServices => setServices(newServices),
       setLoadingServices,
-      setConnectingToFirebase,
     );
 
     return () => {
@@ -136,7 +125,6 @@ const useData = () => {
     events,
     services,
     config,
-    connectingToFirebase,
     loadingEvents,
     loadingServices,
   };
