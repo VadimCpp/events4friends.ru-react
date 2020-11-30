@@ -8,6 +8,8 @@ const defaultData = {
   deleteEvent: (eventId, callback) => {}, // метод удаляет анонс
   editEvent: (data, docId, callback) => {}, // метод изменяет анонс
   config: {}, // настройки сайта
+  loadingEvents: true, // флаг, который означает процесс загрузки событий
+  loadingServices: true, // флаг, который означает процесс загрузки услуг
 };
 
 export const DataContext = React.createContext(defaultData);

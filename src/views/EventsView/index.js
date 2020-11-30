@@ -20,6 +20,7 @@ const EventsView = () => {
   const dataContext = useContext(DataContext);
   const { user, connectingToFirebase } = authContext;
   const { events, loadingEvents } = dataContext;
+  const isAuth = user && !user.isAnonymous;
 
   /**
    * @param {Event} event
@@ -87,14 +88,6 @@ const EventsView = () => {
     };
   });
 
-  let userAuthorized = false;
-  if (user) {
-    const { isAnonymous } = user;
-    if (isAnonymous === false) {
-      userAuthorized = true;
-    }
-  }
-
   const warnMessage = (
     <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
   );
@@ -110,7 +103,7 @@ const EventsView = () => {
         />
       </div>
       <>
-        {userAuthorized ? (
+        {isAuth ? (
           <div>
             <ButtonLink
               to="/newevent"
