@@ -17,7 +17,9 @@ const ServicesView = () => {
   const dataContext = useContext(DataContext);
   const authContext = useContext(AuthContext);
   const [sortType, setSortType] = useState(ServiceSortingType.SortByService);
-  const isAuth = authContext.user && !authContext.user.isAnonymous;
+  const { user, connectingToFirebase } = authContext;
+  const { services, loadingServices } = dataContext;
+  const isAuth = user && !user.isAnonymous;
 
   const displayService = service => {
     let highlightName = false;
@@ -38,7 +40,6 @@ const ServicesView = () => {
   };
 
   const getSortedServices = () => {
-    const { services } = dataContext;
     let sortedServices = [...services];
 
     if (sortType === ServiceSortingType.SortByName) {
@@ -111,7 +112,21 @@ const ServicesView = () => {
         sortByPrice={ServiceSortingType.SortByPrice}
       />
 
-      <div className="pt-3">{getSortedServices()}</div>
+      {connectingToFirebase ? (
+        <p align="center">Подключаемся к базе данных...</p>
+      ) : (
+        <>
+          {loadingServices ? (
+            <p align="center">Загружаем услуги...</p>
+          ) : (
+            <>
+              {!!services.length && (
+                <div className="pt-3">{getSortedServices()}</div>
+              )}
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 };

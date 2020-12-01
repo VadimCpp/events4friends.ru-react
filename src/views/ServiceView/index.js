@@ -17,8 +17,8 @@ const ServiceView = ({ match }) => {
   const dataContext = useContext(DataContext);
   const history = useHistory();
 
-  const { services, deleteService } = dataContext;
-  const { user, loadingStatuses } = authContext;
+  const { user, connectingToFirebase } = authContext;
+  const { services, loadingServices, deleteService } = dataContext;
 
   let service = null;
   for (let i = 0; i < services.length; i++) {
@@ -76,27 +76,23 @@ const ServiceView = ({ match }) => {
       <div className="border-top">
         <div className="container">
           <div className="service-item container-center">
-            {!service && loadingStatuses.connectingToFirebase && (
+            {!service && connectingToFirebase && (
               <p align="center">Подключаемся к базе данных...</p>
             )}
-            {!service &&
-              !loadingStatuses.connectingToFirebase &&
-              loadingStatuses.loadingServices && (
-                <p align="center">Загружаем услугу...</p>
-              )}
-            {!service &&
-              !loadingStatuses.connectingToFirebase &&
-              !loadingStatuses.loadingServices && (
-                <div>
-                  <p align="center">
-                    Услуга недоступна{' '}
-                    <span role="img" aria-label="sad">
-                      🙁
-                    </span>
-                  </p>
-                  <p align="center">Попробуйте перезагрузить страницу</p>
-                </div>
-              )}
+            {!service && !connectingToFirebase && loadingServices && (
+              <p align="center">Загружаем услугу...</p>
+            )}
+            {!service && !connectingToFirebase && !loadingServices && (
+              <div>
+                <p align="center">
+                  Услуга недоступна{' '}
+                  <span role="img" aria-label="sad">
+                    🙁
+                  </span>
+                </p>
+                <p align="center">Попробуйте перезагрузить страницу</p>
+              </div>
+            )}
             {service && (
               <div>
                 <h2>

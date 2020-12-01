@@ -18,6 +18,9 @@ const EventsView = () => {
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
+  const { user, connectingToFirebase } = authContext;
+  const { events, loadingEvents } = dataContext;
+  const isAuth = user && !user.isAnonymous;
 
   /**
    * @param {Event} event
@@ -39,7 +42,7 @@ const EventsView = () => {
   };
 
   const now = new Date();
-  let sortedEvents = [...dataContext.events];
+  let sortedEvents = [...events];
 
   if (filterType === EventsFilterType.Upcoming) {
     sortedEvents = sortedEvents.filter(event => {
@@ -85,14 +88,6 @@ const EventsView = () => {
     };
   });
 
-  let userAuthorized = false;
-  if (authContext.user) {
-    const { isAnonymous } = authContext.user;
-    if (isAnonymous === false) {
-      userAuthorized = true;
-    }
-  }
-
   const warnMessage = (
     <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
   );
@@ -108,7 +103,7 @@ const EventsView = () => {
         />
       </div>
       <>
-        {userAuthorized ? (
+        {isAuth ? (
           <div>
             <ButtonLink
               to="/newevent"
@@ -130,13 +125,25 @@ const EventsView = () => {
           past={EventsFilterType.Past}
         />
       </div>
-      <div className="pt-3">
-        {eventsList.length
-          ? eventsList.map(eventItem =>
-              displayEvent(eventItem.event, eventItem.source),
-            )
-          : null}
-      </div>
+      {connectingToFirebase ? (
+        <p align="center">Подключаемся к базе данных...</p>
+      ) : (
+        <>
+          {loadingEvents ? (
+            <p align="center">Загружаем события...</p>
+          ) : (
+            <>
+              {!!eventsList.length && (
+                <div className="pt-3">
+                  {eventsList.map(eventItem =>
+                    displayEvent(eventItem.event, eventItem.source),
+                  )}
+                </div>
+              )}
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 };

@@ -16,6 +16,7 @@ const firebaseConfig = {
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
+  const [connectingToFirebase, setConnectingToFirebase] = useState(true);
 
   useEffect(() => {
     try {
@@ -28,12 +29,13 @@ const useAuth = () => {
           await firebase.auth().signInAnonymously();
         }
       });
+      setConnectingToFirebase(false);
     } catch (error) {
       console.error('Auth Error', error);
     }
   }, []);
 
-  return { user };
+  return { user, connectingToFirebase };
 };
 
 export default useAuth;
