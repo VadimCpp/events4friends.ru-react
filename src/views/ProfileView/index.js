@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import Button from '../../components/Button';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
+import MessengerLink from '../../components/MessengerLink';
 
 const ProfileView = () => {
   const authContext = useContext(AuthContext);
@@ -79,35 +80,23 @@ const ProfileView = () => {
             Пожалуйста, заполните свой профиль. Если Вам не понятно, как это
             сделать, задайте вопрос в чат.
           </p>
-          <ButtonExternalLink
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
             href="tg://resolve?domain=events4friends"
             icon="/icons/telegram.svg"
-            alt="telegram"
-            style={{
-              borderColor: '#139BD0',
-              margin: 8,
-              borderRadius: 38,
-            }}
+            messengerName="telegram"
           />
-          <ButtonExternalLink
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
             href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
             icon="/icons/whatsapp.svg"
-            alt="whatsapp"
-            style={{
-              borderColor: '#57BB63',
-              margin: 8,
-              borderRadius: 38,
-            }}
+            messengerName="whatsapp"
           />
-          <ButtonExternalLink
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
             href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
             icon="/icons/viber.svg"
-            alt="viber"
-            style={{
-              borderColor: '#7C519B',
-              margin: 8,
-              borderRadius: 38,
-            }}
+            messengerName="viber"
           />
         </div>
       </div>
