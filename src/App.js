@@ -21,6 +21,8 @@ import './App.css';
 import useAuth from './hooks/useAuth';
 import useData from './hooks/useData';
 
+import 'moment/locale/ru';
+
 //
 // NOTE!
 // Add here all new icons used in the app.

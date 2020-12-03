@@ -9,7 +9,6 @@ import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
-import 'moment/locale/ru';
 import './EventView.css';
 
 const EventView = ({ match, history }) => {
