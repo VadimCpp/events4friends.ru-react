@@ -12,6 +12,7 @@ import {
   editService,
   deleteService,
 } from './provider/firebase';
+import 'moment/locale/ru';
 
 import AppRouter from './AppRouter';
 import { AuthContext } from './context/AuthContext';
@@ -20,8 +21,6 @@ import './App.css';
 
 import useAuth from './hooks/useAuth';
 import useData from './hooks/useData';
-
-import 'moment/locale/ru';
 
 //
 // NOTE!
