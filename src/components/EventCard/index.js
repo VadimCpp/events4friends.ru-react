@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './EventCard.css';
 
-moment.locale('ru');
-
 const EventCard = ({ event, name }) => {
   const authContext = useContext(AuthContext);
   const { start, contact, timezone, id, summary, isOnline, location } = event;
