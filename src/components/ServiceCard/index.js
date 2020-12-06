@@ -1,10 +1,7 @@
 import React from 'react';
-import moment from 'moment';
 import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link } from 'react-router-dom';
 import './ServiceCard.css';
-
-moment.locale('ru');
 
 const ServiceCard = ({ service, highlightName }) => {
   const { isFree, price, name, service: typeOfService, id } = service;

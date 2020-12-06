@@ -1,0 +1,13 @@
+.social__link {
+  margin: 4px;
+  width: 250px;
+  border-radius: 48px;
+  word-break: break-word;
+}
+
+.social__link--vkontakte {
+  border-color: #4b729f;
+}
+.social__link--instagram {
+  border-color: #fd5949;
+}

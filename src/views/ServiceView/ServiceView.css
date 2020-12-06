@@ -1,4 +1,4 @@
-.event-item {
+.service-item {
   text-align: left;
   color: #444;
   margin-bottom: 20px;
@@ -6,11 +6,30 @@
   position: relative;
 }
 
-.reset-link-style {
-  color: #444;
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 10px;
 }
 
-.reset-link-style:hover {
-  color: #444;
-  text-decoration: none;
+.service-view.button-link {
+  margin-bottom: 10px;
+  border-color: rgba(77, 77, 77, 0.2);
+  border-radius: 48px;
+  min-width: 155px;
+}
+
+.service-view.button-link:first-child {
+  margin-right: 8px;
+}
+
+.arrow-back-btn {
+  width: 155px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  border-color: rgba(77, 77, 77, .2);
+  border-radius: 48px;
 }

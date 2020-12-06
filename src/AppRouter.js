@@ -8,7 +8,9 @@ import LoginView from './views/LoginView';
 import ServicesView from './views/ServicesView';
 import ServiceView from './views/ServiceView';
 import NewEventView from './views/NewEventView';
+import NewServiceView from './views/NewServiceView';
 import EditEventView from './views/EditEventView';
+import EditServiceView from './views/EditServiceView';
 import CommunitiesView from './views/CommunitiesView';
 import ProfileView from './views/ProfileView';
 import Header from './components/Header';
@@ -23,6 +25,7 @@ const AppRouter = () => {
           <Route path="/signin/" exact component={LoginView} />
           <Route path="/services/" exact component={ServicesView} />
           <Route path="/newevent/" exact component={NewEventView} />
+          <Route path="/newservice/" exact component={NewServiceView} />
           <Route path="/communities/" exact component={CommunitiesView} />
           <Route path="/profile/" exact component={ProfileView} />
           <Route path="/events/" render={props => <EventsView {...props} />} />
@@ -43,6 +46,7 @@ const AppRouter = () => {
             path="/editevent/:id"
             render={props => <EditEventView {...props} />}
           />
+          <Route path="/editservice/:id" exact component={EditServiceView} />
         </div>
       </ScrollToTop>
     </Router>

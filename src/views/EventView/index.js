@@ -9,7 +9,6 @@ import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
-import 'moment/locale/ru';
 import './EventView.css';
 
 const EventView = ({ match, history }) => {
@@ -19,8 +18,8 @@ const EventView = ({ match, history }) => {
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
 
-  const { events, deleteEvent } = dataContext;
-  const { user, loadingStatuses } = authContext;
+  const { user, connectingToFirebase } = authContext;
+  const { events, loadingEvents, deleteEvent } = dataContext;
 
   let event = null;
   let name = null;
@@ -94,27 +93,22 @@ const EventView = ({ match, history }) => {
         <div className="border-top">
           <div className="container">
             <div className="event-item container-center">
-              {!event && loadingStatuses.connectingToFirebase && (
+              {!event && connectingToFirebase && (
                 <p align="center">Подключаемся к базе данных...</p>
               )}
-              {!event &&
-                !loadingStatuses.connectingToFirebase &&
-                loadingStatuses.loadingEvents && (
-                  <p align="center">Загружаем событие...</p>
-                )}
-              {!event &&
-                !loadingStatuses.connectingToFirebase &&
-                !loadingStatuses.loadingEvents && (
-                  <div>
-                    <p align="center">
-                      Мероприятие недоступно{' '}
-                      <span role="img" aria-label="sad" />
-                    </p>
-                    <p align="center">
-                      Возможно, оно было удалено или Вы открыли «битую» ссылку.
-                    </p>
-                  </div>
-                )}
+              {!event && !connectingToFirebase && loadingEvents && (
+                <p align="center">Загружаем событие...</p>
+              )}
+              {!event && !connectingToFirebase && !loadingEvents && (
+                <div>
+                  <p align="center">
+                    Мероприятие недоступно <span role="img" aria-label="sad" />
+                  </p>
+                  <p align="center">
+                    Возможно, оно было удалено или Вы открыли «битую» ссылку.
+                  </p>
+                </div>
+              )}
               {event && (
                 <div>
                   <div>

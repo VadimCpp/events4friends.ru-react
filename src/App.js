@@ -1,7 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
+import 'moment/locale/ru';
+
 import {
   signIn,
   signOut,
@@ -9,14 +10,17 @@ import {
   createEvent,
   deleteEvent,
   editEvent,
-  fireBaseInitAndAuth,
+  createService,
+  editService,
+  deleteService,
 } from './provider/firebase';
-import { initClipboard, dropClipboard } from './provider/clipboard';
-
 import AppRouter from './AppRouter';
 import { AuthContext } from './context/AuthContext';
 import { DataContext } from './context/DataContext';
 import './App.css';
+
+import useAuth from './hooks/useAuth';
+import useData from './hooks/useData';
 
 //
 // NOTE!
@@ -24,86 +28,54 @@ import './App.css';
 //
 library.add(faShare);
 
-const initState = {
-  user: null,
-  services: [],
-  config: {
-    description: null,
-    name: null,
-    version: null,
-  },
-  connectingToFirebase: true,
-};
-
-const initEventsState = {
-  loadingEvents: true,
-  events: [],
-};
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyBjAQdqx3qkki7MVb6dd1eASw-0UGs2Bg0',
-  authDomain: 'events4friends.firebaseapp.com',
-  databaseURL: 'https://events4friends.firebaseio.com',
-  projectId: 'events4friends',
-  storageBucket: 'events4friends.appspot.com',
-  messagingSenderId: '610960096409',
-  appId: '1:610960096409:web:337ff9ec4ca355a6c28c08',
-  measurementId: 'G-4T13RKFFSG',
-};
-
 const App = () => {
-  const [state, setState] = useState(initState);
-  const [eventsState, setEventsState] = useState(initEventsState);
+  const { user, connectingToFirebase } = useAuth();
+  const {
+    events,
+    services,
+    config,
+    loadingEvents,
+    loadingServices,
+  } = useData();
 
-  const unsubscribeFromEventsChanges = () => {};
-
+  //
+  // NOTE!
+  // Этот стейт создан только для одного случая, когда пользователь меняет свое ФИО
+  //
+  // TODO: подумать, как можно спрятать эту логику
+  //
+  const [currentUser, setCurrentUser] = useState(null);
   useEffect(() => {
-    const initAndAuth = async () => {
-      await fireBaseInitAndAuth(
-        firebaseConfig,
-        initState,
-        setState,
-        setEventsState,
-      );
-    };
-
-    initClipboard();
-    initAndAuth();
-
-    return () => {
-      unsubscribeFromEventsChanges();
-      dropClipboard();
-    };
-  }, []);
-
+    setCurrentUser(user);
+  }, [user]);
   const updateProfileHandler = async displayName => {
     const updatedUser = await updateProfile(displayName);
-    setState({ ...state, user: updatedUser });
+    setCurrentUser(updatedUser);
   };
-
-  const { user, connectingToFirebase, loadingEvents, services, config } = state;
 
   return (
     <AuthContext.Provider
       value={{
-        user,
+        user: currentUser,
         signIn,
         signOut,
         updateProfile: updateProfileHandler,
-        loadingStatuses: {
-          connectingToFirebase,
-          loadingEvents,
-        },
+        connectingToFirebase,
       }}
     >
       <DataContext.Provider
         value={{
-          events: eventsState.events,
+          events,
+          services,
           createEvent,
           deleteEvent,
           editEvent,
-          services,
+          createService,
+          editService,
+          deleteService,
           config,
+          loadingEvents,
+          loadingServices,
         }}
       >
         <div className="App">

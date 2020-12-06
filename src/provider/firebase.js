@@ -3,80 +3,6 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import { updateTelegramPinnedMessage } from './telegram';
 
-export const getConfig = async () => {
-  //
-  // NOTE!
-  // Load config from firebase
-  //
-  try {
-    const db = firebase.firestore();
-    const doc = await db
-      .collection('config')
-      .doc('general')
-      .get();
-
-    if (doc.exists) {
-      console.info('Get config successfully from Firebase');
-      return doc.data();
-    }
-    console.warn('Error getting config, skip: ', doc);
-    return null;
-  } catch (error) {
-    console.warn('Error getting config, skip: ', error);
-  }
-};
-
-export const getServices = async () => {
-  //
-  // NOTE!
-  // Load services from firebase
-  //
-  try {
-    const db = firebase.firestore();
-    const querySnapshot = await db.collection('services').get();
-    const services = querySnapshot.docs.map(item => ({
-      ...item.data(),
-      id: item.id,
-    }));
-    return services;
-  } catch (error) {
-    console.warn('Error getting services, skip: ', error);
-  }
-};
-
-export const subscribeForEventsChanges = setEventsState => {
-  //
-  // NOTE!
-  // Get realtime updates with Cloud Firestore
-  // https://firebase.google.com/docs/firestore/query-data/listen
-  //
-
-  try {
-    const db = firebase.firestore();
-    console.info('Subscribe for events changes');
-    return db.collection('events').onSnapshot(async snapshot => {
-      if (snapshot && snapshot.docs && snapshot.docs.length) {
-        const events = snapshot.docs.reduce((result, item) => {
-          return [
-            ...result,
-            {
-              ...item.data(),
-              id: item.id,
-            },
-          ];
-        }, []);
-        setEventsState({
-          events,
-          loadingEvents: false,
-        });
-        console.info('Get shapshot: events updated successfully');
-      }
-    });
-  } catch (error) {
-    console.warn('Subscribe for events error', error);
-  }
-};
-
 export const deleteEvent = (eventId, callback) => {
   console.info('Delete event, eventId:', eventId);
 
@@ -176,52 +102,64 @@ export const updateProfile = async displayName => {
   }
 };
 
-export const authAndSubscribe = async (initState, setState, setEventsState) => {
-  try {
-    firebase.auth().onAuthStateChanged(async user => {
-      if (user) {
-        //
-        // NOTE!
-        // User is signed in.
-        //
-        if (user.isAnonymous) {
-          console.info('onAuthStateChanged: user is logged in anonymously');
-        } else {
-          console.info('onAuthStateChanged: user is logged in successfully');
-        }
+export const createService = (data, callback) => {
+  console.info('Creating service');
 
-        const config = await getConfig();
-        const services = await getServices();
-        subscribeForEventsChanges(setEventsState);
-
-        return setState({
-          user,
-          config,
-          services,
-          connectingToFirebase: false,
-        });
+  const db = firebase.firestore();
+  db.collection('services')
+    .add(data)
+    // eslint-disable-next-line no-shadow
+    .then(data => {
+      if (data && data.id && callback) {
+        callback(data.id);
+      } else {
+        console.warn('Something went wrong, contact support');
+        alert(
+          'Что-то пошло не так при создании услуги. Пожалуйста, обратитесь в службу поддержки.',
+        );
       }
-      console.info(
-        'onAuthStateChanged: user is not loggen in, login anonymously',
+    })
+    .catch(error => {
+      console.warn('Error creating service', error);
+      alert(
+        'Не удалось создать услугу. Пожалуйста, обратитесь в службу поддержки.',
       );
-      //
-      // NOTE!
-      // Log in anonymously
-      //
-      await firebase.auth().signInAnonymously();
-      return setState(initState);
+      callback(null);
     });
-  } catch (error) {
-    console.error('Auth Error', error);
-  }
 };
 
-export const fireBaseInitAndAuth = async (
-  config,
-  initState,
-  setState,
-  setEventsState,
-) => {
-  firebase.initializeApp(config);
-  await authAndSubscribe(initState, setState, setEventsState);
+export const deleteService = (serviceId, callback) => {
+  console.info('Delete service, serviceId:', serviceId);
+
+  const db = firebase.firestore();
+  db.collection('services')
+    .doc(serviceId)
+    .delete()
+    .then(() => {
+      callback(true);
+    })
+    .catch(error => {
+      callback(false);
+      console.warn('Error removing document:', error);
+      alert(
+        'Не удалось удалить услугу. Пожалуйста, обратитесь в службу поддержки.',
+      );
+    });
+};
+
+export const editService = (data, docId, callback) => {
+  console.info('Updating service');
+
+  const db = firebase.firestore();
+  db.collection('services')
+    .doc(docId)
+    .update(data)
+    .then(() => {
+      console.info('Document successfully updated!');
+      callback(docId);
+    })
+    .catch(error => {
+      console.warn('Error updating service', error);
+      callback(null);
+    });
 };
