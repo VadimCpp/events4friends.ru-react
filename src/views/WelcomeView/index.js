@@ -3,6 +3,9 @@ import { withRouter } from 'react-router-dom';
 import ReactStoreBadges from 'react-store-badges';
 import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
+import MessengerLink from '../../components/MessengerLink';
+import SocialNetworkLink from '../../components/SocialNetworkLink';
+import FeatureLink from '../../components/FeatureLink';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 import './WelcomeView.css';
@@ -20,6 +23,39 @@ const WelcomeView = ({ history }) => {
       userAuthorized = true;
     }
   }
+
+  const messengers = [
+    {
+      messengerName: 'telegram',
+      href: 'tg://resolve?domain=events4friends',
+      icon: '/icons/telegram.svg',
+    },
+    {
+      messengerName: 'whatsapp',
+      href: 'https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8',
+      icon: '/icons/whatsapp.svg',
+    },
+    {
+      messengerName: 'viber',
+      href: 'https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B',
+      icon: '/icons/viber.svg',
+    },
+  ];
+
+  const socialLinks = [
+    {
+      name: 'vkontakte',
+      href: 'https://vk.com/kldevents4friends',
+      icon: '/icons/vk.svg',
+      title: 'Открыть ВКонтакте',
+    },
+    {
+      name: 'instagram',
+      href: 'https://www.instagram.com/kldevents4friends/',
+      icon: '/icons/instagram.svg',
+      title: 'Открыть Instagram',
+    }
+  ];
 
   return (
     <div className="welcomeview">
@@ -62,58 +98,37 @@ const WelcomeView = ({ history }) => {
         </div>
       </div>
 
-      <div className="welcomeview__block">
+      <div className="welcomeview__block welcome__features">
         <div className="container container-center">
           <p>Мероприятия тут:</p>
 
-          <ButtonLink
+          <FeatureLink
+            LinkComponent={ButtonLink}
             to="/events"
             icon="/icons/icon_list.svg"
             title="Все мероприятия"
-            style={{
-              width: 250,
-              display: 'block',
-              marginRight: 'auto',
-              marginLeft: 'auto',
-              marginBottom: 10,
-              borderRadius: '48px',
-            }}
           />
         </div>
 
         <div className="container container-center mt-4">
           <p>Услуги:</p>
 
-          <ButtonLink
+          <FeatureLink
+            LinkComponent={ButtonLink}
             to="/services"
             icon="/icons/icon_service.svg"
             title="Все услуги"
-            style={{
-              width: 250,
-              display: 'block',
-              marginRight: 'auto',
-              marginLeft: 'auto',
-              marginBottom: 10,
-              borderRadius: '48px',
-            }}
           />
         </div>
 
         <div className="container container-center mt-4">
           <p>Сообщества (формируются):</p>
 
-          <ButtonLink
+          <FeatureLink
+            LinkComponent={ButtonLink}
             to="/communities"
             icon="/icons/icon_community.svg"
             title="Все сообщества"
-            style={{
-              width: 250,
-              display: 'block',
-              marginRight: 'auto',
-              marginLeft: 'auto',
-              marginBottom: 10,
-              borderRadius: '48px',
-            }}
           />
         </div>
       </div>
@@ -121,76 +136,32 @@ const WelcomeView = ({ history }) => {
       <div className="welcomeview__block">
         <div className="container container-center">
           <p>Выберите мессенджер для общения:</p>
-          <ButtonExternalLink
-            href="tg://resolve?domain=events4friends"
-            icon="/icons/telegram.svg"
-            alt="telegram"
-            style={{
-              fill: 'red',
-              margin: 8,
-              borderRadius: '48px',
-              borderColor: '#039be5',
-            }}
-          />
-          <ButtonExternalLink
-            href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
-            icon="/icons/whatsapp.svg"
-            alt="whatsapp"
-            style={{
-              margin: 8,
-              borderRadius: '48px',
-              borderColor: '#4caf50',
-            }}
-          />
-          <ButtonExternalLink
-            href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-            icon="/icons/viber.svg"
-            alt="viber"
-            style={{
-              margin: 8,
-              borderRadius: '48px',
-              borderColor: '#9838b2',
-            }}
-          />
+          <ul className="welcomeview__messengers-list">
+            {messengers.map(messenger => (
+              <li className="welcomeview__messengers-item">
+                <MessengerLink
+                  ExternalLinkComponent={ButtonExternalLink}
+                  {...messenger}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
       <div className="welcomeview__block">
         <div className="container container-center">
-          <p>Действует группа ВКонтакте:</p>
-          <ButtonExternalLink
-            href="https://vk.com/kldevents4friends"
-            icon="/icons/vk.svg"
-            alt="vk"
-            style={{
-              margin: 8,
-              width: 250,
-              display: 'block',
-              marginRight: 'auto',
-              marginLeft: 'auto',
-              borderRadius: '48px',
-              borderColor: '#4b729f',
-            }}
-            title="Открыть ВКонтакте"
-          />
-          <p style={{ marginTop: '1rem'}}>
-            Следите за нами в Instagram:
-          </p>
-          <ButtonExternalLink
-            href="https://www.instagram.com/kldevents4friends/"
-            icon="/icons/instagram.svg"
-            alt="instagram"
-            style={{
-                margin: 8,
-                width: 250,
-                display: 'block',
-                marginRight: 'auto',
-                marginLeft: 'auto',
-                borderRadius: '48px',
-                borderColor: '#fd5949'
-            }}
-            title="Открыть Instagram"
-          />
+          <p>Мы в социальных сетях:</p>
+          <ul className="welcomeview__social-list">
+            {socialLinks.map(link => (
+              <li className="welcomeview__social-item">
+                <SocialNetworkLink
+                  ExternalLinkComponent={ButtonExternalLink}
+                  {...link}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 

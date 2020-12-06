@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import Button from '../../components/Button';
 import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
+import MessengerLink from '../../components/MessengerLink';
 import { AuthContext } from '../../context/AuthContext';
 import 'firebase/auth';
 
@@ -52,15 +53,7 @@ const LoginView = ({ history }) => {
                 to="/"
                 icon="/icons/icon_arrow_back.svg"
                 title="Вернуться на экран приветствия"
-                style={{
-                  width: 200,
-                  display: 'block',
-                  marginRight: 'auto',
-                  marginLeft: 'auto',
-                  marginBottom: 26,
-                  borderColor: 'rgba(77, 77, 77, .2)',
-                  borderRadius: '48px',
-                }}
+                className="loginview__back"
               />
             </div>
           ) : (
@@ -109,35 +102,23 @@ const LoginView = ({ history }) => {
             Вход в систему дает возможность создавать услуги и мероприятия.
             Логин и пароль можно получить в одном из чатов:
           </p>
-          <ButtonExternalLink
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
             href="tg://resolve?domain=events4friends"
             icon="/icons/telegram.svg"
-            alt="telegram"
-            style={{
-              borderColor: '#139BD0',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+            messengerName="telegram"
           />
-          <ButtonExternalLink
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
             href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
             icon="/icons/whatsapp.svg"
-            alt="whatsapp"
-            style={{
-              borderColor: '#57BB63',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+            messengerName="whatsapp"
           />
-          <ButtonExternalLink
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
             href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
             icon="/icons/viber.svg"
-            alt="viber"
-            style={{
-              borderColor: '#7C519B',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+            messengerName="viber"
           />
         </div>
       </div>

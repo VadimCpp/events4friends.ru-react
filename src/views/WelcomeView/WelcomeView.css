@@ -5,6 +5,28 @@
   padding: 20px 0;
   border-bottom: 1px solid #DDDDDD;
 }
+
+.welcomeview__messengers-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.welcomeview__social-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.welcomeview__social-item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
 .welcomeview__footer {
   font-size: 12px;
   color: #aaa;
