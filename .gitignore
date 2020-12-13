@@ -33,4 +33,4 @@ phpcs.xml
 phpunit.xml
 
 .vscode
-.eslintcache
+# .eslintcache
