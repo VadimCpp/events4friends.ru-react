@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import ReactStoreBadges from 'react-store-badges';
 import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
+import StoreBadge from '../../components/StoreBadge';
 import './CommunitiesView.css';
 
 const CommunitiesView = () => (
@@ -103,20 +103,10 @@ const CommunitiesView = () => (
         <p>Наше мобильное приложение:</p>
         <div className="d-flex justify-content-center">
           <div className="mr-1">
-            <ReactStoreBadges
-              platform="ios"
-              url="https://apps.apple.com/us/app/events4friends-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%BE/id1509893426"
-              locale="en-us"
-              width={120}
-            />
+            <StoreBadge platform="ios" width={120} />
           </div>
           <div className="ml-1">
-            <ReactStoreBadges
-              platform="android"
-              url="https://play.google.com/store/apps/details?id=com.roscomputing.events4friends"
-              locale="en-us"
-              width={120}
-            />
+            <StoreBadge platform="android" width={120} />
           </div>
         </div>
       </div>
