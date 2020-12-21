@@ -21,7 +21,7 @@ const StoreBadge = ({ platform, width }) => {
       <img
         src={stores[platform].badge}
         alt="Store badge"
-        style={{ width: `${width}px` }}
+        style={{ width: `${width}px`, height: 'auto' }}
       />
     </a>
   );
