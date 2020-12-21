@@ -1,0 +1,62 @@
+.button-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  padding: 8px 20px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border-width: 0;
+  color: white;
+  position: relative;
+}
+
+.button-action.disabled {
+  background-color: rgba(170, 170, 170);
+}
+
+.button-action:focus {
+  outline: none;
+}
+
+.button-action.default {
+  background-color: #24ba7b;
+}
+
+.button-action--service {
+  background-color: #24ba7b;
+  color: white;
+}
+
+.button-action--service.active {
+  background-color: #155724;
+}
+
+.button-action--events {
+  background-color: #ec7b28;
+  color: white;
+}
+
+.button-action--events.active {
+  background-color: #853c08;
+}
+
+.button-action__circle {
+  display: none;
+  background-color: white;
+  border-radius: 3px;
+  width: 6px;
+  height: 6px;
+  position: absolute;
+  top: calc(50% - 3px);
+  left: 10px;
+}
+
+.button-action__circle.active {
+  display: block;
+}
+
+.button-action__label {
+  padding-right: 0px;
+}
