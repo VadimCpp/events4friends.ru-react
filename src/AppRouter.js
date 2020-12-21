@@ -19,7 +19,7 @@ const AppRouter = () => {
   return (
     <Router>
       <ScrollToTop>
-        <Header />
+        <Header logoType="newYear" />
         <div>
           <Route path="/" exact component={WelcomeView} />
           <Route path="/signin/" exact component={LoginView} />
