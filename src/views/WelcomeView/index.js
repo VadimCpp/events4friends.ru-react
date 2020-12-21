@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import ReactStoreBadges from 'react-store-badges';
 import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import MessengerLink from '../../components/MessengerLink';
 import SocialNetworkLink from '../../components/SocialNetworkLink';
 import FeatureLink from '../../components/FeatureLink';
+import StoreBadge from '../../components/StoreBadge';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 import './WelcomeView.css';
@@ -37,7 +37,8 @@ const WelcomeView = ({ history }) => {
     },
     {
       messengerName: 'viber',
-      href: 'https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B',
+      href:
+        'https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B',
       icon: '/icons/viber.svg',
     },
   ];
@@ -54,7 +55,7 @@ const WelcomeView = ({ history }) => {
       href: 'https://www.instagram.com/kldevents4friends/',
       icon: '/icons/instagram.svg',
       title: 'Открыть Instagram',
-    }
+    },
   ];
 
   return (
@@ -170,20 +171,10 @@ const WelcomeView = ({ history }) => {
           <p>Наше мобильное приложение:</p>
           <div className="d-flex justify-content-center">
             <div className="mr-1">
-              <ReactStoreBadges
-                platform="ios"
-                url="https://apps.apple.com/us/app/events4friends-%D1%81%D0%BE%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%BE/id1509893426"
-                locale="en-us"
-                width={120}
-              />
+              <StoreBadge platform="ios" width={120} />
             </div>
             <div className="ml-1">
-              <ReactStoreBadges
-                platform="android"
-                url="https://play.google.com/store/apps/details?id=com.roscomputing.events4friends"
-                locale="en-us"
-                width={120}
-              />
+              <StoreBadge platform="android" width={120} />
             </div>
           </div>
         </div>

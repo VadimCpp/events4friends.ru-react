@@ -1,5 +1,8 @@
 import React from 'react';
+import { ButtonAction } from '../ButtonAction';
 import './EventsFilter.css';
+
+const BUTTON_TYPE = 'events';
 
 function EventsFilter(props) {
   const { onFilterTypeChange, filterType, upcoming, past } = props;
@@ -7,13 +10,8 @@ function EventsFilter(props) {
   return (
     <div className="events-filter">
       <span className="events-filter__label">Фильтр:</span>
-      <button
-        type="button"
-        className={
-          filterType === upcoming
-            ? 'events-filter__button events-filter__button--disabled'
-            : 'events-filter__button'
-        }
+
+      <ButtonAction
         onClick={() => {
           if (filterType !== upcoming) {
             if (onFilterTypeChange) {
@@ -21,16 +19,13 @@ function EventsFilter(props) {
             }
           }
         }}
+        active={filterType === upcoming}
+        type={BUTTON_TYPE}
       >
         Предстоящие
-      </button>
-      <button
-        type="button"
-        className={
-          filterType === past
-            ? 'events-filter__button events-filter__button--disabled'
-            : 'events-filter__button'
-        }
+      </ButtonAction>
+
+      <ButtonAction
         onClick={() => {
           if (filterType !== past) {
             if (onFilterTypeChange) {
@@ -38,9 +33,11 @@ function EventsFilter(props) {
             }
           }
         }}
+        active={filterType === past}
+        type={BUTTON_TYPE}
       >
         Прошедшие
-      </button>
+      </ButtonAction>
     </div>
   );
 }
