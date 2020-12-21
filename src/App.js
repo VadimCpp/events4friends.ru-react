@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faShare } from '@fortawesome/free-solid-svg-icons';
 import 'moment/locale/ru';
 
 import {
@@ -21,12 +19,6 @@ import './App.css';
 
 import useAuth from './hooks/useAuth';
 import useData from './hooks/useData';
-
-//
-// NOTE!
-// Add here all new icons used in the app.
-//
-library.add(faShare);
 
 const App = () => {
   const { user, connectingToFirebase } = useAuth();
