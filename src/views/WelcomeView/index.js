@@ -41,10 +41,6 @@ const WelcomeView = ({ history }) => {
       icon: '/icons/viber.svg',
 		},
 		{
-      messengerName: 'skype',
-      href: 'https://www.skype.com/',
-      icon: 'https://www.flaticon.com/svg/static/icons/svg/2111/2111609.svg',
-    },
   ];
 
   const socialLinks = [
