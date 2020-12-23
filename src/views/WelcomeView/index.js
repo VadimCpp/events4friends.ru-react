@@ -39,8 +39,12 @@ const WelcomeView = ({ history }) => {
       messengerName: 'viber',
       href: 'https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B',
       icon: '/icons/viber.svg',
+<<<<<<< HEAD
 		},
 		{
+=======
+    },
+>>>>>>> 42fa7fae6f6713c6527c2d367c8dbab711c6da36
   ];
 
   const socialLinks = [
