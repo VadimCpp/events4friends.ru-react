@@ -98,6 +98,12 @@ const ProfileView = () => {
             icon="/icons/viber.svg"
             messengerName="viber"
           />
+					<MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
+            href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
+            icon="https://www.flaticon.com/svg/static/icons/svg/2111/2111609.svg"
+            messengerName="skype"
+          />
         </div>
       </div>
     </div>

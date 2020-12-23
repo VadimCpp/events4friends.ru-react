@@ -39,11 +39,6 @@ const WelcomeView = ({ history }) => {
       messengerName: 'viber',
       href: 'https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B',
       icon: '/icons/viber.svg',
-		},
-		{
-      messengerName: 'skype',
-      href: 'https://www.skype.com/',
-      icon: 'https://www.flaticon.com/svg/static/icons/svg/2111/2111609.svg',
     },
   ];
 
