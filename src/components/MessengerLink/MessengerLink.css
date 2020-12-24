@@ -14,3 +14,15 @@
 .messengers__link--viber {
   border-color: #9838b2;
 }
+
+.messengers__link--skype {
+	border-color: #ff0000;
+	background: #808080;
+	transition: box-shadow .2s;
+}
+
+.messengers__link--skype:hover {
+	-webkit-box-shadow: 0px 0px 10px 0px #000000;
+  -moz-box-shadow:    0px 0px 10px 0px #000000;
+  box-shadow:         0px 0px 10px 0px #000000;
+}
