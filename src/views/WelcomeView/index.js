@@ -191,7 +191,7 @@ const WelcomeView = ({ history }) => {
 
       <div className="container container-center">
         <p className="welcomeview__footer">
-          Здесь действуют правила поведения в общественных местах. При поддержке{' '}
+          Здесь действуют правила поведения в общественных местах. Разработано в{' '}
           <a href="https://roscomputing.com/">Роскомпьютинг</a>.
           <span> version - {dataContext.config.version}.</span>
         </p>
