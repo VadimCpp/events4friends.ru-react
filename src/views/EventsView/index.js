@@ -102,6 +102,12 @@ const EventsView = () => {
           classList={['button-link', 'events-view']}
         />
       </div>
+      <ButtonLink
+        to="/events/map/"
+        icon="/icons/icon_event_map_view.svg"
+        title="Карта мероприятий"
+        classList={['button-link']}
+      />
       <>
         {isAuth ? (
           <div>
