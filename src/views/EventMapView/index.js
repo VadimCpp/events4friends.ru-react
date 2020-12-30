@@ -4,6 +4,7 @@ import { DataContext } from '../../context/DataContext';
 import ButtonLink from '../../components/ButtonLink';
 import './EventMapView.css';
 import PlacemarkArray from './PlacemarkArray';
+import getFullLocationStrByEvent from './getFullLocationStrByEvent';
 
 const EventMapView = () => {
   const [coordinates, setCoordinates] = useState(null);
@@ -13,17 +14,9 @@ const EventMapView = () => {
   const mapOnLoadHandler = async ymaps => {
     const newCoordinates = await Promise.all(
       events.map(el => {
-        let fullLocation = '';
+        const geocodingStr = getFullLocationStrByEvent(el);
 
-        if (el.timezone === '+0200') {
-          fullLocation = `Калининград ${el.location}`;
-        } else if (el.timezone === '+0300') {
-          fullLocation = `Москва ${el.location}`;
-        } else {
-          fullLocation = el.location;
-        }
-
-        return ymaps.geocode(fullLocation).then(result => {
+        return ymaps.geocode(geocodingStr).then(result => {
           if (result.geoObjects.get(0)) {
             const {
               _coordinates: coordinatesOfOnePlacemark,
