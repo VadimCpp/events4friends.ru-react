@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Placemark } from 'react-yandex-maps';
+import { Clusterer } from 'react-yandex-maps';
 import { DataContext } from '../../context/DataContext';
+import createPlacemarkArrayObject from './createPlacemarkArrayObject';
 
 const PlacemarkArray = ({ coordinates }) => {
   const history = useHistory();
@@ -12,30 +13,23 @@ const PlacemarkArray = ({ coordinates }) => {
     return null;
   }
 
-  const placemarks = events.map((el, i) => {
-    let geometry = null;
+  const placemarkArrayObject = createPlacemarkArrayObject(
+    events,
+    coordinates,
+    history,
+  );
 
-    if (coordinates[i] !== null) {
-      geometry = coordinates[i];
-    }
-
-    return (
-      <Placemark
-        key={el.id}
-        geometry={geometry}
-        onClick={() => {
-          history.push(`/event/${el.id}`);
-        }}
-        defaultProperties={{
-          iconCaption: el.name,
-          hintContent: el.location,
-        }}
-        modules={['geoObject.addon.hint']}
-      />
-    );
-  });
-
-  return placemarks;
+  return (
+    <>
+      {placemarkArrayObject.clusterOfKaliningrad.length >= 1 && (
+        <Clusterer>{placemarkArrayObject.clusterOfKaliningrad}</Clusterer>
+      )}
+      {placemarkArrayObject.clusterOfMoscow.length >= 1 && (
+        <Clusterer>{placemarkArrayObject.clusterOfMoscow}</Clusterer>
+      )}
+      {placemarkArrayObject.otherPlacemarks}
+    </>
+  );
 };
 
 export default PlacemarkArray;
