@@ -8,10 +8,14 @@ const PlacemarkArray = ({ coordinates }) => {
   const dataContext = useContext(DataContext);
   const { events } = dataContext;
 
-  return events.map((el, i) => {
+  if (coordinates === null) {
+    return null;
+  }
+
+  const placemarks = events.map((el, i) => {
     let geometry = null;
 
-    if (coordinates !== null && coordinates[i] !== null) {
+    if (coordinates[i] !== null) {
       geometry = coordinates[i];
     }
 
@@ -30,6 +34,8 @@ const PlacemarkArray = ({ coordinates }) => {
       />
     );
   });
+
+  return placemarks;
 };
 
 export default PlacemarkArray;
