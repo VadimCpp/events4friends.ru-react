@@ -4,7 +4,7 @@ import { DataContext } from '../../context/DataContext';
 import ButtonLink from '../../components/ButtonLink';
 import './EventMapView.css';
 import PlacemarkArray from './PlacemarkArray';
-import getFullLocationStrByEvent from './getFullLocationStrByEvent';
+import getGeocodeQueryByEvent from './getGeocodeQueryByEvent';
 
 const EventMapView = () => {
   const [coordinates, setCoordinates] = useState(null);
@@ -14,15 +14,16 @@ const EventMapView = () => {
   const mapOnLoadHandler = async ymaps => {
     const newCoordinates = await Promise.all(
       events.map(el => {
-        const geocodingStr = getFullLocationStrByEvent(el);
+        const geocodingStr = getGeocodeQueryByEvent(el);
+
+        if (geocodingStr === '') {
+          return Promise.resolve(null);
+        }
 
         return ymaps.geocode(geocodingStr).then(result => {
           if (result.geoObjects.get(0)) {
-            const {
-              _coordinates: coordinatesOfOnePlacemark,
-            } = result.geoObjects.get(0).geometry;
-
-            return coordinatesOfOnePlacemark;
+            /* eslint-disable-next-line */
+            return result.geoObjects.get(0).geometry._coordinates;
           }
           return null;
         });
