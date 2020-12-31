@@ -1,5 +1,7 @@
 import React from 'react';
+import { renderToString } from 'react-dom/server';
 import { Placemark } from 'react-yandex-maps';
+import moment from 'moment';
 
 const createEventPlacemark = (event, geometry, history) => {
   return (
@@ -12,6 +14,13 @@ const createEventPlacemark = (event, geometry, history) => {
       defaultProperties={{
         iconCaption: event.name,
         hintContent: event.location,
+        balloonContentBody: renderToString(
+          <>
+            <p>{moment(event.start).format('D MMMM YYYY, dddd')}</p>
+            <a href={`/event/${event.id}`}>Перейти к событию</a>
+          </>,
+        ),
+        clusterCaption: `${event.name ? event.name : ''} ${event.location}`,
       }}
       modules={['geoObject.addon.hint']}
     />

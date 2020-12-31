@@ -9,3 +9,9 @@
   justify-content: center;
   margin: 10px;
 }
+
+.EventMapView__button {
+  outline: none;
+  border: 3px solid #0400ff;
+  background: #0400aa;
+}

@@ -22,10 +22,20 @@ const PlacemarkArray = ({ coordinates }) => {
   return (
     <>
       {placemarkArrayObject.clusterOfKaliningrad.length >= 1 && (
-        <Clusterer>{placemarkArrayObject.clusterOfKaliningrad}</Clusterer>
+        <Clusterer
+          options={{ showInAlphabeticalOrder: true }}
+          modules={['clusterer.addon.balloon']}
+        >
+          {placemarkArrayObject.clusterOfKaliningrad}
+        </Clusterer>
       )}
       {placemarkArrayObject.clusterOfMoscow.length >= 1 && (
-        <Clusterer>{placemarkArrayObject.clusterOfMoscow}</Clusterer>
+        <Clusterer
+          options={{ showInAlphabeticalOrder: true }}
+          modules={['clusterer.addon.balloon']}
+        >
+          {placemarkArrayObject.clusterOfMoscow}
+        </Clusterer>
       )}
       {placemarkArrayObject.otherPlacemarks}
     </>
