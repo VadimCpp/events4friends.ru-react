@@ -13,6 +13,7 @@ import EditEventView from './views/EditEventView';
 import EditServiceView from './views/EditServiceView';
 import CommunitiesView from './views/CommunitiesView';
 import ProfileView from './views/ProfileView';
+import EventMapView from './views/EventMapView';
 import Header from './components/Header';
 
 const AppRouter = () => {
@@ -28,7 +29,11 @@ const AppRouter = () => {
           <Route path="/newservice/" exact component={NewServiceView} />
           <Route path="/communities/" exact component={CommunitiesView} />
           <Route path="/profile/" exact component={ProfileView} />
-          <Route path="/events/" render={props => <EventsView {...props} />} />
+          <Route
+            path="/events/"
+            exact
+            render={props => <EventsView {...props} />}
+          />
           {/*
             NOTE!
             В старой версии сайта присутствовала страница с адресом list
@@ -38,6 +43,7 @@ const AppRouter = () => {
           */}
           <Route path="/list/" render={props => <EventsView {...props} />} />
           <Route path="/event/:id" render={props => <EventView {...props} />} />
+          <Route path="/events/map/" exact component={EventMapView} />
           <Route
             path="/service/:id"
             render={props => <ServiceView {...props} />}
