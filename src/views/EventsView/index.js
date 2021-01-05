@@ -102,6 +102,17 @@ const EventsView = () => {
           classList={['button-link', 'events-view']}
         />
       </div>
+
+      {/* 
+        NOTE! Кнопка в этом месте не нужна.
+        TODO: подумать над интерфейсом и разместить кнопку другом месте
+      */}
+      {/* <ButtonLink
+        to="/events/map/"
+        icon="/icons/icon_event_map_view.svg"
+        title="Карта мероприятий"
+        classList={['button-link']}
+      /> */}
       <>
         {isAuth ? (
           <div>

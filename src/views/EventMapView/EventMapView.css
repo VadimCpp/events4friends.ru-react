@@ -1,0 +1,17 @@
+.EventMapView__yandex-map {
+  width: 50%;
+  height: 35vw;
+  box-shadow: 0 0 10px 1px black;
+}
+
+.EventMapView__y-maps-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.EventMapView__button {
+  outline: none;
+  border: 3px solid #0400ff;
+  background: #0400aa;
+}
