@@ -49,24 +49,24 @@ const LoginView = ({ history }) => {
   }
 
   return (
-    <div className="loginview">
-      <div className="loginview__block">
+    <main className="loginview">
+      <h1 className="visually-hidden">Страница входа</h1>
+      <section className="loginview__block">
         <div className="container container-center">
+          <h2 className="visually-hidden">Форма входа</h2>
           {userAuthorized ? (
-            <div>
-              <p>
-                <span>Вход выполнен, {userName}!</span>
-              </p>
+            <>
+              <p>Вход выполнен, {userName}!</p>
               <ButtonLink
                 to="/"
                 icon="/icons/icon_arrow_back.svg"
                 title="Вернуться на экран приветствия"
                 className="loginview__back"
               />
-            </div>
+            </>
           ) : (
             <form className="loginview__form">
-              <div className="textinput">
+              <p className="textinput">
                 <label>
                   <span className="textinput__label">E-mail:</span>
                   <input
@@ -78,8 +78,8 @@ const LoginView = ({ history }) => {
                     onChange={handleLoginChange}
                   />
                 </label>
-              </div>
-              <div className="textinput">
+              </p>
+              <p className="textinput">
                 <label>
                   <span className="textinput__label">Пароль:</span>
                   <input
@@ -91,7 +91,7 @@ const LoginView = ({ history }) => {
                     onChange={handlePasswordChange}
                   />
                 </label>
-              </div>
+              </p>
               <Button
                 icon="/icons/icon_login.svg"
                 onPress={handlerSubmit}
@@ -101,9 +101,10 @@ const LoginView = ({ history }) => {
             </form>
           )}
         </div>
-      </div>
-      <div className="loginview__block">
+      </section>
+      <section className="loginview__block">
         <div className="container container-center">
+          <h2 className="visually-hidden">Где взять данные авторизации</h2>
           <p>
             Вход в систему дает возможность создавать услуги и мероприятия.
             Логин и пароль можно получить в одном из чатов:
@@ -127,8 +128,8 @@ const LoginView = ({ history }) => {
             messengerName="viber"
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
