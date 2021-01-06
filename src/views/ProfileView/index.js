@@ -40,9 +40,11 @@ const ProfileView = () => {
   };
 
   return (
-    <div className="loginview">
-      <div className="loginview__block">
+    <main className="loginview">
+      <h1 className="visually-hidden">Профиль пользователя</h1>
+      <section className="loginview__block">
         <div className="container container-center">
+          <h2 className="visually-hidden">Форма авторизации</h2>
           {userAuthorized ? (
             <div>
               <p>
@@ -74,9 +76,10 @@ const ProfileView = () => {
             </div>
           )}
         </div>
-      </div>
-      <div className="loginview__block">
+      </section>
+      <section className="loginview__block">
         <div className="container container-center">
+          <h2 className="visually-hidden">Как заполнить профиль</h2>
           <p>
             Пожалуйста, заполните свой профиль. Если Вам не понятно, как это
             сделать, задайте вопрос в чат.
@@ -112,8 +115,8 @@ const ProfileView = () => {
             }}
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
