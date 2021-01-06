@@ -17,12 +17,20 @@ const LoginView = ({ history }) => {
   const authContext = useContext(AuthContext);
 
   const handleLoginChange = e => {
-    setLogin(e.target.value);
+    setLogin(e.target.value.trim());
   };
 
   const handlePasswordChange = e => {
-    setPassword(e.target.value);
+    setPassword(e.target.value.trim());
   };
+
+  const handlerSubmit = e => {
+    e.preventDefault();
+    if (!login || !password) {
+      return;
+    }
+    signIn(login, password);
+  }
 
   const { user, signIn } = authContext;
   let userName = null;
@@ -47,7 +55,7 @@ const LoginView = ({ history }) => {
           {userAuthorized ? (
             <div>
               <p>
-                <span>Вход выполнен, {userName}! </span>
+                <span>Вход выполнен, {userName}!</span>
               </p>
               <ButtonLink
                 to="/"
@@ -57,7 +65,7 @@ const LoginView = ({ history }) => {
               />
             </div>
           ) : (
-            <div>
+            <form className="loginview__form">
               <div className="textinput">
                 <label>
                   <span className="textinput__label">E-mail:</span>
@@ -85,14 +93,12 @@ const LoginView = ({ history }) => {
                 </label>
               </div>
               <Button
-                onPress={() => {
-                  signIn(login, password);
-                }}
                 icon="/icons/icon_login.svg"
+                onPress={handlerSubmit}
               >
                 Войти
               </Button>
-            </div>
+            </form>
           )}
         </div>
       </div>
