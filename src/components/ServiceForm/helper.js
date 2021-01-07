@@ -1,20 +1,34 @@
 export const verify = newService => {
   let verified = true;
-  const { service, description, name } = newService;
+  const {
+    service,
+    description,
+    name,
+    isFree,
+    price,
+  } = newService;
+
+  const unverified = (text) => {
+    verified = false;
+    alert(text);
+  };
 
   if (!service) {
-    verified = false;
-    alert('Пожалуйста, введите название услуги');
+    unverified('Пожалуйста, введите название услуги');
   } else if (!description) {
-    verified = false;
-    alert('Пожалуйста, введите полное описание услуги');
+    unverified('Пожалуйста, введите полное описание услуги');
   } else if (!name) {
-    verified = false;
-    alert('Пожалуйста, укажите имя того, кто оказывает услугу');
+    unverified('Пожалуйста, укажите имя того, кто оказывает услугу');
+  } else if (!isFree && !price) {
+    unverified('Пожалуйста, укажите стоимость услуги');
   }
 
   return verified;
 };
+
+export const normalizePrice = (price) => {
+  return Math.abs(Number(price));
+}
 
 export const serviceInitState = {
   name: '',
