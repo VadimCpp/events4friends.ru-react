@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { ReachTextEditor } from '../RichTextEditor';
 import Button from '../Button';
 import { verify, eventInitState } from './helper';
+import { copyObjectAndTrim } from '../../helper';
 
 const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   const history = useHistory();
@@ -25,13 +26,15 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
     e.preventDefault();
     setUpdatingEvent(true);
 
-    if (!verify(event)) {
+    const saveEvent = copyObjectAndTrim(event);
+
+    if (!verify(saveEvent)) {
       console.warn('verify fail');
       setUpdatingEvent(false);
       return;
     }
 
-    onSave(event, docId => {
+    onSave(saveEvent, docId => {
       if (docId) {
         console.info('Event updated successfully, open it');
         history.push(`/event/${docId}`);
