@@ -10,13 +10,19 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   const [event, updateEventValue] = useState(eventInitState);
   const [updatingEvent, setUpdatingEvent] = useState(false);
 
+  const timezone = {
+    EET: '+0200',
+    MSC: '+0300',
+  };
+
   useEffect(() => {
     if (defaultEvent.id || defaultEvent.contact) {
       updateEventValue({ ...eventInitState, ...defaultEvent });
     }
   }, [defaultEvent]);
 
-  const saveHandler = () => {
+  const saveHandler = (e) => {
+    e.preventDefault();
     setUpdatingEvent(true);
 
     if (!verify(event)) {
@@ -56,10 +62,12 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   };
 
   return (
-    <div className="neweventview">
+    <form className="neweventview">
       <div className="textinput">
         <label>
-          <p className="text-left">Короткое название мероприятия:</p>
+          <span className="textinput__label-text--block text-left">
+            Короткое название мероприятия:
+          </span>
           <input
             className="textinput__input"
             type="text"
@@ -78,40 +86,36 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
           />
         </div>
       </div>
-      <div className="textinput">
-        <p className="text-left">Где будет мероприятие?</p>
-        <p>
-          <label>
-            <span className="text-left">Онлайн</span>
-            <input
-              className="textinput__input"
-              type="radio"
-              name="isOnline"
-              checked={event.isOnline}
-              onChange={handleIsOnlineChange(true)}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            <span className="text-left">Офлайн</span>
-            <input
-              className="textinput__input"
-              type="radio"
-              name="isOnline"
-              checked={!event.isOnline}
-              onChange={handleIsOnlineChange(false)}
-            />
-          </label>
-        </p>
-      </div>
+      <fieldset className="textinput">
+        <legend className="textinput__legend">Где будет мероприятие?</legend>
+        <label>
+          <span className="text-left">Онлайн</span>
+          <input
+            className="textinput__input"
+            type="radio"
+            name="isOnline"
+            checked={event.isOnline}
+            onChange={handleIsOnlineChange(true)}
+          />
+        </label>
+        <label>
+          <span className="text-left">Офлайн</span>
+          <input
+            className="textinput__input"
+            type="radio"
+            name="isOnline"
+            checked={!event.isOnline}
+            onChange={handleIsOnlineChange(false)}
+          />
+        </label>
+      </fieldset>
       <div className="textinput">
         <label>
-          <p className="text-left">
+          <span className="textinput__label-text--block text-left">
             {event.isOnline
               ? 'Ссылка онлайн мероприятия:'
               : 'Укажите адрес встречи:'}
-          </p>
+          </span>
           <input
             className="textinput__input"
             type="text"
@@ -121,40 +125,38 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
           />
         </label>
       </div>
-      <div className="textinput">
-        <p className="text-left">Часовая зона?</p>
-        <p>
-          <label>
-            <span className="text-left">Калининград (GMT+2)</span>
-            <input
-              className="textinput__input"
-              type="radio"
-              name="timeZone"
-              checked={event.timezone === '+0200'}
-              onChange={() => {
-                handleTimeZoneChange('+0200');
-              }}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            <span className="text-left">Москва (GMT+3)</span>
-            <input
-              className="textinput__input"
-              type="radio"
-              name="timeZone"
-              checked={event.timezone === '+0300'}
-              onChange={() => {
-                handleTimeZoneChange('+0300');
-              }}
-            />
-          </label>
-        </p>
-      </div>
+      <fieldset className="textinput">
+        <legend className="textinput__legend">Часовая зона?</legend>
+        <label>
+          <span className="text-left">Калининград (GMT+2)</span>
+          <input
+            className="textinput__input"
+            type="radio"
+            name="timeZone"
+            checked={event.timezone === timezone.EET}
+            onChange={() => {
+              handleTimeZoneChange(timezone.EET);
+            }}
+          />
+        </label>
+        <label>
+          <span className="text-left">Москва (GMT+3)</span>
+          <input
+            className="textinput__input"
+            type="radio"
+            name="timeZone"
+            checked={event.timezone === timezone.MSC}
+            onChange={() => {
+              handleTimeZoneChange(timezone.MSC);
+            }}
+          />
+        </label>
+      </fieldset>
       <div className="textinput">
         <label>
-          <p className="text-left">Начало мероприятия:</p>
+          <span className="textinput__label-text--block text-left">
+            Начало мероприятия:
+          </span>
           <input
             className="textinput__input"
             type="datetime-local"
@@ -166,7 +168,9 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
       </div>
       <div className="textinput">
         <label>
-          <p className="text-left">Окончание мероприятия (необязательно):</p>
+          <span className="textinput__label-text--block text-left">
+            Окончание мероприятия (необязательно):
+          </span>
           <input
             className="textinput__input"
             type="datetime-local"
@@ -178,7 +182,9 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
       </div>
       <div className="textinput">
         <label>
-          <p className="text-left">Контакт организатора:</p>
+          <span className="textinput__label-text--block text-left">
+            Контакт организатора:
+          </span>
           <input
             className="textinput__input"
             type="text"
@@ -191,7 +197,9 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
       </div>
       <div className="textinput">
         <label>
-          <p className="text-left">Имя организатора:</p>
+          <span className="textinput__label-text--block text-left">
+            Имя организатора:
+          </span>
           <input
             className="textinput__input"
             type="text"
@@ -202,15 +210,13 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
         </label>
       </div>
       {updatingEvent ? (
-        <div>
-          <p>Сохраняем событие...</p>
-        </div>
+        <p>Сохраняем событие...</p>
       ) : (
         <Button onPress={saveHandler} icon="/icons/icon_save.svg">
           Сохранить
         </Button>
       )}
-    </div>
+    </form>
   );
 };
 

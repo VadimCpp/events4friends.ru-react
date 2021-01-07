@@ -20,11 +20,24 @@
   padding: 10px 0;
 }
 
+.textinput__legend {
+  display: inline-block;
+  width: auto;
+  max-width: unset;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
 .textinput__label {
   display: inline-block;
   width: 70px;
   text-align: right;
   padding-right: 5px;
+}
+
+.textinput__label-text--block {
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .textinput__input {
