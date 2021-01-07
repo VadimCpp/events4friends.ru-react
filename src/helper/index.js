@@ -11,3 +11,15 @@ export function trim(value = '') {
   }
   return value;
 }
+
+/**
+ * Копирует объект и вызывает функцию trim для обрезания пробелов в строках
+ * @param {Object} from
+ * @param {Object=} to
+ * @returns {Object}
+ */
+export const copyObjectAndTrim = (from, to = {}) => {
+  const target = Object.assign({}, to, from);
+  Object.keys(target).forEach(key => target[key] = trim(from[key]));
+  return target;
+}
