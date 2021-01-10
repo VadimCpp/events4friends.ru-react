@@ -139,7 +139,10 @@ const WelcomeView = ({ history }) => {
           <p>Выберите мессенджер для общения:</p>
           <ul className="welcomeview__messengers-list">
             {messengers.map(messenger => (
-              <li className="welcomeview__messengers-item">
+              <li
+                className="welcomeview__messengers-item"
+                key={messenger.messengerName}
+              >
                 <MessengerLink
                   ExternalLinkComponent={ButtonExternalLink}
                   {...messenger}
@@ -155,7 +158,7 @@ const WelcomeView = ({ history }) => {
           <p>Мы в социальных сетях:</p>
           <ul className="welcomeview__social-list">
             {socialLinks.map(link => (
-              <li className="welcomeview__social-item">
+              <li className="welcomeview__social-item" key={link.name}>
                 <SocialNetworkLink
                   ExternalLinkComponent={ButtonExternalLink}
                   {...link}
