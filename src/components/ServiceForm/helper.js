@@ -19,8 +19,6 @@ export const verify = newService => {
     unverified('Пожалуйста, введите полное описание услуги');
   } else if (!name) {
     unverified('Пожалуйста, укажите имя того, кто оказывает услугу');
-  } else if (!isFree && !price) {
-    unverified('Пожалуйста, укажите стоимость услуги');
   }
 
   return verified;
