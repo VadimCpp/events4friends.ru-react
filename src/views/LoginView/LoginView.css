@@ -21,9 +21,7 @@
 }
 
 .textinput__legend {
-  display: inline-block;
-  width: auto;
-  max-width: unset;
+  padding-top: 0.5rem;
   font-size: 1rem;
   font-weight: 400;
 }
