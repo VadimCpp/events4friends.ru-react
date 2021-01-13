@@ -4,8 +4,6 @@ export const verify = newService => {
     service,
     description,
     name,
-    isFree,
-    price,
   } = newService;
 
   const unverified = (text) => {
