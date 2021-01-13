@@ -111,20 +111,14 @@ const LoginView = ({ history }) => {
           </p>
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="tg://resolve?domain=events4friends"
-            icon="/icons/telegram.svg"
             messengerName="telegram"
           />
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
-            icon="/icons/whatsapp.svg"
             messengerName="whatsapp"
           />
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-            icon="/icons/viber.svg"
             messengerName="viber"
           />
         </div>

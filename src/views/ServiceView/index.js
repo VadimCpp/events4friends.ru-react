@@ -8,6 +8,7 @@ import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import Button from '../../components/Button';
 import './ServiceView.css';
+import MessengerLink from '../../components/MessengerLink';
 
 const ServiceView = ({ match }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
@@ -134,32 +135,22 @@ const ServiceView = ({ match }) => {
                 )}
                 {service.telegram && (
                   <p>
-                    <ButtonExternalLink
+                    <MessengerLink
+                      ExternalLinkComponent={ButtonExternalLink}
+                      messengerName="telegram"
                       href={`tg://resolve?domain=${service.telegram}`}
-                      icon="/icons/telegram.svg"
-                      alt="telegram"
-                      style={{
-                        borderColor: '#139BD0',
-                        margin: 8,
-                        borderRadius: '48px',
-                      }}
                       title={service.telegram}
                     />
                   </p>
                 )}
                 {service.whatsapp && (
                   <p>
-                    <ButtonExternalLink
+                    <MessengerLink
+                      ExternalLinkComponent={ButtonExternalLink}
+                      messengerName="whatsapp"
                       href={`https://wa.me/${service.whatsapp}?text=${encodeURI(
                         `Привет, меня интересует услуга ${service.service}, которую я нашел на сайте events4friends.ru`,
                       )}`}
-                      icon="/icons/whatsapp.svg"
-                      alt="whatsapp"
-                      style={{
-                        borderColor: '#57BB63',
-                        margin: 8,
-                        borderRadius: '48px',
-                      }}
                       title={service.whatsapp}
                     />
                   </p>
@@ -172,35 +163,17 @@ const ServiceView = ({ match }) => {
       <div className="border-top">
         <div className="container container-center pt-4 pb-5">
           <p>Обсудить услугу в чате:</p>
-          <ButtonExternalLink
-            href="tg://resolve?domain=events4friends"
-            icon="/icons/telegram.svg"
-            alt="telegram"
-            style={{
-              borderColor: '#139BD0',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
+            messengerName="telegram"
           />
-          <ButtonExternalLink
-            href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
-            icon="/icons/whatsapp.svg"
-            alt="whatsapp"
-            style={{
-              borderColor: '#57BB63',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
+            messengerName="whatsapp"
           />
-          <ButtonExternalLink
-            href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-            icon="/icons/viber.svg"
-            alt="viber"
-            style={{
-              borderColor: '#7C519B',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
+            messengerName="viber"
           />
         </div>
       </div>

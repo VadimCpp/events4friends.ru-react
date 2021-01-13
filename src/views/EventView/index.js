@@ -8,6 +8,7 @@ import StoreBadge from '../../components/StoreBadge';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 import './EventView.css';
+import MessengerLink from '../../components/MessengerLink';
 
 const EventView = ({ match, history }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
@@ -178,35 +179,17 @@ const EventView = ({ match, history }) => {
       <div className="border-top">
         <div className="container container-center pt-4 pb-4">
           <p>Обсудить анонс мероприятия в чате:</p>
-          <ButtonExternalLink
-            href="tg://resolve?domain=events4friends"
-            icon="/icons/telegram.svg"
-            alt="telegram"
-            style={{
-              borderColor: '#139BD0',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
+            messengerName="telegram"
           />
-          <ButtonExternalLink
-            href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
-            icon="/icons/whatsapp.svg"
-            alt="whatsapp"
-            style={{
-              borderColor: '#57BB63',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
+            messengerName="whatsapp"
           />
-          <ButtonExternalLink
-            href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-            icon="/icons/viber.svg"
-            alt="viber"
-            style={{
-              borderColor: '#7C519B',
-              margin: 8,
-              borderRadius: '48px',
-            }}
+          <MessengerLink
+            ExternalLinkComponent={ButtonExternalLink}
+            messengerName="viber"
           />
         </div>
       </div>
