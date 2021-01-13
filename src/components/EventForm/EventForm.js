@@ -12,7 +12,7 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   const [updatingEvent, setUpdatingEvent] = useState(false);
 
   const timezone = {
-    EET: '+0200',
+    EET: '+0200', // https://www.timeanddate.com/time/zone/russia/kaliningrad
     MSC: '+0300',
   };
 
