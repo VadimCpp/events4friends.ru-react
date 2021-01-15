@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import Button from '../../components/Button';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import MessengerLink from '../../components/MessengerLink';
+import './ProfileView.css';
 
 const ProfileView = () => {
   const authContext = useContext(AuthContext);
@@ -39,9 +40,11 @@ const ProfileView = () => {
   };
 
   return (
-    <div className="loginview">
-      <div className="loginview__block">
+    <main className="loginview">
+      <h1 className="visually-hidden">Профиль пользователя</h1>
+      <section className="loginview__block">
         <div className="container container-center">
+          <h2 className="visually-hidden">Форма авторизации</h2>
           {userAuthorized ? (
             <div>
               <p>
@@ -73,34 +76,29 @@ const ProfileView = () => {
             </div>
           )}
         </div>
-      </div>
-      <div className="loginview__block">
+      </section>
+      <section className="loginview__block">
         <div className="container container-center">
+          <h2 className="visually-hidden">Как заполнить профиль</h2>
           <p>
             Пожалуйста, заполните свой профиль. Если Вам не понятно, как это
             сделать, задайте вопрос в чат.
           </p>
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="tg://resolve?domain=events4friends"
-            icon="/icons/telegram.svg"
             messengerName="telegram"
           />
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
-            icon="/icons/whatsapp.svg"
             messengerName="whatsapp"
           />
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-            icon="/icons/viber.svg"
             messengerName="viber"
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

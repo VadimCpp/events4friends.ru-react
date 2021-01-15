@@ -4,6 +4,7 @@
 }
 
 .textinput {
+  margin-bottom: 0;
   padding: 10px 20px;
   display: flex;
   flex-flow: column;
@@ -48,4 +49,8 @@
 
 .viber_btn {
   border-color: #7C519B;
+}
+
+.service-form__label {
+  margin-bottom: 1.25rem;
 }

@@ -2,21 +2,21 @@ export const verify = event => {
   let verified = true;
   const { summary, description, location, start, name } = event;
 
+  const unverified = (text) => {
+    verified = false;
+    alert(text);
+  }
+
   if (!summary) {
-    verified = false;
-    alert('Пожалуйста, введите название мероприятия');
+    unverified('Пожалуйста, введите название мероприятия');
   } else if (!description) {
-    verified = false;
-    alert('Пожалуйста, введите полное описание мероприятия');
+    unverified('Пожалуйста, введите полное описание мероприятия');
   } else if (!location) {
-    verified = false;
-    alert('Пожалуйста, введите место проведения мероприятия');
+    unverified('Пожалуйста, введите место проведения мероприятия');
   } else if (!start) {
-    verified = false;
-    alert('Пожалуйста, укажите время начала мероприятия');
+    unverified('Пожалуйста, укажите время начала мероприятия');
   } else if (!name) {
-    verified = false;
-    alert('Пожалуйста, укажите имя организатора');
+    unverified('Пожалуйста, укажите имя организатора');
   }
 
   return verified;

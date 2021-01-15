@@ -1,0 +1,7 @@
+.profileview__label {
+  margin-bottom: 1em;
+}
+
+.profileview__description {
+  margin-bottom: calc(10px + 1rem);
+}

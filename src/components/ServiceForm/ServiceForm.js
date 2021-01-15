@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { verify, serviceInitState } from './helper';
+import { verify, serviceInitState, normalizePrice } from './helper';
 
 import { ReachTextEditor } from '../RichTextEditor';
 import Button from '../Button';
+import { copyObjectAndTrim } from '../../helper';
 
 const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   const [service, setService] = useState(serviceInitState);
@@ -16,16 +17,19 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
     }
   }, [defaultService]);
 
-  const saveHandler = () => {
+  const saveHandler = (e) => {
+    e.preventDefault();
     setUpdatingService(true);
 
-    if (!verify(service)) {
+    const saveService = copyObjectAndTrim(service);
+
+    if (!verify(saveService)) {
       console.warn('verify fail');
       setUpdatingService(false);
       return;
     }
 
-    onSave(service, docId => {
+    onSave(saveService, docId => {
       if (docId) {
         console.info('Service updated successfully, open it');
         history.push(`/service/${docId}`);
@@ -39,7 +43,10 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   };
 
   const handlerChange = e => {
-    const { name, value } = e.currentTarget;
+    let { name, value } = e.currentTarget;
+    if (name === 'price') {
+      value = normalizePrice(value);
+    }
     setService(prev => ({ ...prev, [name]: value }));
   };
 
@@ -57,14 +64,15 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   };
 
   return (
-    <div className="newserviceview">
+    <form className="newserviceview">
       <div className="textinput">
-        <label htmlFor="service">
-          <p className="text-left">Название услуги:</p>
+        <label>
+          <span className="textinput__label-text--block text-left">
+            Название услуги:
+          </span>
           <input
             className="textinput__input"
             type="text"
-            id="service"
             name="service"
             value={service.service}
             onChange={handlerChange}
@@ -73,12 +81,13 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </div>
 
       <div className="textinput">
-        <label htmlFor="service">
-          <p className="text-left">Имя того, кто оказывает услугу:</p>
+        <label>
+          <span className="textinput__label-text--block">
+            Имя того, кто оказывает услугу:
+          </span>
           <input
             className="textinput__input"
             type="text"
-            id="name"
             name="name"
             value={service.name}
             onChange={handlerChange}
@@ -96,134 +105,123 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
         </div>
       </div>
 
-      <div className="textinput">
-        <p className="text-left">Услуга оказывается платно?</p>
-        <p>
-          <label htmlFor="isFree_true">
-            <span className="text-left">Да</span>
-            <input
-              className="textinput__input"
-              type="radio"
-              id="isFree_true"
-              name="isFree"
-              checked={!service.isFree}
-              onChange={handleIsFreeChange}
-            />
-          </label>
-        </p>
-        <p>
-          <label htmlFor="isFree_false">
-            <span className="text-left">Нет</span>
-            <input
-              className="textinput__input"
-              type="radio"
-              id="isFree_false"
-              name="isFree"
-              checked={service.isFree}
-              onChange={handleIsFreeChange}
-            />
-          </label>
-        </p>
-      </div>
-      <>
-        {!service.isFree && (
-          <div className="textinput">
-            <label htmlFor="price">
-              <p className="text-left">Укажите стоимость услуги в рублях:</p>
-              <input
-                className="textinput__input"
-                type="text"
-                id="price"
-                name="price"
-                value={service.price}
-                onChange={handlerChange}
-                disabled={service.isFree}
-              />
-            </label>
-          </div>
-        )}
-      </>
+      <fieldset className="textinput">
+        <legend className="textinput__legend">Услуга оказывается платно?</legend>
+        <label>
+          <span className="text-left">Да</span>
+          <input
+            className="textinput__input"
+            type="radio"
+            name="isFree"
+            checked={!service.isFree}
+            onChange={handleIsFreeChange}
+          />
+        </label>
+        <label>
+          <span className="text-left">Нет</span>
+          <input
+            className="textinput__input"
+            type="radio"
+            name="isFree"
+            checked={service.isFree}
+            onChange={handleIsFreeChange}
+          />
+        </label>
+      </fieldset>
 
-      <div className="textinput">
-        <label htmlFor="website">
-          <p className="text-left">Cсылка на сайт:</p>
+      {!service.isFree && (
+        <div className="textinput">
+          <label>
+            <span className="textinput__label-text--block text-left">
+              Укажите стоимость услуги в рублях:
+            </span>
+            <input
+              className="textinput__input"
+              type="number"
+              name="price"
+              min="0"
+              value={service.price}
+              onChange={handlerChange}
+              disabled={service.isFree}
+            />
+          </label>
+        </div>
+      )}
+
+      <fieldset className="service-form__contacts textinput">
+        <legend className="visually-hidden">
+          Контактные данные
+        </legend>
+        <label className="service-form__label">
+          <span className="textinput__label-text--block text-left">
+            Cсылка на сайт:
+          </span>
           <input
             className="textinput__input"
             type="text"
-            id="website"
             name="website"
             value={service.website}
             onChange={handlerChange}
           />
         </label>
-      </div>
-
-      <div className="textinput">
-        <label htmlFor="instagram">
-          <p className="text-left">Ссылка на инстаграм:</p>
+        <label className="service-form__label">
+          <span className="textinput__label-text--block text-left">
+            Ссылка на инстаграм:
+          </span>
           <input
             className="textinput__input"
             type="text"
-            id="instagram"
             name="instagram"
             value={service.instagram}
             onChange={handlerChange}
           />
         </label>
-      </div>
-
-      <div className="textinput">
-        <label htmlFor="whatsapp">
-          <p className="text-left">Номер в WhatsApp в формате 7XXX1234567:</p>
+        <label className="service-form__label">
+          <span className="textinput__label-text--block text-left">
+            Номер в WhatsApp в формате 7XXX1234567:
+          </span>
           <input
             className="textinput__input"
             type="text"
-            id="whatsapp"
             name="whatsapp"
             value={service.whatsapp}
             onChange={handlerChange}
           />
         </label>
-      </div>
-
-      <div className="textinput">
-        <label htmlFor="telegram">
-          <p className="text-left">ID пользователя в телеграм:</p>
+        <label className="service-form__label">
+          <span className="textinput__label-text--block text-left">
+            ID пользователя в телеграм:
+          </span>
           <input
             className="textinput__input"
             type="text"
-            id="telegram"
             name="telegram"
             value={service.telegram}
             onChange={handlerChange}
           />
         </label>
-      </div>
-
-      <div className="textinput">
-        <label htmlFor="vkontakte">
-          <p className="text-left">Ссылка ВКонтакте:</p>
+        <label className="service-form__label">
+          <span className="textinput__label-text--block text-left">
+            Ссылка ВКонтакте:
+          </span>
           <input
             className="textinput__input"
             type="text"
-            id="vkontakte"
             name="vkontakte"
             value={service.vkontakte}
             onChange={handlerChange}
           />
         </label>
-      </div>
+      </fieldset>
 
       {updatingService ? (
-        <div>
-          <p>Сохраняем услугу...</p>
-        </div>
+        <p>Сохраняем услугу...</p>
       ) : (
         <Button onPress={saveHandler} icon="/icons/icon_save.svg">
           Сохранить
         </Button>
       )}
-    </div>
+    </form>
   );
 };
 
