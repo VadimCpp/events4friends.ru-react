@@ -17,10 +17,10 @@ const Button = ({
       onClick={onPress}
       style={style}
     >
-      <div className="welcomeview__image__wrapper">
+      <span className="welcomeview__image__wrapper">
         <img src={icon} alt={children} className="welcomeview__image" />
-      </div>
-      {children && <div className="welcomeview__text">{children}</div>}
+      </span>
+      {children && <span className="welcomeview__text">{children}</span>}
     </Tag>
   );
 };

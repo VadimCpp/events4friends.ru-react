@@ -17,12 +17,20 @@ const LoginView = ({ history }) => {
   const authContext = useContext(AuthContext);
 
   const handleLoginChange = e => {
-    setLogin(e.target.value);
+    setLogin(e.target.value.trim());
   };
 
   const handlePasswordChange = e => {
-    setPassword(e.target.value);
+    setPassword(e.target.value.trim());
   };
+
+  const handlerSubmit = e => {
+    e.preventDefault();
+    if (!login || !password) {
+      return;
+    }
+    signIn(login, password);
+  }
 
   const { user, signIn } = authContext;
   let userName = null;
@@ -41,24 +49,24 @@ const LoginView = ({ history }) => {
   }
 
   return (
-    <div className="loginview">
-      <div className="loginview__block">
+    <main className="loginview">
+      <h1 className="visually-hidden">Страница входа</h1>
+      <section className="loginview__block">
         <div className="container container-center">
+          <h2 className="visually-hidden">Форма входа</h2>
           {userAuthorized ? (
-            <div>
-              <p>
-                <span>Вход выполнен, {userName}! </span>
-              </p>
+            <>
+              <p>Вход выполнен, {userName}!</p>
               <ButtonLink
                 to="/"
                 icon="/icons/icon_arrow_back.svg"
                 title="Вернуться на экран приветствия"
                 className="loginview__back"
               />
-            </div>
+            </>
           ) : (
-            <div>
-              <div className="textinput">
+            <form className="loginview__form">
+              <p className="textinput">
                 <label>
                   <span className="textinput__label">E-mail:</span>
                   <input
@@ -70,8 +78,8 @@ const LoginView = ({ history }) => {
                     onChange={handleLoginChange}
                   />
                 </label>
-              </div>
-              <div className="textinput">
+              </p>
+              <p className="textinput">
                 <label>
                   <span className="textinput__label">Пароль:</span>
                   <input
@@ -83,46 +91,39 @@ const LoginView = ({ history }) => {
                     onChange={handlePasswordChange}
                   />
                 </label>
-              </div>
+              </p>
               <Button
-                onPress={() => {
-                  signIn(login, password);
-                }}
                 icon="/icons/icon_login.svg"
+                onPress={handlerSubmit}
               >
                 Войти
               </Button>
-            </div>
+            </form>
           )}
         </div>
-      </div>
-      <div className="loginview__block">
+      </section>
+      <section className="loginview__block">
         <div className="container container-center">
+          <h2 className="visually-hidden">Где взять данные авторизации</h2>
           <p>
             Вход в систему дает возможность создавать услуги и мероприятия.
             Логин и пароль можно получить в одном из чатов:
           </p>
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="tg://resolve?domain=events4friends"
-            icon="/icons/telegram.svg"
             messengerName="telegram"
           />
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8"
-            icon="/icons/whatsapp.svg"
             messengerName="whatsapp"
           />
           <MessengerLink
             ExternalLinkComponent={ButtonExternalLink}
-            href="https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B"
-            icon="/icons/viber.svg"
             messengerName="viber"
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

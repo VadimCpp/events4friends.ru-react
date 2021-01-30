@@ -84,16 +84,7 @@ const WelcomeView = ({ history }) => {
             </div>
           ) : (
             <div>
-              <span>Добро пожаловать в цифровое пространство! </span>
-              <button
-                type="button"
-                className="btn btn-link btn-link-vk"
-                onClick={() => {
-                  history.push('signin/');
-                }}
-              >
-                <span>Войти</span>
-              </button>
+              <span>Добро пожаловать в цифровое пространство!</span>
             </div>
           )}
         </div>
@@ -139,7 +130,10 @@ const WelcomeView = ({ history }) => {
           <p>Выберите мессенджер для общения:</p>
           <ul className="welcomeview__messengers-list">
             {messengers.map(messenger => (
-              <li className="welcomeview__messengers-item">
+              <li
+                className="welcomeview__messengers-item"
+                key={messenger.messengerName}
+              >
                 <MessengerLink
                   ExternalLinkComponent={ButtonExternalLink}
                   {...messenger}
@@ -155,7 +149,7 @@ const WelcomeView = ({ history }) => {
           <p>Мы в социальных сетях:</p>
           <ul className="welcomeview__social-list">
             {socialLinks.map(link => (
-              <li className="welcomeview__social-item">
+              <li className="welcomeview__social-item" key={link.name}>
                 <SocialNetworkLink
                   ExternalLinkComponent={ButtonExternalLink}
                   {...link}
@@ -179,6 +173,23 @@ const WelcomeView = ({ history }) => {
           </div>
         </div>
       </div>
+
+      {!userAuthorized && (
+        <div className="welcomeview__block">
+          <div className="container container-center">
+            <p>Организаторы мероприятий могут создавать анонсы мероприятий</p>
+            <button
+              type="button"
+              className="btn btn-link btn-link-vk"
+              onClick={() => {
+                history.push('signin/');
+              }}
+            >
+              <span>Вход для организаторов</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="container container-center">
         <p className="welcomeview__footer">
