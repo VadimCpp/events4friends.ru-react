@@ -127,7 +127,7 @@ const EventView = ({ match, history }) => {
                       {timezone === '+0300' && (
                         <span className="event-timezone">Мск</span>
                       )}
-                      － «{event.summary}»
+                      － {event.summary}
                       {event.isOnline ? (
                         <span>
                           <span role="img" aria-label="Location">

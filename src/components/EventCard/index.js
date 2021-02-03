@@ -42,7 +42,7 @@ const EventCard = ({ event, name }) => {
                 {timezone === '+0300' && (
                   <span className="event-timezone">Мск</span>
                 )}
-                － «{summary}»
+                － {summary}
                 {isOnline ? (
                   <span>
                     <span role="img" aria-label="Location">
