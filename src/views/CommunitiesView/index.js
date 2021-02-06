@@ -80,13 +80,22 @@ const CommunitiesView = () => (
           className="cv__button-external-link"
         />
       </div>
-      <div className="container container-center pb-4">
+      <div className="container container-center">
         <ButtonExternalLink
           href="tg://resolve?domain=OpenRoad39"
           icon="/icons/telegram.svg"
           alt="telegram"
           title="OpenRoad39"
           classList={['cv__button-external-link', 'telegram']}
+        />
+      </div>
+      <div className="container container-center pb-4">
+        <ButtonExternalLink
+          href="https://vk.com/amberman39"
+          icon="/icons/vk.svg"
+          alt="vk"
+          title="AMBERMAN ТРИАТЛОН"
+          className="cv__button-external-link"
         />
       </div>
     </div>
