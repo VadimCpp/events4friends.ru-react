@@ -1,16 +1,19 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import HeaderLogo from './images/header_logo_small.png';
 import './Header.css';
 
 const Header = () => (
   <header className="header">
     <div className="header__first-col">
       <Link className="reset-link-style" to="/">
-        <img className="header__logo_big" src={HeaderLogo} alt="Header Logo" />
+        <img
+          className="header__logo_big"
+          src="/img/header_logo_small.png"
+          alt="Header Logo"
+        />
         <img
           className="header__logo_small"
-          src={HeaderLogo}
+          src="/img/header_logo_small.png"
           alt="Header Logo"
         />
       </Link>
