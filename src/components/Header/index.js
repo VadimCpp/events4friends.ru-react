@@ -8,12 +8,12 @@ const Header = () => (
       <Link className="reset-link-style" to="/">
         <img
           className="header__logo_big"
-          src="/img/header_logo_small.png"
+          src="/img/header_logo.png"
           alt="Header Logo"
         />
         <img
           className="header__logo_small"
-          src="/img/header_logo_small.png"
+          src="/img/header_logo.png"
           alt="Header Logo"
         />
       </Link>
