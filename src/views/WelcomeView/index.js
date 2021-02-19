@@ -56,6 +56,12 @@ const WelcomeView = ({ history }) => {
       icon: '/icons/instagram.svg',
       title: 'Открыть Instagram',
     },
+    {
+      name: 'strava',
+      href: 'https://www.strava.com/clubs/events4friends',
+      icon: '/icons/strava.png',
+      title: 'Открыть Strava',
+    },
   ];
 
   return (
