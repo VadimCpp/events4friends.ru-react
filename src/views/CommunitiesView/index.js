@@ -6,7 +6,7 @@ import StoreBadge from '../../components/StoreBadge';
 import './CommunitiesView.css';
 
 const CommunitiesView = () => (
-  <div>
+  <div className="communitiesview">
     <div>
       <ButtonLink
         to="/"

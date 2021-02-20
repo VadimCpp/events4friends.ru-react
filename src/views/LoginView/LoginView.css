@@ -1,5 +1,6 @@
 .loginview {
   line-height: 19px;
+  text-align: center;
 }
 .loginview__block {
   padding: 20px 0;
