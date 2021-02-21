@@ -62,7 +62,7 @@ const EventView = ({ match, history }) => {
   };
 
   return (
-    <div>
+    <div className="eventview">
       <div>
         <ButtonLink
           to="/events"
