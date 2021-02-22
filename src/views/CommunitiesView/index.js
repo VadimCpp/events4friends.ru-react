@@ -1,9 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import ButtonLink from '../../components/ButtonLink';
-import ButtonExternalLink from '../../components/ButtonExternalLink';
 import StoreBadge from '../../components/StoreBadge';
+import CommunityList from '../../components/CommunityList';
 import './CommunitiesView.css';
+import communities from './communities.json';
 
 const CommunitiesView = () => (
   <div className="communitiesview">
@@ -17,87 +18,7 @@ const CommunitiesView = () => (
     </div>
     <div className="border-top mt-3">
       <p className="mt-3">Все сообщества Калининграда</p>
-      <div className="container container-center mt-2">
-        <ButtonExternalLink
-          href="https://invite.viber.com/?g2=AQB3E%2BjqSG%2B%2F9Uui8NoBuwBJtIg4H%2F7Mb1RtXXmz1VW8WmCXCXQDkeP5kgzpOdBx"
-          icon="/icons/viber.svg"
-          alt="telegram"
-          title="МТВ Трещалка"
-          classList={['cv__button-external-link', 'mtv']}
-        />
-      </div>
-      <div className="container container-center">
-        <ButtonExternalLink
-          href="tg://resolve?domain=veloafishagroup"
-          icon="/icons/telegram.svg"
-          alt="telegram"
-          title="ВелоАфиша Чат"
-          classList={['cv__button-external-link', 'telegram']}
-        />
-      </div>
-      <div className="container container-center">
-        <ButtonExternalLink
-          href="https://vk.com/velocherepashki039"
-          icon="/icons/vk.svg"
-          alt="vk"
-          title="Велочерепашки"
-          className="cv__button-external-link"
-        />
-      </div>
-      <div className="container container-center">
-        <ButtonExternalLink
-          href="https://vk.com/club195226782"
-          icon="/icons/vk.svg"
-          alt="vk"
-          title="MTB LOVE"
-          className="cv__button-external-link"
-        />
-      </div>
-      <div className="container container-center">
-        <ButtonExternalLink
-          href="https://vk.com/velozapad"
-          icon="/icons/vk.svg"
-          alt="vk"
-          title="Велозапад"
-          className="cv__button-external-link"
-        />
-      </div>
-      <div className="container container-center">
-        <ButtonExternalLink
-          href="https://vk.com/velosreda39"
-          icon="/icons/vk.svg"
-          alt="vk"
-          title="Велосреда"
-          className="cv__button-external-link"
-        />
-      </div>
-      <div className="container container-center">
-        <ButtonExternalLink
-          href="https://vk.com/club195213043"
-          icon="/icons/vk.svg"
-          alt="vk"
-          title="ВелоЧерепашки-39 Дети"
-          className="cv__button-external-link"
-        />
-      </div>
-      <div className="container container-center">
-        <ButtonExternalLink
-          href="tg://resolve?domain=OpenRoad39"
-          icon="/icons/telegram.svg"
-          alt="telegram"
-          title="OpenRoad39"
-          classList={['cv__button-external-link', 'telegram']}
-        />
-      </div>
-      <div className="container container-center pb-4">
-        <ButtonExternalLink
-          href="https://vk.com/amberman39"
-          icon="/icons/vk.svg"
-          alt="vk"
-          title="AMBERMAN ТРИАТЛОН"
-          className="cv__button-external-link"
-        />
-      </div>
+      <CommunityList communities={communities} />
     </div>
     <div className="border-top mt-3 mb-3">
       <p className="mt-3">
