@@ -98,6 +98,33 @@ const CommunitiesView = () => (
           className="cv__button-external-link"
         />
       </div>
+      <div className="container container-center pb-4">
+        <ButtonExternalLink
+          href="https://t.me/AppleEngChat"
+          icon="/icons/telegram.svg"
+          alt="telegram"
+          title="Разговорный клуб английского языка Apple.Eng.Chat"
+          classList={['cv__button-external-link', 'telegram']}
+        />
+      </div>
+      <div className="container container-center pb-4">
+        <ButtonExternalLink
+          href="https://instagram.com/nordic_kld"
+          icon="/icons/instagram.svg"
+          alt="instagram"
+          title="Клуб северной ходьбы nordic_kld"
+          className="cv__button-external-link"
+        />
+      </div>
+      <div className="container container-center pb-4">
+        <ButtonExternalLink
+          href="https://www.instagram.com/shorty.run/"
+          icon="/icons/instagram.svg"
+          alt="instagram"
+          title="Беговой клуб Шорты"
+          className="cv__button-external-link"
+        />
+      </div>
     </div>
     <div className="border-top mt-3 mb-3">
       <p className="mt-3">
