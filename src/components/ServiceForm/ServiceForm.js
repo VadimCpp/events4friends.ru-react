@@ -17,7 +17,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
     }
   }, [defaultService]);
 
-  const saveHandler = (e) => {
+  const saveHandler = e => {
     e.preventDefault();
     setUpdatingService(true);
 
@@ -43,7 +43,8 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   };
 
   const handlerChange = e => {
-    let { name, value } = e.currentTarget;
+    const { name } = e.currentTarget;
+    let { value } = e.currentTarget;
     if (name === 'price') {
       value = normalizePrice(value);
     }
@@ -66,11 +67,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   return (
     <form className="newserviceview">
       <div className="textinput">
-        <label>
+        <label htmlFor="service">
           <span className="textinput__label-text--block text-left">
             Название услуги:
           </span>
           <input
+            id="service"
             className="textinput__input"
             type="text"
             name="service"
@@ -81,11 +83,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </div>
 
       <div className="textinput">
-        <label>
+        <label htmlFor="name">
           <span className="textinput__label-text--block">
             Имя того, кто оказывает услугу:
           </span>
           <input
+            id="name"
             className="textinput__input"
             type="text"
             name="name"
@@ -106,10 +109,13 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       </div>
 
       <fieldset className="textinput">
-        <legend className="textinput__legend">Услуга оказывается платно?</legend>
-        <label>
+        <legend className="textinput__legend">
+          Услуга оказывается платно?
+        </legend>
+        <label htmlFor="is-free-yes">
           <span className="text-left">Да</span>
           <input
+            id="is-free-yes"
             className="textinput__input"
             type="radio"
             name="isFree"
@@ -117,9 +123,10 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             onChange={handleIsFreeChange}
           />
         </label>
-        <label>
+        <label htmlFor="is-free-no">
           <span className="text-left">Нет</span>
           <input
+            id="is-free-no"
             className="textinput__input"
             type="radio"
             name="isFree"
@@ -131,11 +138,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
 
       {!service.isFree && (
         <div className="textinput">
-          <label>
+          <label htmlFor="price">
             <span className="textinput__label-text--block text-left">
               Укажите стоимость услуги в рублях:
             </span>
             <input
+              id="price"
               className="textinput__input"
               type="number"
               name="price"
@@ -149,14 +157,13 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
       )}
 
       <fieldset className="service-form__contacts textinput">
-        <legend className="visually-hidden">
-          Контактные данные
-        </legend>
-        <label className="service-form__label">
+        <legend className="visually-hidden">Контактные данные</legend>
+        <label className="service-form__label" htmlFor="site-link">
           <span className="textinput__label-text--block text-left">
             Cсылка на сайт:
           </span>
           <input
+            id="site-link"
             className="textinput__input"
             type="text"
             name="website"
@@ -164,11 +171,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             onChange={handlerChange}
           />
         </label>
-        <label className="service-form__label">
+        <label className="service-form__label" htmlFor="insta-link">
           <span className="textinput__label-text--block text-left">
             Ссылка на инстаграм:
           </span>
           <input
+            id="insta-link"
             className="textinput__input"
             type="text"
             name="instagram"
@@ -176,11 +184,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             onChange={handlerChange}
           />
         </label>
-        <label className="service-form__label">
+        <label className="service-form__label" htmlFor="whatsapp">
           <span className="textinput__label-text--block text-left">
             Номер в WhatsApp в формате 7XXX1234567:
           </span>
           <input
+            id="whatsapp"
             className="textinput__input"
             type="text"
             name="whatsapp"
@@ -188,11 +197,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             onChange={handlerChange}
           />
         </label>
-        <label className="service-form__label">
+        <label className="service-form__label" htmlFor="telegram">
           <span className="textinput__label-text--block text-left">
             ID пользователя в телеграм:
           </span>
           <input
+            id="telegram"
             className="textinput__input"
             type="text"
             name="telegram"
@@ -200,11 +210,12 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             onChange={handlerChange}
           />
         </label>
-        <label className="service-form__label">
+        <label className="service-form__label" htmlFor="vk-link">
           <span className="textinput__label-text--block text-left">
             Ссылка ВКонтакте:
           </span>
           <input
+            id="vk-link"
             className="textinput__input"
             type="text"
             name="vkontakte"

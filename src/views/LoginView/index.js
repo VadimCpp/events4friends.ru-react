@@ -15,6 +15,7 @@ const LoginView = ({ history }) => {
   const [password, setPassword] = useState('');
 
   const authContext = useContext(AuthContext);
+  const { user, signIn } = authContext;
 
   const handleLoginChange = e => {
     setLogin(e.target.value.trim());
@@ -30,9 +31,8 @@ const LoginView = ({ history }) => {
       return;
     }
     signIn(login, password);
-  }
+  };
 
-  const { user, signIn } = authContext;
   let userName = null;
   let userAuthorized = false;
   if (user) {
@@ -92,10 +92,7 @@ const LoginView = ({ history }) => {
                   />
                 </label>
               </p>
-              <Button
-                icon="/icons/icon_login.svg"
-                onPress={handlerSubmit}
-              >
+              <Button icon="/icons/icon_login.svg" onPress={handlerSubmit}>
                 Войти
               </Button>
             </form>

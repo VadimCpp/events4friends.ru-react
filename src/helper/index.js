@@ -19,7 +19,9 @@ export function trim(value = '') {
  * @returns {Object}
  */
 export const copyObjectAndTrim = (from, to = {}) => {
-  const target = Object.assign({}, to, from);
-  Object.keys(target).forEach(key => target[key] = trim(from[key]));
+  const target = { ...to, ...from };
+  Object.keys(target).forEach(key => {
+    target[key] = trim(from[key]);
+  });
   return target;
-}
+};
