@@ -2,10 +2,10 @@ export const verify = event => {
   let verified = true;
   const { summary, description, location, start, name } = event;
 
-  const unverified = (text) => {
+  const unverified = text => {
     verified = false;
     alert(text);
-  }
+  };
 
   if (!summary) {
     unverified('Пожалуйста, введите название мероприятия');

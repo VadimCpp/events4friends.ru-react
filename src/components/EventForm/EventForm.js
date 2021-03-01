@@ -22,7 +22,7 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
     }
   }, [defaultEvent]);
 
-  const saveHandler = (e) => {
+  const saveHandler = e => {
     e.preventDefault();
     setUpdatingEvent(true);
 
@@ -56,8 +56,8 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
     updateEventValue({ ...event, description: val });
   };
 
-  const handleTimeZoneChange = timezone => {
-    updateEventValue({ ...event, timezone });
+  const handleTimeZoneChange = aTimezone => {
+    updateEventValue({ ...event, aTimezone });
   };
 
   const handleIsOnlineChange = value => () => {
