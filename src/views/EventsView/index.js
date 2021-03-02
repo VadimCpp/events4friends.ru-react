@@ -79,17 +79,19 @@ const EventsView = () => {
     <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
   );
 
-  return (
-    <div className="main-view">
-      <div>
-        <ButtonLink
-          to="/"
-          icon="/icons/icon_arrow_back.svg"
-          title="На главную"
-          classList={['button-link', 'events-view']}
-        />
-      </div>
+  const notice = {
+    CONNECT: 'Подключаемся к базе данных...',
+    LOADING: 'Загружаем события...',
+  };
 
+  return (
+    <section className="main-view">
+      <ButtonLink
+        to="/"
+        icon="/icons/icon_arrow_back.svg"
+        title="На главную"
+        classList={['button-link', 'events-view']}
+      />
       {/*
         NOTE! Кнопка в этом месте не нужна.
         TODO: подумать над интерфейсом и разместить кнопку другом месте
@@ -100,21 +102,19 @@ const EventsView = () => {
         title="Карта мероприятий"
         classList={['button-link']}
       /> */}
-      <>
-        {isAuth ? (
-          <div>
-            <ButtonLink
-              to="/newevent"
-              icon="/icons/icon_plus.svg"
-              title="Сделать анонс"
-              style={{ width: 200 }}
-              classList={['button-link', 'events-view']}
-            />
-          </div>
-        ) : (
-          <div>{warnMessage}</div>
-        )}
-      </>
+      {isAuth ? (
+        <div>
+          <ButtonLink
+            to="/newevent"
+            icon="/icons/icon_plus.svg"
+            title="Сделать анонс"
+            style={{ width: 200 }}
+            classList={['button-link', 'events-view']}
+          />
+        </div>
+      ) : (
+        warnMessage
+      )}
       <div className="container pt-3">
         <EventsFilter
           onFilterTypeChange={value => setFilterType(value)}
@@ -123,26 +123,18 @@ const EventsView = () => {
           past={EventsFilterType.Past}
         />
       </div>
-      {connectingToFirebase ? (
-        <p align="center">Подключаемся к базе данных...</p>
+      {connectingToFirebase || loadingEvents ? (
+        <p align="center">
+          {connectingToFirebase ? notice.CONNECT : notice.LOADING}
+        </p>
       ) : (
-        <>
-          {loadingEvents ? (
-            <p align="center">Загружаем события...</p>
-          ) : (
-            <>
-              {!!eventsList.length && (
-                <div className="pt-3">
-                  {eventsList.map(eventItem =>
-                    displayEvent(eventItem.event, eventItem.source),
-                  )}
-                </div>
-              )}
-            </>
+        <div className="pt-3">
+          {eventsList.map(eventItem =>
+            displayEvent(eventItem.event, eventItem.source),
           )}
-        </>
+        </div>
       )}
-    </div>
+    </section>
   );
 };
 
