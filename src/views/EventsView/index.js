@@ -6,6 +6,7 @@ import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
+import { isEventHaseStartTime, sortEvents, setEndTime } from './helper';
 import './EventsView.css';
 
 const EventsFilterType = {
@@ -13,17 +14,6 @@ const EventsFilterType = {
   Past: 'PAST_EVENTS',
   // TODO: add more types here
 };
-
-function sortEvents(eventsList, desc = false) {
-  return eventsList.sort((a, b) => {
-    let startEventA = new Date(a.start).getTime();
-    let startEventB = new Date(b.start).getTime();
-    if (desc) {
-      [startEventA, startEventB] = [startEventB, startEventA];
-    }
-    return startEventA - startEventB;
-  });
-}
 
 const EventsView = () => {
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
@@ -53,18 +43,15 @@ const EventsView = () => {
   };
 
   const now = new Date();
-  let sortedEvents = [...events];
+  let sortedEvents = events.map(setEndTime);
 
   if (filterType === EventsFilterType.Upcoming) {
     sortedEvents = sortedEvents.filter(event => {
-      if (!(event.start && event.timezone)) {
+      if (!isEventHaseStartTime(event)) {
         return false;
       }
       const eventStart = moment(`${event.start}${event.timezone}`).toDate();
-      const eventEnd = (event.end
-        ? moment(`${event.end}${event.timezone}`)
-        : moment(eventStart).add(1, 'h')
-      ).toDate();
+      const eventEnd = moment(`${event.end}${event.timezone}`).toDate();
       return eventStart > now || eventEnd > now;
     });
     sortedEvents = sortEvents([...sortedEvents]);
