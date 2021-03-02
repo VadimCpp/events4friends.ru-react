@@ -14,6 +14,17 @@ const EventsFilterType = {
   // TODO: add more types here
 };
 
+function sortEvents(eventsList, desc = false) {
+  return eventsList.sort((a, b) => {
+    let startEventA = new Date(a.start).getTime();
+    let startEventB = new Date(b.start).getTime();
+    if (desc) {
+      [startEventA, startEventB] = [startEventB, startEventA];
+    }
+    return startEventA - startEventB;
+  });
+}
+
 const EventsView = () => {
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
   const authContext = useContext(AuthContext);
@@ -46,37 +57,22 @@ const EventsView = () => {
 
   if (filterType === EventsFilterType.Upcoming) {
     sortedEvents = sortedEvents.filter(event => {
-      return event.start && event.timezone
-        ? moment(`${event.start}${event.timezone}`).toDate() > now
-        : false;
+      return (
+        event.start &&
+        event.timezone &&
+        moment(`${event.start}${event.timezone}`).toDate() > now
+      );
     });
-
-    // TODO: неочевидная сортировка, рассмотреть сортировку дат, не строк
-    sortedEvents.sort((a, b) => {
-      if (a.start > b.start) {
-        return 1;
-      }
-      if (a.start < b.start) {
-        return -1;
-      }
-      return 0;
-    });
+    sortedEvents = sortEvents([...sortedEvents]);
   } else if (filterType === EventsFilterType.Past) {
     sortedEvents = sortedEvents.filter(event => {
-      return event.start && event.timezone
-        ? moment(`${event.start}${event.timezone}`).toDate() < now
-        : false;
+      return (
+        event.start &&
+        event.timezone &&
+        moment(`${event.start}${event.timezone}`).toDate() < now
+      );
     });
-
-    sortedEvents.sort((a, b) => {
-      if (a.start < b.start) {
-        return 1;
-      }
-      if (a.start > b.start) {
-        return -1;
-      }
-      return 0;
-    });
+    sortedEvents = sortEvents([...sortedEvents], true);
   }
 
   const eventsList = sortedEvents.map(item => {
@@ -103,7 +99,7 @@ const EventsView = () => {
         />
       </div>
 
-      {/* 
+      {/*
         NOTE! Кнопка в этом месте не нужна.
         TODO: подумать над интерфейсом и разместить кнопку другом месте
       */}
