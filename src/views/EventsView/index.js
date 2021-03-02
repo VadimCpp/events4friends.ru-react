@@ -57,11 +57,15 @@ const EventsView = () => {
 
   if (filterType === EventsFilterType.Upcoming) {
     sortedEvents = sortedEvents.filter(event => {
-      return (
-        event.start &&
-        event.timezone &&
-        moment(`${event.start}${event.timezone}`).toDate() > now
-      );
+      if (!(event.start && event.timezone)) {
+        return false;
+      }
+      const eventStart = moment(`${event.start}${event.timezone}`).toDate();
+      const eventEnd = (event.end
+        ? moment(`${event.end}${event.timezone}`)
+        : moment(eventStart).add(1, 'h')
+      ).toDate();
+      return eventStart > now || eventEnd > now;
     });
     sortedEvents = sortEvents([...sortedEvents]);
   } else if (filterType === EventsFilterType.Past) {
