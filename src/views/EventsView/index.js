@@ -1,19 +1,17 @@
 /* eslint-disable indent */
 import React, { useState, useContext } from 'react';
-import moment from 'moment';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
-import { isEventHaseStartTime, sortEvents, setEndTime } from './helper';
+import {
+  sortEvents,
+  setEndTime,
+  EventsFilterType,
+  filterEvents,
+} from './helper';
 import './EventsView.css';
-
-const EventsFilterType = {
-  Upcoming: 'UPCOMING_EVENTS',
-  Past: 'PAST_EVENTS',
-  // TODO: add more types here
-};
 
 const EventsView = () => {
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
@@ -42,28 +40,12 @@ const EventsView = () => {
     );
   };
 
-  const now = new Date();
   let sortedEvents = events.map(setEndTime);
-
+  sortedEvents = filterEvents(sortedEvents, filterType);
   if (filterType === EventsFilterType.Upcoming) {
-    sortedEvents = sortedEvents.filter(event => {
-      if (!isEventHaseStartTime(event)) {
-        return false;
-      }
-      const eventStart = moment(`${event.start}${event.timezone}`).toDate();
-      const eventEnd = moment(`${event.end}${event.timezone}`).toDate();
-      return eventStart > now || eventEnd > now;
-    });
-    sortedEvents = sortEvents([...sortedEvents]);
+    sortedEvents = sortEvents(sortedEvents);
   } else if (filterType === EventsFilterType.Past) {
-    sortedEvents = sortedEvents.filter(event => {
-      return (
-        event.start &&
-        event.timezone &&
-        moment(`${event.start}${event.timezone}`).toDate() < now
-      );
-    });
-    sortedEvents = sortEvents([...sortedEvents], true);
+    sortedEvents = sortEvents(sortedEvents, true);
   }
 
   const eventsList = sortedEvents.map(item => {

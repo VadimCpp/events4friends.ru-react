@@ -1,5 +1,11 @@
 import moment from 'moment';
 
+export const EventsFilterType = {
+  Upcoming: 'UPCOMING_EVENTS',
+  Past: 'PAST_EVENTS',
+  // TODO: add more types here
+};
+
 export function isEventHaseStartTime(event) {
   return event.start && event.timezone;
 }
@@ -26,4 +32,27 @@ export function setEndTime(event, duration = 1) {
     ...event,
     end,
   };
+}
+
+export function dateWithTimezon(date, timezone) {
+  return moment(`${date}${timezone}`).toDate();
+}
+
+export function filterEvents(eventsList, filterType) {
+  const now = new Date();
+  return eventsList.filter(event => {
+    if (!isEventHaseStartTime(event)) {
+      return false;
+    }
+    const eventStart = dateWithTimezon(event.start, event.timezone);
+    const eventEnd = dateWithTimezon(event.end, event.timezone);
+    switch (filterType) {
+      case EventsFilterType.Upcoming:
+        return eventStart > now || eventEnd > now;
+      case EventsFilterType.Past:
+        return eventStart < now;
+      default:
+        return false;
+    }
+  });
 }
