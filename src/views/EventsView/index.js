@@ -11,6 +11,7 @@ import {
   EventsFilterType,
   filterEvents,
   isCurrentEvent,
+  isComingEvent,
 } from './helper';
 import './EventsView.css';
 
@@ -34,10 +35,16 @@ const EventsView = () => {
       return null;
     }
     const isCurrent = isCurrentEvent(event.start, event.end, event.timezone);
+    const isComing = isComingEvent(event.start, event.timezone);
 
     return (
       <li key={id}>
-        <EventCard event={event} name={name} isCurrent={isCurrent} />
+        <EventCard
+          event={event}
+          name={name}
+          isCurrent={isCurrent}
+          isComing={isComing}
+        />
       </li>
     );
   };
