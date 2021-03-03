@@ -40,7 +40,7 @@ const EventsView = () => {
     );
   };
 
-  let sortedEvents = events.map(setEndTime);
+  let sortedEvents = events.map(event => setEndTime(event));
   sortedEvents = filterEvents(sortedEvents, filterType);
   if (filterType === EventsFilterType.Upcoming) {
     sortedEvents = sortEvents(sortedEvents);
