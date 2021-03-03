@@ -1,9 +1,7 @@
 .event-item {
   text-align: left;
   color: #444;
-  margin-bottom: 20px;
-  padding: 35px 10px 20px;
-  position: relative;
+  padding: 10px 10px 20px;
 }
 
 .border-top {
@@ -25,8 +23,8 @@
   margin: 15px 0 0 0;
 }
 
-.event-timezone {	
-  padding-right: 7px;	
+.event-timezone {
+  padding-right: 7px;
   font-size: 12px;
 }
 
@@ -67,28 +65,15 @@
   padding-right: 5px;
 }
 
-.calendar-name {
+.event-card__calendar-name {
+  float: right;
   padding: 0;
   margin: 0;
-  position: absolute;
-  top: 10px;
-  right: 15px;
   color: #999;
 }
 
 .calendar-owner {
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-}
-
-.button__image {
-  position: relative;
-  top : 13px;
-  width: 10px;
-  height: 10px;
+  color: #28a745;
 }
 
 .reset-link-style {
@@ -98,4 +83,22 @@
 .reset-link-style:hover {
     color: #444;
     text-decoration: none;
+}
+
+.event-card__header {
+  min-height: 1rem;
+  margin-bottom: 10px;
+}
+
+.event-card__label {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.event-card__label--current {
+  color: #dc3545;
+}
+
+.event-card__arrow {
+  margin-left: 15px;
 }

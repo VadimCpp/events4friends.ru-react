@@ -38,13 +38,15 @@ const EventsView = () => {
     const isComing = isComingEvent(event.start, event.timezone);
 
     return (
-      <li key={id}>
-        <EventCard
-          event={event}
-          name={name}
-          isCurrent={isCurrent}
-          isComing={isComing}
-        />
+      <li key={id} className="events-list__item">
+        <div className="container container-center">
+          <EventCard
+            event={event}
+            name={name}
+            isCurrent={isCurrent}
+            isComing={isComing}
+          />
+        </div>
       </li>
     );
   };
@@ -119,7 +121,7 @@ const EventsView = () => {
           {connectingToFirebase ? notice.CONNECT : notice.LOADING}
         </p>
       ) : (
-        <ul className="container container-center pt-3">
+        <ul className="events-list pt-3">
           {eventsList.map(eventItem =>
             displayEvent(eventItem.event, eventItem.source),
           )}

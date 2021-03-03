@@ -46,3 +46,13 @@
   border-color: rgba(77, 77, 77, 0.2);
   border-radius: 48px;
 }
+
+.events-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.events-list__item {
+  border-top: 1px solid #dee2e6;
+}
