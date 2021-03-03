@@ -67,5 +67,6 @@ export function isCurrentEvent(start, end, timezone) {
 export function isComingEvent(start, timezone) {
   const HOUR = 3600000;
   const startDate = new Date(`${start}${timezone}`).getTime();
-  return startDate - Date.now() <= HOUR;
+  const timeBefore = startDate - Date.now();
+  return timeBefore > 0 && timeBefore < HOUR;
 }
