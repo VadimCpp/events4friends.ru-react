@@ -10,6 +10,7 @@ import {
   setEndTime,
   EventsFilterType,
   filterEvents,
+  isCurrentEvent,
 } from './helper';
 import './EventsView.css';
 
@@ -32,11 +33,12 @@ const EventsView = () => {
     if (!event || !source) {
       return null;
     }
+    const isCurrent = isCurrentEvent(event.start, event.end, event.timezone);
 
     return (
-      <div key={id}>
-        <EventCard event={event} name={name} />
-      </div>
+      <li key={id}>
+        <EventCard event={event} name={name} isCurrent={isCurrent} />
+      </li>
     );
   };
 
@@ -110,11 +112,11 @@ const EventsView = () => {
           {connectingToFirebase ? notice.CONNECT : notice.LOADING}
         </p>
       ) : (
-        <div className="pt-3">
+        <ul className="container container-center pt-3">
           {eventsList.map(eventItem =>
             displayEvent(eventItem.event, eventItem.source),
           )}
-        </div>
+        </ul>
       )}
     </section>
   );

@@ -56,3 +56,10 @@ export function filterEvents(eventsList, filterType) {
     }
   });
 }
+
+export function isCurrentEvent(start, end, timezone) {
+  const startDate = dateWithTimezon(start, timezone);
+  const endDate = dateWithTimezon(end, timezone);
+  const now = new Date();
+  return startDate < now && endDate > now;
+}
