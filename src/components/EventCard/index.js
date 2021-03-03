@@ -5,6 +5,15 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import './EventCard.css';
 
+function timezoneToOffset(timezone = '+0300') {
+  return Number(timezone) / 100;
+}
+
+function getUserTimezoneOffset() {
+  // Часовой сдвиг имеет отрицательный знак, возвращается в минутах: -180 (Мск)
+  return new Date().getTimezoneOffset() / 60;
+}
+
 const EventCard = props => {
   const { event, name, isCurrent, isComing } = props;
   const authContext = useContext(AuthContext);
@@ -21,6 +30,15 @@ const EventCard = props => {
   const startDate = moment(start).format('D MMMM, dddd');
   const startTime = moment(start).format('HH:mm');
   const dateTime = `${start}${timezone}`;
+  const userTimezoneOffset = getUserTimezoneOffset();
+  const startOffset = timezoneToOffset(timezone);
+  let userStartTime = null;
+  if (userTimezoneOffset + startOffset) {
+    const offset = -(userTimezoneOffset + startOffset);
+    userStartTime = moment(`${start}`)
+      .add(offset, 'h')
+      .format('HH:mm');
+  }
   const isOwner =
     authContext.user &&
     event &&
@@ -47,7 +65,10 @@ const EventCard = props => {
               <span aria-hidden="true">🕗</span>
               <span className="event-time">{startTime}</span>
               {timezone && (
-                <span className="event-timezone">{timeZones[timezone]}</span>
+                <span className="event-timezone">
+                  {timeZones[timezone]}{' '}
+                  {userStartTime && `(${userStartTime} по вашему времени)`}
+                </span>
               )}
             </time>
             － {summary}
