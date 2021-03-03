@@ -91,7 +91,7 @@ const EventView = ({ match, history }) => {
         ) : null}
         <div className="border-top">
           <div className="container">
-            <div className="event-item container-center">
+            <div className="eventview__event-item container-center">
               {!event && connectingToFirebase && (
                 <p align="center">Подключаемся к базе данных...</p>
               )}
