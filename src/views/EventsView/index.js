@@ -1,18 +1,19 @@
 /* eslint-disable indent */
 import React, { useState, useContext } from 'react';
-import moment from 'moment';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
+import {
+  sortEvents,
+  setEndTime,
+  EventsFilterType,
+  filterEvents,
+  isCurrentEvent,
+  isComingEvent,
+} from './helper';
 import './EventsView.css';
-
-const EventsFilterType = {
-  Upcoming: 'UPCOMING_EVENTS',
-  Past: 'PAST_EVENTS',
-  // TODO: add more types here
-};
 
 const EventsView = () => {
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
@@ -33,50 +34,29 @@ const EventsView = () => {
     if (!event || !source) {
       return null;
     }
+    const isCurrent = isCurrentEvent(event.start, event.end, event.timezone);
+    const isComing = isComingEvent(event.start, event.timezone);
 
     return (
-      <div key={id}>
-        <EventCard event={event} name={name} />
-      </div>
+      <li key={id} className="events-list__item">
+        <div className="container container-center">
+          <EventCard
+            event={event}
+            name={name}
+            isCurrent={isCurrent}
+            isComing={isComing}
+          />
+        </div>
+      </li>
     );
   };
 
-  const now = new Date();
-  let sortedEvents = [...events];
-
+  let sortedEvents = events.map(event => setEndTime(event));
+  sortedEvents = filterEvents(sortedEvents, filterType);
   if (filterType === EventsFilterType.Upcoming) {
-    sortedEvents = sortedEvents.filter(event => {
-      return event.start && event.timezone
-        ? moment(`${event.start}${event.timezone}`).toDate() > now
-        : false;
-    });
-
-    // TODO: неочевидная сортировка, рассмотреть сортировку дат, не строк
-    sortedEvents.sort((a, b) => {
-      if (a.start > b.start) {
-        return 1;
-      }
-      if (a.start < b.start) {
-        return -1;
-      }
-      return 0;
-    });
+    sortedEvents = sortEvents(sortedEvents);
   } else if (filterType === EventsFilterType.Past) {
-    sortedEvents = sortedEvents.filter(event => {
-      return event.start && event.timezone
-        ? moment(`${event.start}${event.timezone}`).toDate() < now
-        : false;
-    });
-
-    sortedEvents.sort((a, b) => {
-      if (a.start < b.start) {
-        return 1;
-      }
-      if (a.start > b.start) {
-        return -1;
-      }
-      return 0;
-    });
+    sortedEvents = sortEvents(sortedEvents, true);
   }
 
   const eventsList = sortedEvents.map(item => {
@@ -92,18 +72,20 @@ const EventsView = () => {
     <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
   );
 
-  return (
-    <div className="main-view">
-      <div>
-        <ButtonLink
-          to="/"
-          icon="/icons/icon_arrow_back.svg"
-          title="На главную"
-          classList={['button-link', 'events-view']}
-        />
-      </div>
+  const notice = {
+    CONNECT: 'Подключаемся к базе данных...',
+    LOADING: 'Загружаем события...',
+  };
 
-      {/* 
+  return (
+    <section className="main-view">
+      <ButtonLink
+        to="/"
+        icon="/icons/icon_arrow_back.svg"
+        title="На главную"
+        classList={['button-link', 'events-view']}
+      />
+      {/*
         NOTE! Кнопка в этом месте не нужна.
         TODO: подумать над интерфейсом и разместить кнопку другом месте
       */}
@@ -113,21 +95,19 @@ const EventsView = () => {
         title="Карта мероприятий"
         classList={['button-link']}
       /> */}
-      <>
-        {isAuth ? (
-          <div>
-            <ButtonLink
-              to="/newevent"
-              icon="/icons/icon_plus.svg"
-              title="Сделать анонс"
-              style={{ width: 200 }}
-              classList={['button-link', 'events-view']}
-            />
-          </div>
-        ) : (
-          <div>{warnMessage}</div>
-        )}
-      </>
+      {isAuth ? (
+        <div>
+          <ButtonLink
+            to="/newevent"
+            icon="/icons/icon_plus.svg"
+            title="Сделать анонс"
+            style={{ width: 200 }}
+            classList={['button-link', 'events-view']}
+          />
+        </div>
+      ) : (
+        warnMessage
+      )}
       <div className="container pt-3">
         <EventsFilter
           onFilterTypeChange={value => setFilterType(value)}
@@ -136,26 +116,18 @@ const EventsView = () => {
           past={EventsFilterType.Past}
         />
       </div>
-      {connectingToFirebase ? (
-        <p align="center">Подключаемся к базе данных...</p>
+      {connectingToFirebase || loadingEvents ? (
+        <p align="center">
+          {connectingToFirebase ? notice.CONNECT : notice.LOADING}
+        </p>
       ) : (
-        <>
-          {loadingEvents ? (
-            <p align="center">Загружаем события...</p>
-          ) : (
-            <>
-              {!!eventsList.length && (
-                <div className="pt-3">
-                  {eventsList.map(eventItem =>
-                    displayEvent(eventItem.event, eventItem.source),
-                  )}
-                </div>
-              )}
-            </>
+        <ul className="events-list pt-3">
+          {eventsList.map(eventItem =>
+            displayEvent(eventItem.event, eventItem.source),
           )}
-        </>
+        </ul>
       )}
-    </div>
+    </section>
   );
 };
 

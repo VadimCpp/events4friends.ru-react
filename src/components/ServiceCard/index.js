@@ -43,7 +43,7 @@ const ServiceCard = ({ service, highlightName }) => {
     <Link className="reset-link-style" to={`/service/${id}`}>
       <div className="border-top">
         <div className="container">
-          <div className="event-item container-center">
+          <div className="service-item container-center">
             <div className="d-flex align-items-center justify-content-between">
               <ServiceContent />
               <div className="button">
