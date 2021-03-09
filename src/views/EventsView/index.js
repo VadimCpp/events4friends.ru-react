@@ -72,7 +72,7 @@ const EventsView = () => {
     <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
   );
 
-  const notice = {
+  const NOTICES = {
     CONNECT: 'Подключаемся к базе данных...',
     LOADING: 'Загружаем события...',
   };
@@ -118,7 +118,7 @@ const EventsView = () => {
       </div>
       {connectingToFirebase || loadingEvents ? (
         <p align="center">
-          {connectingToFirebase ? notice.CONNECT : notice.LOADING}
+          {connectingToFirebase ? NOTICES.CONNECT : NOTICES.LOADING}
         </p>
       ) : (
         <ul className="events-list pt-3">

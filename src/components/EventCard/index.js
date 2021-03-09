@@ -23,7 +23,7 @@ const EventCard = props => {
     '+0200': 'Клд',
     '+0300': 'Мск',
   };
-  const notice = {
+  const NOTICES = {
     CURRENT: 'Идёт сейчас',
     COMING: 'Начнется в течении часа',
   };
@@ -51,7 +51,7 @@ const EventCard = props => {
         <header className="event-card__header">
           {(isCurrent || isComing) && (
             <small className="event-card__label event-card__label--current">
-              {isCurrent ? notice.CURRENT : notice.COMING}
+              {isCurrent ? NOTICES.CURRENT : NOTICES.COMING}
             </small>
           )}
           {isOwner && <small className="calendar-owner">Мой анонс</small>}
