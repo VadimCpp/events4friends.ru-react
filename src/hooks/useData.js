@@ -26,7 +26,7 @@ export const getConfig = async () => {
 // Get realtime updates with Cloud Firestore
 // https://firebase.google.com/docs/firestore/query-data/listen
 //
-export const subscribeForEventsChanges = (onUpdate, afterSuccess) => {
+export const subscribeForEventsChanges = onUpdate => {
   try {
     const db = firebase.firestore();
     return db.collection('events').onSnapshot(async snapshot => {
@@ -41,7 +41,6 @@ export const subscribeForEventsChanges = (onUpdate, afterSuccess) => {
           ];
         }, []);
         onUpdate(events);
-        afterSuccess(false);
       }
     });
   } catch (error) {
@@ -54,7 +53,7 @@ export const subscribeForEventsChanges = (onUpdate, afterSuccess) => {
 // Get realtime updates with Cloud Firestore
 // https://firebase.google.com/docs/firestore/query-data/listen
 //
-export const subscribeForServicesChanges = (onUpdate, afterSuccess) => {
+export const subscribeForServicesChanges = onUpdate => {
   try {
     const db = firebase.firestore();
     return db.collection('services').onSnapshot(async snapshot => {
@@ -69,7 +68,6 @@ export const subscribeForServicesChanges = (onUpdate, afterSuccess) => {
           ];
         }, []);
         onUpdate(services);
-        afterSuccess(false);
       }
     });
   } catch (error) {
@@ -102,13 +100,17 @@ const useData = () => {
     // Изменения данных в анонсах происходят автоматически без перезагрузки сайтов
     //
     const unsubscribeFromEventsChanges = subscribeForEventsChanges(
-      newEvents => setEvents(newEvents),
-      setLoadingEvents,
+      newEvents => {
+        setEvents(newEvents);
+        setLoadingEvents(false);
+      },
     );
 
     const unsubscribeFromServicesChanges = subscribeForServicesChanges(
-      newServices => setServices(newServices),
-      setLoadingServices,
+      newServices => {
+        setServices(newServices);
+        setLoadingServices(false);
+      },
     );
 
     return () => {
