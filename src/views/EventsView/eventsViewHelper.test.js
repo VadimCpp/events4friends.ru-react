@@ -1,6 +1,7 @@
 const {
   isEventHaseStartTime,
   sortEvents,
+  setEndTime,
 } = require('./helper');
 
 describe('isEventHaseStartTime function receive an event as argument and', () => {
@@ -82,5 +83,46 @@ describe('sortEvents function receive list events and', () => {
       descendingList.push({ start: 'NULL' });
       eventsList.unshift({ start: 'NULL' })
       expect(sortEvents(eventsList, true)).toEqual(descendingList);
+  });
+});
+
+describe('setEndTime function check event end time and', () => {
+  let event;
+  let eventWithDefaultEnd;
+
+  beforeEach(() => {
+    event = {
+      start: '2021-03-23T10:00',
+      end: '2021-03-23T13:00',
+      timezone: '+0200',
+    };
+    eventWithDefaultEnd = {
+      start: '2021-03-23T10:00',
+      end: '2021-03-23T11:00',
+      timezone: '+0200',
+    };
+  });
+
+  test('return event if event has end time', () => {
+    expect(setEndTime(event)).toEqual(event);
+  });
+
+  test('set end time with default duration', () => {
+    event.end = null;
+    expect(setEndTime(event)).toEqual(eventWithDefaultEnd)
+  });
+
+  test('set end time with n duration', () => {
+    const eventDuration = 3;
+    let [endDate, endTime] = event.start.split('T');
+    endTime = endTime.split(':');
+    endTime[0] = Number(endTime[0]) + eventDuration;
+
+    const eventWithDurationEnd = {
+      ...eventWithDefaultEnd,
+      end: `${endDate}T${endTime.join(':')}`,
+    }
+    event.end = null;
+    expect(setEndTime(event, eventDuration)).toEqual(eventWithDurationEnd)
   });
 });
