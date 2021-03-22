@@ -6,14 +6,17 @@ export const EventsFilterType = {
   // TODO: add more types here
 };
 
-export function isEventHaseStartTime(event) {
-  return event.start && event.timezone;
+export function isEventHaseStartTime({ start, timezone }) {
+  return !!start && !!timezone;
 }
 
 export function sortEvents(eventsList, desc = false) {
   return eventsList.sort((a, b) => {
     let startEventA = new Date(a.start).getTime();
     let startEventB = new Date(b.start).getTime();
+    if (Number.isNaN(startEventA) || Number.isNaN(startEventB)) {
+      return -1;
+    }
     if (desc) {
       [startEventA, startEventB] = [startEventB, startEventA];
     }
