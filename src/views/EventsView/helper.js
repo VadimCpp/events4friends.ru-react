@@ -7,7 +7,16 @@ export const EventsFilterType = {
 };
 
 export function isEventHaseStartTime({ start, timezone }) {
-  return !!start && !!timezone;
+  if (!start || !timezone) {
+    return false;
+  }
+  /*
+    Если передать невалидную строку в качестве даты (например "NULL"),
+    Chrome вернёт объект отрицательное количество миллисекунд,
+    Firefox вернёт NaN
+ */
+  const milliseconds = Date.parse(start + timezone);
+  return !Number.isNaN(milliseconds) && milliseconds > 0;
 }
 
 export function sortEvents(eventsList, desc = false) {
@@ -37,12 +46,24 @@ export function setEndTime(event, duration = 1) {
   };
 }
 
+/**
+ * Return absolute time 2021-03-23T10:00+0200 => 2021-03-23T08:00:00.000Z
+ * @param date
+ * @param timezone
+ * @return {Date}
+ */
 export function dateWithTimezon(date, timezone) {
   return moment(`${date}${timezone}`).toDate();
 }
 
-export function filterEvents(eventsList, filterType) {
-  const now = new Date();
+/**
+ * Returns a list of events according to the passed filter type
+ * @param eventsList
+ * @param filterType
+ * @param {Date} dateNow
+ * @return {Events[]}
+ */
+export function filterEvents(eventsList, filterType, dateNow = new Date()) {
   return eventsList.filter(event => {
     if (!isEventHaseStartTime(event)) {
       return false;
@@ -51,9 +72,9 @@ export function filterEvents(eventsList, filterType) {
     const eventEnd = dateWithTimezon(event.end, event.timezone);
     switch (filterType) {
       case EventsFilterType.Upcoming:
-        return eventStart > now || eventEnd > now;
+        return eventStart > dateNow || eventEnd > dateNow;
       case EventsFilterType.Past:
-        return eventStart < now;
+        return eventStart < dateNow;
       default:
         return false;
     }
