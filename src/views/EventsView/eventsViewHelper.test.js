@@ -2,6 +2,9 @@ const {
   isEventHaseStartTime,
   sortEvents,
   setEndTime,
+  dateWithTimezon,
+  filterEvents,
+  EventsFilterType,
 } = require('./helper');
 
 describe('isEventHaseStartTime function receive an event as argument and', () => {
@@ -16,6 +19,10 @@ describe('isEventHaseStartTime function receive an event as argument and', () =>
   });
   test('should return false if event has not start', () => {
     event.start = '';
+    expect(isEventHaseStartTime(event)).toEqual(false);
+  });
+  test('should return false if event start is incorrect', () => {
+    event.start = 'NULL';
     expect(isEventHaseStartTime(event)).toEqual(false);
   });
   test('should return false if event has not timezone', () => {
@@ -124,5 +131,57 @@ describe('setEndTime function check event end time and', () => {
     }
     event.end = null;
     expect(setEndTime(event, eventDuration)).toEqual(eventWithDurationEnd)
+  });
+});
+
+describe('dateWithTimezone function receive date (YYYY-MM-DDTHH:mm) and timezone and', () => {
+  const date = '2021-03-23T10:00';
+  const timezone = '+0200';
+  test('should return date with timezone', () => {
+    expect(dateWithTimezon(date, timezone)).toEqual(new Date('2021-03-23T08:00:00.000Z'));
+  });
+});
+
+describe('filterEvents receive list events, filter type and', () => {
+  const now = '2021-03-25T12:00';
+  const upcomingEvents = [
+    { start: '2021-03-25T13:00', timezone: '+0200' },
+    { start: '2021-03-26T13:00', timezone: '+0200' },
+    { start: '2021-03-25T19:00', timezone: '+0200' },
+    { start: '2021-03-26T13:00', timezone: '+0200' },
+    { start: '2021-03-27T00:00', timezone: '+0200' },
+  ];
+  const pastEvents = [
+    { start: '2021-03-23T13:00', timezone: '+0200' },
+    { start: '2021-03-23T14:00', timezone: '+0200' },
+    { start: '2021-03-24T14:00', timezone: '+0200' },
+    { start: '2021-03-15T14:00', timezone: '+0200' },
+    { start: '2021-03-23T00:00', timezone: '+0200' },
+  ];
+  let eventsList;
+
+  beforeEach(() => {
+    eventsList = [
+      { start: '2021-03-23T13:00', timezone: '+0200' },
+      { start: '2021-03-25T13:00', timezone: '+0200' },
+      { start: '2021-03-23T14:00', timezone: '+0200' },
+      { start: '2021-03-26T13:00', timezone: '+0200' },
+      { start: '2021-03-24T14:00', timezone: '+0200' },
+      { start: '2021-03-25T19:00', timezone: '+0200' },
+      { start: 'NULL', timezone: '+0200' },
+      { start: '2021-03-15T14:00', timezone: '+0200' },
+      { start: '2021-03-26T13:00', timezone: '+0200' },
+      { start: '2021-03-26T13:00', timezone: 'NULL' },
+      { start: '2021-03-23T00:00', timezone: '+0200' },
+      { start: '2021-03-27T00:00', timezone: '+0200' },
+    ];
+  });
+
+  test('should return upcoming events', () => {
+    expect(filterEvents(eventsList, EventsFilterType.Upcoming, new Date(now))).toEqual(upcomingEvents);
+  });
+
+  test('should return past events', () => {
+    expect(filterEvents(eventsList, EventsFilterType.Past, new Date(now))).toEqual(pastEvents);
   });
 });
