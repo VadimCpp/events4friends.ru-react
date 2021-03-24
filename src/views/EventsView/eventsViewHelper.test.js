@@ -4,8 +4,17 @@ const {
   setEndTime,
   dateWithTimezon,
   filterEvents,
+  isCurrentEvent,
+  isComingEvent,
   EventsFilterType,
 } = require('./helper');
+
+const KLD = '+0200';
+const MSK = '+0300';
+
+function getNowMs(dateString, timezone) {
+  return new Date(dateString + timezone).getTime();
+}
 
 describe('isEventHaseStartTime function receive an event as argument and', () => {
   let event;
@@ -183,5 +192,75 @@ describe('filterEvents receive list events, filter type and', () => {
 
   test('should return past events', () => {
     expect(filterEvents(eventsList, EventsFilterType.Past, new Date(now))).toEqual(pastEvents);
+  });
+});
+
+describe('isCurrentEvent returns whether the event is currently running', () => {
+  let start, end, timezone, dateNow;
+
+  beforeEach(() => {
+    start = '2021-03-23T13:00';
+    end = '2021-03-23T14:00';
+    timezone = KLD;
+    dateNow = '2021-03-23T13:30'
+  });
+
+  test('should return true, if timezones are equal', () => {
+    expect(isCurrentEvent(start, end, timezone, new Date(dateNow + KLD))).toBe(true);
+    timezone = MSK;
+    expect(isCurrentEvent(start, end, timezone, new Date(dateNow + MSK))).toBe(true);
+  });
+
+  test('should return false, if timezones are different', () => {
+    // начало в 13 (14 по Москве), текущее Московское время 13:30
+    expect(isCurrentEvent(start, end, timezone, new Date(dateNow + MSK))).toBe(false);
+    timezone = MSK;
+    // начало в 13 (по Москве), текущее Калининградское время 13:30 (мероприятие закончилось)
+    expect(isCurrentEvent(start, end, timezone, new Date(dateNow + KLD))).toBe(false);
+  });
+
+  test('should return true, if timezones are different and the duration of the event is more than an hour ', () => {
+    start = '2021-03-23T12:00';
+    end = '2021-03-23T15:00';
+    expect(isCurrentEvent(start, end, timezone, new Date(dateNow + MSK))).toBe(true);
+    timezone = MSK;
+    expect(isCurrentEvent(start, end, timezone, new Date(dateNow + KLD))).toBe(true);
+  });
+});
+
+describe('isComingEvent if the event starts soon', () => {
+  let start, timezone, notifyAdvance, now;
+
+  beforeEach(() => {
+    start = '2021-03-23T12:00';
+    timezone = KLD;
+    notifyAdvance = 1;
+    now = '2021-03-23T11:30';
+  });
+
+  test('should return true if timezone are equal', () => {
+    const nowMs = getNowMs(now, KLD);
+    expect(isComingEvent(start, timezone, notifyAdvance, nowMs)).toBe(true);
+  });
+
+  test('should return false if timezone ar different', () => {
+    const nowMs = getNowMs(now, MSK);
+    expect(isComingEvent(start, timezone, notifyAdvance, nowMs)).toBe(false);
+  });
+
+  test('should return true if timezone ar different', () => {
+    now = '2021-03-23T12:30';
+    const nowMs = getNowMs(now, MSK);
+
+    expect(isComingEvent(start, timezone, notifyAdvance, nowMs)).toBe(true);
+  });
+
+  test('notify n hours in advance', () => {
+    notifyAdvance = 2;
+    now = '2021-03-23T10:30';
+    expect(isComingEvent(start, timezone, notifyAdvance, getNowMs(now, KLD))).toBe(true);
+    notifyAdvance = 3;
+    now = now = '2021-03-23T09:30';
+    expect(isComingEvent(start, timezone, notifyAdvance, getNowMs(now, KLD))).toBe(true);
   });
 });
