@@ -81,16 +81,36 @@ export function filterEvents(eventsList, filterType, dateNow = new Date()) {
   });
 }
 
-export function isCurrentEvent(start, end, timezone) {
+/**
+ * Returns true if the event is already in progress
+ * @param {String} start
+ * @param {String} end
+ * @param {String} timezone
+ * @param {Date} dateNow
+ * @return {boolean}
+ */
+export function isCurrentEvent(start, end, timezone, dateNow = new Date()) {
   const startDate = dateWithTimezon(start, timezone);
   const endDate = dateWithTimezon(end, timezone);
-  const now = new Date();
-  return startDate < now && endDate > now;
+  return startDate < dateNow && endDate > dateNow;
 }
 
-export function isComingEvent(start, timezone) {
+/**
+ * Returns true if there are n hours left before the event
+ * @param {String} start
+ * @param {String} timezone
+ * @param {Number} notifyAdvance - hours
+ * @param {Number} nowMs - ms
+ * @return {boolean}
+ */
+export function isComingEvent(
+  start,
+  timezone,
+  notifyAdvance = 1,
+  nowMs = Date.now(),
+) {
   const HOUR = 3600000;
   const startDate = new Date(`${start}${timezone}`).getTime();
-  const timeBefore = startDate - Date.now();
-  return timeBefore > 0 && timeBefore < HOUR;
+  const timeBefore = startDate - nowMs;
+  return timeBefore > 0 && timeBefore < notifyAdvance * HOUR;
 }
