@@ -1,14 +1,22 @@
 import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import moment from 'moment';
+
+// components
 import Button from '../../components/Button';
 import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import StoreBadge from '../../components/StoreBadge';
+import MessengerLink from '../../components/MessengerLink';
+
+// contexts
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
+
+// hooks
+import useEventsLogic from '../../hooks/useEventsLogic';
+
+// styles
 import './EventView.css';
-import MessengerLink from '../../components/MessengerLink';
 
 const EventView = ({ match, history }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
@@ -20,31 +28,22 @@ const EventView = ({ match, history }) => {
   const { user, connectingToFirebase } = authContext;
   const { events, loadingEvents, deleteEvent } = dataContext;
 
+  const { getVerboseDate, getVerboseTime } = useEventsLogic();
+
   let event = null;
-  let name = null;
-  let startDate = 'Не указано';
-  let startTime = 'Не указано';
-  let timezone = null;
 
   for (let i = 0; i < events.length; i++) {
     if (eventId === events[i].id) {
       event = events[i];
-      name = 'База данных events4friends';
-      startDate = event
-        ? moment(event.start).format('D MMMM, dddd')
-        : 'Не указано';
-      startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
-      timezone = events[i].timezone;
       break;
     }
   }
 
+  const startDate = event ? getVerboseDate(event) : 'Не указано';
+  const startTime = event ? getVerboseTime(event) : 'Не указано';
+
   const isAbleToDeleteOrEdit =
-    !deletingInProgress &&
-    user &&
-    event &&
-    user.email === event.contact &&
-    name === 'База данных events4friends';
+    !deletingInProgress && user && event && user.email === event.contact;
 
   const onPressDeleteEvent = () => {
     if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
@@ -111,7 +110,6 @@ const EventView = ({ match, history }) => {
               {event && (
                 <div>
                   <div>
-                    {name && <small className="calendar-name">#{name}</small>}
                     <p>
                       <span role="img" aria-label="Date">
                         📅
@@ -120,14 +118,8 @@ const EventView = ({ match, history }) => {
                       <span role="img" aria-label="Time">
                         🕗
                       </span>
-                      <span className="event-time">{startTime}</span>
-                      {timezone === '+0200' && (
-                        <span className="event-timezone">Клд</span>
-                      )}
-                      {timezone === '+0300' && (
-                        <span className="event-timezone">Мск</span>
-                      )}
-                      － {event.summary}
+                      <span className="event-time">{startTime}</span> －{' '}
+                      {event.summary}
                       {event.isOnline ? (
                         <span>
                           <span role="img" aria-label="Location">
