@@ -1,27 +1,28 @@
 /* eslint-disable indent */
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
-import {
-  sortEvents,
-  setEndTime,
-  EventsFilterType,
-  filterEvents,
-  isCurrentEvent,
-  isComingEvent,
-} from './helper';
+import useEventsLogic from '../../hooks/useEventsLogic';
+import EventsFilterType from '../../enums';
 import './EventsView.css';
 
 const EventsView = () => {
-  const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
   const { user, connectingToFirebase } = authContext;
   const { events, loadingEvents } = dataContext;
+  const { getSortedEvents } = useEventsLogic();
   const isAuth = user && !user.isAnonymous;
+
+  const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
+  const [sortedEvents, setSortedEvents] = useState([]);
+
+  useEffect(() => {
+    setSortedEvents(getSortedEvents(events, filterType));
+  }, [events, filterType, getSortedEvents]);
 
   /**
    * @param {Event} event
@@ -34,30 +35,15 @@ const EventsView = () => {
     if (!event || !source) {
       return null;
     }
-    const isCurrent = isCurrentEvent(event.start, event.end, event.timezone);
-    const isComing = isComingEvent(event.start, event.timezone);
 
     return (
       <li key={id} className="events-list__item">
         <div className="container container-center">
-          <EventCard
-            event={event}
-            name={name}
-            isCurrent={isCurrent}
-            isComing={isComing}
-          />
+          <EventCard event={event} name={name} />
         </div>
       </li>
     );
   };
-
-  let sortedEvents = events.map(event => setEndTime(event));
-  sortedEvents = filterEvents(sortedEvents, filterType);
-  if (filterType === EventsFilterType.Upcoming) {
-    sortedEvents = sortEvents(sortedEvents);
-  } else if (filterType === EventsFilterType.Past) {
-    sortedEvents = sortEvents(sortedEvents, true);
-  }
 
   const eventsList = sortedEvents.map(item => {
     return {

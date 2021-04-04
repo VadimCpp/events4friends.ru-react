@@ -1,44 +1,24 @@
 import React, { useContext } from 'react';
-import moment from 'moment';
-import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import useEventsLogic from '../../hooks/useEventsLogic';
 import './EventCard.css';
 
-function timezoneToOffset(timezone = '+0300') {
-  return Number(timezone) / 100;
-}
-
-function getUserTimezoneOffset() {
-  // Часовой сдвиг имеет отрицательный знак, возвращается в минутах: -180 (Мск)
-  return new Date().getTimezoneOffset() / 60;
-}
-
 const EventCard = props => {
-  const { event, name, isCurrent, isComing } = props;
+  const { event, name } = props;
   const authContext = useContext(AuthContext);
-  const { start, contact, timezone, id, summary, isOnline, location } = event;
+  const { contact, id, summary, isOnline, location } = event;
 
-  const timeZones = {
-    '+0200': 'Клд',
-    '+0300': 'Мск',
-  };
-  const NOTICES = {
-    CURRENT: 'Идёт сейчас',
-    COMING: 'Начнется в течении часа',
-  };
-  const startDate = moment(start).format('D MMMM, dddd');
-  const startTime = moment(start).format('HH:mm');
-  const dateTime = `${start}${timezone}`;
-  const userTimezoneOffset = getUserTimezoneOffset();
-  const startOffset = timezoneToOffset(timezone);
-  let userStartTime = null;
-  if (userTimezoneOffset + startOffset) {
-    const offset = -(userTimezoneOffset + startOffset);
-    userStartTime = moment(`${start}`)
-      .add(offset, 'h')
-      .format('HH:mm');
-  }
+  const {
+    isCurrentEvent,
+    isStartWithinAnHourEvent,
+    getVerboseDate,
+    getVerboseTime,
+  } = useEventsLogic();
+
+  const startDate = getVerboseDate(event);
+  const startTime = getVerboseTime(event);
+
   const isOwner =
     authContext.user &&
     event &&
@@ -49,27 +29,28 @@ const EventCard = props => {
     <div className="event-item">
       <Link className="reset-link-style" to={`/event/${id}`}>
         <header className="event-card__header">
-          {(isCurrent || isComing) && (
+          {isCurrentEvent(event) ? (
             <small className="event-card__label event-card__label--current">
-              {isCurrent ? NOTICES.CURRENT : NOTICES.COMING}
+              Идет сейчас
             </small>
+          ) : (
+            isStartWithinAnHourEvent(event) && (
+              <small className="event-card__label event-card__label--current">
+                Начнется в течение часа
+              </small>
+            )
           )}
+
           {isOwner && <small className="calendar-owner">Мой анонс</small>}
           <small className="event-card__calendar-name ">#{name}</small>
         </header>
         <div className="d-flex align-items-center justify-content-between">
           <p>
-            <time dateTime={dateTime}>
+            <time>
               <span aria-hidden="true">📅</span>
               <span className="event-date">{startDate}</span>
               <span aria-hidden="true">🕗</span>
               <span className="event-time">{startTime}</span>
-              {timezone && (
-                <span className="event-timezone">
-                  {timeZones[timezone]}{' '}
-                  {userStartTime && `(${userStartTime} по вашему времени)`}
-                </span>
-              )}
             </time>
             － {summary}
             {isOnline ? (
