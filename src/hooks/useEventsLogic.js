@@ -31,68 +31,74 @@ const useEventsLogic = () => {
     return end;
   }, []);
 
+  const sortAscending = useCallback((a, b) => {
+    let retVal = 0;
+    if (a.start > b.start) {
+      retVal = 1;
+    } else if (a.start < b.start) {
+      retVal = -1;
+    }
+    return retVal;
+  }, []);
+
+  const sortDescending = useCallback((a, b) => {
+    let retVal = 0;
+    if (a.start < b.start) {
+      retVal = 1;
+    } else if (a.start > b.start) {
+      retVal = -1;
+    }
+    return retVal;
+  }, []);
+
+  const sortUpcomingEvents = useCallback(
+    (evnts, now) => {
+      let sortedEvents = [];
+      sortedEvents = evnts.filter(event => {
+        const end = getEndDate(event);
+        return end && end > now;
+      });
+
+      sortedEvents.sort(sortAscending);
+      return sortedEvents;
+    },
+    [getEndDate, sortAscending],
+  );
+
+  const sortPastEvents = useCallback(
+    (evnts, now) => {
+      let sortedEvents = [];
+      const currentEvents = evnts.filter(event => {
+        const end = getEndDate(event);
+        const start = getStartDate(event);
+        return end && end > now && start && start < now;
+      });
+      currentEvents.sort(sortDescending);
+
+      const pastEvents = evnts.filter(event => {
+        const end = getEndDate(event);
+        return end && end < now;
+      });
+      pastEvents.sort(sortDescending);
+
+      sortedEvents = [...currentEvents, ...pastEvents];
+      return sortedEvents;
+    },
+    [getEndDate, getStartDate, sortDescending],
+  );
+
   const getSortedEvents = useCallback(
     (events, filterType) => {
       const now = new Date();
       let sortedEvents = [];
-
       if (filterType === EventsFilter.Upcoming) {
-        sortedEvents = events.filter(event => {
-          const end = getEndDate(event);
-          return end && end > now;
-        });
-
-        sortedEvents.sort((a, b) => {
-          let retVal = 0;
-          if (a.start > b.start) {
-            retVal = 1;
-          } else if (a.start < b.start) {
-            retVal = -1;
-          }
-          return retVal;
-        });
+        sortedEvents = sortUpcomingEvents(events, now);
       } else if (filterType === EventsFilter.Past) {
-        const currentEvents = events.filter(event => {
-          const end = getEndDate(event);
-          const start = getStartDate(event);
-          return end && end > now && start && start < now;
-        });
-        currentEvents.sort((a, b) => {
-          let retVal = 0;
-          if (a.start < b.start) {
-            retVal = 1;
-          } else if (a.start > b.start) {
-            retVal = -1;
-          }
-          return retVal;
-        });
-
-        const pastEvents = events.filter(event => {
-          const end = getEndDate(event);
-          return end && end < now;
-        });
-        pastEvents.sort((a, b) => {
-          let retVal = 0;
-          if (a.start < b.start) {
-            retVal = 1;
-          } else if (a.start > b.start) {
-            retVal = -1;
-          }
-          return retVal;
-        });
-
-        sortedEvents = [...currentEvents, ...pastEvents];
-
-        //
-        // NOTE!
-        // Cut array to 10 items to increase performance
-        //
-        sortedEvents = sortedEvents.slice(0, 9);
+        sortedEvents = sortPastEvents(events, now);
       }
-
       return sortedEvents;
     },
-    [getEndDate, getStartDate],
+    [sortUpcomingEvents, sortPastEvents],
   );
 
   const isCurrentEvent = useCallback(
