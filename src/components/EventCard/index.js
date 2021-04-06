@@ -1,20 +1,24 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+// contexts
 import { AuthContext } from '../../context/AuthContext';
-import useEventsLogic from '../../hooks/useEventsLogic';
+
+// style
 import './EventCard.css';
+
+// utils
+import {
+  isCurrentEvent,
+  isStartWithinAnHourEvent,
+  getVerboseDate,
+  getVerboseTime,
+} from '../../utils/eventsLogic';
 
 const EventCard = props => {
   const { event, name } = props;
   const authContext = useContext(AuthContext);
   const { contact, id, summary, isOnline, location } = event;
-
-  const {
-    isCurrentEvent,
-    isStartWithinAnHourEvent,
-    getVerboseDate,
-    getVerboseTime,
-  } = useEventsLogic();
 
   const startDate = getVerboseDate(event);
   const startTime = getVerboseTime(event);

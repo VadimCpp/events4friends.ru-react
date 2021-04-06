@@ -5,16 +5,17 @@ import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
-import useEventsLogic from '../../hooks/useEventsLogic';
 import EventsFilterType from '../../enums';
 import './EventsView.css';
+
+// utils
+import { getSortedEvents } from '../../utils/eventsLogic';
 
 const EventsView = () => {
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
   const { user, connectingToFirebase } = authContext;
   const { events, loadingEvents } = dataContext;
-  const { getSortedEvents } = useEventsLogic();
   const isAuth = user && !user.isAnonymous;
 
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
@@ -22,7 +23,7 @@ const EventsView = () => {
 
   useEffect(() => {
     setSortedEvents(getSortedEvents(events, filterType));
-  }, [events, filterType, getSortedEvents]);
+  }, [events, filterType]);
 
   /**
    * @param {Event} event

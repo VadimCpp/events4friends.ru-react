@@ -12,11 +12,11 @@ import MessengerLink from '../../components/MessengerLink';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 
-// hooks
-import useEventsLogic from '../../hooks/useEventsLogic';
-
 // styles
 import './EventView.css';
+
+// utils
+import { getVerboseDate, getVerboseTime } from '../../utils/eventsLogic';
 
 const EventView = ({ match, history }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
@@ -27,8 +27,6 @@ const EventView = ({ match, history }) => {
 
   const { user, connectingToFirebase } = authContext;
   const { events, loadingEvents, deleteEvent } = dataContext;
-
-  const { getVerboseDate, getVerboseTime } = useEventsLogic();
 
   let event = null;
 
