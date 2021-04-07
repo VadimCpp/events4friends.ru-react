@@ -1,7 +1,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
-import { updateTelegramPinnedMessage } from './telegram';
+import { notifyTelegramBot } from './telegram';
 
 export const deleteEvent = (event, user, callback) => {
   console.info('Delete event:', event.id);
@@ -12,7 +12,7 @@ export const deleteEvent = (event, user, callback) => {
     .delete()
     .then(() => {
       callback(true);
-      updateTelegramPinnedMessage(
+      notifyTelegramBot(
         {
           summary: event.summary,
           start: event.start,
@@ -42,7 +42,7 @@ export const editEvent = (data, docId, user, callback) => {
     .then(() => {
       console.info('Document successfully updated!');
       callback(docId);
-      updateTelegramPinnedMessage(
+      notifyTelegramBot(
         {
           summary: data.summary,
           start: data.start,
@@ -69,7 +69,7 @@ export const createEvent = (eventData, user, callback) => {
     .then(data => {
       if (data && data.id && callback) {
         callback(data.id);
-        updateTelegramPinnedMessage(
+        notifyTelegramBot(
           {
             summary: eventData.summary,
             start: eventData.start,

@@ -4,7 +4,7 @@
  * @param {Object} event событие, которое было изменено
  * @param {string} userName имя админа, который все изменения
  */
-export const updateTelegramPinnedMessage = (event, userName) => {
+export const notifyTelegramBot = (event, userName) => {
   console.info('Updating Telegram pinned message');
   fetch('https://events4friendsbot.herokuapp.com/update', {
     method: 'post',
