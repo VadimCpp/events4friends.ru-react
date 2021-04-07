@@ -3,7 +3,7 @@ export const updateTelegramPinnedMessage = () => {
   fetch('https://events4friendsbot.herokuapp.com/update', {
     method: 'post',
     headers: {
-      Accept: 'application/json',
+      Accept: 'application/json, text/plain, */*',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
