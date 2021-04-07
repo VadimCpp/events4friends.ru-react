@@ -11,7 +11,7 @@ const NewEventView = () => {
 
   const saveHandler = useCallback(
     (event, cb) => {
-      dataContext.createEvent(event, cb);
+      dataContext.createEvent(event, authContext.user, cb);
     },
     [dataContext],
   );

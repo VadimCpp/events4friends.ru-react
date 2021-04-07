@@ -13,7 +13,7 @@ const EditEventView = () => {
 
   const saveHandler = useCallback(
     (event, cb) => {
-      dataContext.editEvent(event, event.id, cb);
+      dataContext.editEvent(event, event.id, authContext.user, cb);
     },
     [dataContext],
   );

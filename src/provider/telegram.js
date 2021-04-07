@@ -1,4 +1,10 @@
-export const updateTelegramPinnedMessage = () => {
+/**
+ * Функция отправляет запрос в телеграм бот для обновления данных
+ *
+ * @param {Object} event событие, которое было изменено
+ * @param {string} userName имя админа, который все изменения
+ */
+export const updateTelegramPinnedMessage = (event, userName) => {
   console.info('Updating Telegram pinned message');
   fetch('https://events4friendsbot.herokuapp.com/update', {
     method: 'post',
@@ -7,19 +13,14 @@ export const updateTelegramPinnedMessage = () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      event: {
-        id: 'ACCt4USu1iZMLxM65aDY',
-        summary: 'Воскресная служба в Родниках',
-        start: '2020-11-15T08:00',
-        timezone: '+0200',
-      },
-      userName: 'Организатор',
+      event,
+      userName,
     }),
   })
-    .then(data => {
-      console.info('Updating Telegram pinned message done:', data);
+    .then(() => {
+      console.info('Updating Telegram pinned message done');
     })
-    .catch(error => {
-      console.warn('Failed to update Telegram pinned message:', error);
+    .catch(() => {
+      console.warn('Failed to update Telegram pinned message');
     });
 };

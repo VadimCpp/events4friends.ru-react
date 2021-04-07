@@ -3,16 +3,25 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import { updateTelegramPinnedMessage } from './telegram';
 
-export const deleteEvent = (eventId, callback) => {
-  console.info('Delete event, eventId:', eventId);
+export const deleteEvent = (event, user, callback) => {
+  console.info('Delete event:', event.id);
 
   const db = firebase.firestore();
   db.collection('events')
-    .doc(eventId)
+    .doc(event.id)
     .delete()
     .then(() => {
       callback(true);
-      updateTelegramPinnedMessage();
+      updateTelegramPinnedMessage(
+        {
+          summary: event.summary,
+          start: event.start,
+          timezone: event.timezone,
+          id: event.id,
+          delete: true,
+        },
+        user.displayName || user.email || 'Не указано',
+      );
     })
     .catch(error => {
       callback(false);
@@ -23,7 +32,7 @@ export const deleteEvent = (eventId, callback) => {
     });
 };
 
-export const editEvent = (data, docId, callback) => {
+export const editEvent = (data, docId, user, callback) => {
   console.info('Updating event');
 
   const db = firebase.firestore();
@@ -33,7 +42,16 @@ export const editEvent = (data, docId, callback) => {
     .then(() => {
       console.info('Document successfully updated!');
       callback(docId);
-      updateTelegramPinnedMessage();
+      updateTelegramPinnedMessage(
+        {
+          summary: data.summary,
+          start: data.start,
+          timezone: data.timezone,
+          id: data.id,
+          edit: true,
+        },
+        user.displayName || user.email || 'Не указано',
+      );
     })
     .catch(error => {
       console.warn('Error updating event', error);
@@ -41,17 +59,26 @@ export const editEvent = (data, docId, callback) => {
     });
 };
 
-export const createEvent = (data, callback) => {
+export const createEvent = (eventData, user, callback) => {
   console.info('Creating event');
 
   const db = firebase.firestore();
   db.collection('events')
-    .add(data)
+    .add(eventData)
     // eslint-disable-next-line no-shadow
     .then(data => {
       if (data && data.id && callback) {
         callback(data.id);
-        updateTelegramPinnedMessage();
+        updateTelegramPinnedMessage(
+          {
+            summary: eventData.summary,
+            start: eventData.start,
+            timezone: eventData.timezone,
+            id: data.id,
+            create: true,
+          },
+          user.displayName || user.email || 'Не указано',
+        );
       } else {
         console.warn('Something went wrong, contact support');
         alert(

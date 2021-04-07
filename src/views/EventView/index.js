@@ -46,7 +46,7 @@ const EventView = ({ match, history }) => {
   const onPressDeleteEvent = () => {
     if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
       setDeletingInProgress(true);
-      deleteEvent(event.id, success => {
+      deleteEvent(event, user, success => {
         if (success) {
           console.info('Event deleted successfully, navigate to list view');
           history.push('/events');
