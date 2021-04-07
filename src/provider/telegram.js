@@ -1,7 +1,15 @@
 export const updateTelegramPinnedMessage = () => {
   console.info('Updating Telegram pinned message');
   fetch('https://events4friendsbot.herokuapp.com/update', {
-    body: {},
+    body: {
+      event: {
+        id: 'ACCt4USu1iZMLxM65aDY',
+        summary: 'Воскресная служба в Родниках',
+        start: '2020-11-15T08:00',
+        timezone: '+0200',
+      },
+      userName: 'Организатор',
+    },
     method: 'post',
   })
     .then(data => {
