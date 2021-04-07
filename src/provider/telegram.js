@@ -6,7 +6,7 @@ export const updateTelegramPinnedMessage = () => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: {
+    body: JSON.stringify({
       event: {
         id: 'ACCt4USu1iZMLxM65aDY',
         summary: 'Воскресная служба в Родниках',
@@ -14,7 +14,7 @@ export const updateTelegramPinnedMessage = () => {
         timezone: '+0200',
       },
       userName: 'Организатор',
-    },
+    }),
   })
     .then(data => {
       console.info('Updating Telegram pinned message done:', data);
