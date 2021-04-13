@@ -25,7 +25,7 @@ export function timeZoneToCityName(timezone) {
 /**
  * Возвращает время начала мероприятия
  * @param {Object} event событие
- * @returns {Date}
+ * @returns {Date | null}
  */
 export const getStartDate = event => {
   let start = null;
@@ -38,7 +38,7 @@ export const getStartDate = event => {
 /**
  * Возвращает время окончания мероприятия
  * @param {Object} event событие
- * @returns {Date}
+ * @returns {Date | null}
  */
 export const getEndDate = event => {
   let end = null;
@@ -109,7 +109,7 @@ export const sortUpcomingEvents = (events, now) => {
  * Функция формировании списка прошедших мероприятий.
  * @param {Array} events общий список мероприятий
  * @param {Date} now метка времени, которую считать текущим временем
- * @returns {number}
+ * @returns {Array}
  */
 export const sortPastEvents = (events, now) => {
   let sortedEvents = [];
@@ -134,7 +134,7 @@ export const sortPastEvents = (events, now) => {
  * Формирование списка прошедших или предстоящих мероприятий.
  * @param {Array} events общий список мероприятий
  * @param {string} filterType тип фильтра
- * @returns {number}
+ * @returns {Array}
  */
 export const getSortedEvents = (events, filterType) => {
   const now = new Date();
@@ -169,7 +169,7 @@ export const isStartWithinAnHourEvent = event => {
   const start = getStartDate(event);
   const minusHour = new Date();
   if (start) {
-    minusHour.setTime(start.getTime() - 1 * 60 * 60 * 1000); // extract an hour
+    minusHour.setTime(start.getTime() - 1 * 60 * 60 * 1000); // отнимаем час
   }
   return start && start > now && minusHour && minusHour < now;
 };
