@@ -9,7 +9,7 @@ export const notifyTelegramBot = (event, userName) => {
   fetch('https://events4friendsbot.herokuapp.com/update', {
     method: 'post',
     headers: {
-      Accept: 'application/json, text/plain, */*',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
