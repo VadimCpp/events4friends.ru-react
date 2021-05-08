@@ -16,7 +16,7 @@ import {
 } from '../../utils/eventsLogic';
 
 const EventCard = props => {
-  const { event, name } = props;
+  const { event } = props;
   const authContext = useContext(AuthContext);
   const { contact, id, summary, isOnline, location } = event;
 
@@ -24,10 +24,7 @@ const EventCard = props => {
   const startTime = getVerboseTime(event);
 
   const isOwner =
-    authContext.user &&
-    event &&
-    authContext.user.email === contact &&
-    name === 'База данных events4friends';
+    authContext.user && event && authContext.user.email === contact;
 
   return (
     <div className="event-item">
@@ -46,7 +43,6 @@ const EventCard = props => {
           )}
 
           {isOwner && <small className="calendar-owner">Мой анонс</small>}
-          <small className="event-card__calendar-name ">#{name}</small>
         </header>
         <div className="d-flex align-items-center justify-content-between">
           <p>
