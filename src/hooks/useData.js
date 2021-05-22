@@ -21,6 +21,16 @@ export const getConfig = async () => {
   }
 };
 
+export const getCommunities = async () => {
+  try {
+    const db = firebase.firestore();
+    const snapshot = await db.collection('communities').get();
+    return snapshot.docs.map(doc => doc.data());
+  } catch (error) {
+    console.warn('Error getting communities, skip: ', error);
+  }
+};
+
 //
 // NOTE!
 // Get realtime updates with Cloud Firestore
@@ -79,6 +89,7 @@ const useData = () => {
   const [events, setEvents] = useState([]);
   const [services, setServices] = useState([]);
   const [config, setConfig] = useState({});
+  const [communities, setCommuities] = useState([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [loadingServices, setLoadingServices] = useState(true);
 
@@ -86,6 +97,8 @@ const useData = () => {
     const getData = async () => {
       const aConfig = await getConfig();
       setConfig(aConfig);
+      const aCommunities = await getCommunities();
+      setCommuities(aCommunities);
     };
 
     //
@@ -127,6 +140,7 @@ const useData = () => {
     events,
     services,
     config,
+    communities,
     loadingEvents,
     loadingServices,
   };
