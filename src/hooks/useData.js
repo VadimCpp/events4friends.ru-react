@@ -25,7 +25,14 @@ export const getCommunities = async () => {
   try {
     const db = firebase.firestore();
     const snapshot = await db.collection('communities').get();
-    return snapshot.docs.map(doc => doc.data());
+    return snapshot.docs.map(doc => {
+      return {
+        name: 'Не указано',
+        description: 'Не указано',
+        ...doc.data(),
+        id: doc.id,
+      };
+    });
   } catch (error) {
     console.warn('Error getting communities, skip: ', error);
   }
