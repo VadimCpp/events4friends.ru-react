@@ -18,6 +18,9 @@ const WelcomeView = ({ history }) => {
     const communityId = cookies.get('communityId');
     if (!communityId) {
       history.push('/communities/');
+    } else {
+      // eslint-disable-next-line no-console
+      console.log(`Current community id is ${communityId}`);
     }
   }, []);
 

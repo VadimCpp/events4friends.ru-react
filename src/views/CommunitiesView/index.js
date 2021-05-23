@@ -1,5 +1,6 @@
 import React, { useContext, useCallback } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import ButtonLink from '../../components/ButtonLink';
 import StoreBadge from '../../components/StoreBadge';
 import CommunityList from '../../components/CommunityList';
@@ -8,11 +9,15 @@ import './CommunitiesView.css';
 import communities from './communities.json';
 
 const CommunitiesView = () => {
+  const history = useHistory();
   const dataContext = useContext(DataContext);
   const { communities: communitiesList } = dataContext;
 
   const onCommunityClick = useCallback(communityId => {
-    alert(communityId);
+    // Cookies
+    const cookies = new Cookies();
+    cookies.set('communityId', communityId);
+    history.push('/');
   }, []);
 
   return (
