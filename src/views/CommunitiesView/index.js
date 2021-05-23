@@ -9,7 +9,7 @@ import communities from './communities.json';
 
 const CommunitiesView = () => {
   const dataContext = useContext(DataContext);
-  // const { communities } = dataContext;
+  const { communities: communitiesList } = dataContext;
 
   return (
     <div className="communitiesview">
@@ -23,6 +23,17 @@ const CommunitiesView = () => {
       </div>
       <div className="border-top mt-3">
         <p className="mt-3">Все сообщества Калининграда</p>
+        {communitiesList.map(community => (
+          <div key={community.id} className="pt-2">
+            <img
+              src={`data:image/png;base64, ${community.logo}`}
+              alt="Logo"
+              width="32"
+              height="32"
+            />
+            <span className="pl-2">{community.name}</span>
+          </div>
+        ))}
         <CommunityList communities={communities} />
       </div>
       <div className="border-top mt-3 mb-3">
