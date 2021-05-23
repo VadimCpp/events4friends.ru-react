@@ -17,7 +17,7 @@ const WelcomeView = ({ history }) => {
     const cookies = new Cookies();
     const communityId = cookies.get('communityId');
     if (!communityId) {
-      console.log('TODO: navigate to communities screen');
+      history.push('/communities/');
     }
   }, []);
 

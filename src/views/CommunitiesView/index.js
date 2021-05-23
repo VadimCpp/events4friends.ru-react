@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { withRouter } from 'react-router-dom';
 import ButtonLink from '../../components/ButtonLink';
 import StoreBadge from '../../components/StoreBadge';
@@ -10,6 +10,10 @@ import communities from './communities.json';
 const CommunitiesView = () => {
   const dataContext = useContext(DataContext);
   const { communities: communitiesList } = dataContext;
+
+  const onCommunityClick = useCallback(communityId => {
+    alert(communityId);
+  }, []);
 
   return (
     <div className="communitiesview">
@@ -25,13 +29,19 @@ const CommunitiesView = () => {
         <p className="mt-3">Все сообщества Калининграда</p>
         {communitiesList.map(community => (
           <div key={community.id} className="pt-2">
-            <img
-              src={`data:image/png;base64, ${community.logo}`}
-              alt="Logo"
-              width="32"
-              height="32"
-            />
-            <span className="pl-2">{community.name}</span>
+            <button
+              type="button"
+              className="btn btn-light"
+              onClick={() => onCommunityClick(community.id)}
+            >
+              <img
+                src={`data:image/png;base64, ${community.logo}`}
+                alt="Logo"
+                width="32"
+                height="32"
+              />
+              <span className="pl-2">{community.name}</span>
+            </button>
           </div>
         ))}
         <CommunityList communities={communities} />
