@@ -25,9 +25,12 @@ const App = () => {
     events,
     services,
     config,
+    communities,
     loadingEvents,
     loadingServices,
   } = useData();
+
+  console.log('communities: ', communities);
 
   //
   // NOTE!
