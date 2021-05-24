@@ -6,7 +6,6 @@ import StoreBadge from '../../components/StoreBadge';
 import CommunityList from '../../components/CommunityList';
 import { DataContext } from '../../context/DataContext';
 import './CommunitiesView.css';
-import communities from './communities.json';
 
 const CommunitiesView = () => {
   const history = useHistory();
@@ -49,7 +48,7 @@ const CommunitiesView = () => {
             </button>
           </div>
         ))}
-        <CommunityList communities={communities} />
+        <CommunityList />
       </div>
       <div className="border-top mt-3 mb-3">
         <p className="mt-3">
