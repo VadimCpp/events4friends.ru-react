@@ -1,8 +1,9 @@
 import React from 'react';
 import ButtonExternalLink from '../ButtonExternalLink';
 import './CommunityList.css';
+import communities from './communities.json';
 
-const CommunityList = ({ communities }) => {
+const CommunityList = () => {
   const communityItem = item => (
     <li className="community-list__item ">
       <ButtonExternalLink
