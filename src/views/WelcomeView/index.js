@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import MessengerLink from '../../components/MessengerLink';
@@ -11,6 +12,18 @@ import { DataContext } from '../../context/DataContext';
 import './WelcomeView.css';
 
 const WelcomeView = ({ history }) => {
+  useEffect(() => {
+    // Cookies
+    const cookies = new Cookies();
+    const communityId = cookies.get('communityId');
+    if (!communityId) {
+      history.push('/communities/');
+    } else {
+      // eslint-disable-next-line no-console
+      console.log(`Current community id is ${communityId}`);
+    }
+  }, []);
+
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
 

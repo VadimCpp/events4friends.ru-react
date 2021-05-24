@@ -4,6 +4,7 @@ import React from 'react';
 const defaultData = {
   events: [], // список анонсов
   services: [], // список услуг
+  communities: [], // список сообществ
   createEvent: (data, callback) => {}, // метод создает новый анонс
   deleteEvent: (eventId, callback) => {}, // метод удаляет анонс
   editEvent: (data, docId, callback) => {}, // метод изменяет анонс

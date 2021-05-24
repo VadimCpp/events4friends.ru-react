@@ -30,8 +30,6 @@ const App = () => {
     loadingServices,
   } = useData();
 
-  console.log('communities: ', communities);
-
   //
   // NOTE!
   // Этот стейт создан только для одного случая, когда пользователь меняет свое ФИО
@@ -63,6 +61,7 @@ const App = () => {
         value={{
           events,
           services,
+          communities,
           createEvent,
           deleteEvent,
           editEvent,
