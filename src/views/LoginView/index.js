@@ -14,8 +14,7 @@ const LoginView = ({ history }) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const authContext = useContext(AuthContext);
-  const { user, signIn } = authContext;
+  const { user, signIn } = useContext(AuthContext);
 
   const handleLoginChange = e => {
     setLogin(e.target.value.trim());

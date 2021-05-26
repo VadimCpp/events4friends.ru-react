@@ -8,8 +8,7 @@ import getGeocodeQueryByEvent from './getGeocodeQueryByEvent';
 
 const EventMapView = () => {
   const [coordinates, setCoordinates] = useState(null);
-  const dataContext = useContext(DataContext);
-  const { events } = dataContext;
+  const { events } = useContext(DataContext);
 
   const mapOnLoadHandler = async ymaps => {
     const newCoordinates = await Promise.all(
