@@ -12,10 +12,8 @@ import './EventsView.css';
 import { getSortedEvents } from '../../utils/eventsLogic';
 
 const EventsView = () => {
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
-  const { user, connectingToFirebase } = authContext;
-  const { events, loadingEvents } = dataContext;
+  const { user, connectingToFirebase } = useContext(AuthContext);
+  const { events, loadingEvents } = useContext(DataContext);
   const isAuth = user && !user.isAnonymous;
 
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);

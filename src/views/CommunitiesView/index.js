@@ -9,8 +9,7 @@ import './CommunitiesView.css';
 
 const CommunitiesView = () => {
   const history = useHistory();
-  const dataContext = useContext(DataContext);
-  const { communities: communitiesList } = dataContext;
+  const { communities: communitiesList } = useContext(DataContext);
 
   const onCommunityClick = useCallback(communityId => {
     // Cookies

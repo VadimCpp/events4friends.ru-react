@@ -22,11 +22,9 @@ const EventView = ({ match, history }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
 
   const eventId = match.params.id;
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
 
-  const { user, connectingToFirebase } = authContext;
-  const { events, loadingEvents, deleteEvent } = dataContext;
+  const { user, connectingToFirebase } = useContext(AuthContext);
+  const { events, loadingEvents, deleteEvent } = useContext(DataContext);
 
   let event = null;
 

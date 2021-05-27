@@ -14,12 +14,10 @@ const ServiceView = ({ match }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
 
   const serviceId = match.params.id;
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
   const history = useHistory();
 
-  const { user, connectingToFirebase } = authContext;
-  const { services, loadingServices, deleteService } = dataContext;
+  const { user, connectingToFirebase } = useContext(AuthContext);
+  const { services, loadingServices, deleteService } = useContext(DataContext);
 
   let service = null;
   for (let i = 0; i < services.length; i++) {

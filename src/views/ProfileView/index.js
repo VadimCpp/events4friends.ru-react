@@ -8,11 +8,10 @@ import MessengerLink from '../../components/MessengerLink';
 import './ProfileView.css';
 
 const ProfileView = () => {
-  const authContext = useContext(AuthContext);
   const history = useHistory();
   const [displayName, setDisplayName] = useState('');
 
-  const { user, updateProfile } = authContext;
+  const { user, updateProfile } = useContext(AuthContext);
   const userAuthorized = !!(user && !user.isAnonymous);
 
   useEffect(() => {
