@@ -6,12 +6,8 @@ import { DataContext } from '../../context/DataContext';
 import EventForm from '../../components/EventForm';
 
 const EditEventView = () => {
-  const routerParams = useParams();
-
-  const { events, editEvent } = useContext(DataContext);
   const { user } = useContext(AuthContext);
-
-  const isAuth = user && !user.isAnonymous;
+  const { events, editEvent } = useContext(DataContext);
 
   const saveHandler = useCallback(
     (event, cb) => {
@@ -20,6 +16,7 @@ const EditEventView = () => {
     [editEvent],
   );
 
+  const routerParams = useParams();
   let event = { id: null };
   if (routerParams.id) {
     const filteredEvents =
@@ -31,7 +28,12 @@ const EditEventView = () => {
   }
 
   return (
-    <EventForm editMode isAuth={isAuth} event={event} onSave={saveHandler} />
+    <EventForm
+      editMode
+      isAuth={user && !user.isAnonymous}
+      event={event}
+      onSave={saveHandler}
+    />
   );
 };
 
