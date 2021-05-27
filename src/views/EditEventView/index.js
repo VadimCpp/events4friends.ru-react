@@ -6,27 +6,27 @@ import { DataContext } from '../../context/DataContext';
 import EventForm from '../../components/EventForm';
 
 const EditEventView = () => {
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
   const routerParams = useParams();
-  const isAuth = authContext.user && !authContext.user.isAnonymous;
+
+  const { events, editEvent } = useContext(DataContext);
+  const { user } = useContext(AuthContext);
+
+  const isAuth = user && !user.isAnonymous;
 
   const saveHandler = useCallback(
     (event, cb) => {
-      dataContext.editEvent(event, event.id, authContext.user, cb);
+      editEvent(event, event.id, user, cb);
     },
-    [dataContext],
+    [editEvent],
   );
 
   let event = { id: null };
   if (routerParams.id) {
-    // IE 11, если не поддерживать можно использовать Array.find
-    const events =
-      dataContext.events &&
-      dataContext.events.filter(evt => evt.id === routerParams.id);
-    if (events.length) {
+    const filteredEvents =
+      events && events.filter(evt => evt.id === routerParams.id);
+    if (filteredEvents.length) {
       // eslint-disable-next-line prefer-destructuring
-      event = events[0];
+      event = filteredEvents[0];
     }
   }
 
