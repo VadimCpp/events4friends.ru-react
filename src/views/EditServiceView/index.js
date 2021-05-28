@@ -6,34 +6,31 @@ import { DataContext } from '../../context/DataContext';
 import ServiceForm from '../../components/ServiceForm';
 
 const EditServiceView = () => {
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
-  const routerParams = useParams();
-  const isAuth = authContext.user && !authContext.user.isAnonymous;
+  const { user } = useContext(AuthContext);
+  const { editService, services } = useContext(DataContext);
 
   const saveHandler = useCallback(
     (service, cb) => {
-      dataContext.editService(service, service.id, cb);
+      editService(service, service.id, cb);
     },
-    [dataContext],
+    [editService],
   );
 
+  const routerParams = useParams();
   let service = { id: null };
   if (routerParams.id) {
-    // IE 11, если не поддерживать можно использовать Array.find
-    const services =
-      dataContext.services &&
-      dataContext.services.filter(s => s.id === routerParams.id);
+    const filteredServices =
+      services && services.filter(s => s.id === routerParams.id);
     if (services.length) {
       // eslint-disable-next-line prefer-destructuring
-      service = services[0];
+      service = filteredServices[0];
     }
   }
 
   return (
     <ServiceForm
       editMode
-      isAuth={isAuth}
+      isAuth={user && !user.isAnonymous}
       service={service}
       onSave={saveHandler}
     />
