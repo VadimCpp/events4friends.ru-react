@@ -91,7 +91,7 @@ const LoginView = ({ history }) => {
                   />
                 </label>
               </p>
-              <Button icon="/icons/icon_login.svg" onPress={handlerSubmit}>
+              <Button onPress={handlerSubmit} icon="/icons/icon_login.svg">
                 Войти
               </Button>
             </form>
