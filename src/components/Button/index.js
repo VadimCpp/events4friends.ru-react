@@ -1,28 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 import './Button.css';
 
-const Button = ({
-  tag: Tag = 'button',
-  style,
-  onPress = () => {},
-  icon,
-  children,
-  classList = [],
-  className = '',
-}) => {
+const Button = ({ onPress, icon, children }) => {
   return (
-    <Tag
-      className={cn('welcomeview__button', className, [...classList])}
-      onClick={onPress}
-      style={style}
-    >
+    <button type="button" className="welcomeview__button" onClick={onPress}>
       <span className="welcomeview__image__wrapper">
         <img src={icon} alt={children} className="welcomeview__image" />
       </span>
       {children && <span className="welcomeview__text">{children}</span>}
-    </Tag>
+    </button>
   );
 };
 
