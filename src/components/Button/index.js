@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
 import './Button.css';
 
@@ -23,6 +24,11 @@ const Button = ({
       {children && <span className="welcomeview__text">{children}</span>}
     </Tag>
   );
+};
+
+Button.propTypes = {
+  onPress: PropTypes.func.isRequired,
+  icon: PropTypes.string.isRequired,
 };
 
 export default Button;
