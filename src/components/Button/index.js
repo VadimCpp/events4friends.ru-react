@@ -16,6 +16,7 @@ const Button = ({ onPress, icon, children }) => {
 Button.propTypes = {
   onPress: PropTypes.func.isRequired,
   icon: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired, // https://stackoverflow.com/a/42122662/1775459
 };
 
 export default Button;
