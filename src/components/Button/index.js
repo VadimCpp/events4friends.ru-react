@@ -6,9 +6,14 @@ const Button = ({ onPress, icon, children }) => {
   return (
     <button type="button" className="welcomeview__button" onClick={onPress}>
       <span className="welcomeview__image__wrapper">
-        <img src={icon} alt={children} className="welcomeview__image" />
+        <img
+          src={icon}
+          alt=""
+          aria-hidden="true"
+          className="welcomeview__image"
+        />
       </span>
-      {children && <span className="welcomeview__text">{children}</span>}
+      <span className="welcomeview__text">{children}</span>
     </button>
   );
 };
