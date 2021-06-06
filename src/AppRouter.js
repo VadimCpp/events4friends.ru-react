@@ -53,6 +53,27 @@ const AppRouter = () => {
             render={props => <EditEventView {...props} />}
           />
           <Route path="/editservice/:id" exact component={EditServiceView} />
+          {/* 
+            NOTE!
+            У Route для страницы 404 мы не указали ни path, ни exact,
+            а сам Route помещен в конец. Таким образом,
+            Switch будет переводить на него все адреса,
+            которые не встретилист до, что и нужно от 404 страницы
+           */}
+          {/* TODO: реализовать страницу 404 */}
+          {/* <Route
+            render={props => (
+              // console.log(`404 props`, props);
+              <Fragment>
+                <h1>
+                  404.
+                  <br />
+                  <small>Page not found</small>
+                </h1>
+                <Link to="/">Go to main page</Link>
+              </Fragment>
+            )}
+          /> */}
         </div>
       </ScrollToTop>
     </Router>
