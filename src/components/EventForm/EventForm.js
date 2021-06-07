@@ -11,7 +11,6 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   const history = useHistory();
   const [event, updateEventValue] = useState(eventInitState);
   const [updatingEvent, setUpdatingEvent] = useState(false);
-  const [communityId, setCommunityId] = useState('0');
 
   const timezone = {
     EET: '+0200', // https://www.timeanddate.com/time/zone/russia/kaliningrad
@@ -135,7 +134,12 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
           <span className="textinput__label-text--block text-left">
             Выберите сообщество:
           </span>
-          <CommunityChoice value={communityId} handleChange={setCommunityId} />
+          <CommunityChoice
+            value={event.communityId}
+            handleChange={value =>
+              updateEventValue({ ...event, communityId: value })
+            }
+          />
         </label>
       </div>
       <fieldset className="textinput">

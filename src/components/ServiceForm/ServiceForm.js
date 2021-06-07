@@ -10,7 +10,6 @@ import CommunityChoice from '../CommunityChoice';
 const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   const [service, setService] = useState(serviceInitState);
   const [updatingService, setUpdatingService] = useState(false);
-  const [communityId, setCommunityId] = useState('0');
   const history = useHistory();
 
   useEffect(() => {
@@ -104,7 +103,10 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
         <span className="textinput__label-text--block text-left">
           Выберите сообщество:
         </span>
-        <CommunityChoice value={communityId} handleChange={setCommunityId} />
+        <CommunityChoice
+          value={service.communityId}
+          handleChange={value => setService({ ...service, communityId: value })}
+        />
       </div>
 
       <div className="textinput">
