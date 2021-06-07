@@ -5,10 +5,12 @@ import { verify, serviceInitState, normalizePrice } from './helper';
 import { ReachTextEditor } from '../RichTextEditor';
 import Button from '../Button';
 import { copyObjectAndTrim } from '../../helper';
+import CommunityChoice from '../CommunityChoice';
 
 const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   const [service, setService] = useState(serviceInitState);
   const [updatingService, setUpdatingService] = useState(false);
+  const [communityId, setCommunityId] = useState('0');
   const history = useHistory();
 
   useEffect(() => {
@@ -96,6 +98,13 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
             onChange={handlerChange}
           />
         </label>
+      </div>
+
+      <div className="textinput">
+        <span className="textinput__label-text--block text-left">
+          Выберите сообщество:
+        </span>
+        <CommunityChoice value={communityId} handleChange={setCommunityId} />
       </div>
 
       <div className="textinput">

@@ -5,11 +5,13 @@ import { ReachTextEditor } from '../RichTextEditor';
 import Button from '../Button';
 import { verify, eventInitState } from './helper';
 import { copyObjectAndTrim } from '../../helper';
+import CommunityChoice from '../CommunityChoice';
 
 const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   const history = useHistory();
   const [event, updateEventValue] = useState(eventInitState);
   const [updatingEvent, setUpdatingEvent] = useState(false);
+  const [communityId, setCommunityId] = useState('0');
 
   const timezone = {
     EET: '+0200', // https://www.timeanddate.com/time/zone/russia/kaliningrad
@@ -126,6 +128,14 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
             value={event.location}
             onChange={handlerChange('location')}
           />
+        </label>
+      </div>
+      <div className="textinput">
+        <label>
+          <span className="textinput__label-text--block text-left">
+            Выберите сообщество:
+          </span>
+          <CommunityChoice value={communityId} handleChange={setCommunityId} />
         </label>
       </div>
       <fieldset className="textinput">
