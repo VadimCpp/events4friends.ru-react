@@ -34,4 +34,5 @@ export const serviceInitState = {
   whatsapp: '',
   telegram: '',
   vkontakte: '',
+  communityId: '0',
 };

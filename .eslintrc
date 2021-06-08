@@ -105,6 +105,7 @@
     "import/prefer-default-export": "off",
     "no-plusplus": "off",
     "class-methods-use-this": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "jsx-a11y/no-onchange": "off"
   }
 }

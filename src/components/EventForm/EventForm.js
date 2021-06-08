@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReachTextEditor } from '../RichTextEditor';
 import Button from '../Button';
 import { verify, eventInitState } from './helper';
 import { copyObjectAndTrim } from '../../helper';
+import CommunityChoice from '../CommunityChoice';
 
 const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   const history = useHistory();
@@ -63,6 +64,11 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   const handleIsOnlineChange = value => () => {
     updateEventValue({ ...event, isOnline: value });
   };
+
+  const handleCommunityChange = useCallback(
+    value => updateEventValue({ ...event, communityId: value }),
+    [updateEventValue, event],
+  );
 
   return (
     <form className="neweventview">
@@ -125,6 +131,17 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
             name="location"
             value={event.location}
             onChange={handlerChange('location')}
+          />
+        </label>
+      </div>
+      <div className="textinput">
+        <label>
+          <span className="textinput__label-text--block text-left">
+            Выберите сообщество:
+          </span>
+          <CommunityChoice
+            value={event.communityId}
+            handleChange={handleCommunityChange}
           />
         </label>
       </div>
