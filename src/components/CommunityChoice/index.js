@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import { DataContext } from '../../context/DataContext';
 
 const CommunityChoice = ({ value, handleChange }) => {
   const { communities } = useContext(DataContext);
+  const onChange = useCallback(event => handleChange(event.target.value), [
+    handleChange,
+  ]);
 
   return (
     communities.length && (
-      <select
-        value={value}
-        onChange={event => handleChange(event.target.value)}
-      >
+      <select value={value} onChange={onChange}>
         {communities.map(community => {
           return (
             <option key={community.id} value={community.id}>
