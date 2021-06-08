@@ -65,6 +65,11 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
     }
   };
 
+  const handleCommunityChange = useCallback(
+    value => setService({ ...service, communityId: value }),
+    [setService, service],
+  );
+
   return (
     <form className="newserviceview">
       <div className="textinput">
@@ -105,7 +110,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
         </span>
         <CommunityChoice
           value={service.communityId}
-          handleChange={value => setService({ ...service, communityId: value })}
+          handleChange={handleCommunityChange}
         />
       </div>
 
