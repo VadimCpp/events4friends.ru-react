@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReachTextEditor } from '../RichTextEditor';
 import Button from '../Button';
@@ -64,6 +64,11 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   const handleIsOnlineChange = value => () => {
     updateEventValue({ ...event, isOnline: value });
   };
+
+  const handleCommunityChange = useCallback(
+    value => updateEventValue({ ...event, communityId: value }),
+    [updateEventValue, event],
+  );
 
   return (
     <form className="neweventview">
@@ -136,9 +141,7 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
           </span>
           <CommunityChoice
             value={event.communityId}
-            handleChange={value =>
-              updateEventValue({ ...event, communityId: value })
-            }
+            handleChange={handleCommunityChange}
           />
         </label>
       </div>
