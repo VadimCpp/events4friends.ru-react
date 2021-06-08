@@ -12,13 +12,11 @@ const CommunityChoice = ({ value, handleChange }) => {
   return (
     communities.length && (
       <select value={value} onChange={onChange}>
-        {communities.map(community => {
-          return (
-            <option key={community.id} value={community.id}>
-              {community.name}
-            </option>
-          );
-        })}
+        {communities.map(community => (
+          <option key={community.id} value={community.id}>
+            {community.name}
+          </option>
+        ))}
       </select>
     )
   );
