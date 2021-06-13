@@ -1,16 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ButtonLink from '../ButtonLink';
 import ButtonExternalLink from '../ButtonExternalLink';
 import MessengerLink from '../MessengerLink';
 import EventForm from './EventForm';
 import './EventForm.css';
 
-const EventFormView = ({
-  editMode = true,
-  event,
-  isAuth,
-  onSave = () => {},
-}) => {
+const EventFormView = ({ editMode, event, isAuth, onSave }) => {
   const formContent = isAuth ? (
     <EventForm defaultEvent={event} onSave={onSave} editMode={editMode} />
   ) : (
@@ -62,6 +58,17 @@ const EventFormView = ({
       </div>
     </div>
   );
+};
+
+EventFormView.propTypes = {
+  event: PropTypes.string.isRequired,
+  editMode: PropTypes.bool,
+  isAuth: PropTypes.bool,
+  onSave: PropTypes.func.isRequired,
+};
+
+EventFormView.defaultProps = {
+  editMode: true,
 };
 
 export default React.memo(EventFormView, (prev, next) => {
