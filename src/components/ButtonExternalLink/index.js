@@ -31,7 +31,7 @@ ButtonExternalLink.propTypes = {
   title: PropTypes.string,
   style: PropTypes.string,
   className: PropTypes.string,
-  classList: PropTypes.array,
+  classList: PropTypes.arrayOf(PropTypes.string),
 };
 
 ButtonExternalLink.defaultProps = {
