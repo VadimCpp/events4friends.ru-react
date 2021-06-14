@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 // contexts
@@ -15,8 +16,7 @@ import {
   getVerboseTime,
 } from '../../utils/eventsLogic';
 
-const EventCard = props => {
-  const { event } = props;
+const EventCard = ({ event }) => {
   const authContext = useContext(AuthContext);
   const { contact, id, summary, isOnline, location } = event;
 
@@ -78,4 +78,13 @@ const EventCard = props => {
   );
 };
 
+EventCard.propTypes = {
+  event: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    contact: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired,
+    isOnline: PropTypes.bool.isRequired,
+    location: PropTypes.string,
+  }),
+};
 export default EventCard;
