@@ -1,23 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import Button from '../../components/Button';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import MessengerLink from '../../components/MessengerLink';
 import './ProfileView.css';
 
-const ProfileView = props => {
-  //
-  // NOTE!
-  // За счет того что в роуте указан компонент:
-  // <Route path="/profile/" exact component={ProfileView} />
-  // в пропсы дополнительно передается histiry и location
-  //
-  // TODO:
-  // Обсудить с программистами задачу на выпиливание вот такого:
-  // import { useHistory } from 'react-router-dom';
-  //
-  const { history } = props;
+const ProfileView = () => {
+  const history = useHistory();
   const [displayName, setDisplayName] = useState('');
 
   const { user, updateProfile } = useContext(AuthContext);
