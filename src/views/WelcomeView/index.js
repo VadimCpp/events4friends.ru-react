@@ -22,7 +22,7 @@ const WelcomeView = ({ history }) => {
       // eslint-disable-next-line no-console
       console.log(`Current community id is ${communityId}`);
     }
-  }, []);
+  }, [history]);
 
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);

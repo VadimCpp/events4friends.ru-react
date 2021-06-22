@@ -11,12 +11,15 @@ const CommunitiesView = () => {
   const history = useHistory();
   const { communities: communitiesList } = useContext(DataContext);
 
-  const onCommunityClick = useCallback(communityId => {
-    // Cookies
-    const cookies = new Cookies();
-    cookies.set('communityId', communityId);
-    history.push('/');
-  }, []);
+  const onCommunityClick = useCallback(
+    communityId => {
+      // Cookies
+      const cookies = new Cookies();
+      cookies.set('communityId', communityId);
+      history.push('/');
+    },
+    [history],
+  );
 
   return (
     <div className="communitiesview">

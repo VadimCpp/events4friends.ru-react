@@ -13,7 +13,7 @@ const EditEventView = () => {
     (event, cb) => {
       editEvent(event, event.id, user, cb);
     },
-    [editEvent],
+    [editEvent, user],
   );
 
   const routerParams = useParams();
