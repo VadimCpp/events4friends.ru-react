@@ -12,7 +12,7 @@ const NewEventView = () => {
     (event, cb) => {
       createEvent(event, user, cb);
     },
-    [createEvent],
+    [createEvent, user],
   );
 
   const event = {
