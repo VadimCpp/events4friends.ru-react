@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
@@ -110,38 +110,22 @@ const WelcomeView = ({ history }) => {
       </div>
 
       <div className="welcomeview__block welcome__features">
-        <div className="container container-center">
-          <p>Мероприятия тут:</p>
-
-          <FeatureLink
-            LinkComponent={ButtonLink}
-            to="/events"
-            icon="/icons/icon_list.svg"
-            title="Все мероприятия"
+        <Link to="/events" className="events-btn">
+          <img
+            src="/icons/icon_list.svg"
+            alt="events"
+            className="events-btn__icon"
           />
-        </div>
-
-        <div className="container container-center mt-4">
-          <p>Услуги:</p>
-
-          <FeatureLink
-            LinkComponent={ButtonLink}
-            to="/services"
-            icon="/icons/icon_service.svg"
-            title="Все услуги"
+          <span className="events-btn__title">События</span>
+        </Link>
+        <Link to="/services" className="services-btn">
+          <img
+            src="/icons/icon_service.svg"
+            alt="events"
+            className="services-btn__icon"
           />
-        </div>
-
-        <div className="container container-center mt-4">
-          <p>Сообщества (формируются):</p>
-
-          <FeatureLink
-            LinkComponent={ButtonLink}
-            to="/communities"
-            icon="/icons/icon_community.svg"
-            title="Все сообщества"
-          />
-        </div>
+          <span className="services-btn__title">Услуги</span>
+        </Link>
       </div>
 
       <div className="welcomeview__block">
@@ -176,6 +160,17 @@ const WelcomeView = ({ history }) => {
               </li>
             ))}
           </ul>
+        </div>
+      </div>
+
+      <div className="welcomeview__block">
+        <div className="container container-center">
+          <FeatureLink
+            LinkComponent={ButtonLink}
+            to="/communities"
+            icon="/icons/icon_community.svg"
+            title="Все сообщества"
+          />
         </div>
       </div>
 
