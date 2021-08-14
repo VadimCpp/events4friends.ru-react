@@ -3,7 +3,6 @@ import { withRouter, useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import ButtonLink from '../../components/ButtonLink';
 import StoreBadge from '../../components/StoreBadge';
-import CommunityList from '../../components/CommunityList';
 import { DataContext } from '../../context/DataContext';
 import './CommunitiesView.css';
 
@@ -31,10 +30,10 @@ const CommunitiesView = () => {
           className="communities-view__button-link"
         />
       </div>
-      <div className="border-top mt-3">
+      <div className="border-top mt-3 mb-3">
         <p className="mt-3">Все сообщества Калининграда</p>
         {communitiesList.map(community => (
-          <div key={community.id} className="pt-2">
+          <div key={community.id} className="pb-2">
             <button
               type="button"
               className="btn btn-light"
@@ -50,15 +49,6 @@ const CommunitiesView = () => {
             </button>
           </div>
         ))}
-        <CommunityList />
-      </div>
-      <div className="border-top mt-3 mb-3">
-        <p className="mt-3">
-          Для добавления Вашего чата или группы сообщества, напишите пожалуйста
-          программисту ВКонтакте:
-          <br />
-          <a href="https://vk.com/vadimcpp">Вадим Канинский</a>
-        </p>
       </div>
       <div className="border-top">
         <div className="container container-center pt-4 pb-5">
