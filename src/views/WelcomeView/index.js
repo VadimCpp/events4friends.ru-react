@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import MessengerLink from '../../components/MessengerLink';
 import SocialNetworkLink from '../../components/SocialNetworkLink';
-import FeatureLink from '../../components/FeatureLink';
 import StoreBadge from '../../components/StoreBadge';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
@@ -130,7 +128,7 @@ const WelcomeView = ({ history }) => {
 
       <div className="welcomeview__block">
         <div className="container container-center">
-          <p>Выберите мессенджер для общения:</p>
+          <h4>Чаты сообщества</h4>
           <ul className="welcomeview__messengers-list">
             {messengers.map(messenger => (
               <li
@@ -165,12 +163,16 @@ const WelcomeView = ({ history }) => {
 
       <div className="welcomeview__block">
         <div className="container container-center">
-          <FeatureLink
-            LinkComponent={ButtonLink}
-            to="/communities"
-            icon="/icons/icon_community.svg"
-            title="Все сообщества"
-          />
+          <h4>Дополнительно</h4>
+          <p>Для смены сообщества нажмите кнопку «Сообщества»</p>
+          <Link to="/communities" className="communities-btn">
+            <img
+              src="/icons/icon_community.svg"
+              alt="communities"
+              className="communities-btn__icon"
+            />
+            <span className="communities-btn__title">Сообщества</span>
+          </Link>
         </div>
       </div>
 
