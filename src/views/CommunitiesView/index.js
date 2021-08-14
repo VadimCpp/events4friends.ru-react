@@ -31,12 +31,12 @@ const CommunitiesView = () => {
         />
       </div>
       <div className="border-top mt-3 mb-3">
-        <p className="mt-3">Все сообщества Калининграда</p>
+        <p className="mt-3">Выберите сообщество</p>
         {communitiesList.map(community => (
-          <div key={community.id} className="pb-2">
+          <div key={community.id} className="pb-3">
             <button
               type="button"
-              className="btn btn-light"
+              className="btn-community"
               onClick={() => onCommunityClick(community.id)}
             >
               <img
@@ -49,6 +49,7 @@ const CommunitiesView = () => {
             </button>
           </div>
         ))}
+        {communitiesList.length === 0 && <p align="center">Загружаем...</p>}
       </div>
       <div className="border-top">
         <div className="container container-center pt-4 pb-5">

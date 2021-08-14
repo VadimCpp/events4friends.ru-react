@@ -7,21 +7,16 @@
   display: block;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 10;
+  margin-bottom: 10px;
   border-color: rgba(77, 77, 77, 0.2);
   border-radius: 48px;
 }
 
-.cv__button-external-link {
-  border-color: #4d76a1;
-  margin: 8px;
-  border-radius: 48px;
-}
-
-.mtv {
-  border-color: #7c519b;
-}
-
-.telegram {
-  border-color: #139bd0;
+.btn-community {
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: #66F;
+  background-color: rgba(102,102,255,0.2);
+  width: 200px;
+  height: 55px;
 }
