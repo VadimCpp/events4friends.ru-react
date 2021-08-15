@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
@@ -10,6 +10,11 @@ import { DataContext } from '../../context/DataContext';
 import './WelcomeView.css';
 
 const WelcomeView = ({ history }) => {
+  const authContext = useContext(AuthContext);
+  const dataContext = useContext(DataContext);
+
+  const [community, setCommunity] = useState(null);
+
   useEffect(() => {
     // Cookies
     const cookies = new Cookies();
@@ -17,13 +22,13 @@ const WelcomeView = ({ history }) => {
     if (!communityId) {
       history.push('/communities/');
     } else {
-      // eslint-disable-next-line no-console
-      console.log(`Current community id is ${communityId}`);
+      const { communities } = dataContext;
+      const aCommunity = communities.find(c => c.id === communityId);
+      if (aCommunity) {
+        setCommunity(aCommunity);
+      }
     }
-  }, [history]);
-
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
+  }, [history, dataContext.communities]);
 
   let userName = null;
   let userAuthorized = false;
@@ -35,45 +40,104 @@ const WelcomeView = ({ history }) => {
     }
   }
 
-  const messengers = [
-    {
-      messengerName: 'telegram',
-      href: 'tg://resolve?domain=events4friends',
-      icon: '/icons/telegram.svg',
-    },
-    {
-      messengerName: 'whatsapp',
-      href: 'https://chat.whatsapp.com/DWUaZ1bsuxwJLALyvBYTt8',
-      icon: '/icons/whatsapp.svg',
-    },
-    {
-      messengerName: 'viber',
-      href:
-        'https://invite.viber.com/?g2=AQBA7jF9Y7%2BXBkqTI0PoYF%2BmnEMluxPdGZy8wJQ3PRPBLT%2BMeh344RxBuBUTVc6B',
-      icon: '/icons/viber.svg',
-    },
-  ];
+  const [messengers, setMessengers] = useState([]);
+  useEffect(() => {
+    if (community) {
+      let aMessengers = [];
+      if (community.telegram) {
+        aMessengers = [
+          ...aMessengers,
+          {
+            messengerName: 'telegram',
+            href: community.telegram,
+            icon: '/icons/telegram.svg',
+          },
+        ];
+      }
+      if (community.whatsapp) {
+        aMessengers = [
+          ...aMessengers,
+          {
+            messengerName: 'whatsapp',
+            href: community.whatsapp,
+            icon: '/icons/whatsapp.svg',
+          },
+        ];
+      }
+      if (community.viber) {
+        aMessengers = [
+          ...aMessengers,
+          {
+            messengerName: 'viber',
+            href: community.viber,
+            icon: '/icons/viber.svg',
+          },
+        ];
+      }
+      setMessengers(aMessengers);
+    }
+  }, [community]);
 
-  const socialLinks = [
-    {
-      name: 'vkontakte',
-      href: 'https://vk.com/kldevents4friends',
-      icon: '/icons/vk.svg',
-      title: 'Открыть ВКонтакте',
-    },
-    {
-      name: 'instagram',
-      href: 'https://www.instagram.com/kldevents4friends/',
-      icon: '/icons/instagram.svg',
-      title: 'Открыть Instagram',
-    },
-    {
-      name: 'strava',
-      href: 'https://www.strava.com/clubs/events4friends',
-      icon: '/icons/strava.png',
-      title: 'Открыть Strava',
-    },
-  ];
+  const [socialLinks, setSocialLinks] = useState([]);
+  useEffect(() => {
+    if (community) {
+      let aSocialLinks = [];
+      if (community.vkontakte) {
+        aSocialLinks = [
+          ...aSocialLinks,
+          {
+            name: 'vkontakte',
+            href: community.vkontakte,
+            icon: '/icons/vk.svg',
+            title: 'ВКонтакте',
+          },
+        ];
+      }
+      if (community.instagram) {
+        aSocialLinks = [
+          ...aSocialLinks,
+          {
+            name: 'instagram',
+            href: community.instagram,
+            icon: '/icons/instagram.svg',
+            title: 'Instagram',
+          },
+        ];
+      }
+      if (community.strava) {
+        aSocialLinks = [
+          ...aSocialLinks,
+          {
+            name: 'strava',
+            href: community.strava,
+            icon: '/icons/strava.png',
+            title: 'Strava',
+          },
+        ];
+      }
+      if (community.youtube) {
+        aSocialLinks = [
+          ...aSocialLinks,
+          {
+            name: 'youtube',
+            href: community.youtube,
+            title: 'YouTube',
+          },
+        ];
+      }
+      if (community.website) {
+        aSocialLinks = [
+          ...aSocialLinks,
+          {
+            name: 'website',
+            href: community.website,
+            title: 'Сайт',
+          },
+        ];
+      }
+      setSocialLinks(aSocialLinks);
+    }
+  }, [community]);
 
   return (
     <div className="welcomeview">
@@ -147,7 +211,10 @@ const WelcomeView = ({ history }) => {
 
       <div className="welcomeview__block">
         <div className="container container-center">
-          <p>Мы в социальных сетях:</p>
+          <h4>Ссылки</h4>
+          <p>
+            В этом разделе ссылки на Instagram, YouTube, социальные сети и т.п.
+          </p>
           <ul className="welcomeview__social-list">
             {socialLinks.map(link => (
               <li className="welcomeview__social-item" key={link.name}>
