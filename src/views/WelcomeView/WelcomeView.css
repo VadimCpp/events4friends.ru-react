@@ -106,7 +106,7 @@
   color: #4d4d4d;
 }
 
-.communities-btn {
+.communities-btn, .signin-btn {
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -121,7 +121,7 @@
   height: 55px;
 }
 
-.communities-btn:hover {
+.communities-btn:hover, .signin-btn:hover {
   text-decoration: none;
 }
 
@@ -132,9 +132,15 @@
   border-style: none;
 }
 
-.communities-btn__title {
+.communities-btn__title, .signin-btn__title {
   padding-left: 8px;
   line-height: 19px;
   font-size: 16px;
   color: #4d4d4d;
+}
+
+.community__logo {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
 }

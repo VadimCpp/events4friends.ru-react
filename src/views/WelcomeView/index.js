@@ -139,13 +139,23 @@ const WelcomeView = ({ history }) => {
     }
   }, [community]);
 
+  if (!community) {
+    return (
+      <div className="welcomeview">
+        <div className="welcomeview__block">
+          <p>Загружаем...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="welcomeview">
-      <div className="welcomeview__block">
-        <div className="container container-center">
-          {userAuthorized ? (
+      {userAuthorized && (
+        <div className="welcomeview__block">
+          <div className="container container-center">
             <div>
-              <span>Добро пожаловать в цифровое пространство, </span>
+              <span>Добро пожаловать, </span>
               <button
                 type="button"
                 className="btn btn-link btn-link-vk"
@@ -163,14 +173,21 @@ const WelcomeView = ({ history }) => {
                 <span>Выйти</span>
               </button>
             </div>
-          ) : (
-            <div>
-              <span>Добро пожаловать в цифровое пространство!</span>
-            </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
+      <div className="welcomeview__block">
+        <h1>
+          <img
+            className="community__logo"
+            src={`data:image/png;base64,${community.logo}`}
+            alt="logo"
+          />
+          <span>{community.name}</span>
+        </h1>
+        <p>{community.description}</p>
+      </div>
       <div className="welcomeview__block welcome__features">
         <Link to="/events" className="events-btn">
           <img
@@ -240,12 +257,21 @@ const WelcomeView = ({ history }) => {
             />
             <span className="communities-btn__title">Сообщества</span>
           </Link>
+
+          {!userAuthorized && (
+            <>
+              <p>Если Вы - организатор, то «Вход для оргов» для Вас</p>
+              <Link to="/signin" className="signin-btn">
+                <span className="signin-btn__title">Вход для оргов</span>
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
       <div className="welcomeview__block">
         <div className="container container-center">
-          <p>Наше мобильное приложение:</p>
+          <p>Доступно мобильное приложение</p>
           <div className="d-flex justify-content-center">
             <div className="mr-1">
               <StoreBadge platform="ios" width={120} />
@@ -256,23 +282,6 @@ const WelcomeView = ({ history }) => {
           </div>
         </div>
       </div>
-
-      {!userAuthorized && (
-        <div className="welcomeview__block">
-          <div className="container container-center">
-            <p>Организаторы мероприятий могут создавать анонсы мероприятий</p>
-            <button
-              type="button"
-              className="btn btn-link btn-link-vk"
-              onClick={() => {
-                history.push('signin/');
-              }}
-            >
-              <span>Вход для организаторов</span>
-            </button>
-          </div>
-        </div>
-      )}
 
       <div className="container container-center">
         <p className="welcomeview__footer">

@@ -14,13 +14,11 @@ import EditServiceView from './views/EditServiceView';
 import CommunitiesView from './views/CommunitiesView';
 import ProfileView from './views/ProfileView';
 import EventMapView from './views/EventMapView';
-import Header from './components/Header';
 
 const AppRouter = () => {
   return (
     <Router>
       <ScrollToTop>
-        <Header />
         <div>
           <Route path="/" exact component={WelcomeView} />
           <Route path="/signin/" exact component={LoginView} />
@@ -53,7 +51,7 @@ const AppRouter = () => {
             render={props => <EditEventView {...props} />}
           />
           <Route path="/editservice/:id" exact component={EditServiceView} />
-          {/* 
+          {/*
             NOTE!
             У Route для страницы 404 мы не указали ни path, ни exact,
             а сам Route помещен в конец. Таким образом,
