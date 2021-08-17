@@ -63,7 +63,7 @@ const EventView = ({ match, history }) => {
           to="/events"
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
-          classList={['button-link', 'event-view']}
+          className="btn-back"
         />
       </div>
       <div>

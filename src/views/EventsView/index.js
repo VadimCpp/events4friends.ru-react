@@ -68,7 +68,7 @@ const EventsView = () => {
         to="/"
         icon="/icons/icon_arrow_back.svg"
         title="На главную"
-        classList={['button-link', 'events-view']}
+        className="btn-back"
       />
       {/*
         NOTE! Кнопка в этом месте не нужна.

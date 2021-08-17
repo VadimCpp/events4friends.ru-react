@@ -49,7 +49,7 @@ const ServiceView = ({ match }) => {
     <div>
       <div>
         <ButtonLink
-          className="arrow-back-btn"
+          className="btn-back"
           to="/services"
           icon="/icons/icon_arrow_back.svg"
           title="К списку"

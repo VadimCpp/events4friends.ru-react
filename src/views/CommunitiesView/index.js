@@ -27,7 +27,7 @@ const CommunitiesView = () => {
           to="/"
           icon="/icons/icon_arrow_back.svg"
           title="На главную"
-          className="communities-view__button-link"
+          className="btn-back"
         />
       </div>
       <div className="border-top mt-3 mb-3">

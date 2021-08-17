@@ -2,7 +2,7 @@
   margin: 4px;
   border-radius: 15px;
   border-width: 2px;
-  width: 65px;
+  min-width: 65px;
   height: 55px;
 }
 

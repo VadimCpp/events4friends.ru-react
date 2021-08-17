@@ -82,7 +82,7 @@ const ServicesView = () => {
           to="/"
           icon="/icons/icon_arrow_back.svg"
           title="На главную"
-          className="serviceView-arrowBack-btn"
+          className="btn-back"
         />
         <>
           {isAuth ? (

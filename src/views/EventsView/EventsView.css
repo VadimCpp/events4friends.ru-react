@@ -38,15 +38,6 @@
   word-wrap: break-word;
 }
 
-.events-view.button-link {
-  width: 175px;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 10px;
-  border-color: rgba(77, 77, 77, 0.2);
-  border-radius: 48px;
-}
-
 .events-list {
   margin: 0;
   padding: 0;

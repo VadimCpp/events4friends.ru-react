@@ -2,14 +2,19 @@
   text-align: center;
 }
 
-.communities-view__button-link {
-  width: 175px;
+.btn-back {
   display: block;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 10px;
-  border-color: rgba(77, 77, 77, 0.2);
-  border-radius: 48px;
+  margin-top: 20px;
+
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: #999;
+  background-color: rgba(153, 153, 153, 0.2);
+  width: 170px;
+  height: 45px;
 }
 
 .btn-community {
