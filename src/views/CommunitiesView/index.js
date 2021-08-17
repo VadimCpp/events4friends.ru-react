@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import ButtonLink from '../../components/ButtonLink';
@@ -20,17 +20,25 @@ const CommunitiesView = () => {
     [history],
   );
 
+  const [isBackButton, setIsBackButton] = useState(false);
+  useEffect(() => {
+    // Cookies
+    const cookies = new Cookies();
+    const communityId = cookies.get('communityId');
+    setIsBackButton(Boolean(communityId));
+  }, []);
+
   return (
     <div className="communitiesview">
-      <div>
+      {isBackButton && (
         <ButtonLink
           to="/"
           icon="/icons/icon_arrow_back.svg"
           title="На главную"
           className="btn-back"
         />
-      </div>
-      <div className="border-top mt-3 mb-3">
+      )}
+      <div className={isBackButton ? 'border-top mt-3 mb-3' : 'mt-3 mb-3'}>
         <p className="mt-3">Выберите сообщество</p>
         {communitiesList.map(community => (
           <div key={community.id} className="pb-3">
