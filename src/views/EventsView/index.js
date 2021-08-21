@@ -59,12 +59,12 @@ const EventsView = ({ match, history }) => {
 
   useEffect(() => {
     if (community) {
-      const sortSvents = getSortedEvents(events, filterType);
-      const sortSvents4Community = sortSvents.filter(e => {
+      const sortEvents = getSortedEvents(events, filterType);
+      const sortEvents4Community = sortEvents.filter(e => {
         const communityId = e.communityId || '1';
         return communityId === community.id;
       });
-      setSortedEvents(sortSvents4Community);
+      setSortedEvents(sortEvents4Community);
     }
   }, [events, filterType, community]);
 
