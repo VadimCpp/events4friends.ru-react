@@ -45,6 +45,7 @@ const AppRouter = () => {
             TODO: удалить через полгода, в январе 2021
           */}
           <Route path="/list/" render={props => <EventsView {...props} />} />
+          <Route path="/:slug/event/:id" component={EventView} />
           <Route path="/event/:id" render={props => <EventView {...props} />} />
           <Route path="/events/map/" exact component={EventMapView} />
           <Route

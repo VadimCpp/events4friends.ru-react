@@ -82,7 +82,7 @@ const EventsView = ({ match, history }) => {
     return (
       <li key={id} className="events-list__item">
         <div className="container container-center">
-          <EventCard event={event} name={name} />
+          <EventCard event={event} name={name} slug={slug} />
         </div>
       </li>
     );

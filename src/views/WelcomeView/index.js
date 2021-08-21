@@ -28,7 +28,7 @@ const WelcomeView = ({ history }) => {
         setCommunity(aCommunity);
       }
     }
-  }, [history, dataContext.communities]);
+  }, [history, dataContext]);
 
   let userName = null;
   let userAuthorized = false;
