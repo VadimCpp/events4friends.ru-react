@@ -1,5 +1,5 @@
-/* eslint-disable indent */
 import React, { useState, useContext, useEffect } from 'react';
+import Cookies from 'universal-cookie';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
@@ -11,23 +11,67 @@ import './EventsView.css';
 // utils
 import { getSortedEvents } from '../../utils/eventsLogic';
 
-const EventsView = () => {
+const EventsView = ({ match, history }) => {
   const { user, connectingToFirebase } = useContext(AuthContext);
-  const { events, loadingEvents } = useContext(DataContext);
+  const { events, loadingEvents, communities } = useContext(DataContext);
   const isAuth = user && !user.isAnonymous;
 
   const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
   const [sortedEvents, setSortedEvents] = useState([]);
 
+  const { slug } = match.params;
+  const [community, setCommunity] = useState(null);
   useEffect(() => {
-    setSortedEvents(getSortedEvents(events, filterType));
-  }, [events, filterType]);
+    if (slug) {
+      //
+      // NOTE!
+      // Если в URL указан slug сообщества необходимо:
+      // - произвести поиск по slug
+      // - если сообщество не найдено, отобразить NOT_FOUND
+      //
+      const aCommunity = communities.find(c => c.slug === slug);
+      if (aCommunity) {
+        setCommunity(aCommunity);
+      } else {
+        // TODO: реализовать NOT_FOUND экран
+        console.warn('TODO: реализовать NOT_FOUND экран');
+        history.push('/');
+      }
+    } else {
+      //
+      // NOTE!
+      // Если в URL не указан slug сообщества необходимо:
+      // - произвести поиск по id из cookies
+      // - по умолчанию id сообщества - 1 (events4friends)
+      //
+      const cookies = new Cookies();
+      const communityId = cookies.get('communityId');
+      if (!communityId) {
+        history.push('/communities/');
+      } else {
+        const aCommunity = communities.find(c => c.id === communityId);
+        if (aCommunity) {
+          setCommunity(aCommunity);
+        }
+      }
+    }
+  }, [history, communities, slug]);
+
+  useEffect(() => {
+    if (community) {
+      const sortSvents = getSortedEvents(events, filterType);
+      const sortSvents4Community = sortSvents.filter(e => {
+        const communityId = e.communityId || '1';
+        return communityId === community.id;
+      });
+      setSortedEvents(sortSvents4Community);
+    }
+  }, [events, filterType, community]);
 
   /**
    * @param {Event} event
    * @param {EventsSource} source
    */
-
   const displayEvent = (event, source) => {
     const { id } = event;
     const { name } = source;

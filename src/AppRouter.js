@@ -28,6 +28,11 @@ const AppRouter = () => {
           <Route path="/communities/" exact component={CommunitiesView} />
           <Route path="/profile/" exact component={ProfileView} />
           <Route
+            path="/:slug/events/"
+            exact
+            render={props => <EventsView {...props} />}
+          />
+          <Route
             path="/events/"
             exact
             render={props => <EventsView {...props} />}
