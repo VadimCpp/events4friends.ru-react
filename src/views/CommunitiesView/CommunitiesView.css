@@ -2,26 +2,26 @@
   text-align: center;
 }
 
-.communities-view__button-link {
-  width: 175px;
+.btn-back {
   display: block;
   margin-right: auto;
   margin-left: auto;
-  margin-bottom: 10;
-  border-color: rgba(77, 77, 77, 0.2);
-  border-radius: 48px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: #999;
+  background-color: rgba(153, 153, 153, 0.2);
+  width: 170px;
+  height: 45px;
 }
 
-.cv__button-external-link {
-  border-color: #4d76a1;
-  margin: 8px;
-  border-radius: 48px;
-}
-
-.mtv {
-  border-color: #7c519b;
-}
-
-.telegram {
-  border-color: #139bd0;
+.btn-community {
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: #66F;
+  background-color: rgba(102,102,255,0.2);
+  width: 200px;
+  height: 55px;
 }

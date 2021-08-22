@@ -1,9 +1,8 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useEffect, useState } from 'react';
 import { withRouter, useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import ButtonLink from '../../components/ButtonLink';
 import StoreBadge from '../../components/StoreBadge';
-import CommunityList from '../../components/CommunityList';
 import { DataContext } from '../../context/DataContext';
 import './CommunitiesView.css';
 
@@ -21,23 +20,31 @@ const CommunitiesView = () => {
     [history],
   );
 
+  const [isBackButton, setIsBackButton] = useState(false);
+  useEffect(() => {
+    // Cookies
+    const cookies = new Cookies();
+    const communityId = cookies.get('communityId');
+    setIsBackButton(Boolean(communityId));
+  }, []);
+
   return (
     <div className="communitiesview">
-      <div>
+      {isBackButton && (
         <ButtonLink
           to="/"
           icon="/icons/icon_arrow_back.svg"
           title="На главную"
-          className="communities-view__button-link"
+          className="btn-back"
         />
-      </div>
-      <div className="border-top mt-3">
-        <p className="mt-3">Все сообщества Калининграда</p>
+      )}
+      <div className={isBackButton ? 'border-top mt-3 mb-3' : 'mt-3 mb-3'}>
+        <p className="mt-3">Выберите сообщество</p>
         {communitiesList.map(community => (
-          <div key={community.id} className="pt-2">
+          <div key={community.id} className="pb-3">
             <button
               type="button"
-              className="btn btn-light"
+              className="btn-community"
               onClick={() => onCommunityClick(community.id)}
             >
               <img
@@ -50,15 +57,7 @@ const CommunitiesView = () => {
             </button>
           </div>
         ))}
-        <CommunityList />
-      </div>
-      <div className="border-top mt-3 mb-3">
-        <p className="mt-3">
-          Для добавления Вашего чата или группы сообщества, напишите пожалуйста
-          программисту ВКонтакте:
-          <br />
-          <a href="https://vk.com/vadimcpp">Вадим Канинский</a>
-        </p>
+        {communitiesList.length === 0 && <p align="center">Загружаем...</p>}
       </div>
       <div className="border-top">
         <div className="container container-center pt-4 pb-5">

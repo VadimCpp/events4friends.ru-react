@@ -16,7 +16,7 @@ import {
   getVerboseTime,
 } from '../../utils/eventsLogic';
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, slug }) => {
   const authContext = useContext(AuthContext);
   const { contact, id, summary, isOnline, location } = event;
 
@@ -25,10 +25,11 @@ const EventCard = ({ event }) => {
 
   const isOwner =
     authContext.user && event && authContext.user.email === contact;
+  const linkTo = slug ? `/${slug}/event/${id}` : `/event/${id}`;
 
   return (
     <div className="event-item">
-      <Link className="reset-link-style" to={`/event/${id}`}>
+      <Link className="reset-link-style" to={linkTo}>
         <header className="event-card__header">
           {isCurrentEvent(event) ? (
             <small className="event-card__label event-card__label--current">

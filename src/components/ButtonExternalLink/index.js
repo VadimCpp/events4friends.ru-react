@@ -18,7 +18,9 @@ const ButtonExternalLink = ({
       style={style}
       className={cn('link', className, [...classList])}
     >
-      <img src={icon} alt={alt || 'le-icon'} className="link__image" />
+      {icon && (
+        <img src={icon} alt={alt || 'le-icon'} className="link__image" />
+      )}
       {title && <span className="link__text"> {title} </span>}
     </a>
   );

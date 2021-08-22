@@ -23,13 +23,3 @@
 .service-view.button-link:first-child {
   margin-right: 8px;
 }
-
-.arrow-back-btn {
-  width: 155px;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 10px;
-  border-color: rgba(77, 77, 77, .2);
-  border-radius: 48px;
-}

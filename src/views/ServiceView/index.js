@@ -13,7 +13,7 @@ import MessengerLink from '../../components/MessengerLink';
 const ServiceView = ({ match }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
 
-  const serviceId = match.params.id;
+  const { slug, id: serviceId } = match.params;
   const history = useHistory();
 
   const { user, connectingToFirebase } = useContext(AuthContext);
@@ -45,12 +45,13 @@ const ServiceView = ({ match }) => {
     }
   };
 
+  const backLinkTo = slug ? `/${slug}/services` : '/services';
   return (
     <div>
       <div>
         <ButtonLink
-          className="arrow-back-btn"
-          to="/services"
+          className="btn-back"
+          to={backLinkTo}
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
         />

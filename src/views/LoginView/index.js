@@ -50,6 +50,14 @@ const LoginView = ({ history }) => {
   return (
     <main className="loginview">
       <h1 className="visually-hidden">Страница входа</h1>
+      <div>
+        <ButtonLink
+          to="/"
+          icon="/icons/icon_arrow_back.svg"
+          title="На главную"
+          className="btn-back"
+        />
+      </div>
       <section className="loginview__block">
         <div className="container container-center">
           <h2 className="visually-hidden">Форма входа</h2>
@@ -60,7 +68,7 @@ const LoginView = ({ history }) => {
                 to="/"
                 icon="/icons/icon_arrow_back.svg"
                 title="Вернуться на экран приветствия"
-                className="loginview__back"
+                className="btn-back"
               />
             </>
           ) : (

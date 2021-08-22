@@ -21,7 +21,7 @@ import { getVerboseDate, getVerboseTime } from '../../utils/eventsLogic';
 const EventView = ({ match, history }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
 
-  const eventId = match.params.id;
+  const { slug, id: eventId } = match.params;
 
   const { user, connectingToFirebase } = useContext(AuthContext);
   const { events, loadingEvents, deleteEvent } = useContext(DataContext);
@@ -56,14 +56,15 @@ const EventView = ({ match, history }) => {
     }
   };
 
+  const backLinkTo = slug ? `/${slug}/events` : '/events';
   return (
     <div className="eventview">
       <div>
         <ButtonLink
-          to="/events"
+          to={backLinkTo}
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
-          classList={['button-link', 'event-view']}
+          className="btn-back"
         />
       </div>
       <div>

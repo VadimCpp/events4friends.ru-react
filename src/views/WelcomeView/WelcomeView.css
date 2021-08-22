@@ -4,7 +4,6 @@
 }
 .welcomeview__block {
   padding: 20px 0;
-  border-bottom: 1px solid #DDDDDD;
 }
 
 .welcomeview__messengers-list {
@@ -39,4 +38,109 @@
   padding: 0 !important;
   margin: 0;
   text-decoration: underline;
+}
+
+.events-btn {
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  border: 2px solid #EC7B28;
+  background-color: rgba(236,123,40,0.2);
+  width: 200px;
+  height: 55px;
+}
+
+.events-btn:hover {
+  text-decoration: none;
+}
+
+.events-btn__icon {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.events-btn__title {
+  padding-left: 8px;
+  line-height: 19px;
+  font-size: 16px;
+  color: #4d4d4d;
+}
+
+.services-btn {
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  border: 2px solid #24BA7B;
+  background-color: rgba(36,186,123,0.2);
+  width: 200px;
+  height: 55px;
+}
+
+.services-btn:hover {
+  text-decoration: none;
+}
+
+.services-btn__icon {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.services-btn__title {
+  padding-left: 8px;
+  line-height: 19px;
+  font-size: 16px;
+  color: #4d4d4d;
+}
+
+.communities-btn, .signin-btn {
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  border: 2px solid #66F;
+  background-color: rgba(102,102,255,0.2);
+  width: 200px;
+  height: 55px;
+}
+
+.communities-btn:hover, .signin-btn:hover {
+  text-decoration: none;
+}
+
+.communities-btn__icon {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  border-style: none;
+}
+
+.communities-btn__title, .signin-btn__title {
+  padding-left: 8px;
+  line-height: 19px;
+  font-size: 16px;
+  color: #4d4d4d;
+}
+
+.community__logo {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
 }

@@ -1,16 +1,26 @@
 .social__link {
-  margin: 4px;
-  width: 250px;
-  border-radius: 48px;
-  word-break: break-word;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  display: flex;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 15px;
+  border: 2px solid #9BF;
+  background-color: rgba(153, 187, 255, 0.2);
+  width: 170px;
+  height: 45px;
 }
 
 .social__link--vkontakte {
-  border-color: #4b729f;
+  border-color: #9BF;
+  background-color: rgba(153, 187, 255, 0.2);
 }
 .social__link--instagram {
   border-color: #fd5949;
+  background-color: rgba(253, 89, 73, 0.2);
 }
 .social__link--strava {
   border-color: #fc5200;
+  background-color: rgba(252, 82, 0, 0.2);
 }
