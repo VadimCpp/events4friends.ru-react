@@ -134,17 +134,13 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
           />
         </label>
       </div>
-      <div className="textinput">
-        <label>
-          <span className="textinput__label-text--block text-left">
-            Выберите сообщество:
-          </span>
-          <CommunityChoice
-            value={event.communityId}
-            handleChange={handleCommunityChange}
-          />
-        </label>
-      </div>
+      <fieldset className="textinput">
+        <legend className="textinput__legend">Выберите сообщество:</legend>
+        <CommunityChoice
+          value={event.communityId}
+          handleChange={handleCommunityChange}
+        />
+      </fieldset>
       <fieldset className="textinput">
         <legend className="textinput__legend">Часовая зона?</legend>
         <label>
