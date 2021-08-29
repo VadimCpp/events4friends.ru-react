@@ -3,6 +3,7 @@ import Cookies from 'universal-cookie';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
+import Spinner from '../../components/Spinner';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 import EventsFilterType from '../../enums';
@@ -21,6 +22,7 @@ const EventsView = ({ match, history }) => {
 
   const { slug } = match.params;
   const [community, setCommunity] = useState(null);
+
   useEffect(() => {
     if (slug) {
       //
@@ -146,9 +148,9 @@ const EventsView = ({ match, history }) => {
         />
       </div>
       {connectingToFirebase || loadingEvents ? (
-        <p align="center">
-          {connectingToFirebase ? NOTICES.CONNECT : NOTICES.LOADING}
-        </p>
+        <Spinner
+          message={connectingToFirebase ? NOTICES.CONNECT : NOTICES.LOADING}
+        />
       ) : (
         <ul className="events-list pt-3">
           {eventsList.map(eventItem =>
