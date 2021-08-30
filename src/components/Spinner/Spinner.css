@@ -1,3 +1,8 @@
+.spinner-container {
+  position: relative;
+  height: 75vh;
+}
+
 .spinner {
   animation: rotate 2s linear infinite;
   height: 50px;

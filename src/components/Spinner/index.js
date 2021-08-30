@@ -6,7 +6,7 @@ import './Spinner.css';
 
 const Spinner = ({ message }) => {
   return (
-    <div>
+    <div className="spinner-container">
       <svg className="spinner" viewBox="0 0 50 50">
         <circle
           className="path"
