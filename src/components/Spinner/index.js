@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Spinner.css';
 
+// реализация спиннера https://codepen.io/supah/pen/BjYLdW
+
 const Spinner = ({ message }) => {
   return (
     <div>

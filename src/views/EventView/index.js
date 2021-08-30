@@ -7,6 +7,7 @@ import ButtonLink from '../../components/ButtonLink';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import StoreBadge from '../../components/StoreBadge';
 import MessengerLink from '../../components/MessengerLink';
+import Spinner from '../../components/Spinner';
 
 // contexts
 import { AuthContext } from '../../context/AuthContext';
@@ -17,6 +18,9 @@ import './EventView.css';
 
 // utils
 import { getVerboseDate, getVerboseTime } from '../../utils/eventsLogic';
+
+// enums
+import { NOTICES } from '../../enums';
 
 const EventView = ({ match, history }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
@@ -89,10 +93,10 @@ const EventView = ({ match, history }) => {
           <div className="container">
             <div className="eventview__event-item container-center">
               {!event && connectingToFirebase && (
-                <p align="center">Подключаемся к базе данных...</p>
+                <Spinner message={NOTICES.CONNECT_TO_DB} />
               )}
               {!event && !connectingToFirebase && loadingEvents && (
-                <p align="center">Загружаем событие...</p>
+                <Spinner message={NOTICES.LOADING_EVT} />
               )}
               {!event && !connectingToFirebase && !loadingEvents && (
                 <div>

@@ -6,7 +6,7 @@ import EventsFilter from '../../components/EventsFilter';
 import Spinner from '../../components/Spinner';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
-import EventsFilterType from '../../enums';
+import { EventsFilterType, NOTICES } from '../../enums';
 import './EventsView.css';
 
 // utils
@@ -103,11 +103,6 @@ const EventsView = ({ match, history }) => {
     <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
   );
 
-  const NOTICES = {
-    CONNECT: 'Подключаемся к базе данных...',
-    LOADING: 'Загружаем события...',
-  };
-
   return (
     <section className="main-view">
       <ButtonLink
@@ -149,7 +144,9 @@ const EventsView = ({ match, history }) => {
       </div>
       {connectingToFirebase || loadingEvents ? (
         <Spinner
-          message={connectingToFirebase ? NOTICES.CONNECT : NOTICES.LOADING}
+          message={
+            connectingToFirebase ? NOTICES.CONNECT_TO_DB : NOTICES.LOADING_EVT
+          }
         />
       ) : (
         <ul className="events-list pt-3">
