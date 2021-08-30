@@ -5,8 +5,10 @@ import ButtonExternalLink from '../../components/ButtonExternalLink';
 import MessengerLink from '../../components/MessengerLink';
 import SocialNetworkLink from '../../components/SocialNetworkLink';
 import StoreBadge from '../../components/StoreBadge';
+import Spinner from '../../components/Spinner';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
+import { NOTICES } from '../../enums';
 import './WelcomeView.css';
 
 const WelcomeView = ({ history }) => {
@@ -140,13 +142,7 @@ const WelcomeView = ({ history }) => {
   }, [community]);
 
   if (!community) {
-    return (
-      <div className="welcomeview">
-        <div className="welcomeview__block">
-          <p>Загружаем...</p>
-        </div>
-      </div>
-    );
+    return <Spinner message={NOTICES.LOADING} />;
   }
 
   return (

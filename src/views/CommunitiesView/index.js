@@ -4,6 +4,8 @@ import Cookies from 'universal-cookie';
 import ButtonLink from '../../components/ButtonLink';
 import StoreBadge from '../../components/StoreBadge';
 import { DataContext } from '../../context/DataContext';
+import Spinner from '../../components/Spinner';
+import { NOTICES } from '../../enums';
 import './CommunitiesView.css';
 
 const CommunitiesView = () => {
@@ -57,7 +59,7 @@ const CommunitiesView = () => {
             </button>
           </div>
         ))}
-        {communitiesList.length === 0 && <p align="center">Загружаем...</p>}
+        {communitiesList.length === 0 && <Spinner message={NOTICES.LOADING} />}
       </div>
       <div className="border-top">
         <div className="container container-center pt-4 pb-5">

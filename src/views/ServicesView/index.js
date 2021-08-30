@@ -5,6 +5,8 @@ import { AuthContext } from '../../context/AuthContext';
 import ServiceCard from '../../components/ServiceCard';
 import ButtonLink from '../../components/ButtonLink';
 import ServiceSort from '../../components/ServiceSort';
+import Spinner from '../../components/Spinner';
+import { NOTICES } from '../../enums';
 import './ServicesView.css';
 
 const ServiceSortingType = {
@@ -163,11 +165,11 @@ const ServicesView = ({ match, history }) => {
       />
 
       {connectingToFirebase ? (
-        <p align="center">Подключаемся к базе данных...</p>
+        <Spinner message={NOTICES.CONNECT_TO_DB} />
       ) : (
         <>
           {loadingServices ? (
-            <p align="center">Загружаем услуги...</p>
+            <Spinner message={NOTICES.LOADING_SERVICES} />
           ) : (
             <>
               {!!sortedServices.length && (

@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 // enums
-import EventsFilter from '../enums';
+import { EventsFilterType } from '../enums';
 
 /**
  * Возвращает город в зависимости от часового пояса
@@ -139,9 +139,9 @@ export const sortPastEvents = (events, now) => {
 export const getSortedEvents = (events, filterType) => {
   const now = new Date();
   let sortedEvents = [];
-  if (filterType === EventsFilter.Upcoming) {
+  if (filterType === EventsFilterType.Upcoming) {
     sortedEvents = sortUpcomingEvents(events, now);
-  } else if (filterType === EventsFilter.Past) {
+  } else if (filterType === EventsFilterType.Past) {
     sortedEvents = sortPastEvents(events, now);
   }
   return sortedEvents;
