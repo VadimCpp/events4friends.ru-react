@@ -3,9 +3,10 @@ import Cookies from 'universal-cookie';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
+import Spinner from '../../components/Spinner';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
-import EventsFilterType from '../../enums';
+import { EventsFilterType, NOTICES } from '../../enums';
 import './EventsView.css';
 
 // utils
@@ -21,6 +22,7 @@ const EventsView = ({ match, history }) => {
 
   const { slug } = match.params;
   const [community, setCommunity] = useState(null);
+
   useEffect(() => {
     if (slug) {
       //
@@ -101,11 +103,6 @@ const EventsView = ({ match, history }) => {
     <p>Для того, чтобы добавлять мероприятия, выполните вход</p>
   );
 
-  const NOTICES = {
-    CONNECT: 'Подключаемся к базе данных...',
-    LOADING: 'Загружаем события...',
-  };
-
   return (
     <section className="main-view">
       <ButtonLink
@@ -146,9 +143,11 @@ const EventsView = ({ match, history }) => {
         />
       </div>
       {connectingToFirebase || loadingEvents ? (
-        <p align="center">
-          {connectingToFirebase ? NOTICES.CONNECT : NOTICES.LOADING}
-        </p>
+        <Spinner
+          message={
+            connectingToFirebase ? NOTICES.CONNECT_TO_DB : NOTICES.LOADING_EVT
+          }
+        />
       ) : (
         <ul className="events-list pt-3">
           {eventsList.map(eventItem =>

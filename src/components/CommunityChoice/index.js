@@ -10,15 +10,19 @@ const CommunityChoice = ({ value, handleChange }) => {
   ]);
 
   return (
-    communities.length && (
-      <select value={value} onChange={onChange}>
-        {communities.map(community => (
-          <option key={community.id} value={community.id}>
-            {community.name}
-          </option>
-        ))}
-      </select>
-    )
+    communities.length &&
+    communities.map(community => (
+      <label key={community.id} htmlFor={community.id}>
+        <span className="text-left">{community.name}</span>
+        <input
+          className="textinput__input"
+          type="radio"
+          value={community.id}
+          checked={community.id === value}
+          onChange={onChange}
+        />
+      </label>
+    ))
   );
 };
 

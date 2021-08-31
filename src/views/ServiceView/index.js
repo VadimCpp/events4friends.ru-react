@@ -9,6 +9,8 @@ import ButtonExternalLink from '../../components/ButtonExternalLink';
 import Button from '../../components/Button';
 import './ServiceView.css';
 import MessengerLink from '../../components/MessengerLink';
+import Spinner from '../../components/Spinner';
+import { NOTICES } from '../../enums';
 
 const ServiceView = ({ match }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
@@ -80,7 +82,7 @@ const ServiceView = ({ match }) => {
               <p align="center">Подключаемся к базе данных...</p>
             )}
             {!service && !connectingToFirebase && loadingServices && (
-              <p align="center">Загружаем услугу...</p>
+              <Spinner message={NOTICES.LOADING_SERVICE} />
             )}
             {!service && !connectingToFirebase && !loadingServices && (
               <div>
