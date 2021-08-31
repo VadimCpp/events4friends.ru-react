@@ -13,14 +13,14 @@ const CommunityChoice = ({ value, handleChange }) => {
     communities.length &&
     communities.map(community => (
       <label key={community.id} htmlFor={community.id}>
-        <span className="text-left">{community.name}</span>
         <input
-          className="textinput__input"
+          className="textinput"
           type="radio"
           value={community.id}
           checked={community.id === value}
           onChange={onChange}
         />
+        <span className="text-left">{community.name}</span>
       </label>
     ))
   );

@@ -12,11 +12,45 @@
   align-items: center;
 }
 
-.textinput__input {
-  border: 1px solid rgba(0, 0, 0, 0.2);
+.textinput__legend {
+  font-weight: 700;
+}
+
+.radio label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+}
+
+.radio input {
+  margin-right: 10px;
+}
+
+.text label {
+  display: flex;
+  flex-direction: column;
+  /* width: 200px; */
+}
+
+.text input {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.text:last-of-type {
+  margin-bottom: 50px;
+}
+
+.date label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date input {
   width: 230px;
-  padding: 5px 10px;
-  border-radius: 3px;
+  margin-top: 15px;
 }
 
 .rte-container {
