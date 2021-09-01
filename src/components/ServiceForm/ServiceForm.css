@@ -41,11 +41,11 @@
   padding: 10px 20px;
 }
 
-.rte-container {
+/* .rte-container {
   width: 100%;
   min-width: 300px;
   max-width: 960px;
-}
+} */
 
 .fieldset:nth-last-of-type(-2n+2) {
   margin-bottom: 30px;
@@ -61,7 +61,7 @@
   border-radius: 48px;
 }
 
-.external_link_btn {
+/* .external_link_btn {
   margin: 8px;
 }
 
@@ -79,4 +79,4 @@
 
 .service-form__label {
   margin-bottom: 1.25rem;
-}
+} */
