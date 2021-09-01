@@ -1,23 +1,39 @@
 .newserviceview {
+  width: 414px;
+  margin: 0 auto;
   padding: 20px 0;
   border-bottom: 1px solid #dddddd;
-  text-align: center;
 }
 
 .textinput {
-  margin-bottom: 0;
   padding: 10px 20px;
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.textinput__input {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  width: 230px;
-  padding: 5px 10px;
-  border-radius: 3px;
+.textinput__legend {
+  font-weight: 700;
+}
+
+.text input {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.radio label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+}
+
+.radio input {
+  margin-right: 10px;
+}
+
+.textinput.button {
+  display: block;
+  padding: 10px 20px;
 }
 
 .rte-container {

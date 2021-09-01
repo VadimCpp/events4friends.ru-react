@@ -213,13 +213,15 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
           />
         </label>
       </fieldset>
-      {updatingEvent ? (
-        <p>Сохраняем событие...</p>
-      ) : (
-        <Button onPress={saveHandler} icon="/icons/icon_save.svg">
-          Сохранить
-        </Button>
-      )}
+      <fieldset className="textinput button">
+        {updatingEvent ? (
+          <p>Сохраняем событие...</p>
+        ) : (
+          <Button onPress={saveHandler} icon="/icons/icon_save.svg">
+            Сохранить
+          </Button>
+        )}
+      </fieldset>
     </form>
   );
 };

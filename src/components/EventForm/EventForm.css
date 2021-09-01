@@ -1,15 +1,14 @@
 .neweventview {
-  padding: 20px 0;
-  border-bottom: 1px solid #dddddd;
-  text-align: center;
+  width: 414px;
+  margin: 0 auto;
+  padding: 20px;
+  /* text-align: center; */
 }
 
 .textinput {
   padding: 10px 20px;
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .textinput__legend {
@@ -45,12 +44,17 @@
 .date label {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .date input {
   width: 230px;
   margin-top: 15px;
+  width: 100%;
+}
+
+.textinput.button {
+  display: block;
+  padding: 10px 20px;
 }
 
 .rte-container {
