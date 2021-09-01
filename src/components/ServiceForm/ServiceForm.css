@@ -1,7 +1,7 @@
 .new-service-view {
   width: 414px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 20px 0 30px;
   border-bottom: 1px solid #dddddd;
 }
 
@@ -27,7 +27,7 @@
 
 .fieldset__legend {
   margin-bottom: .5rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
 }
 
@@ -49,8 +49,8 @@
 }
 
 .fieldset.button {
-  display: block;
-  padding: 10px 20px;
+  margin: 0 auto;
+  width: 170px;
 }
 
 /* .rte-container {
@@ -63,12 +63,14 @@
   margin-bottom: 30px;
 }
 
-.service-form-view-arrow-back-btn {
+.form-arrow-back-btn {
   width: 155px;
   display: block;
+  text-align: center;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 10px;
+  margin-top: 20px;
   border-color: rgba(77, 77, 77, .2);
   border-radius: 48px;
 }
