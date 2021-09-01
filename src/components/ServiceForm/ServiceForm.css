@@ -1,23 +1,28 @@
-.newserviceview {
+.new-service-view {
   width: 414px;
   margin: 0 auto;
   padding: 20px 0;
   border-bottom: 1px solid #dddddd;
 }
 
-.textinput {
+.fieldset {
   padding: 10px 20px;
   display: flex;
   flex-flow: column;
 }
 
-.textinput__legend {
+.fieldset input {
+  padding: 5px 10px;
+  border: 1px solid #cccccc;
+}
+
+.fieldset__legend {
   font-weight: 700;
 }
 
 .text input {
-  margin-top: 15px;
   width: 100%;
+  margin-top: 15px;
 }
 
 .radio label {
@@ -31,7 +36,7 @@
   margin-right: 10px;
 }
 
-.textinput.button {
+.fieldset.button {
   display: block;
   padding: 10px 20px;
 }
@@ -40,6 +45,10 @@
   width: 100%;
   min-width: 300px;
   max-width: 960px;
+}
+
+.fieldset:nth-last-of-type(-2n+2) {
+  margin-bottom: 30px;
 }
 
 .serviceFormView-arrowBack-btn {

@@ -1,17 +1,26 @@
-.neweventview {
+.new-event-view {
   width: 414px;
   margin: 0 auto;
   padding: 20px;
   /* text-align: center; */
 }
 
-.textinput {
+.fieldset {
   padding: 10px 20px;
   display: flex;
   flex-flow: column;
 }
 
-.textinput__legend {
+.fieldset:nth-last-of-type(-2n+2) {
+  margin-bottom: 30px;
+}
+
+.fieldset input {
+  padding: 5px 10px;
+  border: 1px solid #b1b1b1;
+}
+
+.fieldset__legend {
   font-weight: 700;
 }
 
@@ -34,11 +43,6 @@
 
 .text input {
   margin-top: 15px;
-  width: 100%;
-}
-
-.text:last-of-type {
-  margin-bottom: 50px;
 }
 
 .date label {
@@ -47,12 +51,11 @@
 }
 
 .date input {
-  width: 230px;
   margin-top: 15px;
   width: 100%;
 }
 
-.textinput.button {
+.fieldset.button {
   display: block;
   padding: 10px 20px;
 }
