@@ -11,6 +11,10 @@
   flex-flow: column;
 }
 
+.fieldset:first-of-type {
+  margin-top: 0;
+}
+
 .fieldset:nth-last-of-type(-2n+2) {
   margin-bottom: 30px;
 }
@@ -20,7 +24,13 @@
   border: 1px solid #b1b1b1;
 }
 
+.fieldset label {
+  margin-bottom: 0;
+}
+
 .fieldset__legend {
+  margin-bottom: .5rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 
@@ -41,9 +51,9 @@
   /* width: 200px; */
 }
 
-.text input {
+/* .text input {
   margin-top: 15px;
-}
+} */
 
 .date label {
   display: flex;
@@ -51,7 +61,7 @@
 }
 
 .date input {
-  margin-top: 15px;
+  /* margin-top: 15px; */
   width: 100%;
 }
 

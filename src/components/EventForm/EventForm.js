@@ -86,7 +86,7 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
         </label>
       </fieldset>
       <fieldset className="fieldset">
-        <p className="fieldset__legend">Полное описание:</p>
+        <span className="fieldset__legend">Полное описание:</span>
         <div>
           <ReachTextEditor
             description={event.description}

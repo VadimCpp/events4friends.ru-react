@@ -21,7 +21,7 @@ const ServiceFormView = ({ service, isAuth, onSave = () => {} }) => {
           to="/services"
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
-          className="serviceFormView-arrowBack-btn"
+          className="service-form-view-arrow-back-btn"
         />
       </div>
 

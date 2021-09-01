@@ -6,9 +6,18 @@
 }
 
 .fieldset {
-  padding: 10px 20px;
+  margin-top: 30px;
+  padding: 0;
   display: flex;
   flex-flow: column;
+}
+
+.fieldset:first-of-type {
+  margin-top: 0;
+}
+
+.fieldset label {
+  margin-bottom: 0;
 }
 
 .fieldset input {
@@ -17,12 +26,14 @@
 }
 
 .fieldset__legend {
+  margin-bottom: .5rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 
 .text input {
   width: 100%;
-  margin-top: 15px;
+  /* margin-top: 10px; */
 }
 
 .radio label {
@@ -33,6 +44,7 @@
 }
 
 .radio input {
+  margin-top: 0;
   margin-right: 10px;
 }
 
@@ -51,7 +63,7 @@
   margin-bottom: 30px;
 }
 
-.serviceFormView-arrowBack-btn {
+.service-form-view-arrow-back-btn {
   width: 155px;
   display: block;
   margin-right: auto;
