@@ -22,15 +22,7 @@ const EventFormView = ({ editMode, event, isAuth, onSave }) => {
           to="/events"
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
-          style={{
-            width: 155,
-            display: 'block',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-            marginBottom: 10,
-            borderColor: 'rgba(77, 77, 77, .2)',
-            borderRadius: '48px',
-          }}
+          className="form-arrow-back-btn"
         />
       </div>
 

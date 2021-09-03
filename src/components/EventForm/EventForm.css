@@ -1,26 +1,77 @@
-.neweventview {
-  padding: 20px 0;
-  border-bottom: 1px solid #dddddd;
-  text-align: center;
+.new-event-view {
+  width: 414px;
+  margin: 0 auto;
+  padding: 20px 0 30px;
+  /* text-align: center; */
 }
 
-.textinput {
+.fieldset {
   padding: 10px 20px;
   display: flex;
   flex-flow: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.textinput__input {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  width: 230px;
+.fieldset:first-of-type {
+  margin-top: 0;
+}
+
+.fieldset:nth-last-of-type(-2n+2) {
+  margin-bottom: 30px;
+}
+
+.fieldset input {
   padding: 5px 10px;
-  border-radius: 3px;
+  border: 1px solid #b1b1b1;
 }
 
-.rte-container {
+.fieldset label {
+  margin-bottom: 0;
+}
+
+.fieldset__legend {
+  margin-bottom: .5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.radio label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 200px;
+}
+
+.radio input {
+  margin-right: 10px;
+}
+
+.text label {
+  display: flex;
+  flex-direction: column;
+  /* width: 200px; */
+}
+
+/* .text input {
+  margin-top: 15px;
+} */
+
+.date label {
+  display: flex;
+  flex-direction: column;
+}
+
+.date input {
+  /* margin-top: 15px; */
+  width: 100%;
+}
+
+.fieldset.button {
+  margin: 0 auto;
+  width: 170px;
+}
+
+/* .rte-container {
   width: 100%;
   min-width: 300px;
   max-width: 960px;
-}
+} */
