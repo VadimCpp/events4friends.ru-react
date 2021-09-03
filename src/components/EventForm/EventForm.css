@@ -2,7 +2,6 @@
   width: 414px;
   margin: 0 auto;
   padding: 20px 0 30px;
-  /* text-align: center; */
 }
 
 .fieldset {
@@ -51,10 +50,6 @@
   /* width: 200px; */
 }
 
-/* .text input {
-  margin-top: 15px;
-} */
-
 .date label {
   display: flex;
   flex-direction: column;
@@ -69,9 +64,3 @@
   margin: 0 auto;
   width: 170px;
 }
-
-/* .rte-container {
-  width: 100%;
-  min-width: 300px;
-  max-width: 960px;
-} */

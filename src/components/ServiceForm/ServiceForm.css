@@ -33,7 +33,6 @@
 
 .text input {
   width: 100%;
-  /* margin-top: 10px; */
 }
 
 .radio label {
@@ -53,12 +52,6 @@
   width: 170px;
 }
 
-/* .rte-container {
-  width: 100%;
-  min-width: 300px;
-  max-width: 960px;
-} */
-
 .fieldset:nth-last-of-type(-2n+2) {
   margin-bottom: 30px;
 }
@@ -74,23 +67,3 @@
   border-color: rgba(77, 77, 77, .2);
   border-radius: 48px;
 }
-
-/* .external_link_btn {
-  margin: 8px;
-}
-
-.telegram_btn {
-  border-color: #139BD0;
-}
-
-.whatsapp_btn {
-  border-color: #57BB63;
-}
-
-.viber_btn {
-  border-color: #7C519B;
-}
-
-.service-form__label {
-  margin-bottom: 1.25rem;
-} */
