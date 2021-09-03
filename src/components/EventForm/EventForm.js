@@ -71,82 +71,78 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
   );
 
   return (
-    <form className="neweventview">
-      <div className="textinput">
+    <form className="new-event-view">
+      <fieldset className="fieldset text">
         <label>
-          <span className="textinput__label-text--block text-left">
+          <span className="fieldset__legend">
             Короткое название мероприятия:
           </span>
           <input
-            className="textinput__input"
             type="text"
             name="summary"
             value={event.summary}
             onChange={handlerChange('summary')}
           />
         </label>
-      </div>
-      <div className="textinput">
-        <p className="text-left">Полное описание:</p>
-        <div className="rte-container">
+      </fieldset>
+      <fieldset className="fieldset">
+        <span className="fieldset__legend">Полное описание:</span>
+        <div>
           <ReachTextEditor
             description={event.description}
             onChange={handlerDescriptionChange}
           />
         </div>
-      </div>
-      <fieldset className="textinput">
-        <legend className="textinput__legend">Где будет мероприятие?</legend>
+      </fieldset>
+      <fieldset className="fieldset radio">
+        <legend className="fieldset__legend">Где будет мероприятие?</legend>
         <label>
-          <span className="text-left">Онлайн</span>
           <input
-            className="textinput__input"
+            className="fieldset"
             type="radio"
             name="isOnline"
             checked={event.isOnline}
             onChange={handleIsOnlineChange(true)}
           />
+          <span className="text-left">Онлайн</span>
         </label>
         <label>
-          <span className="text-left">Офлайн</span>
           <input
-            className="textinput__input"
+            className="fieldset"
             type="radio"
             name="isOnline"
             checked={!event.isOnline}
             onChange={handleIsOnlineChange(false)}
           />
+          <span className="text-left">Офлайн</span>
         </label>
       </fieldset>
-      <div className="textinput">
+      <fieldset className="fieldset text">
         <label>
-          <span className="textinput__label-text--block text-left">
+          <span className="fieldset__legend">
             {event.isOnline
               ? 'Ссылка онлайн мероприятия:'
               : 'Укажите адрес встречи:'}
           </span>
           <input
-            className="textinput__input"
             type="text"
             name="location"
             value={event.location}
             onChange={handlerChange('location')}
           />
         </label>
-      </div>
-      <fieldset className="textinput">
-        <legend className="textinput__legend">Выберите сообщество:</legend>
+      </fieldset>
+      <fieldset className="fieldset radio">
+        <legend className="fieldset__legend">Выберите сообщество:</legend>
         <CommunityChoice
           value={event.communityId}
           handleChange={handleCommunityChange}
         />
       </fieldset>
-      <fieldset className="textinput">
-        <legend className="textinput__legend">Часовая зона?</legend>
+      <fieldset className="fieldset radio">
+        <legend className="fieldset__legend">Часовая зона?</legend>
         <label>
-          <span className="text-left">Калининград (GMT+2)</span>
           <input
-            className="textinput__input"
             type="radio"
             name="timeZone"
             checked={event.timezone === timezone.EET}
@@ -154,11 +150,10 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
               handleTimeZoneChange(timezone.EET);
             }}
           />
+          <span className="text-left">Калининград (GMT+2)</span>
         </label>
         <label>
-          <span className="text-left">Москва (GMT+3)</span>
           <input
-            className="textinput__input"
             type="radio"
             name="timeZone"
             checked={event.timezone === timezone.MSC}
@@ -166,43 +161,37 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
               handleTimeZoneChange(timezone.MSC);
             }}
           />
+          <span className="text-left">Москва (GMT+3)</span>
         </label>
       </fieldset>
-      <div className="textinput">
+      <fieldset className="fieldset date">
         <label>
-          <span className="textinput__label-text--block text-left">
-            Начало мероприятия:
-          </span>
+          <span className="fieldset__legend">Начало мероприятия:</span>
           <input
-            className="textinput__input"
             type="datetime-local"
             name="start"
             value={event.start}
             onChange={handlerChange('start')}
           />
         </label>
-      </div>
-      <div className="textinput">
+      </fieldset>
+      <fieldset className="fieldset date">
         <label>
-          <span className="textinput__label-text--block text-left">
+          <span className="fieldset__legend">
             Окончание мероприятия (необязательно):
           </span>
           <input
-            className="textinput__input"
             type="datetime-local"
             name="end"
             value={event.end}
             onChange={handlerChange('end')}
           />
         </label>
-      </div>
-      <div className="textinput">
+      </fieldset>
+      <fieldset className="fieldset text">
         <label>
-          <span className="textinput__label-text--block text-left">
-            Контакт организатора:
-          </span>
+          <span className="fieldset__legend">Контакт организатора:</span>
           <input
-            className="textinput__input"
             type="text"
             name="contact"
             onChange={handlerChange('contact')}
@@ -210,28 +199,27 @@ const EventForm = ({ defaultEvent, onSave = () => {} }) => {
             disabled
           />
         </label>
-      </div>
-      <div className="textinput">
+      </fieldset>
+      <fieldset className="fieldset text">
         <label>
-          <span className="textinput__label-text--block text-left">
-            Имя организатора:
-          </span>
+          <span className="fieldset__legend">Имя организатора:</span>
           <input
-            className="textinput__input"
             type="text"
             name="name"
             value={event.name}
             onChange={handlerChange('name')}
           />
         </label>
-      </div>
-      {updatingEvent ? (
-        <p>Сохраняем событие...</p>
-      ) : (
-        <Button onPress={saveHandler} icon="/icons/icon_save.svg">
-          Сохранить
-        </Button>
-      )}
+      </fieldset>
+      <fieldset className="fieldset button">
+        {updatingEvent ? (
+          <p>Сохраняем событие...</p>
+        ) : (
+          <Button onPress={saveHandler} icon="/icons/icon_save.svg">
+            Сохранить
+          </Button>
+        )}
+      </fieldset>
     </form>
   );
 };
