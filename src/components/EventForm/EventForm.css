@@ -47,7 +47,6 @@
 .text label {
   display: flex;
   flex-direction: column;
-  /* width: 200px; */
 }
 
 .date label {
@@ -56,11 +55,22 @@
 }
 
 .date input {
-  /* margin-top: 15px; */
   width: 100%;
 }
 
 .fieldset.button {
   margin: 0 auto;
   width: 170px;
+}
+
+.form-arrow-back-btn {
+  width: 155px;
+  display: block;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  border-color: rgba(77, 77, 77, .2);
+  border-radius: 48px;
 }
