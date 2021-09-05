@@ -27,8 +27,8 @@
 }
 
 .event-view.button-link {
-  /* margin-bottom: 10px; */
-  border-color: rgba(153, 153, 153, 0.2);
+  border-color: #999999;
+  background-color: rgba(153, 153, 153, 0.2);
   border-radius: 15px;
   min-width: 155px;
 }

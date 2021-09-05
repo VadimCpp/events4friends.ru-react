@@ -47,7 +47,6 @@
 .text label {
   display: flex;
   flex-direction: column;
-  /* width: 200px; */
 }
 
 .date label {
@@ -56,7 +55,6 @@
 }
 
 .date input {
-  /* margin-top: 15px; */
   width: 100%;
 }
 
