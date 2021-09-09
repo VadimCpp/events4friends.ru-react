@@ -27,3 +27,7 @@
   width: 200px;
   height: 55px;
 }
+
+.btn-back .link__text {
+  margin-left: 0;
+}
