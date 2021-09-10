@@ -4,9 +4,7 @@ import { withRouter } from 'react-router-dom';
 // components
 import Button from '../../components/Button';
 import ButtonLink from '../../components/ButtonLink';
-import ButtonExternalLink from '../../components/ButtonExternalLink';
 import StoreBadge from '../../components/StoreBadge';
-import MessengerLink from '../../components/MessengerLink';
 import Spinner from '../../components/Spinner';
 
 // contexts
@@ -167,23 +165,6 @@ const EventView = ({ match, history }) => {
               )}
             </div>
           </div>
-        </div>
-      </div>
-      <div className="border-top">
-        <div className="container container-center pt-4 pb-4">
-          <p>Обсудить анонс мероприятия в чате:</p>
-          <MessengerLink
-            ExternalLinkComponent={ButtonExternalLink}
-            messengerName="telegram"
-          />
-          <MessengerLink
-            ExternalLinkComponent={ButtonExternalLink}
-            messengerName="whatsapp"
-          />
-          <MessengerLink
-            ExternalLinkComponent={ButtonExternalLink}
-            messengerName="viber"
-          />
         </div>
       </div>
 
