@@ -3,7 +3,7 @@
 }
 
 .btn-back {
-  display: block;
+  /* display: block; */
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 10px;
@@ -13,7 +13,7 @@
   border-radius: 15px;
   border-color: #999;
   background-color: rgba(153, 153, 153, 0.2);
-  width: 170px;
+  width: auto;
   height: 45px;
 
   text-align: center;
