@@ -144,7 +144,6 @@ const WelcomeView = ({ history }) => {
   if (!community) {
     return <Spinner message={NOTICES.LOADING} />;
   }
-
   return (
     <div className="welcomeview">
       {userAuthorized && (
@@ -203,24 +202,28 @@ const WelcomeView = ({ history }) => {
         </Link>
       </div>
 
-      <div className="welcomeview__block">
-        <div className="container container-center">
-          <h4>Чаты сообщества</h4>
-          <ul className="welcomeview__messengers-list">
-            {messengers.map(messenger => (
-              <li
-                className="welcomeview__messengers-item"
-                key={messenger.messengerName}
-              >
-                <MessengerLink
-                  ExternalLinkComponent={ButtonExternalLink}
-                  {...messenger}
-                />
-              </li>
-            ))}
-          </ul>
+      {messengers.length !== 0 ? (
+        <div className="welcomeview__block">
+          <div className="container container-center">
+            <h4>Чаты сообщества</h4>
+            <ul className="welcomeview__messengers-list">
+              {messengers.map(messenger => (
+                <li
+                  className="welcomeview__messengers-item"
+                  key={messenger.messengerName}
+                >
+                  <MessengerLink
+                    ExternalLinkComponent={ButtonExternalLink}
+                    {...messenger}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
+      ) : (
+        ''
+      )}
 
       <div className="welcomeview__block">
         <div className="container container-center">
