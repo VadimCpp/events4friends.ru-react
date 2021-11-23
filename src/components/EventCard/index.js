@@ -29,52 +29,37 @@ const EventCard = ({ event, slug }) => {
 
   return (
     <div className="event-item">
-      <Link className="reset-link-style" to={linkTo}>
-        <header className="event-card__header">
-          {isCurrentEvent(event) ? (
+      <header className="event-card__header">
+        {isCurrentEvent(event) ? (
+          <small className="event-card__label event-card__label--current">
+            Идет сейчас
+          </small>
+        ) : (
+          isStartWithinAnHourEvent(event) && (
             <small className="event-card__label event-card__label--current">
-              Идет сейчас
+              Начнется в течение часа
             </small>
-          ) : (
-            isStartWithinAnHourEvent(event) && (
-              <small className="event-card__label event-card__label--current">
-                Начнется в течение часа
-              </small>
-            )
-          )}
+          )
+        )}
 
-          {isOwner && <small className="calendar-owner">Мой анонс</small>}
-        </header>
-        <div className="d-flex align-items-center justify-content-between">
-          <p>
-            <time>
-              <span aria-hidden="true">📅</span>
-              <span className="event-date">{startDate}</span>
-              <span aria-hidden="true">🕗</span>
-              <span className="event-time">{startTime}</span>
-            </time>
-            － {summary}
-            {isOnline ? (
-              <>
-                <span aria-hidden="true"> 🕸</span>
-                Онлайн
-              </>
-            ) : (
-              <>
-                <span aria-hidden="true"> 📍</span>
-                {location}
-              </>
-            )}
-          </p>
-          <img
-            src="/icons/icon_arrow_forward.svg"
-            alt="➡️"
-            className="event-card__arrow"
-            width="10"
-            height="10"
-          />
-        </div>
-      </Link>
+        {isOwner && <small className="calendar-owner">Мой анонс</small>}
+      </header>
+      <div className="event-card__body">
+        <Link className="event-card__link" to={linkTo}>
+          {summary}
+        </Link>
+        <p className="event-card__content">
+          <time className="event-card__time">
+            <span>{startDate}</span>
+            <span>{startTime}</span>
+          </time>
+
+          <div className="event-card__place">
+            <span>@</span>
+            {isOnline ? <span>Онлайн</span> : <span>{location}</span>}
+          </div>
+        </p>
+      </div>
     </div>
   );
 };

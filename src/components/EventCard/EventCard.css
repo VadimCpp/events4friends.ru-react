@@ -8,15 +8,9 @@
   border-top: 1px solid rgba(200, 200, 200, 1);
 }
 
-.event-date,
-.event-summary,
-.event-location {
+.event-date {
   padding-left: 3px;
   padding-right: 7px;
-}
-
-.event-time {
-  padding-left: 3px;
 }
 
 .event-more {
@@ -48,7 +42,6 @@
   color: black !important;
 }
 
-
 /* Customize from 'react-add-to-calendar/dist/react-add-to-calendar.css'; */
 .react-add-to-calendar__button {
   background-color: transparent;
@@ -69,15 +62,6 @@
   color: #28a745;
 }
 
-.reset-link-style {
-	color: #444;
-}
-
-.reset-link-style:hover {
-    color: #444;
-    text-decoration: none;
-}
-
 .event-card__header {
   min-height: 1rem;
   margin-bottom: 10px;
@@ -92,6 +76,33 @@
   color: #dc3545;
 }
 
-.event-card__arrow {
-  margin-left: 15px;
+.event-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.event-card__link {
+  color: #007cff;
+}
+.event-card__link:hover {
+  color: #007cff;
+  text-decoration: none;
+}
+
+.event-card__content {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+}
+
+.event-card__time {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.7rem;
+}
+
+.event-card__place {
+  display: flex;
+  gap: 0.5rem;
 }
