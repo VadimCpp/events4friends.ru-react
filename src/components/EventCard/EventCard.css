@@ -8,9 +8,7 @@
   border-top: 1px solid rgba(200, 200, 200, 1);
 }
 
-.event-date,
-.event-summary,
-.event-location {
+.event-date {
   padding-left: 3px;
   padding-right: 7px;
 }
@@ -76,10 +74,6 @@
 
 .event-card__label--current {
   color: #dc3545;
-}
-
-.event-card__arrow {
-  margin-left: 15px;
 }
 
 .event-card__body {
