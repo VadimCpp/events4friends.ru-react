@@ -17,6 +17,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env
 
 npm-debug.log*
 yarn-debug.log*
@@ -30,3 +31,6 @@ yarn.lock
 /vendor/
 phpcs.xml
 phpunit.xml
+
+.vscode
+.eslintcache

@@ -1,0 +1,32 @@
+.communitiesview {
+  text-align: center;
+}
+
+.btn-back {
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  margin-top: 20px;
+
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: #999;
+  background-color: rgba(153, 153, 153, 0.2);
+  width: auto;
+  height: 45px;
+
+  text-align: center;
+}
+
+.btn-community {
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: #66F;
+  background-color: rgba(102,102,255,0.2);
+  width: 200px;
+  height: 55px;
+}
+
+.btn-back .link__text {
+  margin-left: 0;
+}

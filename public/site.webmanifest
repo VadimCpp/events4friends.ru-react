@@ -1,6 +1,6 @@
 {
-    "name": "События для друзей",
-    "short_name": "Для друзей",
+    "name": "events4friends",
+    "short_name": "events4friends",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

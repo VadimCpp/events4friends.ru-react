@@ -1,0 +1,30 @@
+.service-item {
+  text-align: left;
+  color: #444;
+  margin-bottom: 20px;
+  padding: 35px 10px 20px;
+  position: relative;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.service-view.button-link {
+  border: 2px solid #999999;
+  background-color: rgba(153, 153, 153, 0.2);
+  border-radius: 15px;
+  min-width: 155px;
+}
+
+.service-view.button-link:hover {
+  border: 2px solid #4d4d4d;
+  color: #4d4d4d;
+}
+
+.service-view.button-link:first-child {
+  margin-right: 8px;
+}

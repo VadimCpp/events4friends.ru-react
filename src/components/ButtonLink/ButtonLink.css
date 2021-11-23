@@ -1,0 +1,38 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem 1rem;
+  background-color: #fff;
+  border: 2px solid #999;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.link_image_for_navigation {
+  position: relative;
+  bottom: 0;
+  left: -8px;
+  width: 15px;
+  height: 15px;
+}
+
+.link_image_welcome_list{
+  width: 30px;
+  height: 30px;
+}
+
+.form-arrow-back-btn .link__text {
+  line-height: 19px;
+  font-size: 16px;
+  color: #4d4d4d;
+  margin-left: 0;
+}
+
+.link.button-link {
+  background-color: rgba(153, 153, 153, 0.2);
+}
