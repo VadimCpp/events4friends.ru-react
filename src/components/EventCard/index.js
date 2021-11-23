@@ -55,17 +55,8 @@ const EventCard = ({ event, slug }) => {
           </time>
 
           <div className="event-card__place">
-            {isOnline ? (
-              <>
-                <span aria-hidden="true">🕸</span>
-                Онлайн
-              </>
-            ) : (
-              <>
-                <span aria-hidden="true">📍</span>
-                {location}
-              </>
-            )}
+            <span>@</span>
+            {isOnline ? <span>Онлайн</span> : <span>{location}</span>}
           </div>
         </p>
       </div>
