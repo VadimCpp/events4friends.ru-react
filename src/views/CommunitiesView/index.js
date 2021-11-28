@@ -49,12 +49,14 @@ const CommunitiesView = () => {
               className="btn-community"
               onClick={() => onCommunityClick(community.id)}
             >
-              <img
-                src={`data:image/png;base64, ${community.logo}`}
-                alt="Logo"
-                width="32"
-                height="32"
-              />
+              {!!community.logo_url && (
+                <img
+                  src={community.logo_url}
+                  alt="Logo"
+                  width="32"
+                  height="32"
+                />
+              )}
               <span className="pl-2">{community.name}</span>
             </button>
           </div>
