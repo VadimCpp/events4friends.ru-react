@@ -174,11 +174,13 @@ const WelcomeView = ({ history }) => {
 
       <div className="welcomeview__block">
         <h1>
-          <img
-            className="community__logo"
-            src={community.logo_url}
-            alt="logo"
-          />
+          {!!community.logo_url && (
+            <img
+              className="community__logo"
+              src={community.logo_url}
+              alt="logo"
+            />
+          )}
           <span>{community.name}</span>
         </h1>
         <p>{community.description}</p>
