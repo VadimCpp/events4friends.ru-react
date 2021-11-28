@@ -176,7 +176,7 @@ const WelcomeView = ({ history }) => {
         <h1>
           <img
             className="community__logo"
-            src={`data:image/png;base64,${community.logo}`}
+            src={community.logo_url}
             alt="logo"
           />
           <span>{community.name}</span>
