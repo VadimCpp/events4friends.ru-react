@@ -41,9 +41,10 @@ const CommunitiesView = () => {
         />
       )}
       <div className={isBackButton ? 'border-top mt-3 mb-3' : 'mt-3 mb-3'}>
-        <p className="mt-3">Выберите сообщество</p>
+        <p className="mt-3 pb-5 h3">Выберите сообщество</p>
         {communitiesList.map(community => (
-          <div key={community.id} className="pb-3">
+          <div key={community.id} className="pb-5">
+            <p className="pl-3 pr-3">{community.description}:</p>
             <button
               type="button"
               className="btn-community"
