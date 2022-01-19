@@ -1,16 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ButtonLink from '../ButtonLink';
 import ButtonExternalLink from '../ButtonExternalLink';
 import MessengerLink from '../MessengerLink';
 import EventForm from './EventForm';
 import './EventForm.css';
 
-const EventFormView = ({
-  editMode = true,
-  event,
-  isAuth,
-  onSave = () => {},
-}) => {
+const EventFormView = ({ editMode, event, isAuth, onSave }) => {
   const formContent = isAuth ? (
     <EventForm defaultEvent={event} onSave={onSave} editMode={editMode} />
   ) : (
@@ -26,15 +22,7 @@ const EventFormView = ({
           to="/events"
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
-          style={{
-            width: 155,
-            display: 'block',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-            marginBottom: 10,
-            borderColor: 'rgba(77, 77, 77, .2)',
-            borderRadius: '48px',
-          }}
+          className="form-arrow-back-btn"
         />
       </div>
 
@@ -62,6 +50,17 @@ const EventFormView = ({
       </div>
     </div>
   );
+};
+
+EventFormView.propTypes = {
+  event: PropTypes.string.isRequired,
+  editMode: PropTypes.bool,
+  isAuth: PropTypes.bool,
+  onSave: PropTypes.func.isRequired,
+};
+
+EventFormView.defaultProps = {
+  editMode: true,
 };
 
 export default React.memo(EventFormView, (prev, next) => {

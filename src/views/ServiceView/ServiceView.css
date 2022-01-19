@@ -14,22 +14,17 @@
 }
 
 .service-view.button-link {
-  margin-bottom: 10px;
-  border-color: rgba(77, 77, 77, 0.2);
-  border-radius: 48px;
+  border: 2px solid #999999;
+  background-color: rgba(153, 153, 153, 0.2);
+  border-radius: 15px;
   min-width: 155px;
+}
+
+.service-view.button-link:hover {
+  border: 2px solid #4d4d4d;
+  color: #4d4d4d;
 }
 
 .service-view.button-link:first-child {
   margin-right: 8px;
-}
-
-.arrow-back-btn {
-  width: 155px;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 10px;
-  border-color: rgba(77, 77, 77, .2);
-  border-radius: 48px;
 }

@@ -1,55 +1,52 @@
 import React, { useState, useContext } from 'react';
 import { withRouter } from 'react-router-dom';
-import moment from 'moment';
+
+// components
 import Button from '../../components/Button';
 import ButtonLink from '../../components/ButtonLink';
-import ButtonExternalLink from '../../components/ButtonExternalLink';
 import StoreBadge from '../../components/StoreBadge';
+import Spinner from '../../components/Spinner';
+
+// contexts
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
+
+// styles
 import './EventView.css';
-import MessengerLink from '../../components/MessengerLink';
+
+// utils
+import { getVerboseDate, getVerboseTime } from '../../utils/eventsLogic';
+
+// enums
+import { NOTICES } from '../../enums';
 
 const EventView = ({ match, history }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
 
-  const eventId = match.params.id;
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
+  const { slug, id: eventId } = match.params;
 
-  const { user, connectingToFirebase } = authContext;
-  const { events, loadingEvents, deleteEvent } = dataContext;
+  const { user, connectingToFirebase } = useContext(AuthContext);
+  const { events, loadingEvents, deleteEvent } = useContext(DataContext);
 
   let event = null;
-  let name = null;
-  let startDate = 'Не указано';
-  let startTime = 'Не указано';
-  let timezone = null;
 
   for (let i = 0; i < events.length; i++) {
     if (eventId === events[i].id) {
       event = events[i];
-      name = 'База данных events4friends';
-      startDate = event
-        ? moment(event.start).format('D MMMM, dddd')
-        : 'Не указано';
-      startTime = event ? moment(event.start).format('HH:mm') : 'Не указано';
-      timezone = events[i].timezone;
       break;
     }
   }
 
+  const startDate = event ? getVerboseDate(event) : 'Не указано';
+  const startTime = event ? getVerboseTime(event) : 'Не указано';
+
   const isAbleToDeleteOrEdit =
-    !deletingInProgress &&
-    user &&
-    event &&
-    user.email === event.contact &&
-    name === 'База данных events4friends';
+    !deletingInProgress && user && event && user.email === event.contact;
 
   const onPressDeleteEvent = () => {
     if (window.confirm('Вы уверены, что хотите удалить мероприятие?')) {
       setDeletingInProgress(true);
-      deleteEvent(event.id, success => {
+      deleteEvent(event, user, success => {
         if (success) {
           console.info('Event deleted successfully, navigate to list view');
           history.push('/events');
@@ -61,14 +58,15 @@ const EventView = ({ match, history }) => {
     }
   };
 
+  const backLinkTo = slug ? `/${slug}/events` : '/events';
   return (
-    <div>
+    <div className="eventview">
       <div>
         <ButtonLink
-          to="/events"
+          to={backLinkTo}
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
-          classList={['button-link', 'event-view']}
+          className="btn-back"
         />
       </div>
       <div>
@@ -91,12 +89,12 @@ const EventView = ({ match, history }) => {
         ) : null}
         <div className="border-top">
           <div className="container">
-            <div className="event-item container-center">
+            <div className="eventview__event-item container-center">
               {!event && connectingToFirebase && (
-                <p align="center">Подключаемся к базе данных...</p>
+                <Spinner message={NOTICES.CONNECT_TO_DB} />
               )}
               {!event && !connectingToFirebase && loadingEvents && (
-                <p align="center">Загружаем событие...</p>
+                <Spinner message={NOTICES.LOADING_EVT} />
               )}
               {!event && !connectingToFirebase && !loadingEvents && (
                 <div>
@@ -111,7 +109,6 @@ const EventView = ({ match, history }) => {
               {event && (
                 <div>
                   <div>
-                    {name && <small className="calendar-name">#{name}</small>}
                     <p>
                       <span role="img" aria-label="Date">
                         📅
@@ -120,14 +117,8 @@ const EventView = ({ match, history }) => {
                       <span role="img" aria-label="Time">
                         🕗
                       </span>
-                      <span className="event-time">{startTime}</span>
-                      {timezone === '+0200' && (
-                        <span className="event-timezone">Клд</span>
-                      )}
-                      {timezone === '+0300' && (
-                        <span className="event-timezone">Мск</span>
-                      )}
-                      － «{event.summary}»
+                      <span className="event-time">{startTime}</span> －{' '}
+                      {event.summary}
                       {event.isOnline ? (
                         <span>
                           <span role="img" aria-label="Location">
@@ -174,23 +165,6 @@ const EventView = ({ match, history }) => {
               )}
             </div>
           </div>
-        </div>
-      </div>
-      <div className="border-top">
-        <div className="container container-center pt-4 pb-4">
-          <p>Обсудить анонс мероприятия в чате:</p>
-          <MessengerLink
-            ExternalLinkComponent={ButtonExternalLink}
-            messengerName="telegram"
-          />
-          <MessengerLink
-            ExternalLinkComponent={ButtonExternalLink}
-            messengerName="whatsapp"
-          />
-          <MessengerLink
-            ExternalLinkComponent={ButtonExternalLink}
-            messengerName="viber"
-          />
         </div>
       </div>
 

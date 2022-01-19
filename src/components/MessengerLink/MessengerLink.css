@@ -1,6 +1,9 @@
 .messengers__link {
   margin: 4px;
-  border-radius: 48px;
+  border-radius: 15px;
+  border-width: 2px;
+  min-width: 65px;
+  height: 55px;
 }
 
 .messengers__link--telegram {

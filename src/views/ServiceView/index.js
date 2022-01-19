@@ -9,17 +9,17 @@ import ButtonExternalLink from '../../components/ButtonExternalLink';
 import Button from '../../components/Button';
 import './ServiceView.css';
 import MessengerLink from '../../components/MessengerLink';
+import Spinner from '../../components/Spinner';
+import { NOTICES } from '../../enums';
 
 const ServiceView = ({ match }) => {
   const [deletingInProgress, setDeletingInProgress] = useState(false);
 
-  const serviceId = match.params.id;
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
+  const { slug, id: serviceId } = match.params;
   const history = useHistory();
 
-  const { user, connectingToFirebase } = authContext;
-  const { services, loadingServices, deleteService } = dataContext;
+  const { user, connectingToFirebase } = useContext(AuthContext);
+  const { services, loadingServices, deleteService } = useContext(DataContext);
 
   let service = null;
   for (let i = 0; i < services.length; i++) {
@@ -47,12 +47,13 @@ const ServiceView = ({ match }) => {
     }
   };
 
+  const backLinkTo = slug ? `/${slug}/services` : '/services';
   return (
     <div>
       <div>
         <ButtonLink
-          className="arrow-back-btn"
-          to="/services"
+          className="btn-back"
+          to={backLinkTo}
           icon="/icons/icon_arrow_back.svg"
           title="К списку"
         />
@@ -81,7 +82,7 @@ const ServiceView = ({ match }) => {
               <p align="center">Подключаемся к базе данных...</p>
             )}
             {!service && !connectingToFirebase && loadingServices && (
-              <p align="center">Загружаем услугу...</p>
+              <Spinner message={NOTICES.LOADING_SERVICE} />
             )}
             {!service && !connectingToFirebase && !loadingServices && (
               <div>

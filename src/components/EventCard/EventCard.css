@@ -1,32 +1,24 @@
 .event-item {
   text-align: left;
   color: #444;
-  margin-bottom: 20px;
-  padding: 35px 10px 20px;
-  position: relative;
+  padding: 10px 10px 20px;
 }
 
 .border-top {
   border-top: 1px solid rgba(200, 200, 200, 1);
 }
 
-.event-date,
-.event-summary,
-.event-location {
+.event-date {
   padding-left: 3px;
   padding-right: 7px;
-}
-
-.event-time {
-  padding-left: 3px;
 }
 
 .event-more {
   margin: 15px 0 0 0;
 }
 
-.event-timezone {	
-  padding-right: 7px;	
+.event-timezone {
+  padding-right: 7px;
   font-size: 12px;
 }
 
@@ -50,7 +42,6 @@
   color: black !important;
 }
 
-
 /* Customize from 'react-add-to-calendar/dist/react-add-to-calendar.css'; */
 .react-add-to-calendar__button {
   background-color: transparent;
@@ -67,35 +58,51 @@
   padding-right: 5px;
 }
 
-.calendar-name {
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: #999;
-}
-
 .calendar-owner {
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  top: 10px;
-  left: 10px;
+  color: #28a745;
 }
 
-.button__image {
-  position: relative;
-  top : 13px;
-  width: 10px;
-  height: 10px;
+.event-card__header {
+  min-height: 1rem;
+  margin-bottom: 10px;
 }
 
-.reset-link-style {
-	color: #444;
+.event-card__label {
+  display: inline-block;
+  margin-right: 1rem;
 }
 
-.reset-link-style:hover {
-    color: #444;
-    text-decoration: none;
+.event-card__label--current {
+  color: #dc3545;
+}
+
+.event-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.event-card__link {
+  color: #007cff;
+}
+.event-card__link:hover {
+  color: #007cff;
+  text-decoration: none;
+}
+
+.event-card__content {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+}
+
+.event-card__time {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.7rem;
+}
+
+.event-card__place {
+  display: flex;
+  gap: 0.5rem;
 }

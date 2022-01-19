@@ -21,12 +21,29 @@ export const getConfig = async () => {
   }
 };
 
+export const getCommunities = async () => {
+  try {
+    const db = firebase.firestore();
+    const snapshot = await db.collection('communities').get();
+    return snapshot.docs.map(doc => {
+      return {
+        name: 'Не указано',
+        description: 'Не указано',
+        ...doc.data(),
+        id: doc.id,
+      };
+    });
+  } catch (error) {
+    console.warn('Error getting communities, skip: ', error);
+  }
+};
+
 //
 // NOTE!
 // Get realtime updates with Cloud Firestore
 // https://firebase.google.com/docs/firestore/query-data/listen
 //
-export const subscribeForEventsChanges = (onUpdate, afterSuccess) => {
+export const subscribeForEventsChanges = onUpdate => {
   try {
     const db = firebase.firestore();
     return db.collection('events').onSnapshot(async snapshot => {
@@ -41,7 +58,6 @@ export const subscribeForEventsChanges = (onUpdate, afterSuccess) => {
           ];
         }, []);
         onUpdate(events);
-        afterSuccess(false);
       }
     });
   } catch (error) {
@@ -54,7 +70,7 @@ export const subscribeForEventsChanges = (onUpdate, afterSuccess) => {
 // Get realtime updates with Cloud Firestore
 // https://firebase.google.com/docs/firestore/query-data/listen
 //
-export const subscribeForServicesChanges = (onUpdate, afterSuccess) => {
+export const subscribeForServicesChanges = onUpdate => {
   try {
     const db = firebase.firestore();
     return db.collection('services').onSnapshot(async snapshot => {
@@ -69,7 +85,6 @@ export const subscribeForServicesChanges = (onUpdate, afterSuccess) => {
           ];
         }, []);
         onUpdate(services);
-        afterSuccess(false);
       }
     });
   } catch (error) {
@@ -81,6 +96,7 @@ const useData = () => {
   const [events, setEvents] = useState([]);
   const [services, setServices] = useState([]);
   const [config, setConfig] = useState({});
+  const [communities, setCommuities] = useState([]);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [loadingServices, setLoadingServices] = useState(true);
 
@@ -88,6 +104,8 @@ const useData = () => {
     const getData = async () => {
       const aConfig = await getConfig();
       setConfig(aConfig);
+      const aCommunities = await getCommunities();
+      setCommuities(aCommunities);
     };
 
     //
@@ -102,13 +120,17 @@ const useData = () => {
     // Изменения данных в анонсах происходят автоматически без перезагрузки сайтов
     //
     const unsubscribeFromEventsChanges = subscribeForEventsChanges(
-      newEvents => setEvents(newEvents),
-      setLoadingEvents,
+      newEvents => {
+        setEvents(newEvents);
+        setLoadingEvents(false);
+      },
     );
 
     const unsubscribeFromServicesChanges = subscribeForServicesChanges(
-      newServices => setServices(newServices),
-      setLoadingServices,
+      newServices => {
+        setServices(newServices);
+        setLoadingServices(false);
+      },
     );
 
     return () => {
@@ -125,6 +147,7 @@ const useData = () => {
     events,
     services,
     config,
+    communities,
     loadingEvents,
     loadingServices,
   };

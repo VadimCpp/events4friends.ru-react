@@ -2,7 +2,18 @@ import { useState, useEffect } from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 
-// константа, можно/нужно вынести из функции, можно вынести из файла, например в .env
+//
+// NOTE!
+// Каждый первый ревьювер отмечает, как плохо хранить ключи в коде.
+//
+// Отвечаем:
+//  - эти ключи дают только доступ на чтение;
+//  - после сборки эти данные всегда доступны в коде сайта, их нет смысла прятать;
+//  - ключи оставлены тут специально, чтобы уменьмить время развертывания исходников.
+//
+// Пример кода, где это действительно необходимо:
+// https://github.com/VadimCpp/events4friendsbot/blob/master/.env.default
+//
 const firebaseConfig = {
   apiKey: 'AIzaSyBjAQdqx3qkki7MVb6dd1eASw-0UGs2Bg0',
   authDomain: 'events4friends.firebaseapp.com',

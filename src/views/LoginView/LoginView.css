@@ -1,19 +1,10 @@
 .loginview {
   line-height: 19px;
+  text-align: center;
 }
 .loginview__block {
   padding: 20px 0;
   border-bottom: 1px solid #DDDDDD;
-}
-
-.loginview__back {
-  width: 200px;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: 26px;
-  border-color: rgba(77, 77, 77, .2);
-  border-radius: 48px;
 }
 
 .textinput {

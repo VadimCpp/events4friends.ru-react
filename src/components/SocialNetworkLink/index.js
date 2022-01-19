@@ -1,15 +1,7 @@
 import React from 'react';
 import './SocialNetworkLink.css';
 
-function SocialNetworkLink(
-  {
-    ExternalLinkComponent,
-    href,
-    icon,
-    name,
-    title,
-  }
-  ) {
+function SocialNetworkLink({ ExternalLinkComponent, href, icon, name, title }) {
   return (
     <ExternalLinkComponent
       href={href}

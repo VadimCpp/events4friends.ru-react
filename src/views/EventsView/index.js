@@ -1,32 +1,79 @@
-/* eslint-disable indent */
-import React, { useState, useContext } from 'react';
-import moment from 'moment';
+import React, { useState, useContext, useEffect } from 'react';
+import Cookies from 'universal-cookie';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
+import Spinner from '../../components/Spinner';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
+import { EventsFilterType, NOTICES } from '../../enums';
 import './EventsView.css';
 
-const EventsFilterType = {
-  Upcoming: 'UPCOMING_EVENTS',
-  Past: 'PAST_EVENTS',
-  // TODO: add more types here
-};
+// utils
+import { getSortedEvents } from '../../utils/eventsLogic';
 
-const EventsView = () => {
-  const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
-  const authContext = useContext(AuthContext);
-  const dataContext = useContext(DataContext);
-  const { user, connectingToFirebase } = authContext;
-  const { events, loadingEvents } = dataContext;
+const EventsView = ({ match, history }) => {
+  const { user, connectingToFirebase } = useContext(AuthContext);
+  const { events, loadingEvents, communities } = useContext(DataContext);
   const isAuth = user && !user.isAnonymous;
+
+  const [filterType, setFilterType] = useState(EventsFilterType.Upcoming);
+  const [sortedEvents, setSortedEvents] = useState([]);
+
+  const { slug } = match.params;
+  const [community, setCommunity] = useState(null);
+
+  useEffect(() => {
+    if (slug) {
+      //
+      // NOTE!
+      // Если в URL указан slug сообщества необходимо:
+      // - произвести поиск по slug
+      // - если сообщество не найдено, отобразить NOT_FOUND
+      //
+      const aCommunity = communities.find(c => c.slug === slug);
+      if (aCommunity) {
+        setCommunity(aCommunity);
+      } else {
+        // TODO: реализовать NOT_FOUND экран
+        console.warn('TODO: реализовать NOT_FOUND экран');
+        history.push('/');
+      }
+    } else {
+      //
+      // NOTE!
+      // Если в URL не указан slug сообщества необходимо:
+      // - произвести поиск по id из cookies
+      // - по умолчанию id сообщества - 1 (events4friends)
+      //
+      const cookies = new Cookies();
+      const communityId = cookies.get('communityId');
+      if (!communityId) {
+        history.push('/communities/');
+      } else {
+        const aCommunity = communities.find(c => c.id === communityId);
+        if (aCommunity) {
+          setCommunity(aCommunity);
+        }
+      }
+    }
+  }, [history, communities, slug]);
+
+  useEffect(() => {
+    if (community) {
+      const sortEvents = getSortedEvents(events, filterType);
+      const sortEvents4Community = sortEvents.filter(e => {
+        const communityId = e.communityId || '1';
+        return communityId === community.id;
+      });
+      setSortedEvents(sortEvents4Community);
+    }
+  }, [events, filterType, community]);
 
   /**
    * @param {Event} event
    * @param {EventsSource} source
    */
-
   const displayEvent = (event, source) => {
     const { id } = event;
     const { name } = source;
@@ -35,49 +82,13 @@ const EventsView = () => {
     }
 
     return (
-      <div key={id}>
-        <EventCard event={event} name={name} />
-      </div>
+      <li key={id} className="events-list__item">
+        <div className="container container-center">
+          <EventCard event={event} name={name} slug={slug} />
+        </div>
+      </li>
     );
   };
-
-  const now = new Date();
-  let sortedEvents = [...events];
-
-  if (filterType === EventsFilterType.Upcoming) {
-    sortedEvents = sortedEvents.filter(event => {
-      return event.start && event.timezone
-        ? moment(`${event.start}${event.timezone}`).toDate() > now
-        : false;
-    });
-
-    // TODO: неочевидная сортировка, рассмотреть сортировку дат, не строк
-    sortedEvents.sort((a, b) => {
-      if (a.start > b.start) {
-        return 1;
-      }
-      if (a.start < b.start) {
-        return -1;
-      }
-      return 0;
-    });
-  } else if (filterType === EventsFilterType.Past) {
-    sortedEvents = sortedEvents.filter(event => {
-      return event.start && event.timezone
-        ? moment(`${event.start}${event.timezone}`).toDate() < now
-        : false;
-    });
-
-    sortedEvents.sort((a, b) => {
-      if (a.start < b.start) {
-        return 1;
-      }
-      if (a.start > b.start) {
-        return -1;
-      }
-      return 0;
-    });
-  }
 
   const eventsList = sortedEvents.map(item => {
     return {
@@ -93,17 +104,14 @@ const EventsView = () => {
   );
 
   return (
-    <div className="main-view">
-      <div>
-        <ButtonLink
-          to="/"
-          icon="/icons/icon_arrow_back.svg"
-          title="На главную"
-          classList={['button-link', 'events-view']}
-        />
-      </div>
-
-      {/* 
+    <section className="main-view">
+      <ButtonLink
+        to="/"
+        icon="/icons/icon_arrow_back.svg"
+        title="На главную"
+        className="btn-back"
+      />
+      {/*
         NOTE! Кнопка в этом месте не нужна.
         TODO: подумать над интерфейсом и разместить кнопку другом месте
       */}
@@ -113,21 +121,19 @@ const EventsView = () => {
         title="Карта мероприятий"
         classList={['button-link']}
       /> */}
-      <>
-        {isAuth ? (
-          <div>
-            <ButtonLink
-              to="/newevent"
-              icon="/icons/icon_plus.svg"
-              title="Сделать анонс"
-              style={{ width: 200 }}
-              classList={['button-link', 'events-view']}
-            />
-          </div>
-        ) : (
-          <div>{warnMessage}</div>
-        )}
-      </>
+      {isAuth ? (
+        <div>
+          <ButtonLink
+            to="/newevent"
+            icon="/icons/icon_plus.svg"
+            title="Сделать анонс"
+            style={{ width: 200 }}
+            classList={['button-link', 'events-view']}
+          />
+        </div>
+      ) : (
+        warnMessage
+      )}
       <div className="container pt-3">
         <EventsFilter
           onFilterTypeChange={value => setFilterType(value)}
@@ -136,26 +142,20 @@ const EventsView = () => {
           past={EventsFilterType.Past}
         />
       </div>
-      {connectingToFirebase ? (
-        <p align="center">Подключаемся к базе данных...</p>
+      {connectingToFirebase || loadingEvents ? (
+        <Spinner
+          message={
+            connectingToFirebase ? NOTICES.CONNECT_TO_DB : NOTICES.LOADING_EVT
+          }
+        />
       ) : (
-        <>
-          {loadingEvents ? (
-            <p align="center">Загружаем события...</p>
-          ) : (
-            <>
-              {!!eventsList.length && (
-                <div className="pt-3">
-                  {eventsList.map(eventItem =>
-                    displayEvent(eventItem.event, eventItem.source),
-                  )}
-                </div>
-              )}
-            </>
+        <ul className="events-list pt-3">
+          {eventsList.map(eventItem =>
+            displayEvent(eventItem.event, eventItem.source),
           )}
-        </>
+        </ul>
       )}
-    </div>
+    </section>
   );
 };
 

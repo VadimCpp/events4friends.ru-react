@@ -1,12 +1,8 @@
 export const verify = newService => {
   let verified = true;
-  const {
-    service,
-    description,
-    name,
-  } = newService;
+  const { service, description, name } = newService;
 
-  const unverified = (text) => {
+  const unverified = text => {
     verified = false;
     alert(text);
   };
@@ -22,9 +18,9 @@ export const verify = newService => {
   return verified;
 };
 
-export const normalizePrice = (price) => {
+export const normalizePrice = price => {
   return Math.abs(Number(price));
-}
+};
 
 export const serviceInitState = {
   name: '',
@@ -38,4 +34,5 @@ export const serviceInitState = {
   whatsapp: '',
   telegram: '',
   vkontakte: '',
+  communityId: '0',
 };

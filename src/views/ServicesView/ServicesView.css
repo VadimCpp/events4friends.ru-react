@@ -37,14 +37,14 @@
 	word-wrap: break-word;
 }
 
-.services-view.button-link {
-	width: 200px;
-	margin-right: auto;
-	margin-left: auto;
-	margin-bottom: 10px;
-	border-color: rgba(77, 77, 77, 0.2);
-	border-radius: 48px;
-}
+/*.services-view.button-link {*/
+/*	width: 200px;*/
+/*	margin-right: auto;*/
+/*	margin-left: auto;*/
+/*	margin-bottom: 10px;*/
+/*	border-color: rgba(77, 77, 77, 0.2);*/
+/*	border-radius: 48px;*/
+/*}*/
 
 .serviceView-arrowBack-btn {
 	width: 175px;

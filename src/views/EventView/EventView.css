@@ -1,4 +1,8 @@
-.event-item {
+.eventview {
+  text-align: center;
+}
+
+.eventview__event-item {
   text-align: left;
   color: #444;
   margin-bottom: 20px;
@@ -23,10 +27,15 @@
 }
 
 .event-view.button-link {
-  margin-bottom: 10px;
-  border-color: rgba(77, 77, 77, 0.2);
-  border-radius: 48px;
+  border-color: #999999;
+  background-color: rgba(153, 153, 153, 0.2);
+  border-radius: 15px;
   min-width: 155px;
+}
+
+.event-view.button-link:hover {
+  border: 2px solid #4d4d4d;
+  color: #4d4d4d;
 }
 
 .event-view.button-link:first-child {

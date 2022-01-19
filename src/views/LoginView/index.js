@@ -14,7 +14,7 @@ const LoginView = ({ history }) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const authContext = useContext(AuthContext);
+  const { user, signIn } = useContext(AuthContext);
 
   const handleLoginChange = e => {
     setLogin(e.target.value.trim());
@@ -30,9 +30,8 @@ const LoginView = ({ history }) => {
       return;
     }
     signIn(login, password);
-  }
+  };
 
-  const { user, signIn } = authContext;
   let userName = null;
   let userAuthorized = false;
   if (user) {
@@ -51,6 +50,14 @@ const LoginView = ({ history }) => {
   return (
     <main className="loginview">
       <h1 className="visually-hidden">Страница входа</h1>
+      <div>
+        <ButtonLink
+          to="/"
+          icon="/icons/icon_arrow_back.svg"
+          title="На главную"
+          className="btn-back"
+        />
+      </div>
       <section className="loginview__block">
         <div className="container container-center">
           <h2 className="visually-hidden">Форма входа</h2>
@@ -61,7 +68,7 @@ const LoginView = ({ history }) => {
                 to="/"
                 icon="/icons/icon_arrow_back.svg"
                 title="Вернуться на экран приветствия"
-                className="loginview__back"
+                className="btn-back"
               />
             </>
           ) : (
@@ -92,10 +99,7 @@ const LoginView = ({ history }) => {
                   />
                 </label>
               </p>
-              <Button
-                icon="/icons/icon_login.svg"
-                onPress={handlerSubmit}
-              >
+              <Button onPress={handlerSubmit} icon="/icons/icon_login.svg">
                 Войти
               </Button>
             </form>

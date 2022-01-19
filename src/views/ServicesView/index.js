@@ -1,10 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
+import Cookies from 'universal-cookie';
 import { DataContext } from '../../context/DataContext';
 import { AuthContext } from '../../context/AuthContext';
-
 import ServiceCard from '../../components/ServiceCard';
 import ButtonLink from '../../components/ButtonLink';
 import ServiceSort from '../../components/ServiceSort';
+import Spinner from '../../components/Spinner';
+import { NOTICES } from '../../enums';
 import './ServicesView.css';
 
 const ServiceSortingType = {
@@ -13,45 +15,65 @@ const ServiceSortingType = {
   SortByPrice: 'SORT_BY_PRICE',
 };
 
-const ServicesView = () => {
-  const dataContext = useContext(DataContext);
-  const authContext = useContext(AuthContext);
-  const [sortType, setSortType] = useState(ServiceSortingType.SortByService);
-  const { user, connectingToFirebase } = authContext;
-  const { services, loadingServices } = dataContext;
+const ServicesView = ({ match, history }) => {
+  const { user, connectingToFirebase } = useContext(AuthContext);
+  const { services, loadingServices, communities } = useContext(DataContext);
   const isAuth = user && !user.isAnonymous;
 
-  const displayService = service => {
-    let highlightName = false;
+  const [sortType, setSortType] = useState(ServiceSortingType.SortByService);
+  const [sortedServices, setSortedServices] = useState([]);
 
-    if (sortType === 'SORT_BY_NAME') {
-      highlightName = true;
+  const { slug } = match.params;
+  const [community, setCommunity] = useState(null);
+  useEffect(() => {
+    if (slug) {
+      //
+      // NOTE!
+      // Если в URL указан slug сообщества необходимо:
+      // - произвести поиск по slug
+      // - если сообщество не найдено, отобразить NOT_FOUND
+      //
+      const aCommunity = communities.find(c => c.slug === slug);
+      if (aCommunity) {
+        setCommunity(aCommunity);
+      } else {
+        // TODO: реализовать NOT_FOUND экран
+        console.warn('TODO: реализовать NOT_FOUND экран');
+        history.push('/');
+      }
+    } else {
+      //
+      // NOTE!
+      // Если в URL не указан slug сообщества необходимо:
+      // - произвести поиск по id из cookies
+      // - по умолчанию id сообщества - 1 (events4friends)
+      //
+      const cookies = new Cookies();
+      const communityId = cookies.get('communityId');
+      if (!communityId) {
+        history.push('/communities/');
+      } else {
+        const aCommunity = communities.find(c => c.id === communityId);
+        if (aCommunity) {
+          setCommunity(aCommunity);
+        }
+      }
     }
+  }, [history, communities, slug]);
 
-    if (!service) {
-      return null;
-    }
-
-    return (
-      <div key={service.id}>
-        <ServiceCard service={service} highlightName={highlightName} />
-      </div>
-    );
-  };
-
-  const getSortedServices = () => {
-    let sortedServices = [...services];
+  const getSortedServices = useCallback(() => {
+    let aSortedServices = [...services];
 
     if (sortType === ServiceSortingType.SortByName) {
-      sortedServices = sortedServices.sort((a, b) => {
+      aSortedServices = aSortedServices.sort((a, b) => {
         return a.name ? a.name.localeCompare(b.name) : 0;
       });
     } else if (sortType === ServiceSortingType.SortByService) {
-      sortedServices = sortedServices.sort((a, b) => {
+      aSortedServices = aSortedServices.sort((a, b) => {
         return a.service ? a.service.localeCompare(b.service) : 0;
       });
     } else if (sortType === ServiceSortingType.SortByPrice) {
-      sortedServices = sortedServices.sort((a, b) => {
+      aSortedServices = aSortedServices.sort((a, b) => {
         if (a.isFree && b.isFree) {
           return 0;
         }
@@ -74,7 +96,37 @@ const ServicesView = () => {
       });
     }
 
-    return sortedServices.map(service => displayService(service));
+    return aSortedServices;
+    // return aSortedServices.map(service => displayService(service));
+  }, [services, sortType]);
+
+  useEffect(() => {
+    if (community) {
+      const sortServices = getSortedServices();
+      const sortServices4Community = sortServices.filter(e => {
+        const communityId = e.communityId || '1';
+        return communityId === community.id;
+      });
+      setSortedServices(sortServices4Community);
+    }
+  }, [community, getSortedServices]);
+
+  const displayService = service => {
+    let highlightName = false;
+
+    if (sortType === 'SORT_BY_NAME') {
+      highlightName = true;
+    }
+
+    if (!service) {
+      return null;
+    }
+
+    return (
+      <div key={service.id}>
+        <ServiceCard service={service} highlightName={highlightName} />
+      </div>
+    );
   };
 
   return (
@@ -84,7 +136,7 @@ const ServicesView = () => {
           to="/"
           icon="/icons/icon_arrow_back.svg"
           title="На главную"
-          className="serviceView-arrowBack-btn"
+          className="btn-back"
         />
         <>
           {isAuth ? (
@@ -113,15 +165,17 @@ const ServicesView = () => {
       />
 
       {connectingToFirebase ? (
-        <p align="center">Подключаемся к базе данных...</p>
+        <Spinner message={NOTICES.CONNECT_TO_DB} />
       ) : (
         <>
           {loadingServices ? (
-            <p align="center">Загружаем услуги...</p>
+            <Spinner message={NOTICES.LOADING_SERVICES} />
           ) : (
             <>
-              {!!services.length && (
-                <div className="pt-3">{getSortedServices()}</div>
+              {!!sortedServices.length && (
+                <div className="pt-3">
+                  {sortedServices.map(service => displayService(service))}
+                </div>
               )}
             </>
           )}

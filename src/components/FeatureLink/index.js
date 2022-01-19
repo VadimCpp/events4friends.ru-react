@@ -1,14 +1,7 @@
 import React from 'react';
 import './FeatureLink.css';
 
-function FeatureLink(
-  {
-    LinkComponent,
-    to,
-    icon,
-    title,
-  }
-) {
+function FeatureLink({ LinkComponent, to, icon, title }) {
   return (
     <LinkComponent
       to={to}

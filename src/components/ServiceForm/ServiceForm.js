@@ -5,6 +5,7 @@ import { verify, serviceInitState, normalizePrice } from './helper';
 import { ReachTextEditor } from '../RichTextEditor';
 import Button from '../Button';
 import { copyObjectAndTrim } from '../../helper';
+import CommunityChoice from '../CommunityChoice';
 
 const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   const [service, setService] = useState(serviceInitState);
@@ -17,7 +18,7 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
     }
   }, [defaultService]);
 
-  const saveHandler = (e) => {
+  const saveHandler = e => {
     e.preventDefault();
     setUpdatingService(true);
 
@@ -43,7 +44,8 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
   };
 
   const handlerChange = e => {
-    let { name, value } = e.currentTarget;
+    const { name } = e.currentTarget;
+    let { value } = e.currentTarget;
     if (name === 'price') {
       value = normalizePrice(value);
     }
@@ -63,80 +65,91 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
     }
   };
 
+  const handleCommunityChange = useCallback(
+    value => setService({ ...service, communityId: value }),
+    [setService, service],
+  );
+
   return (
-    <form className="newserviceview">
-      <div className="textinput">
-        <label>
-          <span className="textinput__label-text--block text-left">
-            Название услуги:
-          </span>
+    <form className="new-service-view">
+      <fieldset className="fieldset text">
+        <label htmlFor="service">
+          <span className="fieldset__legend">Название услуги:</span>
           <input
-            className="textinput__input"
+            id="service"
             type="text"
             name="service"
             value={service.service}
             onChange={handlerChange}
           />
         </label>
-      </div>
+      </fieldset>
 
-      <div className="textinput">
-        <label>
-          <span className="textinput__label-text--block">
+      <fieldset className="fieldset text">
+        <label htmlFor="name">
+          <span className="fieldset__legend">
             Имя того, кто оказывает услугу:
           </span>
           <input
-            className="textinput__input"
+            id="name"
             type="text"
             name="name"
             value={service.name}
             onChange={handlerChange}
           />
         </label>
-      </div>
+      </fieldset>
 
-      <div className="textinput">
-        <p className="text-left">Полное описание:</p>
-        <div className="rte-container">
+      <fieldset className="fieldset radio">
+        <legend className="fieldset__legend">Выберите сообщество:</legend>
+        <CommunityChoice
+          value={service.communityId}
+          handleChange={handleCommunityChange}
+        />
+      </fieldset>
+
+      <fieldset className="fieldset">
+        <p className="fieldset__legend">Полное описание:</p>
+        <div>
           <ReachTextEditor
             description={service.description}
             onChange={handlerDescriptionChange}
           />
         </div>
-      </div>
+      </fieldset>
 
-      <fieldset className="textinput">
-        <legend className="textinput__legend">Услуга оказывается платно?</legend>
-        <label>
-          <span className="text-left">Да</span>
+      <fieldset className="fieldset radio">
+        <legend className="fieldset__legend">Услуга оказывается платно?</legend>
+        <label htmlFor="is-free-yes">
           <input
-            className="textinput__input"
+            id="is-free-yes"
             type="radio"
             name="isFree"
             checked={!service.isFree}
             onChange={handleIsFreeChange}
           />
+          <span className="text-left">Да</span>
         </label>
-        <label>
-          <span className="text-left">Нет</span>
+        <label htmlFor="is-free-no">
           <input
-            className="textinput__input"
+            id="is-free-no"
             type="radio"
             name="isFree"
             checked={service.isFree}
             onChange={handleIsFreeChange}
           />
+          <span className="text-left">Нет</span>
         </label>
       </fieldset>
 
       {!service.isFree && (
-        <div className="textinput">
-          <label>
-            <span className="textinput__label-text--block text-left">
+        <fieldset className="fieldset text">
+          <label htmlFor="price">
+            <span className="fieldset__legend">
               Укажите стоимость услуги в рублях:
             </span>
             <input
-              className="textinput__input"
+              id="price"
               type="number"
               name="price"
               min="0"
@@ -145,67 +158,65 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
               disabled={service.isFree}
             />
           </label>
-        </div>
+        </fieldset>
       )}
 
-      <fieldset className="service-form__contacts textinput">
-        <legend className="visually-hidden">
-          Контактные данные
-        </legend>
-        <label className="service-form__label">
-          <span className="textinput__label-text--block text-left">
-            Cсылка на сайт:
-          </span>
+      <fieldset className="fieldset text">
+        <legend className="visually-hidden">Контактные данные</legend>
+        <label htmlFor="site-link">
+          <span className="fieldset__legend">Cсылка на сайт:</span>
           <input
-            className="textinput__input"
+            id="site-link"
             type="text"
             name="website"
             value={service.website}
             onChange={handlerChange}
           />
         </label>
-        <label className="service-form__label">
-          <span className="textinput__label-text--block text-left">
-            Ссылка на инстаграм:
-          </span>
+      </fieldset>
+      <fieldset className="fieldset text">
+        <label htmlFor="insta-link">
+          <span className="fieldset__legend">Ссылка на инстаграм:</span>
           <input
-            className="textinput__input"
+            id="insta-link"
             type="text"
             name="instagram"
             value={service.instagram}
             onChange={handlerChange}
           />
         </label>
-        <label className="service-form__label">
-          <span className="textinput__label-text--block text-left">
+      </fieldset>
+      <fieldset className="fieldset text">
+        <label htmlFor="whatsapp">
+          <span className="fieldset__legend">
             Номер в WhatsApp в формате 7XXX1234567:
           </span>
           <input
-            className="textinput__input"
+            id="whatsapp"
             type="text"
             name="whatsapp"
             value={service.whatsapp}
             onChange={handlerChange}
           />
         </label>
-        <label className="service-form__label">
-          <span className="textinput__label-text--block text-left">
-            ID пользователя в телеграм:
-          </span>
+      </fieldset>
+      <fieldset className="fieldset text">
+        <label htmlFor="telegram">
+          <span className="fieldset__legend">ID пользователя в телеграм:</span>
           <input
-            className="textinput__input"
+            id="telegram"
             type="text"
             name="telegram"
             value={service.telegram}
             onChange={handlerChange}
           />
         </label>
-        <label className="service-form__label">
-          <span className="textinput__label-text--block text-left">
-            Ссылка ВКонтакте:
-          </span>
+      </fieldset>
+      <fieldset className="fieldset text">
+        <label htmlFor="vk-link">
+          <span className="fieldset__legend">Ссылка ВКонтакте:</span>
           <input
-            className="textinput__input"
+            id="vk-link"
             type="text"
             name="vkontakte"
             value={service.vkontakte}
@@ -214,13 +225,15 @@ const ServiceForm = ({ defaultService, onSave = () => {} }) => {
         </label>
       </fieldset>
 
-      {updatingService ? (
-        <p>Сохраняем услугу...</p>
-      ) : (
-        <Button onPress={saveHandler} icon="/icons/icon_save.svg">
-          Сохранить
-        </Button>
-      )}
+      <fieldset className="fieldset button">
+        {updatingService ? (
+          <p>Сохраняем услугу...</p>
+        ) : (
+          <Button onPress={saveHandler} icon="/icons/icon_save.svg">
+            Сохранить
+          </Button>
+        )}
+      </fieldset>
     </form>
   );
 };

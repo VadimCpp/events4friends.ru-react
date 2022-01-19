@@ -15,7 +15,6 @@ import {
 import AppRouter from './AppRouter';
 import { AuthContext } from './context/AuthContext';
 import { DataContext } from './context/DataContext';
-import './App.css';
 
 import useAuth from './hooks/useAuth';
 import useData from './hooks/useData';
@@ -26,6 +25,7 @@ const App = () => {
     events,
     services,
     config,
+    communities,
     loadingEvents,
     loadingServices,
   } = useData();
@@ -61,6 +61,7 @@ const App = () => {
         value={{
           events,
           services,
+          communities,
           createEvent,
           deleteEvent,
           editEvent,
@@ -72,9 +73,7 @@ const App = () => {
           loadingServices,
         }}
       >
-        <div className="App">
-          <AppRouter />
-        </div>
+        <AppRouter />
       </DataContext.Provider>
     </AuthContext.Provider>
   );

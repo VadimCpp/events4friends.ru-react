@@ -1,12 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ButtonAction } from '../ButtonAction';
 import './EventsFilter.css';
 
 const BUTTON_TYPE = 'events';
 
-function EventsFilter(props) {
-  const { onFilterTypeChange, filterType, upcoming, past } = props;
-
+function EventsFilter({ onFilterTypeChange, filterType, upcoming, past }) {
   return (
     <div className="events-filter">
       <span className="events-filter__label">Фильтр:</span>
@@ -41,5 +40,12 @@ function EventsFilter(props) {
     </div>
   );
 }
+
+EventsFilter.propTypes = {
+  onFilterTypeChange: PropTypes.func.isRequired,
+  filterType: PropTypes.string.isRequired,
+  upcoming: PropTypes.string.isRequired,
+  past: PropTypes.string.isRequired,
+};
 
 export default EventsFilter;
