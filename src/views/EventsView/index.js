@@ -37,6 +37,15 @@ const EventsView = ({ match, history }) => {
       } else {
         // TODO: реализовать NOT_FOUND экран
         console.warn('TODO: реализовать NOT_FOUND экран');
+        //
+        // NOTE !
+        // при первой загрузке событий по прямой ссылке
+        // например ".../kgd/events"
+        // aCommunity пустая => директимся к WelcomeView в следующей строчке
+        // Перезагрузка странички решает проблему.
+        // Нужно либо прибить логику с переходом по NOT_FOUND
+        // либо принудительно заполнять aCommunity из базы как в getCommunities
+        //
         history.push('/');
       }
     } else {
