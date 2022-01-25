@@ -82,10 +82,8 @@ const EventsView = ({ match, history }) => {
     }
 
     return (
-      <li key={id} className="events-list__item">
-        <div className="container container-center">
-          <EventCard event={event} name={name} slug={slug} />
-        </div>
+      <li key={id} className="event">
+        <EventCard event={event} name={name} slug={slug} />
       </li>
     );
   };
@@ -104,7 +102,7 @@ const EventsView = ({ match, history }) => {
   );
 
   return (
-    <section className="main-view">
+    <section className="main-view events__wrapper">
       <ButtonLink
         to="/"
         icon="/icons/icon_arrow_back.svg"
@@ -149,7 +147,7 @@ const EventsView = ({ match, history }) => {
           }
         />
       ) : (
-        <ul className="events-list pt-3">
+        <ul className="events__list">
           {eventsList.map(eventItem =>
             displayEvent(eventItem.event, eventItem.source),
           )}

@@ -27,40 +27,38 @@ const EventCard = ({ event, slug }) => {
     authContext.user && event && authContext.user.email === contact;
   const linkTo = slug ? `/${slug}/event/${id}` : `/event/${id}`;
 
+  const splitStartTime = startTime.split(' (');
+  const localStartTime = splitStartTime[0];
+  const userStartTime = `(${splitStartTime[1]}`;
+
   return (
-    <div className="event-item">
-      <header className="event-card__header">
-        {isCurrentEvent(event) ? (
-          <small className="event-card__label event-card__label--current">
-            Идет сейчас
-          </small>
-        ) : (
-          isStartWithinAnHourEvent(event) && (
-            <small className="event-card__label event-card__label--current">
-              Начнется в течение часа
-            </small>
-          )
-        )}
-
-        {isOwner && <small className="calendar-owner">Мой анонс</small>}
-      </header>
-      <div className="event-card__body">
-        <Link className="event-card__link" to={linkTo}>
-          {summary}
-        </Link>
-        <p className="event-card__content">
-          <time className="event-card__time">
-            <span>{startDate}</span>
-            <span>{startTime}</span>
-          </time>
-
-          <div className="event-card__place">
-            <span>@</span>
-            {isOnline ? <span>Онлайн</span> : <span>{location}</span>}
-          </div>
-        </p>
-      </div>
-    </div>
+    <>
+      {isCurrentEvent(event) ? (
+        <p className="event__tag">Идет сейчас</p>
+      ) : (
+        isStartWithinAnHourEvent(event) && (
+          <p className="event__tag">Начнется в течение часа</p>
+        )
+      )}
+      {isOwner && <p className="event__tag event__tag--owner">Мой анонс</p>}
+      <h3 className="event__title">{summary}</h3>
+      <dl className="event__details">
+        <dt className="event__details-header">Дата</dt>
+        <dd className="event__details-text">{startDate}</dd>
+        <dt className="event__details-header">Время</dt>
+        <dd className="event__details-text">
+          <p className="event__details-subtext">{localStartTime}</p>
+          <p className="event__details-subtext">{userStartTime}</p>
+        </dd>
+        <dt className="event__details-header">Место</dt>
+        <dd className="event__details-text">
+          {isOnline ? 'Онлайн' : location}
+        </dd>
+      </dl>
+      <Link className="event__button" to={linkTo}>
+        Узнать больше
+      </Link>
+    </>
   );
 };
 
