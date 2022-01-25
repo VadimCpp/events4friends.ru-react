@@ -35,8 +35,7 @@ const EventsView = ({ match, history }) => {
 
       if (aCommunity) {
         setCommunity(aCommunity);
-      } else if (!loadingEvents) {
-        // TODO: реализовать NOT_FOUND экран
+      } else if (!connectingToFirebase && !loadingEvents) {
         console.warn('TODO: реализовать NOT_FOUND экран');
         history.push('/');
       }
