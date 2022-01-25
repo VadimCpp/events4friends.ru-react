@@ -32,9 +32,10 @@ const EventsView = ({ match, history }) => {
       // - если сообщество не найдено, отобразить NOT_FOUND
       //
       const aCommunity = communities.find(c => c.slug === slug);
+
       if (aCommunity) {
         setCommunity(aCommunity);
-      } else {
+      } else if (!loadingEvents) {
         // TODO: реализовать NOT_FOUND экран
         console.warn('TODO: реализовать NOT_FOUND экран');
         history.push('/');
