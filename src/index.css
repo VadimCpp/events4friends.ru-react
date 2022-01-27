@@ -1,3 +1,21 @@
+:root {
+  --basic-black: #000000;
+  --basic-white: #ffffff;
+  --blue-background: #3A5AFF;
+  --grey-background: #fafafa;
+  --light-blue-button: #3AB9F0;
+  --blue-button: #3A7DFF;
+  --pale-blue-button: #B6CFFF;
+  --pale-blue-events: #E3F2FF;
+  --pale-blue-line: #3ABAF0;
+  --basic-violet: #563AFF;
+  --grey-category: #DBDBDB;
+  --dark-grey-text: #484848;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --services-details-grey: #606060;
+  --pale-blue-background: #F0F4FB;
+}
+
 body {
   margin: 0;
   padding: 0;

@@ -38,12 +38,51 @@
   word-wrap: break-word;
 }
 
-.events-list {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+.events__wrapper {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 42px 10px;
 }
 
-.events-list__item {
-  border-top: 1px solid #dee2e6;
+@media (min-width: 640px) {
+  .events__wrapper {
+    padding-bottom: 110px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .events__wrapper {
+    margin-bottom: 30px;
+    padding: 92px 103px;
+  }
+}
+
+.events__list {
+  display: grid;
+  row-gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 1024px) {
+  .events__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+    row-gap: 31px;
+  }
+}
+
+.event {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 4px 13px var(--shadow);
+}
+
+.event:hover {
+  box-shadow: 0 20px 30px var(--shadow);
 }
