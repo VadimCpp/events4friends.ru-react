@@ -21,7 +21,7 @@ function EventsFilter({ onFilterTypeChange, filterType, upcoming, past }) {
         active={filterType === upcoming}
         type={BUTTON_TYPE}
       >
-        Предстоящие
+        Будет
       </ButtonAction>
 
       <ButtonAction
@@ -35,7 +35,7 @@ function EventsFilter({ onFilterTypeChange, filterType, upcoming, past }) {
         active={filterType === past}
         type={BUTTON_TYPE}
       >
-        Прошедшие
+        Было
       </ButtonAction>
     </div>
   );
