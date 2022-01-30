@@ -48,6 +48,7 @@ const EventCard = ({ event, slug }) => {
         <dt className="event__details-header">Время</dt>
         <dd className="event__details-text">
           <p className="event__details-subtext">{localStartTime}</p>
+          { userStartTime ? <p className="event__details-subtext">{userStartTime}</p> : '' }
         </dd>
         <dt className="event__details-header">Место</dt>
         <dd className="event__details-text">
