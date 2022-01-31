@@ -29,7 +29,7 @@ const EventCard = ({ event, slug }) => {
 
   const splitStartTime = startTime.split(' (');
   const localStartTime = splitStartTime[0];
-  const userStartTime = `(${splitStartTime[1]}`;
+  const userStartTime = splitStartTime.length == 1 ? '' : `${splitStartTime[1]}`;
 
   return (
     <>
