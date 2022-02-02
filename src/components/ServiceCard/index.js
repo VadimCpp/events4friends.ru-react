@@ -4,60 +4,61 @@ import { Link } from 'react-router-dom';
 import './ServiceCard.css';
 
 const ServiceCard = ({ service, highlightName }) => {
-  const { isFree, price, name, service: typeOfService, id } = service;
+  const { isFree, price, name, service: typeOfService, id, img } = service;
 
-  const ServiceContent = () => {
-    let priceTag = null;
+  let priceTag = null;
+  if (isFree) {
+    priceTag = <span className="serviceFree">бесплатно</span>;
+  } else if (price) {
+    priceTag = <span>от {price} руб.</span>;
+  }
 
-    if (isFree) {
-      priceTag = <span className="serviceFree">бесплатно</span>;
-    } else if (price) {
-      priceTag = <span>от {price} руб.</span>;
-    }
-
-    if (highlightName) {
+  const Image = () => {
+    if (img) {
       return (
-        <div>
-          {name}
-          <br />
-          <small>
-            {typeOfService}
-            <span>&nbsp;</span>
-            {priceTag}
-          </small>
-        </div>
+        <img
+          className="service__img"
+          src={img}
+          width="267"
+          height="144"
+          alt={typeOfService}
+        />
       );
     }
+    return '';
+  };
+
+  const Title = () => {
+    if (highlightName) {
+      return <h3 className="service__title">{name}</h3>;
+    }
     return (
-      <div>
-        {typeOfService}
-        <span>&nbsp;</span>
-        {priceTag}
-        <br />
-        <small>{name}</small>
-      </div>
+      <h3 className="service__title">
+        {typeOfService}&nbsp;{priceTag}
+      </h3>
     );
   };
 
+  const Text = () => {
+    if (highlightName) {
+      return (
+        <p className="service__text">
+          {typeOfService}&nbsp;{priceTag}
+        </p>
+      );
+    }
+    return <p className="service__text">{name}</p>;
+  };
+
   return (
-    <Link className="reset-link-style" to={`/service/${id}`}>
-      <div className="border-top">
-        <div className="container">
-          <div className="service-item container-center">
-            <div className="d-flex align-items-center justify-content-between">
-              <ServiceContent />
-              <div className="button">
-                <img
-                  src="/icons/icon_arrow_forward.svg"
-                  alt="➡️"
-                  className="service-button__image"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Link>
+    <li className="service">
+      <Title />
+      <Image />
+      <Text />
+      <Link className="service__link" to={`/service/${id}`}>
+        Подробнее
+      </Link>
+    </li>
   );
 };
 

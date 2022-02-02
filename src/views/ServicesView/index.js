@@ -123,9 +123,11 @@ const ServicesView = ({ match, history }) => {
     }
 
     return (
-      <div key={service.id}>
-        <ServiceCard service={service} highlightName={highlightName} />
-      </div>
+      <ServiceCard
+        service={service}
+        highlightName={highlightName}
+        key={service.id}
+      />
     );
   };
 
@@ -173,9 +175,9 @@ const ServicesView = ({ match, history }) => {
           ) : (
             <>
               {!!sortedServices.length && (
-                <div className="pt-3">
+                <ul className="services__list">
                   {sortedServices.map(service => displayService(service))}
-                </div>
+                </ul>
               )}
             </>
           )}
