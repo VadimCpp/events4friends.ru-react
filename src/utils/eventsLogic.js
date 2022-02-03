@@ -189,6 +189,17 @@ export const getVerboseDate = event => {
  * @returns {string}
  */
 export const getVerboseTime = event => {
+  return `${moment(event.start).format('HH:mm')} ${timeZoneToCityName(
+    event.timezone,
+  )}`;
+};
+
+/**
+ * Функция возвращает время в удобном для пользователя формате
+ * @param {Object} event событие
+ * @returns {string}
+ */
+export const getVerboseUserTime = event => {
   const withTimezone = moment(`${event.start}${event.timezone}`)
     .toDate()
     .getTime();
@@ -196,15 +207,8 @@ export const getVerboseTime = event => {
     .toDate()
     .getTime();
 
-  let verbose = `${moment(event.start).format('HH:mm')} ${timeZoneToCityName(
-    event.timezone,
-  )}`;
   if (withTimezone !== noTimezone) {
-    const localTime = `${moment(`${event.start}${event.timezone}`).format(
-      'HH:mm',
-    )}`;
-    verbose += ` (${localTime} по вашему времени)`;
+    return `${moment(`${event.start}${event.timezone}`).format('HH:mm')}`;
   }
-
-  return verbose;
+  return null;
 };
