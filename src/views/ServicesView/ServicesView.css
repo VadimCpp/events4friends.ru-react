@@ -55,3 +55,19 @@
 	border-color: rgba(77, 77, 77, .2);
 	border-radius: 48px;
 }
+
+.services__list {
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .services__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 31px;
+    row-gap: 31px;
+    margin-bottom: 31px;
+  }
+}

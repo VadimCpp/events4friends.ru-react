@@ -1,89 +1,100 @@
-.service-item {
-  text-align: left;
-  color: #444;
-  margin-bottom: 20px;
-  padding: 35px 10px 20px;
-  position: relative;
+.service {
+  margin-bottom: 25px;
+  padding: 15px 15px 9px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 4px 13px var(--shadow);
+  align-items: flex-start;
 }
 
-.border-top {
-  border-top: 1px solid rgba(200, 200, 200, 1);
+@media (min-width: 640px) {
+  .service {
+    margin-bottom: 30px;
+    padding: 25px 45px 22px;
+  }
 }
 
-.event-date,
-.event-summary,
-.event-location {
-  padding-left: 3px;
-  padding-right: 7px;
+@media (min-width: 1024px) {
+  .service {
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 25px 28px;
+  }
 }
 
-.event-time {
-  padding-left: 3px;
-  padding-right: 3px;
+.service:hover {
+  box-shadow: 0 20px 30px var(--shadow);
 }
 
-.event-more {
-  margin: 15px 0 0 0;
-}
-
-.btn-container {
-  margin: 15px 0 15px 0;
-}
-
-.event-description {
-  text-align: justify;
-}
-.event-description a {
-  word-wrap: break-word;
-}
-.btn {
-  margin: 10px 10px 0 0;
-}
-.btn-email {
-  margin-top: 0;
-  margin-left: 15px;
-  padding: 0;
-  color: black !important;
-}
-
-
-/* Customize from 'react-add-to-calendar/dist/react-add-to-calendar.css'; */
-.react-add-to-calendar__button {
-  background-color: transparent;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  color: #000;
-}
-
-.react-add-to-calendar__dropdown ul {
-  padding-left: 0;
-}
-
-.share-icon {
-  padding-right: 5px;
-}
-
-.calendar-name {
-  padding: 0;
+.service__title {
   margin: 0;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  color: #999;
+  margin-bottom: 6px;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 700;
 }
 
-.service-button__image {
-  width: 10px;
-  height: 10px;
+@media (min-width: 640px) {
+  .service__title {
+    font-size: 26px;
+    line-height: 26px;
+  }
 }
 
-.reset-link-style {
-	color: #444;
+.service__img {
+  display: block;
+  width: 100%;
+  height: 144px;
+  object-fit: cover;
+  order: -1;
+  margin-bottom: 26px;
+  border-radius: 10px;
 }
 
-.reset-link-style:hover {
-    color: #444;
-    text-decoration: none;
+@media (min-width: 640px) {
+  .service__img {
+    height: 168px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service__img {
+    margin-bottom: 19px;
+  }
+}
+
+.service__text {
+  margin: 0;
+  margin-bottom: 26px;
+  line-height: 22px;
+  font-weight: 350;
+}
+
+@media (min-width: 640px) {
+  .service__text {
+    margin-bottom: 28px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+.service__link {
+  margin-top: auto;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+}
+
+.service__link:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+  .service__link {
+    line-height: 20px;
+  }
 }
 
 .serviceFree {
