@@ -14,6 +14,7 @@ import {
   isStartWithinAnHourEvent,
   getVerboseDate,
   getVerboseTime,
+  getVerboseUserTime,
 } from '../../utils/eventsLogic';
 
 const EventCard = ({ event, slug }) => {
@@ -21,15 +22,12 @@ const EventCard = ({ event, slug }) => {
   const { contact, id, summary, isOnline, location } = event;
 
   const startDate = getVerboseDate(event);
-  const startTime = getVerboseTime(event);
+  const localStartTime = getVerboseTime(event);
+  const userStartTime = getVerboseUserTime(event);
 
   const isOwner =
     authContext.user && event && authContext.user.email === contact;
   const linkTo = slug ? `/${slug}/event/${id}` : `/event/${id}`;
-
-  const splitStartTime = startTime.split(' (');
-  const localStartTime = splitStartTime[0];
-  const userStartTime = splitStartTime.length === 1 ? '' : `${splitStartTime[1]}`;
 
   return (
     <>
@@ -48,7 +46,7 @@ const EventCard = ({ event, slug }) => {
         <dt className="event__details-header">Время</dt>
         <dd className="event__details-text">
           <p className="event__details-subtext">{localStartTime}</p>
-          { userStartTime ? <p className="event__details-subtext">{userStartTime}</p> : '' }
+          { userStartTime ? <p className="event__details-subtext">{userStartTime} по вашему времени</p> : '' }
         </dd>
         <dt className="event__details-header">Место</dt>
         <dd className="event__details-text">
