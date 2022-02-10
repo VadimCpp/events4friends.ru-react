@@ -30,7 +30,6 @@
     "moment": "^2.22.2",
     "prop-types": "^15.7.2",
     "react": "^16.6.3",
-    "react-add-to-calendar": "^0.1.5",
     "react-dom": "^16.6.3",
     "react-moment": "^0.8.4",
     "react-router-dom": "^5.2.0",

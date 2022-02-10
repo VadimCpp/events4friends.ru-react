@@ -1,5 +1,4 @@
 import React from 'react';
-import 'react-add-to-calendar/dist/react-add-to-calendar.css';
 import { Link } from 'react-router-dom';
 import './ServiceCard.css';
 
