@@ -1,5 +1,4 @@
 import React from 'react';
-import { Progress } from 'reactstrap';
 
 import './LoadingView.css';
 
