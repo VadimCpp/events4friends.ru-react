@@ -1,8 +1,6 @@
-import React, { useContext, useCallback, useEffect, useState } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import React, { useContext, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import ButtonLink from '../../components/ButtonLink';
-import StoreBadge from '../../components/StoreBadge';
 import { DataContext } from '../../context/DataContext';
 import Spinner from '../../components/Spinner';
 import { NOTICES } from '../../enums';
@@ -22,63 +20,35 @@ const CommunitiesView = () => {
     [history],
   );
 
-  const [isBackButton, setIsBackButton] = useState(false);
-  useEffect(() => {
-    // Cookies
-    const cookies = new Cookies();
-    const communityId = cookies.get('communityId');
-    setIsBackButton(Boolean(communityId));
-  }, []);
-
   return (
-    <div className="communitiesview">
-      {isBackButton && (
-        <ButtonLink
-          to="/"
-          icon="/icons/icon_arrow_back.svg"
-          title="На главную"
-          className="btn-back"
-        />
-      )}
-      <div className={isBackButton ? 'border-top mt-3 mb-3' : 'mt-3 mb-3'}>
-        <p className="mt-3 pb-5 h3">Выберите сообщество</p>
-        {communitiesList.map(community => (
-          <div key={community.id} className="pb-5">
-            <p className="pl-3 pr-3">{community.description}:</p>
-            <button
-              type="button"
-              className="btn-community"
-              onClick={() => onCommunityClick(community.id)}
-            >
-              {!!community.logo_url && (
-                <img
-                  src={community.logo_url}
-                  alt="Logo"
-                  width="32"
-                  height="32"
-                />
-              )}
-              <span className="pl-2">{community.name}</span>
-            </button>
-          </div>
-        ))}
+    <section id="communities" className="communities">
+      <div className="communities__wrapper">
+        <h2 className="communities__title">Сообщества</h2>
         {communitiesList.length === 0 && <Spinner message={NOTICES.LOADING} />}
+        <ul className="communities__list">
+          {communitiesList.map(community => (
+            <li className="community" key={community.id}>
+              <a
+                className="community__wrapper"
+                onClick={() => onCommunityClick(community.id)}
+                href="/"
+              >
+                <h3 className="community__title">{community.name}</h3>
+                <img
+                  className="community__img"
+                  src={community.logo_url}
+                  width="95"
+                  height="95"
+                  alt=""
+                />
+                <p className="community__text">{community.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="border-top">
-        <div className="container container-center pt-4 pb-5">
-          <p>Наше мобильное приложение:</p>
-          <div className="d-flex justify-content-center">
-            <div className="mr-1">
-              <StoreBadge platform="ios" width={120} />
-            </div>
-            <div className="ml-1">
-              <StoreBadge platform="android" width={120} />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 };
 
-export default withRouter(CommunitiesView);
+export default CommunitiesView;

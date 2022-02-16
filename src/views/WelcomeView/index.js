@@ -6,6 +6,7 @@ import MessengerLink from '../../components/MessengerLink';
 import SocialNetworkLink from '../../components/SocialNetworkLink';
 import StoreBadge from '../../components/StoreBadge';
 import Spinner from '../../components/Spinner';
+import CommunitiesView from '../CommunitiesView';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 import { NOTICES } from '../../enums';
@@ -248,27 +249,20 @@ const WelcomeView = ({ history }) => {
 
       <div className="welcomeview__block">
         <div className="container container-center">
-          <h4>Дополнительно</h4>
-          <p>Для смены сообщества нажмите кнопку «Сообщества»</p>
-          <Link to="/communities" className="communities-btn">
-            <img
-              src="/icons/icon_community.svg"
-              alt="communities"
-              className="communities-btn__icon"
-            />
-            <span className="communities-btn__title">Сообщества</span>
-          </Link>
-
-          {!userAuthorized && (
-            <>
-              <p>Если Вы - организатор, то «Вход для оргов» для Вас</p>
-              <Link to="/signin" className="signin-btn">
-                <span className="signin-btn__title">Вход для оргов</span>
-              </Link>
-            </>
-          )}
+          <CommunitiesView />
         </div>
       </div>
+
+      {!userAuthorized && (
+        <div className="welcomeview__block">
+          <div className="container container-center">
+            <p>Если Вы - организатор, то «Вход для оргов» для Вас</p>
+            <Link to="/signin" className="signin-btn">
+              <span className="signin-btn__title">Вход для оргов</span>
+            </Link>
+          </div>
+        </div>
+      )}
 
       <div className="welcomeview__block">
         <div className="container container-center">
