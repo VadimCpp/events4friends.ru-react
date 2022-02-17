@@ -212,3 +212,20 @@ export const getVerboseUserTime = event => {
   }
   return null;
 };
+
+/**
+ * Функция возвращает год события, при условии событие было и будет не в текущем году
+ * @param {Object} event событие
+ * @returns {string} 
+ */
+export const getEventAnotherYear = event => {
+  const eventYear = moment(`${event.start}`)
+    .format('YYYY')
+  const nowYear = moment().format('YYYY')
+  
+
+  if (eventYear !== nowYear) {
+    return eventYear;
+  }
+  return null;
+};
