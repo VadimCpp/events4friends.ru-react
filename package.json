@@ -24,6 +24,7 @@
   "dependencies": {
     "@tinymce/tinymce-react": "^3.6.1",
     "classnames": "^2.2.6",
+    "eslint-config-airbnb": "^18.2.0",
     "firebase": "^7.13.1",
     "moment": "^2.22.2",
     "prop-types": "^15.7.2",
