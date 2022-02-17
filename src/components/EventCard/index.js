@@ -44,12 +44,13 @@ const EventCard = ({ event, slug }) => {
       <h3 className="event__title">{summary}</h3>
       <dl className="event__details">
         <dt className="event__details-header">Дата</dt>
-        <dd className="event__details-text">{startDate}</dd>
+        <dd className="event__details-text">{startDate}
+          { eventAnotherYear ? <p className="event__details-subtext">{eventAnotherYear} год</p> : '' }
+        </dd>
         <dt className="event__details-header">Время</dt>
         <dd className="event__details-text">
           <p className="event__details-subtext">{localStartTime}</p>
           { userStartTime ? <p className="event__details-subtext">{userStartTime} по вашему времени</p> : '' }
-          { eventAnotherYear ? <p className="event__details-subtext">{getEventAnotherYear} год</p> : '' }
         </dd>
         <dt className="event__details-header">Место</dt>
         <dd className="event__details-text">
