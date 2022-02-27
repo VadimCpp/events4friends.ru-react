@@ -175,11 +175,17 @@ export const isStartWithinAnHourEvent = event => {
 };
 
 /**
- * Функция возвращает дату в удобном для пользователя формате
+ * Функция возвращает дату в удобном для пользователя формате + если год отличен от текущего -  показыват год мероприятия
  * @param {Object} event событие
  * @returns {string}
  */
 export const getVerboseDate = event => {
+  const eventYear = +moment(`${event.start}`).format('YYYY')
+  const nowYear = +moment().format('YYYY')
+
+  if (eventYear !== nowYear) {
+    return moment(`${event.start}`).format('D MMMM, dddd') + `, ${eventYear} год`;
+  }
   return moment(`${event.start}`).format('D MMMM, dddd');
 };
 
@@ -209,21 +215,6 @@ export const getVerboseUserTime = event => {
 
   if (withTimezone !== noTimezone) {
     return `${moment(`${event.start}${event.timezone}`).format('HH:mm')}`;
-  }
-  return null;
-};
-
-/**
- * Функция возвращает год события, при условии событие было или будет не в текущем году
- * @param {Object} event событие
- * @returns {integer|null} 
- */
-export const getEventAnotherYear = event => {
-  const eventYear = +moment(`${event.start}`).format('YYYY')
-  const nowYear = +moment().format('YYYY')
-
-  if (eventYear !== nowYear) {
-    return eventYear;
   }
   return null;
 };

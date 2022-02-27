@@ -15,7 +15,6 @@ import {
   getVerboseDate,
   getVerboseTime,
   getVerboseUserTime,
-  getEventAnotherYear,
 } from '../../utils/eventsLogic';
 
 const EventCard = ({ event, slug }) => {
@@ -25,7 +24,6 @@ const EventCard = ({ event, slug }) => {
   const startDate = getVerboseDate(event);
   const localStartTime = getVerboseTime(event);
   const userStartTime = getVerboseUserTime(event);
-  const eventAnotherYear = getEventAnotherYear(event);
 
   const isOwner =
     authContext.user && event && authContext.user.email === contact;
@@ -45,7 +43,6 @@ const EventCard = ({ event, slug }) => {
       <dl className="event__details">
         <dt className="event__details-header">Дата</dt>
         <dd className="event__details-text">{startDate}
-          { eventAnotherYear ? <p className="event__details-subtext">{eventAnotherYear} год</p> : '' }
         </dd>
         <dt className="event__details-header">Время</dt>
         <dd className="event__details-text">
