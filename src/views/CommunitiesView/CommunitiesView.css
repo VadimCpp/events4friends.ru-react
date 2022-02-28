@@ -89,7 +89,7 @@
   grid-column: 1 / 2;
   grid-row: 1 / 3;
   width: 95px;
-  height: 100%;
+  height: 95px;
   border-radius: 10px;
   object-fit: cover;
 }
@@ -97,6 +97,7 @@
 @media (min-width: 640px) {
   .community__img {
     width: 116px;
+    height: 116px;
   }
 }
 
