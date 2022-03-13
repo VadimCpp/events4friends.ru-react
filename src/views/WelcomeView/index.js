@@ -249,7 +249,10 @@ const WelcomeView = ({ history }) => {
 
       <div className="welcomeview__block">
         <div className="container container-center">
-          <CommunitiesView />
+          <CommunitiesView
+            setCommunity={setCommunity}
+            currentCommunity={community}
+          />
         </div>
       </div>
 

@@ -6,18 +6,25 @@ import Spinner from '../../components/Spinner';
 import { NOTICES } from '../../enums';
 import './CommunitiesView.css';
 
-const CommunitiesView = () => {
+const CommunitiesView = ({ setCommunity, currentCommunity }) => {
   const history = useHistory();
   const { communities: communitiesList } = useContext(DataContext);
 
   const onCommunityClick = useCallback(
-    communityId => {
+    (evt, communityId) => {
+      evt.preventDefault();
       // Cookies
       const cookies = new Cookies();
       cookies.set('communityId', communityId);
-      history.push('/');
+      const aCommunity = communitiesList.find(c => c.id === communityId);
+      if (currentCommunity && currentCommunity !== aCommunity) {
+        setCommunity(aCommunity);
+      }
+      if (history.location.pathname !== '/') {
+        history.push('/');
+      }
     },
-    [history],
+    [history, setCommunity, currentCommunity, communitiesList],
   );
 
   return (
@@ -30,7 +37,7 @@ const CommunitiesView = () => {
             <li className="community" key={community.id}>
               <a
                 className="community__wrapper"
-                onClick={() => onCommunityClick(community.id)}
+                onClick={evt => onCommunityClick(evt, community.id)}
                 href="/"
               >
                 <h3 className="community__title">{community.name}</h3>
