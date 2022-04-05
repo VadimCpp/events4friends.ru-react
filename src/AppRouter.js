@@ -3,6 +3,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import EventsView from './views/EventsView';
 import EventView from './views/EventView';
 import ScrollToTop from './components/ScrollToTop';
+import Header from './components/Header';
 import WelcomeView from './views/WelcomeView';
 import LoginView from './views/LoginView';
 import ServicesView from './views/ServicesView';
@@ -19,6 +20,7 @@ const AppRouter = () => {
   return (
     <Router>
       <ScrollToTop>
+        <Header />
         <div>
           <Route path="/" exact component={WelcomeView} />
           <Route path="/signin/" exact component={LoginView} />

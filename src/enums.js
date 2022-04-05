@@ -12,4 +12,18 @@ const NOTICES = {
   LOADING: 'Загружаем...',
 };
 
-export { EventsFilterType, NOTICES };
+const ROUTES = {
+  HOME: '/',
+  EVENTS: '/events',
+  SERVICES: '/services',
+  COMMUNITIES: '/communities',
+};
+
+const MENU_ITEMS = [
+  { title: 'Главная', slug: ROUTES.HOME },
+  { title: 'Мероприятия', slug: ROUTES.EVENTS },
+  { title: 'Сообщества', slug: ROUTES.COMMUNITIES },
+  { title: 'Услуги', slug: ROUTES.SERVICES },
+];
+
+export { EventsFilterType, NOTICES, ROUTES, MENU_ITEMS };
