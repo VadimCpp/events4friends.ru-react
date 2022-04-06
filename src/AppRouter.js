@@ -14,7 +14,6 @@ import EditEventView from './views/EditEventView';
 import EditServiceView from './views/EditServiceView';
 import CommunitiesView from './views/CommunitiesView';
 import ProfileView from './views/ProfileView';
-import EventMapView from './views/EventMapView';
 
 const AppRouter = () => {
   return (
@@ -28,7 +27,6 @@ const AppRouter = () => {
           <Route path="/newservice/" exact component={NewServiceView} />
           <Route path="/communities/" exact component={CommunitiesView} />
           <Route path="/profile/" exact component={ProfileView} />
-          <Route path="/events/map/" exact component={EventMapView} />
           <Route path="/editevent/:id" component={EditEventView} />
           <Route path="/editservice/:id" exact component={EditServiceView} />
 

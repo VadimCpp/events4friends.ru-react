@@ -32,7 +32,6 @@
     "react-dom": "^16.6.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.0.1",
-    "react-yandex-maps": "^4.6.0",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
