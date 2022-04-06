@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect, useCallback } from 'react';
-import Cookies from 'universal-cookie';
 import { DataContext } from '../../context/DataContext';
 import { AuthContext } from '../../context/AuthContext';
 import ServiceCard from '../../components/ServiceCard';
@@ -40,23 +39,6 @@ const ServicesView = ({ match, history }) => {
         // TODO: реализовать NOT_FOUND экран
         console.warn('TODO: реализовать NOT_FOUND экран');
         history.push('/');
-      }
-    } else {
-      //
-      // NOTE!
-      // Если в URL не указан slug сообщества необходимо:
-      // - произвести поиск по id из cookies
-      // - по умолчанию id сообщества - 1 (events4friends)
-      //
-      const cookies = new Cookies();
-      const communityId = cookies.get('communityId');
-      if (!communityId) {
-        history.push('/communities/');
-      } else {
-        const aCommunity = communities.find(c => c.id === communityId);
-        if (aCommunity) {
-          setCommunity(aCommunity);
-        }
       }
     }
   }, [history, communities, slug]);

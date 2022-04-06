@@ -1,6 +1,5 @@
 import React, { useContext, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import { DataContext } from '../../context/DataContext';
 import Spinner from '../../components/Spinner';
 import { NOTICES } from '../../enums';
@@ -13,9 +12,6 @@ const CommunitiesView = ({ setCommunity, currentCommunity }) => {
   const onCommunityClick = useCallback(
     (evt, communityId) => {
       evt.preventDefault();
-      // Cookies
-      const cookies = new Cookies();
-      cookies.set('communityId', communityId);
       const aCommunity = communitiesList.find(c => c.id === communityId);
       if (currentCommunity && currentCommunity !== aCommunity) {
         setCommunity(aCommunity);

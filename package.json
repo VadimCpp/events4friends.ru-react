@@ -2,8 +2,7 @@
   "name": "events4friends.ru-react",
   "version": "0.1.0",
   "private": true,
-  "homepage_test": "https://vadimcpp.github.io/events4friends.ru-react/",
-  "homepage": "http://events4friends.ru/",
+  "homepage": "https://events4friends.ru/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -31,8 +30,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.0.1",
-    "universal-cookie": "^4.0.4"
+    "react-scripts": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",

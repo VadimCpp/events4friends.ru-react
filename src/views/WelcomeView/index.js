@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import MessengerLink from '../../components/MessengerLink';
 import SocialNetworkLink from '../../components/SocialNetworkLink';
@@ -17,21 +16,6 @@ const WelcomeView = ({ history }) => {
   const dataContext = useContext(DataContext);
 
   const [community, setCommunity] = useState(null);
-
-  useEffect(() => {
-    // Cookies
-    const cookies = new Cookies();
-    const communityId = cookies.get('communityId');
-    if (!communityId) {
-      history.push('/communities/');
-    } else {
-      const { communities } = dataContext;
-      const aCommunity = communities.find(c => c.id === communityId);
-      if (aCommunity) {
-        setCommunity(aCommunity);
-      }
-    }
-  }, [history, dataContext]);
 
   let userName = null;
   let userAuthorized = false;

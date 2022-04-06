@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Cookies from 'universal-cookie';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
 import EventsFilter from '../../components/EventsFilter';
@@ -39,23 +38,6 @@ const EventsView = ({ match, history }) => {
         console.warn('TODO: реализовать NOT_FOUND экран');
         history.push('/');
       }
-    } else {
-      //
-      // NOTE!
-      // Если в URL не указан slug сообщества необходимо:
-      // - произвести поиск по id из cookies
-      // - по умолчанию id сообщества - 1 (events4friends)
-      //
-      const cookies = new Cookies();
-      const communityId = cookies.get('communityId');
-      if (!communityId) {
-        history.push('/communities/');
-      } else {
-        const aCommunity = communities.find(c => c.id === communityId);
-        if (aCommunity) {
-          setCommunity(aCommunity);
-        }
-      }
     }
   }, [history, communities, slug]);
 
@@ -70,10 +52,6 @@ const EventsView = ({ match, history }) => {
     }
   }, [events, filterType, community]);
 
-  /**
-   * @param {Event} event
-   * @param {EventsSource} source
-   */
   const displayEvent = (event, source) => {
     const { id } = event;
     const { name } = source;
