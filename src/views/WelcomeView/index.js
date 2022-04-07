@@ -14,8 +14,13 @@ import './WelcomeView.css';
 const WelcomeView = ({ history }) => {
   const authContext = useContext(AuthContext);
   const dataContext = useContext(DataContext);
-
   const [community, setCommunity] = useState(null);
+
+  useEffect(() => {
+    if (dataContext.communities.length > 0) {
+      setCommunity(dataContext.communities[0]);
+    }
+  }, [dataContext.communities]);
 
   let userName = null;
   let userAuthorized = false;

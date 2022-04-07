@@ -38,6 +38,8 @@ const EventsView = ({ match, history }) => {
         console.warn('TODO: реализовать NOT_FOUND экран');
         history.push('/');
       }
+    } else if (communities.length > 0) {
+      setCommunity(communities[0]);
     }
   }, [history, communities, slug]);
 
