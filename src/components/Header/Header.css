@@ -353,7 +353,7 @@
 }
 
 
-.overlay {
+.page-navigation--open .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -361,7 +361,7 @@
 }
 
 @media (min-width: 1024px) {
-  .overlay {
+  .page-navigation--open .overlay {
     display: none;
   }
 }

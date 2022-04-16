@@ -10,6 +10,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 import { NOTICES } from '../../enums';
 import './WelcomeView.css';
+import AboutUs from '../../components/AboutUs';
 
 const WelcomeView = ({ history }) => {
   const authContext = useContext(AuthContext);
@@ -135,7 +136,13 @@ const WelcomeView = ({ history }) => {
     return <Spinner message={NOTICES.LOADING} />;
   }
   return (
-    <div className="welcomeview">
+    <main>
+      <div className="page-main__title-wrapper">
+        <h1 className="page-main__title">
+          Events4Friends — нетворкинг в Калининграде
+        </h1>
+      </div>
+
       {userAuthorized && (
         <div className="welcomeview__block">
           <div className="container container-center">
@@ -162,122 +169,95 @@ const WelcomeView = ({ history }) => {
         </div>
       )}
 
-      <div className="welcomeview__block">
-        <h1>
-          {!!community.logo_url && (
-            <img
-              className="community__logo"
-              src={community.logo_url}
-              alt="logo"
-            />
-          )}
-          <span>{community.name}</span>
-        </h1>
-        <p>{community.description}</p>
-      </div>
-      <div className="welcomeview__block welcome__features">
-        <Link to="/events" className="events-btn">
-          <img
-            src="/icons/icon_list.svg"
-            alt="events"
-            className="events-btn__icon"
-          />
-          <span className="events-btn__title">События</span>
-        </Link>
-        <Link to="/services" className="services-btn">
-          <img
-            src="/icons/icon_service.svg"
-            alt="events"
-            className="services-btn__icon"
-          />
-          <span className="services-btn__title">Услуги</span>
-        </Link>
-      </div>
+      <AboutUs />
 
-      {messengers.length !== 0 ? (
+      <div className="welcomeview">
+        {messengers.length !== 0 ? (
+          <div className="welcomeview__block">
+            <div className="container container-center">
+              <h4>Чаты сообщества</h4>
+              <ul className="welcomeview__messengers-list">
+                {messengers.map(messenger => (
+                  <li
+                    className="welcomeview__messengers-item"
+                    key={messenger.messengerName}
+                  >
+                    <MessengerLink
+                      ExternalLinkComponent={ButtonExternalLink}
+                      {...messenger}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+
         <div className="welcomeview__block">
           <div className="container container-center">
-            <h4>Чаты сообщества</h4>
-            <ul className="welcomeview__messengers-list">
-              {messengers.map(messenger => (
-                <li
-                  className="welcomeview__messengers-item"
-                  key={messenger.messengerName}
-                >
-                  <MessengerLink
+            <h4>Ссылки</h4>
+            <p>
+              В этом разделе ссылки на Instagram, YouTube, социальные сети и
+              т.п.
+            </p>
+            <ul className="welcomeview__social-list">
+              {socialLinks.map(link => (
+                <li className="welcomeview__social-item" key={link.name}>
+                  <SocialNetworkLink
                     ExternalLinkComponent={ButtonExternalLink}
-                    {...messenger}
+                    {...link}
                   />
                 </li>
               ))}
             </ul>
           </div>
         </div>
-      ) : (
-        ''
-      )}
 
-      <div className="welcomeview__block">
-        <div className="container container-center">
-          <h4>Ссылки</h4>
-          <p>
-            В этом разделе ссылки на Instagram, YouTube, социальные сети и т.п.
-          </p>
-          <ul className="welcomeview__social-list">
-            {socialLinks.map(link => (
-              <li className="welcomeview__social-item" key={link.name}>
-                <SocialNetworkLink
-                  ExternalLinkComponent={ButtonExternalLink}
-                  {...link}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="welcomeview__block">
-        <div className="container container-center">
-          <CommunitiesView
-            setCommunity={setCommunity}
-            currentCommunity={community}
-          />
-        </div>
-      </div>
-
-      {!userAuthorized && (
         <div className="welcomeview__block">
           <div className="container container-center">
-            <p>Если Вы - организатор, то «Вход для оргов» для Вас</p>
-            <Link to="/signin" className="signin-btn">
-              <span className="signin-btn__title">Вход для оргов</span>
-            </Link>
+            <CommunitiesView
+              setCommunity={setCommunity}
+              currentCommunity={community}
+            />
           </div>
         </div>
-      )}
 
-      <div className="welcomeview__block">
+        {!userAuthorized && (
+          <div className="welcomeview__block">
+            <div className="container container-center">
+              <p>Если Вы - организатор, то «Вход для оргов» для Вас</p>
+              <Link to="/signin" className="signin-btn">
+                <span className="signin-btn__title">Вход для оргов</span>
+              </Link>
+            </div>
+          </div>
+        )}
+
+        <div className="welcomeview__block">
+          <div className="container container-center">
+            <p>Доступно мобильное приложение</p>
+            <div className="d-flex justify-content-center">
+              <div className="mr-1">
+                <StoreBadge platform="ios" width={120} />
+              </div>
+              <div className="ml-1">
+                <StoreBadge platform="android" width={120} />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="container container-center">
-          <p>Доступно мобильное приложение</p>
-          <div className="d-flex justify-content-center">
-            <div className="mr-1">
-              <StoreBadge platform="ios" width={120} />
-            </div>
-            <div className="ml-1">
-              <StoreBadge platform="android" width={120} />
-            </div>
-          </div>
+          <p className="welcomeview__footer">
+            Здесь действуют правила поведения в общественных местах. При
+            поддержке <a href="https://roscomputing.com/">Роскомпьютинг</a>.
+            <span> version - {dataContext.config.version}.</span>
+          </p>
         </div>
       </div>
-
-      <div className="container container-center">
-        <p className="welcomeview__footer">
-          Здесь действуют правила поведения в общественных местах. При поддержке{' '}
-          <a href="https://roscomputing.com/">Роскомпьютинг</a>.
-          <span> version - {dataContext.config.version}.</span>
-        </p>
-      </div>
-    </div>
+    </main>
   );
 };
 
