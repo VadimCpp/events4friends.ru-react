@@ -144,3 +144,33 @@
   height: 28px;
   margin-right: 10px;
 }
+
+.page-main__title-wrapper {
+  background-color: #3a5aff;
+}
+
+.page-main__title {
+  margin: 0 auto;
+  max-width: 1160px;
+  padding: 26px 10px;
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 700;
+  color: #fff;
+}
+
+@media (min-width:640px) {
+  .page-main__title {
+    padding: 48px 10px;
+    font-size: 35px;
+    line-height: 40px;
+  }
+}
+
+@media (min-width:1024px) {
+  .page-main__title {
+    padding: 69px 103px 46px;
+    font-size: 50px;
+    line-height: 57px;
+  }
+}
