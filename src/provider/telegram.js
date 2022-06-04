@@ -6,7 +6,7 @@
  */
 export const notifyTelegramBot = (event, userName) => {
   console.info('Updating Telegram pinned message');
-  fetch('https://events4friendsbot.herokuapp.com/update', {
+  fetch('https://events4friends-bot.herokuapp.com/update', {
     method: 'post',
     headers: {
       Accept: 'application/json',
