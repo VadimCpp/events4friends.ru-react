@@ -23,6 +23,9 @@ const Header = () => {
   const onMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
   const navClass = `page-navigation${
     isMenuOpen ? ' page-navigation--open' : ''
   }`;
@@ -59,8 +62,8 @@ const Header = () => {
           <button type="button" className={buttonClass} onClick={onMenuClick}>
             <span className="visually-hidden">Открыть меню</span>
           </button>
-          <ul className={listClass}>{menuItems}</ul>
-          <div className="overlay" />
+          <ul className={listClass} onClick={closeMenu}>{menuItems}</ul>
+          <div className="overlay" onClick={closeMenu} />
         </nav>
       </div>
     </header>
