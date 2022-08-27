@@ -16,13 +16,11 @@ const ROUTES = {
   HOME: '/',
   EVENTS: '/events',
   SERVICES: '/services',
-  COMMUNITIES: '/communities',
 };
 
 const MENU_ITEMS = [
   { title: 'Главная', slug: ROUTES.HOME },
   { title: 'Мероприятия', slug: ROUTES.EVENTS },
-  { title: 'Сообщества', slug: ROUTES.COMMUNITIES },
   { title: 'Услуги', slug: ROUTES.SERVICES },
 ];
 
