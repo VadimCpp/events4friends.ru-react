@@ -5,7 +5,6 @@ import MessengerLink from '../../components/MessengerLink';
 import SocialNetworkLink from '../../components/SocialNetworkLink';
 import StoreBadge from '../../components/StoreBadge';
 import Spinner from '../../components/Spinner';
-import CommunitiesView from '../CommunitiesView';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
 import { NOTICES } from '../../enums';
@@ -212,15 +211,6 @@ const WelcomeView = ({ history }) => {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-
-        <div className="welcomeview__block">
-          <div className="container container-center">
-            <CommunitiesView
-              setCommunity={setCommunity}
-              currentCommunity={community}
-            />
           </div>
         </div>
 
