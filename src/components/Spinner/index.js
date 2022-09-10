@@ -6,10 +6,10 @@ import './Spinner.css';
 
 const Spinner = ({ message }) => {
   return (
-    <div className="spinner-container">
-      <svg className="spinner" viewBox="0 0 50 50">
+    <div className="spinner">
+      <svg className="spinner__svg" viewBox="0 0 50 50">
         <circle
-          className="path"
+          className="spinner__circle"
           cx="25"
           cy="25"
           r="20"
@@ -17,7 +17,7 @@ const Spinner = ({ message }) => {
           strokeWidth="4"
         />
       </svg>
-      <p className="message">{message}</p>
+      <p className="spinner__message">{message}</p>
     </div>
   );
 };

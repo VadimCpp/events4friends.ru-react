@@ -15,12 +15,10 @@ describe('Spinner component', () => {
     const svg = spinnerContainer.childNodes[0];
     const title = spinnerContainer.childNodes[1];
 
-    expect(
-      spinnerContainer.classList.contains('spinner-container'),
-    ).toBeTruthy();
+    expect(spinnerContainer.classList.contains('spinner')).toBeTruthy();
     expect(spinnerContainer.childNodes.length).toBe(2);
-    expect(svg.classList.contains('spinner')).toBeTruthy();
-    expect(title.classList.contains('message')).toBeTruthy();
+    expect(svg.classList.contains('spinner__svg')).toBeTruthy();
+    expect(title.classList.contains('spinner__message')).toBeTruthy();
 
     ReactDOM.unmountComponentAtNode(div);
   });

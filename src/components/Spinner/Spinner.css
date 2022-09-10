@@ -1,9 +1,9 @@
-.spinner-container {
+.spinner {
   position: relative;
   height: 75vh;
 }
 
-.spinner {
+.spinner__svg {
   animation: rotate 2s linear infinite;
   height: 50px;
   position: absolute;
@@ -12,16 +12,17 @@
   margin: -25px 0 0 -25px;
 }
 
-.path {
+.spinner__message {
+  position: absolute;
+  width: 100%;
+  top: 55%;
+  text-align: center;
+}
+
+.spinner__circle {
   stroke: gray;
   stroke-linecap: round;
   animation: dash 1.5s ease-in-out infinite;
-}
-
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 @keyframes dash {
@@ -41,9 +42,3 @@
   }
 }
 
-.message {
-    position: absolute;
-    width: 100%;
-    top: 55%;
-    text-align: center;
-}
