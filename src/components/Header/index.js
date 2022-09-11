@@ -42,7 +42,7 @@ const Header = () => {
         <div className="page-header__title-wrapper">
           <img
             className="page-header__logo"
-            src="/icons/community/events4friends-spring-peace-64x64.png"
+            src="/icons/community/events4friends-autumn-64x64.png"
             width="32"
             height="32"
             alt="Events for friends logo"
