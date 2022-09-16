@@ -15,6 +15,7 @@ describe('StoreBadge component', () => {
     expect(storeBadgeContainer.childNodes[0].tagName).toBe('IMG');
     ReactDOM.unmountComponentAtNode(div);
   });
+
   it('Url is set correctly', () => {
     const div = document.createElement('div');
     const href =
@@ -24,6 +25,7 @@ describe('StoreBadge component', () => {
     expect(storeBadgeContainer.href).toBe(href);
     ReactDOM.unmountComponentAtNode(div);
   });
+
   it('Styles for img are set correctly', () => {
     const div = document.createElement('div');
     ReactDOM.render(<StoreBadge platform="ios" width="35" />, div);
@@ -31,6 +33,12 @@ describe('StoreBadge component', () => {
     expect(storeBadgeContainer.childNodes[0].style.length).toBe(2);
     expect(storeBadgeContainer.childNodes[0].style[0]).toBe('width');
     expect(storeBadgeContainer.childNodes[0].style[1]).toBe('height');
+    expect(
+      window.getComputedStyle(storeBadgeContainer.childNodes[0]).width,
+    ).toBe('35px');
+    expect(
+      window.getComputedStyle(storeBadgeContainer.childNodes[0]).height,
+    ).toBe('auto');
     ReactDOM.unmountComponentAtNode(div);
   });
 });
