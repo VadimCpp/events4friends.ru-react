@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import ButtonExternalLink from '../../components/ButtonExternalLink';
 import MessengerLink from '../../components/MessengerLink';
-import SocialNetworkLink from '../../components/SocialNetworkLink';
 import StoreBadge from '../../components/StoreBadge';
 import Spinner from '../../components/Spinner';
 import { AuthContext } from '../../context/AuthContext';
@@ -204,9 +203,12 @@ const WelcomeView = ({ history }) => {
             <ul className="welcomeview__social-list">
               {socialLinks.map(link => (
                 <li className="welcomeview__social-item" key={link.name}>
-                  <SocialNetworkLink
-                    ExternalLinkComponent={ButtonExternalLink}
-                    {...link}
+                  <ButtonExternalLink
+                    href={link.href}
+                    icon={link.icon}
+                    alt={link.name}
+                    title={link.title}
+                    classList={['social__link', `social__link--${link.name}`]}
                   />
                 </li>
               ))}
