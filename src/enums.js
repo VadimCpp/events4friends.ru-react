@@ -24,4 +24,10 @@ const MENU_ITEMS = [
   { title: 'Услуги', slug: ROUTES.SERVICES },
 ];
 
-export { EventsFilterType, NOTICES, ROUTES, MENU_ITEMS };
+const STORE_BADGE_ITEMS = [
+  { platform: 'ios', width: 120 },
+  { platform: 'android', width: 120 },
+];
+
+
+export { EventsFilterType, NOTICES, ROUTES, MENU_ITEMS, STORE_BADGE_ITEMS };
