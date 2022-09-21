@@ -6,7 +6,7 @@ import StoreBadge from '../../components/StoreBadge';
 import Spinner from '../../components/Spinner';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
-import { NOTICES } from '../../enums';
+import { NOTICES, STORE_BADGE_ITEMS } from '../../enums';
 import './WelcomeView.css';
 import AboutUs from '../../components/AboutUs';
 
@@ -231,12 +231,13 @@ const WelcomeView = ({ history }) => {
           <div className="container container-center">
             <p>Доступно мобильное приложение</p>
             <div className="d-flex justify-content-center">
-              <div className="mr-1">
-                <StoreBadge platform="ios" width={120} />
-              </div>
-              <div className="ml-1">
-                <StoreBadge platform="android" width={120} />
-              </div>
+              {
+                STORE_BADGE_ITEMS.map( storeBadge => (
+                  <div className="mr-1">
+                    <StoreBadge platform={storeBadge.platform} width={storeBadge.width} />
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
