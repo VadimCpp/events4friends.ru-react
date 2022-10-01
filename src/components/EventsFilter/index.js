@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ButtonAction } from '../ButtonAction';
+import RadioButton from '../RadioButton';
 import './EventsFilter.css';
 
 const BUTTON_TYPE = 'events';
@@ -10,7 +10,7 @@ function EventsFilter({ onFilterTypeChange, filterType, upcoming, past }) {
     <div className="events-filter">
       <span className="events-filter__label">Фильтр:</span>
 
-      <ButtonAction
+      <RadioButton
         onClick={() => {
           if (filterType !== upcoming) {
             if (onFilterTypeChange) {
@@ -22,9 +22,9 @@ function EventsFilter({ onFilterTypeChange, filterType, upcoming, past }) {
         type={BUTTON_TYPE}
       >
         Будет
-      </ButtonAction>
+      </RadioButton>
 
-      <ButtonAction
+      <RadioButton
         onClick={() => {
           if (filterType !== past) {
             if (onFilterTypeChange) {
@@ -36,7 +36,7 @@ function EventsFilter({ onFilterTypeChange, filterType, upcoming, past }) {
         type={BUTTON_TYPE}
       >
         Было
-      </ButtonAction>
+      </RadioButton>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AppleStoreBadge from './images/apple_store_badge.png';
 import GoogleStoreBadge from './images/google_store_badge.png';
 
@@ -25,6 +26,11 @@ const StoreBadge = ({ platform, width }) => {
       />
     </a>
   );
+};
+
+StoreBadge.propTypes = {
+  platform: PropTypes.oneOf(['ios', 'android']),
+  width: PropTypes.string.isRequired,
 };
 
 export default StoreBadge;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonAction } from '../ButtonAction';
+import RadioButton from '../RadioButton';
 import './ServiceSort.css';
 
 const BUTTON_TYPE = 'service';
@@ -16,7 +16,7 @@ const ServiceSort = props => {
   return (
     <div className="container service-sort">
       <span className="service-sort__label">Сортировка:</span>
-      <ButtonAction
+      <RadioButton
         onClick={() =>
           sortType !== sortByService && onSortTypeChange
             ? onSortTypeChange(sortByService)
@@ -26,9 +26,9 @@ const ServiceSort = props => {
         type={BUTTON_TYPE}
       >
         Услуга
-      </ButtonAction>
+      </RadioButton>
 
-      <ButtonAction
+      <RadioButton
         onClick={() =>
           sortType !== sortByName && onSortTypeChange
             ? onSortTypeChange(sortByName)
@@ -38,9 +38,9 @@ const ServiceSort = props => {
         type={BUTTON_TYPE}
       >
         Имя
-      </ButtonAction>
+      </RadioButton>
 
-      <ButtonAction
+      <RadioButton
         onClick={() =>
           sortType !== sortByPrice && onSortTypeChange
             ? onSortTypeChange(sortByPrice)
@@ -50,7 +50,7 @@ const ServiceSort = props => {
         type={BUTTON_TYPE}
       >
         Цена
-      </ButtonAction>
+      </RadioButton>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-.button-action {
+.radio-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,37 +12,37 @@
   position: relative;
 }
 
-.button-action.disabled {
-  background-color: rgba(170, 170, 170);
+.radio-button.disabled {
+  background-color: rgb(170, 170, 170);
 }
 
-.button-action:focus {
+.radio-button:focus {
   outline: none;
 }
 
-.button-action.default {
+.radio-button.default {
   background-color: #24ba7b;
 }
 
-.button-action--service {
+.radio-button--service {
   background-color: #24ba7b;
   color: white;
 }
 
-.button-action--service.active {
+.radio-button--service.active {
   background-color: #155724;
 }
 
-.button-action--events {
+.radio-button--events {
   background-color: #ec7b28;
   color: white;
 }
 
-.button-action--events.active {
+.radio-button--events.active {
   background-color: #853c08;
 }
 
-.button-action__circle {
+.radio-button__circle {
   display: none;
   background-color: white;
   border-radius: 3px;
@@ -53,10 +53,10 @@
   left: 10px;
 }
 
-.button-action__circle.active {
+.radio-button__circle.active {
   display: block;
 }
 
-.button-action__label {
-  padding-right: 0px;
+.radio-button__label {
+  padding-right: 0;
 }

@@ -1,28 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import './ButtonAction.css';
+import './RadioButton.css';
 
-export const ButtonAction = ({ type, onClick, active, children }) => (
+const RadioButton = ({ type, onClick, active, children }) => (
   <button
     type="button"
-    className={cn('button-action', `button-action--${type}`, {
+    className={cn('radio-button', `radio-button--${type}`, {
       active,
     })}
     onClick={onClick}
   >
-    <span className={cn('button-action__circle', { active })} />
-    <span className="button-action__label">{children}</span>
+    <span className={cn('radio-button__circle', { active })} />
+    <span className="radio-button__label">{children}</span>
   </button>
 );
 
-ButtonAction.propTypes = {
+RadioButton.propTypes = {
   active: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   children: PropTypes.node,
   type: PropTypes.oneOf(['service', 'events']),
 };
 
-ButtonAction.defaultProps = {
+RadioButton.defaultProps = {
   type: 'default',
 };
+
+export default RadioButton;
