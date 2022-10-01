@@ -20,8 +20,9 @@
   outline: none;
 }
 
-.radio-button.default {
+.radio-button--default {
   background-color: #24ba7b;
+  color: white;
 }
 
 .radio-button--service {
@@ -29,7 +30,7 @@
   color: white;
 }
 
-.radio-button--service.active {
+.radio-button--service-active {
   background-color: #155724;
 }
 
@@ -38,7 +39,7 @@
   color: white;
 }
 
-.radio-button--events.active {
+.radio-button--events-active {
   background-color: #853c08;
 }
 
@@ -53,7 +54,7 @@
   left: 10px;
 }
 
-.radio-button__circle.active {
+.radio-button__circle--active {
   display: block;
 }
 

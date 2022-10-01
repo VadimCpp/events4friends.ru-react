@@ -6,12 +6,19 @@ import './RadioButton.css';
 const RadioButton = ({ type, onClick, active, children }) => (
   <button
     type="button"
-    className={cn('radio-button', `radio-button--${type}`, {
-      active,
-    })}
+    className={cn(
+      'radio-button',
+      `radio-button--${type}`,
+      active ? `radio-button--${type}-active` : '',
+    )}
     onClick={onClick}
   >
-    <span className={cn('radio-button__circle', { active })} />
+    <span
+      className={cn(
+        'radio-button__circle',
+        active ? 'radio-button__circle--active' : '',
+      )}
+    />
     <span className="radio-button__label">{children}</span>
   </button>
 );
@@ -24,7 +31,7 @@ RadioButton.propTypes = {
 };
 
 RadioButton.defaultProps = {
-  type: 'default',
+  type: 'events',
 };
 
 export default RadioButton;
