@@ -3,16 +3,10 @@ import { DataContext } from '../../context/DataContext';
 import { AuthContext } from '../../context/AuthContext';
 import ServiceCard from '../../components/ServiceCard';
 import ButtonLink from '../../components/ButtonLink';
-import ServiceSort from '../../components/ServiceSort';
+import ServiceSort from './components/ServiceSort';
 import Spinner from '../../components/Spinner';
-import { NOTICES } from '../../enums';
+import { NOTICES, ServiceSortingType } from '../../enums';
 import './ServicesView.css';
-
-const ServiceSortingType = {
-  SortByName: 'SORT_BY_NAME',
-  SortByService: 'SORT_BY_SERVICE',
-  SortByPrice: 'SORT_BY_PRICE',
-};
 
 const ServicesView = ({ match, history }) => {
   const { user, connectingToFirebase } = useContext(AuthContext);

@@ -29,5 +29,17 @@ const STORE_BADGE_ITEMS = [
   { platform: 'android', width: 120 },
 ];
 
+const ServiceSortingType = {
+  SortByName: 'SORT_BY_NAME',
+  SortByService: 'SORT_BY_SERVICE',
+  SortByPrice: 'SORT_BY_PRICE',
+};
 
-export { EventsFilterType, NOTICES, ROUTES, MENU_ITEMS, STORE_BADGE_ITEMS };
+export {
+  EventsFilterType,
+  NOTICES,
+  ROUTES,
+  MENU_ITEMS,
+  STORE_BADGE_ITEMS,
+  ServiceSortingType,
+};

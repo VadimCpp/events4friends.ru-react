@@ -1,5 +1,5 @@
 import React from 'react';
-import RadioButton from '../RadioButton';
+import RadioButton from '../../../../components/RadioButton';
 import './ServiceSort.css';
 
 const BUTTON_TYPE = 'service';
@@ -14,7 +14,7 @@ const ServiceSort = props => {
   } = props;
 
   return (
-    <div className="container service-sort">
+    <div className="service-sort">
       <span className="service-sort__label">Сортировка:</span>
       <RadioButton
         onClick={() =>
