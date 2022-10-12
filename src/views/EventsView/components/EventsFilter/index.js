@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RadioButton from '../RadioButton';
+import RadioButton from '../../../../components/RadioButton';
 import './EventsFilter.css';
 
 const BUTTON_TYPE = 'events';

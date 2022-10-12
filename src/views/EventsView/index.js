@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import EventCard from '../../components/EventCard';
 import ButtonLink from '../../components/ButtonLink';
-import EventsFilter from '../../components/EventsFilter';
+import EventsFilter from './components/EventsFilter';
 import Spinner from '../../components/Spinner';
 import { AuthContext } from '../../context/AuthContext';
 import { DataContext } from '../../context/DataContext';
