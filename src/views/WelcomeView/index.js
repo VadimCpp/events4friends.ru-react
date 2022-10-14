@@ -9,6 +9,7 @@ import { DataContext } from '../../context/DataContext';
 import { NOTICES, STORE_BADGE_ITEMS } from '../../enums';
 import './WelcomeView.css';
 import AboutUs from '../../components/AboutUs';
+import { WelcomeBlockContainer } from './components/WelcomeBlockContainer';
 
 const WelcomeView = ({ history }) => {
   const authContext = useContext(AuthContext);
@@ -142,105 +143,95 @@ const WelcomeView = ({ history }) => {
       </div>
 
       {userAuthorized && (
-        <div className="welcomeview__block">
-          <div className="container container-center">
-            <div>
-              <span>Добро пожаловать, </span>
-              <button
-                type="button"
-                className="btn btn-link btn-link-vk"
-                onClick={() => history.push('/profile')}
-              >
-                <span>{userName}</span>
-              </button>
-              <span>!</span>
-              <br />
-              <button
-                type="button"
-                className="btn btn-link btn-link-vk"
-                onClick={() => authContext.signOut()}
-              >
-                <span>Выйти</span>
-              </button>
-            </div>
+        <WelcomeBlockContainer>
+          <div>
+            <span>Добро пожаловать, </span>
+            <button
+              type="button"
+              className="btn btn-link btn-link-vk"
+              onClick={() => history.push('/profile')}
+            >
+              <span>{userName}</span>
+            </button>
+            <span>!</span>
+            <br />
+            <button
+              type="button"
+              className="btn btn-link btn-link-vk"
+              onClick={() => authContext.signOut()}
+            >
+              <span>Выйти</span>
+            </button>
           </div>
-        </div>
+        </WelcomeBlockContainer>
       )}
 
       <AboutUs />
 
       <div className="welcomeview">
         {messengers.length !== 0 ? (
-          <div className="welcomeview__block">
-            <div className="container container-center">
-              <h4>Чаты сообщества</h4>
-              <ul className="welcomeview__messengers-list">
-                {messengers.map(messenger => (
-                  <li
-                    className="welcomeview__messengers-item"
-                    key={messenger.messengerName}
-                  >
-                    <MessengerLink
-                      ExternalLinkComponent={ButtonExternalLink}
-                      {...messenger}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ) : (
-          ''
-        )}
-
-        <div className="welcomeview__block">
-          <div className="container container-center">
-            <h4>Ссылки</h4>
-            <p>
-              В этом разделе ссылки на Instagram, YouTube, социальные сети и
-              т.п.
-            </p>
-            <ul className="welcomeview__social-list">
-              {socialLinks.map(link => (
-                <li className="welcomeview__social-item" key={link.name}>
-                  <ButtonExternalLink
-                    href={link.href}
-                    icon={link.icon}
-                    alt={link.name}
-                    title={link.title}
-                    classList={['social__link', `social__link--${link.name}`]}
+          <WelcomeBlockContainer>
+            <h4>Чаты сообщества</h4>
+            <ul className="welcomeview__messengers-list">
+              {messengers.map(messenger => (
+                <li
+                  className="welcomeview__messengers-item"
+                  key={messenger.messengerName}
+                >
+                  <MessengerLink
+                    ExternalLinkComponent={ButtonExternalLink}
+                    {...messenger}
                   />
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-
-        {!userAuthorized && (
-          <div className="welcomeview__block">
-            <div className="container container-center">
-              <p>Если Вы - организатор, то «Вход для оргов» для Вас</p>
-              <Link to="/signin" className="signin-btn">
-                <span className="signin-btn__title">Вход для оргов</span>
-              </Link>
-            </div>
-          </div>
+          </WelcomeBlockContainer>
+        ) : (
+          ''
         )}
 
-        <div className="welcomeview__block">
-          <div className="container container-center">
-            <p>Доступно мобильное приложение</p>
-            <div className="d-flex justify-content-center">
-              {
-                STORE_BADGE_ITEMS.map( storeBadge => (
-                  <div className="mr-1">
-                    <StoreBadge platform={storeBadge.platform} width={storeBadge.width} />
-                  </div>
-                ))
-              }
-            </div>
+        <WelcomeBlockContainer>
+          <h4>Ссылки</h4>
+          <p>
+            В этом разделе ссылки на Instagram, YouTube, социальные сети и т.п.
+          </p>
+          <ul className="welcomeview__social-list">
+            {socialLinks.map(link => (
+              <li className="welcomeview__social-item" key={link.name}>
+                <ButtonExternalLink
+                  href={link.href}
+                  icon={link.icon}
+                  alt={link.name}
+                  title={link.title}
+                  classList={['social__link', `social__link--${link.name}`]}
+                />
+              </li>
+            ))}
+          </ul>
+        </WelcomeBlockContainer>
+
+        {!userAuthorized && (
+          <WelcomeBlockContainer>
+            <p>Если Вы - организатор, то «Вход для оргов» для Вас</p>
+            <Link to="/signin" className="signin-btn">
+              <span className="signin-btn__title">Вход для оргов</span>
+            </Link>
+          </WelcomeBlockContainer>
+        )}
+
+        <WelcomeBlockContainer>
+          <p>Доступно мобильное приложение</p>
+          <div className="d-flex justify-content-center">
+            {STORE_BADGE_ITEMS.map(storeBadge => (
+              <div className="mr-1">
+                <StoreBadge
+                  platform={storeBadge.platform}
+                  width={storeBadge.width}
+                />
+              </div>
+            ))}
           </div>
-        </div>
+        </WelcomeBlockContainer>
 
         <div className="container container-center">
           <p className="welcomeview__footer">

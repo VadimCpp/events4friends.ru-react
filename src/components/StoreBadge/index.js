@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AppleStoreBadge from './images/apple_store_badge.png';
 import GoogleStoreBadge from './images/google_store_badge.png';
+import { STORE_BADGE_ITEMS } from '../../enums';
 
 const stores = {
   ios: {
@@ -17,17 +18,19 @@ const stores = {
       'https://play.google.com/store/apps/details?id=com.roscomputing.events4friends',
   },
 };
-
 const StoreBadge = ({ platform = 'ios', width = 120 }) => {
-  return (
-    <a href={stores[platform].url}>
-      <img
-        src={stores[platform].badge}
-        alt={stores[platform].alt}
-        style={{ width: `${width}px`, height: 'auto' }}
-      />
-    </a>
-  );
+  if (STORE_BADGE_ITEMS.some(item => item.platform === platform)) {
+    return (
+      <a href={stores[platform].url}>
+        <img
+          src={stores[platform].badge}
+          alt={stores[platform].alt}
+          style={{ width: `${width}px`, height: 'auto' }}
+        />
+      </a>
+    );
+  }
+  return '';
 };
 
 StoreBadge.propTypes = {
