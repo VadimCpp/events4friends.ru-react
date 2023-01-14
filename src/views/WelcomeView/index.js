@@ -69,67 +69,6 @@ const WelcomeView = ({ history }) => {
     }
   }, [community]);
 
-  const [socialLinks, setSocialLinks] = useState([]);
-  useEffect(() => {
-    if (community) {
-      let aSocialLinks = [];
-      if (community.vkontakte) {
-        aSocialLinks = [
-          ...aSocialLinks,
-          {
-            name: 'vkontakte',
-            href: community.vkontakte,
-            icon: '/icons/vk.svg',
-            title: 'ВКонтакте',
-          },
-        ];
-      }
-      if (community.instagram) {
-        aSocialLinks = [
-          ...aSocialLinks,
-          {
-            name: 'instagram',
-            href: community.instagram,
-            icon: '/icons/instagram.svg',
-            title: 'Instagram',
-          },
-        ];
-      }
-      if (community.strava) {
-        aSocialLinks = [
-          ...aSocialLinks,
-          {
-            name: 'strava',
-            href: community.strava,
-            icon: '/icons/strava.png',
-            title: 'Strava',
-          },
-        ];
-      }
-      if (community.youtube) {
-        aSocialLinks = [
-          ...aSocialLinks,
-          {
-            name: 'youtube',
-            href: community.youtube,
-            title: 'YouTube',
-          },
-        ];
-      }
-      if (community.website) {
-        aSocialLinks = [
-          ...aSocialLinks,
-          {
-            name: 'website',
-            href: community.website,
-            title: 'Сайт',
-          },
-        ];
-      }
-      setSocialLinks(aSocialLinks);
-    }
-  }, [community]);
-
   if (!community) {
     return <Spinner message={NOTICES.LOADING} />;
   }
@@ -192,29 +131,6 @@ const WelcomeView = ({ history }) => {
         ) : (
           ''
         )}
-
-        <div className="welcomeview__block">
-          <div className="container container-center">
-            <h4>Ссылки</h4>
-            <p>
-              В этом разделе ссылки на Instagram, YouTube, социальные сети и
-              т.п.
-            </p>
-            <ul className="welcomeview__social-list">
-              {socialLinks.map(link => (
-                <li className="welcomeview__social-item" key={link.name}>
-                  <ButtonExternalLink
-                    href={link.href}
-                    icon={link.icon}
-                    alt={link.name}
-                    title={link.title}
-                    classList={['social__link', `social__link--${link.name}`]}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
 
         {!userAuthorized && (
           <div className="welcomeview__block">
