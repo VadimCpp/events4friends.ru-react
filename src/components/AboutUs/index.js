@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ROUTES } from '../../enums';
 import './AboutUs.css';
 
@@ -42,9 +41,9 @@ const AboutUs = () => {
                 актуальные события в нашем городе, а также актуальные события.
               </p>
             </div>
-            <Link className="about__item__link" to={ROUTES.EVENTS}>
+            <a href="#" className="about__item__link" to={ROUTES.EVENTS}>
               Все мероприятия
-            </Link>
+            </a>
           </li>
           <li className="about__item">
             <h3 className="about__item__title">
@@ -81,9 +80,9 @@ const AboutUs = () => {
                 актуальные события в нашем городе, а также актуальные события.
               </p>
             </div>
-            <Link className="about__item__link" to={ROUTES.SERVICES}>
+            <a href="#" className="about__item__link" to={ROUTES.SERVICES}>
               Все услуги
-            </Link>
+            </a>
           </li>
           <li className="about__item">
             <h3 className="about__item__title">
@@ -120,9 +119,9 @@ const AboutUs = () => {
                 актуальные события в нашем городе, а также актуальные события.
               </p>
             </div>
-            <Link className="about__item__link" to={ROUTES.COMMUNITIES}>
+            <a className="about__item__link" to={ROUTES.COMMUNITIES}>
               Все сообщества
-            </Link>
+            </a>
           </li>
         </ol>
       </div>
