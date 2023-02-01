@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { MENU_ITEMS } from '../../enums';
-import './Header.css';
+import { SECTIONS } from '../../enums';
+import './header.css';
 
 const Header = () => {
-  const menuItems = MENU_ITEMS.map(item => (
+  const menuItems = SECTIONS.map(item => (
     <li key={item.title}>
-      <a to={item.slug}>
+      <a href={`#${item.slug}`} className="cursor-pointer">
         <span className="page-navigation__item"> {item.title}</span>
       </a>
     </li>
@@ -34,7 +34,7 @@ const Header = () => {
         <div className="page-header__title-wrapper">
           <img
             className="page-header__logo"
-            src="/icons/community/events4friends-autumn-64x64.png"
+            src="/icons/community/events4friends-ny-64x64.png"
             width="32"
             height="32"
             alt="Events for friends logo"
@@ -57,6 +57,11 @@ const Header = () => {
           <ul className={listClass} onClick={closeMenu}>{menuItems}</ul>
           <div className="overlay" onClick={closeMenu} />
         </nav>
+      </div>
+      <div className="page-main__title-wrapper">
+        <h1 className="page-main__title">
+          Городские совместности в Калининграде
+        </h1>
       </div>
     </header>
   );

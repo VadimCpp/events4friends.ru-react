@@ -1,12 +1,20 @@
-import React from 'react';
-import Header from './components/Header';
-import WelcomeView from './views/WelcomeView';
+import Header from './components/header';
+import Section from './components/section';
+import Footer from './components/footer';
+import { SECTIONS } from './enums';
+import './App.css';
 
-const App = () => {
-  return <>
-    <Header />
-    <WelcomeView />
-  </>;
-};
+function App() {
+
+  return (
+    <>
+      <Header />
+      <main>
+        { SECTIONS.map((section) => <Section key={section.id} {...section} />) }
+      </main>
+      <Footer />
+    </>
+  );
+}
 
 export default App;

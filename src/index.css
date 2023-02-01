@@ -1,46 +1,13 @@
-:root {
-  --basic-black: #000000;
-  --basic-white: #ffffff;
-  --blue-background: #3A5AFF;
-  --grey-background: #fafafa;
-  --light-blue-button: #3AB9F0;
-  --blue-button: #3A7DFF;
-  --pale-blue-button: #B6CFFF;
-  --pale-blue-events: #E3F2FF;
-  --pale-blue-line: #3ABAF0;
-  --basic-violet: #563AFF;
-  --grey-category: #DBDBDB;
-  --dark-grey-text: #484848;
-  --shadow: rgba(0, 0, 0, 0.1);
-  --services-details-grey: #606060;
-  --pale-blue-background: #F0F4FB;
-}
-
 body {
   margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.pt-3, .py-3 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.visually-hidden {
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
 }
