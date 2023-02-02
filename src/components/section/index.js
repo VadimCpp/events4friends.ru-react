@@ -5,45 +5,29 @@ const Section = ({ id, title, link, image, slug, description }) => {
   const even = Boolean(id % 2);
 
   return (
-    <section id={slug} className="about">
-      <div className="about__wrapper">
-        <div className="about__list">
-          <div className={`about__item ${!even ? "about__item--right" : "about__item--left"}`}>
-            <div className="about__item__no">{id}</div>
-            <h3 className="about__item__title">{title}</h3>
-            <picture className={`about__item__img-container ${even ? "about__item__img-container--right" : "about__item__img-container--left"}`}>
-              {/* <source
-                media="(min-width: 1024px)"
-                srcSet="
-                  img/services/desktop-service-1.jpg 1x,
-                  img/services/desktop-service-1_x2.jpg 2x
-                "
-              />
-              <source
-                media="(min-width: 640px)"
-                srcSet="
-                  img/services/tablet-service-1.jpg 1x,
-                  img/services/tablet-service-1_x2.jpg 2x
-                "
-              />
-              <img
-                className="about__item__img"
-                src="img/services/mobile-service-1.jpg"
-                srcSet="img/services/mobile-service-1_x2.jpg 2x"
-                width="300"
-                height="182"
-                alt="Стол, сервированный на несколько персон"
-              />*/}
-              <img
-                className="about__item__img"
-                src={`img/sections/${image}`}
-                alt={title}
-              />
-            </picture>
-            <div className="about__item__text">
-              <p> {description} </p>
-            </div>
-            <a href={link} className="about__item__link">
+    <section id={slug} className={even ? "bg-white" : "bg-sky-200"}>
+      <div className="container mx-auto pt-8 pb-10 px-5 md:flex">
+        <div className="md:flex-1 pr-5">
+          <img
+            className="w-full object-cover md:h-full rounded-lg"
+            src={`img/sections/${image}`} 
+            alt={title}
+          />
+        </div>
+        <div className="md:flex-1">
+          <p className='pt-7 md:pt-2'>
+            <span className="border-sky-700 border-2 border-dotted text-black p-2 px-4 rounded-md">
+              {id}
+            </span>
+          </p>
+          <h2 className="text-2xl font-semibold pt-5">
+            {title}
+          </h2>
+          <p className="text-lg pt-3">
+            {description}
+          </p>
+          <div className="pt-10 pb-4">
+            <a href={link} className="text-xl text-center text-white bg-sky-600 border-sky-700 p-3 pb-4 rounded-xl border-2 shadow-lg w-60 mt-auto">
               Группа ВКонтакте
             </a>
           </div>

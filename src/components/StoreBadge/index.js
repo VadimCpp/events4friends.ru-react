@@ -20,7 +20,7 @@ const stores = {
 
 const StoreBadge = ({ platform = 'ios', width = 240 }) => {
   return (
-    <a href={stores[platform].url}>
+    <a href={stores[platform].url} className="shadow-lg">
       <img
         src={stores[platform].badge}
         alt={stores[platform].alt}

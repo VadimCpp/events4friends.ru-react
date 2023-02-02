@@ -29,7 +29,7 @@ const Header = () => {
   }`;
 
   return (
-    <header className="page-header">
+    <header className="page-header bg-sky-600">
       <div className="page-header__wrapper">
         <div className="page-header__title-wrapper">
           <img
@@ -58,7 +58,7 @@ const Header = () => {
           <div className="overlay" onClick={closeMenu} />
         </nav>
       </div>
-      <div className="page-main__title-wrapper">
+      <div className="page-main__title-wrapper bg-sky-600">
         <h1 className="page-main__title">
           Городские совместности в Калининграде
         </h1>
