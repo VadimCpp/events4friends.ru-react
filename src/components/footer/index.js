@@ -1,17 +1,16 @@
 import React from 'react';
 import StoreBadge from '../storebadge';
 import { STORE_BADGE_ITEMS } from '../../enums';
-import './footer.css';
 
 const Footer = () => {
   return ( 
-    <div className="welcomeview__footer">
-      <div className="container container-center">
-        <p>Доступно мобильное приложение</p>
-        <div className="d-flex justify-content-center">
+    <div className="bg-blue-600 p-8">
+      <div className="container mx-auto">
+        <p className="text-white text-lg p-5">Попробуйте наше мобильное приложение</p>
+        <div className="flex flex-col justify-center align-middle">
           {
-            STORE_BADGE_ITEMS.map( storeBadge => (
-              <div className="mr-1" key={storeBadge.platform}>
+            STORE_BADGE_ITEMS.map(storeBadge => (
+              <div className='mx-auto pb-5' key={storeBadge.platform} >
                 <StoreBadge platform={storeBadge.platform} width={String(storeBadge.width)} />
               </div>
             ))

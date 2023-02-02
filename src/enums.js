@@ -26,8 +26,8 @@ const SECTIONS = [
 ];
 
 const STORE_BADGE_ITEMS = [
-  { platform: 'ios', width: 120 },
-  { platform: 'android', width: 120 },
+  { platform: 'ios', width: 240 },
+  { platform: 'android', width: 240 },
 ];
 
 export {

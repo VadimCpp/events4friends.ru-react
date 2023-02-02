@@ -18,7 +18,7 @@ const stores = {
   },
 };
 
-const StoreBadge = ({ platform = 'ios', width = 120 }) => {
+const StoreBadge = ({ platform = 'ios', width = 240 }) => {
   return (
     <a href={stores[platform].url}>
       <img
