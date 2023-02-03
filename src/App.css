@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-
     .section {
         @apply bg-white;
     }
@@ -13,28 +12,16 @@
     }
 
     .section__container {
-        @apply container mx-auto pt-8 pb-10 px-5 flex flex-col space-y-5 md:flex-row md:space-x-5 md:space-y-0;
+        @apply container mx-auto pt-8 pb-10 px-5 flex flex-col space-y-5;
     } 
 
-    .section__container--reverse {
-        @apply md:flex-row-reverse md:space-x-reverse;
-    }
-
-    .section__column {
-        @apply md:flex-1;
-    }
-
     .section__image { 
-        @apply w-full object-cover md:h-full rounded-lg;
+        @apply w-full object-cover rounded-lg;
     }
 
     .section__data {
         @apply flex flex-col space-y-5 h-full;
     } 
-
-    .section__data--right {
-        @apply md:text-right;
-    }
 
     .section__header {
         @apply flex flex-col space-y-5;
@@ -54,5 +41,27 @@
 
     .section__button {
         @apply text-xl text-center text-white bg-sky-600 border-sky-700 rounded-xl border-2 shadow-lg w-60 p-3 pb-4 inline-block; 
+    }
+
+    @screen md {
+        .section__container {
+            @apply flex-row space-x-5 space-y-0;
+        } 
+    
+        .section__container--reverse {
+            @apply flex-row-reverse space-x-reverse;
+        }
+    
+        .section__column {
+            @apply flex-1;
+        }
+    
+        .section__image { 
+            @apply h-full;
+        }
+    
+        .section__data--right {
+            @apply text-right;
+        }
     }
 }
