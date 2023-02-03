@@ -4,37 +4,35 @@ const Section = ({ id, title, link, image, slug, description }) => {
   const even = Boolean(id % 2);
 
   return (
-    <section id={slug} className={even ? "bg-white" : "bg-sky-200"}>
-      <div className={
-        even ? 
-        "container mx-auto pt-8 pb-10 px-5 md:flex md:space-x-5" :
-        "container mx-auto pt-8 pb-10 px-5 md:flex md:space-x-5 md:flex-row-reverse md:space-x-reverse"
-      }>
-        <div className="md:flex-1">
+    <section id={slug} className={even ? "section" : "section section--sky"}>
+      <div className={even ? "section__container" : "section__container section__container--reverse"}>
+        <div className="section__column">
           <img
-            className="w-full object-cover md:h-full rounded-lg"
+            className="section__image"
             src={`img/sections/${image}`} 
             alt={title}
           />
         </div>
-        <div className="pt-5 md:pt-0 md:flex-1">
-          <div className={even ? "flex flex-col space-y-5" : "flex flex-col space-y-5 md:text-right"}>
-            <p className="pt-2">
-              <span className="border-sky-700 border-2 border-dotted text-black p-2 px-4 rounded-md">
-                {id}
-              </span>
-            </p>
-            <h2 className="text-2xl font-semibold">
-              {title}
-            </h2>
-            <p className="text-lg">
+        <div className="section__column">
+          <div className={even ? "section__data" : "section__data section__data--right"}>
+            <header className="section__header">
+              <p>
+                <span className="section__nummer">
+                  {id}
+                </span>
+              </p>
+              <h2 className="section__title">
+                {title}
+              </h2>
+            </header>
+            <p className="section__description">
               {description}
             </p>
-            <div className="pt-3 pb-4">
-              <a href={link} className="text-xl text-center text-white bg-sky-600 border-sky-700 p-3 pb-4 rounded-xl border-2 shadow-lg w-60 mt-auto">
+            <p>
+              <a href={link} className="section__button">
                 Группа ВКонтакте
               </a>
-            </div>
+            </p>
           </div>
         </div>
       </div>
