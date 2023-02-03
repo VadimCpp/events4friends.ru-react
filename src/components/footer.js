@@ -1,6 +1,6 @@
 import React from 'react';
-import StoreBadge from '../storebadge';
-import { STORE_BADGE_ITEMS } from '../../enums';
+import StoreBadge from './storebadge';
+import { STORE_BADGE_ITEMS } from '../enums';
 
 const Footer = () => {
   return (

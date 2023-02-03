@@ -1,5 +1,4 @@
 import React from 'react';
-import './section.css';
 
 const Section = ({ id, title, link, image, slug, description }) => {
   const even = Boolean(id % 2);
@@ -18,8 +17,8 @@ const Section = ({ id, title, link, image, slug, description }) => {
             alt={title}
           />
         </div>
-        <div className="md:flex-1">
-          <div className={even ? "flex flex-col space-y-5" : "flex flex-col space-y-5 text-right"}>
+        <div className="pt-5 md:pt-0 md:flex-1">
+          <div className={even ? "flex flex-col space-y-5" : "flex flex-col space-y-5 md:text-right"}>
             <p className="pt-2">
               <span className="border-sky-700 border-2 border-dotted text-black p-2 px-4 rounded-md">
                 {id}
