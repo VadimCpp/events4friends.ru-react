@@ -1,62 +1,43 @@
 {
-  "name": "events4friends.ru-react",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://events4friends.ru/",
+  "dependencies": {
+    "@headlessui/react": "^1.7.10",
+    "@heroicons/react": "^2.0.15",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^2.1.4"
+  },
   "scripts": {
-    "start": "react-scripts  --openssl-legacy-provider start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage": "react-scripts test \"--coverage\" \"--watchAll\"",
-    "predeploy": "npm run build",
-    "eject": "react-scripts eject",
-    "eslint": "eslint src --ext .js --fix"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "dependencies": {
-    "@tinymce/tinymce-react": "^3.6.1",
-    "classnames": "^2.2.6",
-    "eslint-config-airbnb": "^18.2.0",
-    "firebase": "^7.13.1",
-    "moment": "^2.22.2",
-    "prop-types": "^15.7.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.0.1"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/plugin-proposal-class-properties": "^7.5.0",
-    "@babel/preset-env": "^7.5.4",
-    "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-config-prettier": "^6.12.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.14.2",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "husky": ">=4",
-    "lint-staged": ">=10",
-    "prettier": "^1.18.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": "eslint --cache --fix"
+    "tailwindcss": "^3.2.4"
   }
 }
