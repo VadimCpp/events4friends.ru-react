@@ -1,10 +1,11 @@
 import React from 'react';
+import { seasonal } from '../utils';
 
 const Section = ({ id, title, link, image, slug, description }) => {
   const even = Boolean(id % 2);
 
   return (
-    <section id={slug} className={even ? "section" : "section section--sky"}>
+    <section id={slug} className={even ? "section" : seasonal("section")}>
       <div className={even ? "section__container" : "section__container section__container--reverse"}>
         <div className="section__column">
           <img
@@ -17,7 +18,7 @@ const Section = ({ id, title, link, image, slug, description }) => {
           <div className={even ? "section__data" : "section__data section__data--right"}>
             <header className="section__header">
               <p>
-                <span className="section__nummer">
+                <span className={seasonal("section__nummer")}>
                   {id}
                 </span>
               </p>
@@ -29,7 +30,7 @@ const Section = ({ id, title, link, image, slug, description }) => {
               {description}
             </p>
             <p>
-              <a href={link} className="section__button">
+              <a href={link} className={seasonal("section__button")}>
                 Группа ВКонтакте
               </a>
             </p>

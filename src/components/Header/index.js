@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Bars3Icon } from '@heroicons/react/24/solid';
 import { Transition } from '@headlessui/react'
 import { SECTIONS } from '../../enums';
+import { seasonal } from '../../utils';
 import './header.css';
 
 const Header = () => {
@@ -22,13 +23,13 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-sky-600">
+    <header className={seasonal("header")}>
       <div className="container mx-auto px-5">
         <div className="border-b-2 border-b-sky-300">
           <div className="flex flex-row space-x-5 py-5">
             <img
               className="w-12 md:w-16"
-              src="/icons/community/events4friends-ny-64x64.png"
+              src={seasonal("logo")}
               width="32"
               height="32"
               alt="Events for friends logo"

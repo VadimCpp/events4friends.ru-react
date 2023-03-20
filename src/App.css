@@ -11,6 +11,18 @@
         @apply bg-sky-200;
     }
 
+    .section--green {
+        @apply bg-green-200;
+    }
+
+    .section--yellow {
+        @apply bg-yellow-200;
+    }
+
+    .section--orange {
+        @apply bg-orange-200;
+    }
+
     .section__container {
         @apply container mx-auto pt-8 pb-10 px-5 flex flex-col space-y-5;
     } 
@@ -28,7 +40,23 @@
     }
 
     .section__nummer {
-        @apply border-sky-700 border-2 border-dotted text-black p-2 px-4 rounded-md inline-block; 
+        @apply border-2 border-dotted text-black p-2 px-4 rounded-md inline-block; 
+    }
+
+    .section__nummer--sky {
+        @apply border-sky-700;
+    }
+
+    .section__nummer--green {
+        @apply border-green-700;
+    }
+
+    .section__nummer--yellow {
+        @apply border-yellow-700;
+    }
+
+    .section__nummer--orange {
+        @apply border-orange-700;
     }
 
     .section__title {
@@ -40,7 +68,23 @@
     }
 
     .section__button {
-        @apply text-xl text-center text-white bg-sky-600 border-sky-700 rounded-xl border-2 shadow-lg w-60 p-3 pb-4 inline-block; 
+        @apply text-xl text-center text-white rounded-xl border-2 shadow-lg w-60 p-3 pb-4 inline-block; 
+    }
+
+    .section__button--sky {
+        @apply bg-sky-600 border-sky-700;
+    }
+
+    .section__button--green {
+        @apply bg-green-600 border-green-700;
+    }
+
+    .section__button--yellow {
+        @apply bg-yellow-600 border-yellow-700;
+    }
+
+    .section__button--orange {
+        @apply bg-orange-600 border-orange-700;
     }
 
     @screen md {
