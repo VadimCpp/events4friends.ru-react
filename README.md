@@ -29,3 +29,10 @@ npm start
 yarn install
 yarn start
 ```
+
+# FAQ
+
+## Как обновить favicon?
+
+Обновить иконки на сайте:
+https://realfavicongenerator.net/
