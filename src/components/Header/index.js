@@ -3,7 +3,7 @@ import { Bars3Icon } from '@heroicons/react/24/solid';
 import { Transition } from '@headlessui/react'
 import { SECTIONS } from '../../enums';
 import { seasonal } from '../../utils';
-import './header.css';
+import './Header.css';
 
 const Header = () => {
   const menuItems = SECTIONS.map(item => (

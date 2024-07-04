@@ -1,4 +1,4 @@
-import Header from './components/header';
+import Header from './components/Header';
 import Section from './components/section';
 import Footer from './components/footer';
 import { SECTIONS } from './enums';
