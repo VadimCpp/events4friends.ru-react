@@ -1,7 +1,7 @@
 import React from 'react';
 import { seasonal } from '../utils';
 
-const Section = ({ id, title, link, image, slug, description }) => {
+const Section = ({ id, title, link, image, slug, description, label }) => {
   const even = Boolean(id % 2);
 
   return (
@@ -10,7 +10,7 @@ const Section = ({ id, title, link, image, slug, description }) => {
         <div className="section__column">
           <img
             className="section__image"
-            src={`img/sections/${image}`} 
+            src={`img/sections/${image}`}
             alt={title}
           />
         </div>
@@ -31,7 +31,7 @@ const Section = ({ id, title, link, image, slug, description }) => {
             </p>
             <p>
               <a href={link} className={seasonal("section__button")}>
-                Группа ВКонтакте
+                {label || "Группа ВКонтакте" }
               </a>
             </p>
           </div>
